@@ -1,4 +1,3 @@
-import sanityFetch from '@/utils/sanity.fetch';
 import { DOMAIN } from '@/global/constants';
 import type { MetadataRoute } from 'next';
 
