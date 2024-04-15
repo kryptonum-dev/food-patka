@@ -1,5 +1,5 @@
 import sanityFetch from '@/utils/sanity.fetch';
-import { DOMAIN, LOGO_URL } from '@/global/constants';
+import { DEFAULT_DESCRIPTION, DOMAIN, LOGO_URL } from '@/global/constants';
 
 type QueryTypes = {
   OrganizationSchema: {
@@ -38,7 +38,7 @@ const SchemaOrganization = async () => {
           ...(email && { email: email }),
           ...(phone && { telephone: phone }),
           ...(OrganizationSchema_Name && { name: OrganizationSchema_Name }),
-          ...(OrganizationSchema_Description && { description: OrganizationSchema_Description }),
+          description: OrganizationSchema_Description || DEFAULT_DESCRIPTION,
           logo: LOGO_URL,
           image: LOGO_URL,
           OpeningHoursSpecification: {

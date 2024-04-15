@@ -23,10 +23,16 @@ export const LOCALE: string = 'pl';
 export const DOMAIN: string = 'https://foodpatka.pl';
 
 /**
- * Global declaration of default title.
+ * Global default title.
  * @constant
  */
-export const DEFAULT_TITLE: string = 'Food Patka';
+export const DEFAULT_TITLE: string = 'FoodPatka';
+
+/**
+ * Global description.
+ * @constant
+ */
+export const DEFAULT_DESCRIPTION: string = 'Przyjemność z jedzenia może iść w parze z dbaniem o zdrowie!';
 
 /**
  * URL for the main logo.
