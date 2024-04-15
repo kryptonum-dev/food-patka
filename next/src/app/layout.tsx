@@ -9,7 +9,9 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang={LOCALE}>
-      <body className={`${Rosario.className} ${LibreBaskerville.variable}`}>{children}</body>
+      <body className={`${Rosario.className} ${LibreBaskerville.variable}`}>
+        <main id='main'>{children}</main>
+      </body>
     </html>
   );
 }

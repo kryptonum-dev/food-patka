@@ -1,6 +1,6 @@
-// import sanityFetch from '@/utils/sanity.fetch';
-// import { DOMAIN } from '@/global/constants';
-// import type { MetadataRoute } from 'next';
+import sanityFetch from '@/utils/sanity.fetch';
+import { DOMAIN } from '@/global/constants';
+import type { MetadataRoute } from 'next';
 
 // type FetchTypes = {
 //   landings: {
@@ -8,16 +8,20 @@
 //   }[];
 // };
 
-// export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-//   const { landings } = await query();
-//   const sitemap = [
-//     ...landings.map(({ slug }) => ({
-//       url: `${DOMAIN}/${slug}`,
-//       lastModified: new Date(),
-//     })),
-//   ];
-//   return sitemap;
-// }
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // const { landings } = await query();
+  const sitemap = [
+    // ...landings.map(({ slug }) => ({
+    //   url: `${DOMAIN}/${slug}`,
+    //   lastModified: new Date(),
+    // })),
+    {
+      url: `${DOMAIN}`,
+      lastModified: new Date(),
+    },
+  ];
+  return sitemap;
+}
 
 // const query = async (): Promise<FetchTypes> => {
 //   return await sanityFetch<FetchTypes>({
