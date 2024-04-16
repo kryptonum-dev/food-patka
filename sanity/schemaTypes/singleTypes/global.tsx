@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType } from 'sanity';
 
 const OrganizationSchema = [
   defineField({
@@ -10,7 +10,7 @@ const OrganizationSchema = [
     name: 'description',
     type: 'text',
     rows: 3,
-    title: 'Szczegółowy opis Twojej organizacji',
+    title: 'Opis Twojej organizacji',
   }),
 ]
 
@@ -66,7 +66,7 @@ export const global = defineType({
     defineField({
       name: 'seo',
       type: 'object',
-      title: 'Globalne SEO',
+      title: 'SEO',
       fields: [
         defineField({
           name: 'og_Img',
@@ -99,5 +99,10 @@ export const global = defineType({
     //   title: 'Baner z informacją o ciasteczkach',
     // },
   ],
+  preview: {
+    prepare: () => ({
+      title: 'Globalne ustawienia',
+    })
+  }
 })
 
