@@ -16,7 +16,7 @@ export default defineType({
       name: 'href',
       type: 'string',
       title: 'Link',
-      description: 'Link relatywny lub absolutny (z https://)',
+      description: 'Link relatywny lub absolutny (wymagany protokół https://)',
       validation: Rule =>
         Rule.custom(value => {
           if (value && !value.startsWith('#') && !value.startsWith('/') && !value.startsWith('https://')) {
