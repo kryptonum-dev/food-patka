@@ -11,4 +11,5 @@ export const structure: StructureResolver = (S) =>
     .items([
       createSingleton(S, "global"),
       S.divider(),
+      createSingleton(S, "Index_Page"),
     ])

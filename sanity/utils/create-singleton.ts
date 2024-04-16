@@ -7,5 +7,5 @@ export const createSingleton = (S: StructureBuilder, name: string) => {
     .id(name)
     .title(title)
     .icon(icon)
-    .child(S.document().schemaType(name).documentId(name));
+    .child(S.document().title(title).schemaType(name).documentId(name));
 };
