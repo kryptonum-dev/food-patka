@@ -1,5 +1,5 @@
 import type { StructureBuilder } from "sanity/structure";
-import { schemaTypes } from "../schemaTypes";
+import { schemaTypes } from "../schema";
 
 export const createSingleton = (S: StructureBuilder, name: string) => {
   const { title, icon } = schemaTypes.find(item => item.name === name) as { title: string, icon: React.ReactNode };
