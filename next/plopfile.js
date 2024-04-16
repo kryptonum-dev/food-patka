@@ -1,6 +1,6 @@
 module.exports = function (plop) {
   plop.setGenerator('component', {
-    description: 'Component generator Next.js',
+    description: 'Component generator for Next.js',
     prompts: [
       {
         type: 'input',
