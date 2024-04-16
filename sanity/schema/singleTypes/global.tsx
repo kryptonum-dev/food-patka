@@ -21,6 +21,19 @@ export const global = defineType({
   icon: () => '🌍',
   fields: [
     defineField({
+      name: 'nav',
+      type: 'object',
+      title: 'Nawigacja',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: 'annotation',
+          type: 'markdown',
+          title: 'Adnotacja',
+        }),
+      ],
+    }),
+    defineField({
       name: 'email',
       type: 'string',
       title: 'Adres e-mail',

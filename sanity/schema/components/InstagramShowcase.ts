@@ -22,7 +22,8 @@ export default defineType({
       heading: 'heading',
     },
     prepare: ({ heading }) => ({
-      title: `[${title}] ${removeMarkdown(heading)}`,
+      title: title,
+      subtitle: removeMarkdown(heading),
       icon,
     }),
   },
