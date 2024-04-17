@@ -110,6 +110,25 @@ export const global = defineType({
           type: 'array',
           title: 'Linki',
           of: [NavLinks],
+          validation: Rule => Rule.required(),
+        }),
+      ],
+    }),
+    defineField({
+      name: 'footer',
+      type: 'object',
+      title: 'Stopka',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: 'heading',
+          type: 'markdown',
+          title: 'Nagłówek',
+        }),
+        defineField({
+          name: 'paragraph',
+          type: 'markdown',
+          title: 'Paragraf',
         }),
       ],
     }),
