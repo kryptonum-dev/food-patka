@@ -14,6 +14,80 @@ const OrganizationSchema = [
   }),
 ]
 
+const NavLinks = {
+  type: 'object',
+  title: 'Linki nawigacyjne',
+  fields: [
+    defineField({
+      name: 'name',
+      type: 'string',
+      title: 'Nazwa',
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: 'href',
+      type: 'string',
+      title: 'Link',
+      validation: Rule =>
+        Rule.custom(value => {
+          if (value && (!value.startsWith('/') || value.startsWith('//'))) {
+            return 'Link musi byc relatywny';
+          }
+          return true;
+        }).required(),
+    }),
+    defineField({
+      name: 'links',
+      type: 'array',
+      title: 'Podlinki (opcjonalne)',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'name',
+              type: 'string',
+              title: 'Nazwa',
+              validation: Rule => Rule.required(),
+            }),
+            defineField({
+              name: 'href',
+              type: 'string',
+              title: 'Link',
+              validation: Rule =>
+                Rule.custom(value => {
+                  if (value && (!value.startsWith('/') || value.startsWith('//'))) {
+                    return 'Link musi byc relatywny';
+                  }
+                  return true;
+                }).required(),
+            }),
+            defineField({
+              name: 'img',
+              type: 'image',
+              title: 'Zdjęcie',
+              validation: Rule => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'name',
+              subtitle: 'href',
+              media: 'img',
+            }
+          }
+        }
+      ]
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'href',
+    }
+  }
+};
+
 export const global = defineType({
   name: 'global',
   type: 'document',
@@ -30,6 +104,12 @@ export const global = defineType({
           name: 'annotation',
           type: 'markdown',
           title: 'Adnotacja',
+        }),
+        defineField({
+          name: 'links',
+          type: 'array',
+          title: 'Linki',
+          of: [NavLinks],
         }),
       ],
     }),
