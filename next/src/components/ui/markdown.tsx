@@ -45,7 +45,6 @@ type MarkdownTypes = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export default function Markdown({ Tag, components, children, ...props }: MarkdownTypes) {
-  console.log(props);
   const markdown = (
     <MDXRemote
       source={children}
