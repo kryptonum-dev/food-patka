@@ -26,7 +26,7 @@
   --success-200: #f2fff5;
   --success-700: #298543;
 
-  --easing: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --easing: cubic-bezier(0.6, -0.15, 0.27, 1.15);
 
   --pageMargin: clamp(16px, calc(40vw / 7.68), 40px);
   @media (max-width: 899px) and (min-width: 600px) {
@@ -164,6 +164,7 @@ h3,
 }
 
 .link {
+  position: relative;
   &[target='_blank']::after {
     content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDE1IDE1Ij48cGF0aCBkPSJNMTQuMzMzIDcuMjhBNi42NjcgNi42NjcgMCAxIDEgNy42NjcuNjE0bTYuNjY2IDBMNy42NjcgNy4yOE0xNC4zMzMuNjE0aC00bTQgMHY0IiBzdHJva2U9IiNGNDg5QTkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==');
     display: inline-block;

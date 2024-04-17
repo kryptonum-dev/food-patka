@@ -8,3 +8,11 @@ export type HeaderQueryTypes = {
     tiktok?: string;
   }
 }
+
+export type SocialMediaTypes = {
+  data: {
+    instagram?: string;
+    youtube?: string;
+    tiktok?: string;
+  }
+}
