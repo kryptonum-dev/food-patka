@@ -28,7 +28,7 @@ export default function Button({ data, href, children, className, ...props }: Bu
       <Star3Icon className={styles.Star3Icon} />
     </Element>
   );
-};
+}
 
 const Star1Icon = ({ ...props }) => (
   <svg
@@ -43,7 +43,8 @@ const Star1Icon = ({ ...props }) => (
       fill="#F489A9"
     />
   </svg>
-)
+);
+
 const Star2Icon = ({ ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +58,8 @@ const Star2Icon = ({ ...props }) => (
       fill="#FFFDFD"
     />
   </svg>
-)
+);
+
 const Star3Icon = ({ ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -71,4 +73,4 @@ const Star3Icon = ({ ...props }) => (
       fill="#E6688D"
     />
   </svg>
-)
+);
