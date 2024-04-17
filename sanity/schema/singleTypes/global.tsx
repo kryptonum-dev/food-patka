@@ -119,16 +119,19 @@ export const global = defineType({
       type: 'object',
       title: 'Stopka',
       options: { collapsible: true, collapsed: true },
+      validation: Rule => Rule.required(),
       fields: [
         defineField({
           name: 'heading',
           type: 'markdown',
           title: 'Nagłówek',
+          validation: Rule => Rule.required(),
         }),
         defineField({
           name: 'paragraph',
           type: 'markdown',
           title: 'Paragraf',
+          validation: Rule => Rule.required(),
         }),
       ],
     }),
