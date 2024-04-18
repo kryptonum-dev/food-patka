@@ -4,7 +4,7 @@ import type { LoaderTypes } from './Loader.types';
 export default function Loader({ loading }: LoaderTypes) {
   return (
     loading && (
-      <div className={styles['Loading']}>
+      <div className={styles['Loader']}>
         <CircleLoaderIcon className={styles.CircleLoaderIcon} />
       </div>
     )
@@ -14,6 +14,8 @@ export default function Loader({ loading }: LoaderTypes) {
 const CircleLoaderIcon = ({ ...props }) => {
   return (
     <svg
+      width={18}
+      height={18}
       viewBox='25 25 50 50'
       {...props}
     >
