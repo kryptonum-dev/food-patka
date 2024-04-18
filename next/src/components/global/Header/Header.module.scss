@@ -29,10 +29,15 @@
     align-items: center;
     justify-content: space-between;
   }
+  .nav {
+    > ul {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
 .Socials {
-  list-style-type: none;
   display: flex;
   gap: clamp(4px, calc(8vw / 7.68), 8px);
   a {

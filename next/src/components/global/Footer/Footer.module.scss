@@ -1,0 +1,30 @@
+.WaveSvg {
+  margin-bottom: -1px;
+}
+
+.Footer {
+  background: var(--primary-300, #fff6f9);
+  padding-bottom: 48px;
+  @media (max-width: 499px) {
+    padding-bottom: 64px;
+  }
+  .info {
+    margin-top: clamp(96px, calc(128vw / 7.68), 180px);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 42px;
+    justify-content: space-between;
+    @media (max-width: 899px) {
+      .copyright {
+        order: 1;
+      }
+    }
+    .legal {
+      display: flex;
+      align-items: center;
+      gap: 22px 28px;
+      flex-wrap: wrap;
+    }
+  }
+}

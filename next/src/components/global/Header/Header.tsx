@@ -1,52 +1,13 @@
 import Link from 'next/link';
 import sanityFetch from '@/utils/sanity.fetch';
 import Markdown from '@/components/ui/markdown';
+import Img, { ImgDataQuery } from '@/components/ui/image';
 import styles from './Header.module.scss';
 import SocialMedia from './SocialMedia';
 import type { HeaderQueryTypes } from './Header.types';
 
-const links = [
-  {
-    name: 'O mnie',
-    href: '/o-mnie',
-  },
-  {
-    name: 'Partnerzy',
-    href: '/partnerzy',
-  },
-  {
-    name: 'Kontakt',
-    href: '/kontakt',
-  },
-  {
-    name: 'Oferta',
-    href: '/oferta',
-    links: [
-      {
-        name: 'Ebooki',
-        href: '/ebooki',
-        img: '',
-      },
-      {
-        name: 'Plany treningowe',
-        href: '/plany-treningowe',
-        img: '',
-      },
-      {
-        name: 'Pakiety',
-        href: '/pakiety',
-        img: '',
-      },
-    ]
-  },
-  {
-    name: 'Blog',
-    href: '/blog',
-  }
-];
-
 export default async function Header() {
-  const { nav, socials } = await query();
+  const { nav, nav: { links }, socials } = await query();
 
   return (
     <>
@@ -70,9 +31,10 @@ export default async function Header() {
                   <Link href={href}>{name}</Link>
                   {links && (
                     <ul>
-                      {links.map(({ href, name }, i) => (
+                      {links.map(({ href, name, img }, i) => (
                         <li key={i}>
                           <Link href={href}>{name}</Link>
+                          <Img data={img} sizes="32px" style={{ width: 32, height: 32 }} />
                         </li>
                       ))}
                     </ul>
@@ -93,6 +55,17 @@ const query = async (): Promise<HeaderQueryTypes> => {
       *[_id == 'global'][0] {
         nav {
           annotation,
+          links[] {
+            name,
+            href,
+            links[] {
+              name,
+              href,
+              img {
+                ${ImgDataQuery}
+              }
+            },
+          },
         },
         socials {
           instagram,

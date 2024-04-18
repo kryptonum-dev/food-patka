@@ -3,7 +3,7 @@ import type { FormStatusTypes } from '@/global/types';
 export type FormStateTypes = {
   errorState: {
     heading: string;
-    paragraph: string;
+    paragraph: React.ReactNode;
   }
   successState: {
     heading: string;

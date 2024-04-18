@@ -9,6 +9,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  justify-self: flex-start;
   text-align: center;
   @media (max-width: 499px) {
     width: 100%;

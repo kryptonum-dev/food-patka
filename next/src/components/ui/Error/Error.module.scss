@@ -6,6 +6,9 @@
   align-items: center;
   gap: 4px;
   animation: reveal 0.5s both;
+  svg {
+    flex-shrink: 0;
+  }
   @keyframes reveal {
     0% {
       opacity: 0;

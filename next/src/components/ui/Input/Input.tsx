@@ -3,7 +3,7 @@ import Textarea from './_Textarea';
 import styles from './Input.module.scss';
 import type { InputTypes } from './Input.types';
 
-export default function Input({ register, label, errors, textarea = false, ...props }: InputTypes) {
+export default function Input({ label, register, errors, textarea = false, ...props }: InputTypes) {
   const Element = textarea ? Textarea : 'input';
 
   return (

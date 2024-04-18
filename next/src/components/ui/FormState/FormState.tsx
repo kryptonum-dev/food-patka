@@ -9,12 +9,13 @@ export default function FormState({ errorState, successState, isSuccess, setStat
       <div
         className={styles['FormState']}
         data-issuccess={!!isSuccess}
+        data-element='FormState'
       >
         <h3>
           {isSuccess ? <SuccessIcon /> : <ErrorIcon />}
           <span>{isSuccess ? successState.heading : errorState.heading}</span>
         </h3>
-        <p dangerouslySetInnerHTML={{ __html: isSuccess ? successState.paragraph : errorState.paragraph }} />
+        <p>{isSuccess ? successState.paragraph : errorState.paragraph}</p>
         {isSuccess === false && (
           <>
             <Button
