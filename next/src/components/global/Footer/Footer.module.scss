@@ -1,5 +1,40 @@
-.WaveSvg {
+.Decoration {
   margin-bottom: -1px;
+  position: relative;
+  .Decoration1Icon,
+  .Decoration2Icon,
+  .Decoration3Icon {
+    position: absolute;
+    animation: decoration 10s var(--easing) infinite both;
+  }
+  @keyframes decoration {
+    0%,
+    50%,
+    100% {
+      transform: scale(0);
+    }
+    5%,
+    45% {
+      transform: scale(1);
+    }
+  }
+  .Decoration1Icon {
+    width: clamp(91px, calc(165vw / 7.68), 165px);
+    left: 25%;
+    top: calc(clamp(91px, calc(165vw / 7.68), 165px) * -0.5);
+  }
+  .Decoration2Icon {
+    width: clamp(61px, calc(111vw / 7.68), 111px);
+    right: 9%;
+    top: 0;
+    animation-delay: -3s;
+  }
+  .Decoration3Icon {
+    width: clamp(72px, calc(118vw / 7.68), 118px);
+    left: 8%;
+    top: -25%;
+    animation-delay: -8s;
+  }
 }
 
 .Footer {
