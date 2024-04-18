@@ -75,6 +75,10 @@ select {
   border: none;
   border-radius: 0;
 }
+ul,
+li {
+  list-style-type: none;
+}
 summary {
   cursor: pointer;
   list-style: none;
@@ -96,6 +100,7 @@ img {
   max-width: 100%;
   height: auto;
   vertical-align: bottom;
+  object-fit: cover;
 }
 
 :focus {
@@ -164,13 +169,14 @@ h3,
 }
 
 .link {
+  line-height: normal;
   position: relative;
   &[target='_blank']::after {
     content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDE1IDE1Ij48cGF0aCBkPSJNMTQuMzMzIDcuMjhBNi42NjcgNi42NjcgMCAxIDEgNy42NjcuNjE0bTYuNjY2IDBMNy42NjcgNy4yOE0xNC4zMzMuNjE0aC00bTQgMHY0IiBzdHJva2U9IiNGNDg5QTkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==');
     display: inline-block;
     margin-left: 4px;
   }
-  &::after {
+  &::before {
     content: '';
     width: 100%;
     height: 1px;
@@ -199,7 +205,7 @@ h3,
   }
   &:hover,
   &:focus-visible {
-    &::after {
+    &::before {
       animation: link 0.8s var(--easing);
     }
   }
