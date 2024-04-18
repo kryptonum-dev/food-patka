@@ -1,0 +1,43 @@
+.Loader {
+  position: absolute;
+  left: -16px;
+  top: -16px;
+  right: -16px;
+  bottom: -16px;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  background-color: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(4px);
+  z-index: 4;
+  .CircleLoaderIcon {
+    width: 18px;
+    height: 18px;
+    animation: rotate 1.5s linear infinite;
+    circle {
+      stroke-dasharray: 150 200;
+      stroke-dashoffset: -10;
+      animation: dash 1s var(--easing) infinite;
+      stroke-linecap: round;
+    }
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1 200;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 89 200;
+        stroke-dashoffset: -35;
+      }
+      100% {
+        stroke-dasharray: 89 200;
+        stroke-dashoffset: -124;
+      }
+    }
+  }
+}
