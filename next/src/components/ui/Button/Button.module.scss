@@ -19,7 +19,7 @@
   .Star2Icon,
   .Star3Icon {
     position: absolute;
-    transition: transform 0.5s var(--easing), opacity 0.3s;
+    transition: transform 0.3s var(--easing), opacity 0.3s;
     opacity: 0;
     transform: scale(0) translateY(3px);
   }
