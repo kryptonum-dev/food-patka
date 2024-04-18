@@ -11,6 +11,12 @@ export default async function Header() {
 
   return (
     <>
+      <a
+        href='#main'
+        className={styles.skipToMainContent}
+      >
+        Przejdź do głównej treści
+      </a>
       {nav?.annotation && (
         <aside className={styles['Annotation']}>
           <div className={`${styles.maxWidth} max-width`}>
