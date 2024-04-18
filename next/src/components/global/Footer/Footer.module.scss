@@ -5,7 +5,8 @@
   .Decoration2Icon,
   .Decoration3Icon {
     position: absolute;
-    animation: decoration 10s var(--easing) infinite both;
+    animation: decoration 20s var(--easing) infinite both;
+    transform-origin: center 75%;
   }
   @keyframes decoration {
     0%,
@@ -13,8 +14,8 @@
     100% {
       transform: scale(0);
     }
-    5%,
-    45% {
+    2.5%,
+    47.5% {
       transform: scale(1);
     }
   }
@@ -27,13 +28,13 @@
     width: clamp(61px, calc(111vw / 7.68), 111px);
     right: 9%;
     top: 0;
-    animation-delay: -3s;
+    animation-delay: -5s;
   }
   .Decoration3Icon {
     width: clamp(72px, calc(118vw / 7.68), 118px);
     left: 8%;
     top: -25%;
-    animation-delay: -8s;
+    animation-delay: -13s;
   }
 }
 
