@@ -1,0 +1,21 @@
+.FormState {
+  &[data-issuccess='true'] {
+    h3 {
+      color: var(--success-500, #298543);
+    }
+  }
+  &[data-issuccess='false'] {
+    h3 {
+      color: var(--error-500, #cb2f2f);
+    }
+  }
+  h3 {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    font-size: calc(18rem / 16);
+  }
+  p {
+    margin: 16px 0 28px;
+  }
+}
