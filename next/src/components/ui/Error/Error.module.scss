@@ -1,0 +1,17 @@
+.Error {
+  font-size: clac(14rem/16);
+  color: var(--error-500);
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: reveal 0.5s both;
+  @keyframes reveal {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
