@@ -1,13 +1,22 @@
-import Link from 'next/link';
 import sanityFetch from '@/utils/sanity.fetch';
 import Markdown from '@/components/ui/markdown';
 import Img, { ImgDataQuery } from '@/components/ui/image';
 import styles from './Header.module.scss';
 import SocialMedia from './SocialMedia';
+import _Header from './_Header';
 import type { HeaderQueryTypes } from './Header.types';
 
 export default async function Header() {
   const { nav, nav: { links }, socials } = await query();
+  const _links = links.map(({ links, ...props }) => ({
+    ...links && {
+      links: links.map(({ img, ...props }) => ({
+        img: <Img data={img} sizes='32px' style={{ width: 32, height: 32 }} />,
+        ...props,
+      })),
+    },
+    ...props,
+  }));
 
   return (
     <>
@@ -25,32 +34,13 @@ export default async function Header() {
           </div>
         </aside>
       )}
-      <header className={styles['Header']}>
-        <div className={`${styles.maxWidth} max-width`}>
-          <Link href='/' aria-label="Strona główna">
-            <FoodPatkaLogo />
-          </Link>
-          <nav className={styles.nav}>
-            <ul>
-              {links.map(({ name, href, links }, i) => (
-                <li key={i}>
-                  <Link href={href}>{name}</Link>
-                  {links && (
-                    <ul>
-                      {links.map(({ href, name, img }, i) => (
-                        <li key={i}>
-                          <Link href={href}>{name}</Link>
-                          <Img data={img} sizes="32px" style={{ width: 32, height: 32 }} />
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </header>
+      <_Header
+        logo={FoodPatkaLogo}
+        links={_links}
+        DropdownIcon={<DropdownIcon className={styles.DropdownIcon} />}
+        IndicatorIcon={<IndicatorIcon className={styles.IndicatorIcon} />}
+        BackIcon={<BackIcon className={styles.BackIcon} />}
+      />
     </>
   );
 }
@@ -84,7 +74,7 @@ const query = async (): Promise<HeaderQueryTypes> => {
   });
 };
 
-const FoodPatkaLogo = () => (
+const FoodPatkaLogo = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={256}
@@ -156,5 +146,56 @@ const FoodPatkaLogo = () => (
       d="M255.02 41.675c-.244.405-.541.66-.893.768-.352.08-.716.125-1.093.125-1.217 0-1.821-1.539-1.821-4.616v-9.075c0-2.293-.568-3.914-1.702-4.86-1.134-.973-3.05-1.455-5.75-1.455-2.537 0-4.492.363-5.873 1.092-1.377.701-2.065 1.702-2.065 2.994 0 1.292.676 2.027 2.024 2.027.541 0 .945-.125 1.217-.366.297-.266.593-.796.893-1.578.161-.513.324-.945.485-1.297.188-.347.391-.618.607-.807.216-.188.485-.324.81-.405a4.93 4.93 0 0 1 1.172-.124c2.812 0 4.215 1.646 4.215 4.94v1.664l-5.834 2.55c-1.217.538-2.243 1.076-3.08 1.617-.837.513-1.508 1.042-2.024 1.577-.513.54-.893 1.11-1.134 1.702a5.415 5.415 0 0 0-.324 1.863c0 1.456.485 2.618 1.458 3.483.973.865 2.31 1.297 4.006 1.297 1.514 0 2.892-.377 4.134-1.134a8.259 8.259 0 0 0 2.914-3.158h.205c0 1.376.283 2.443.849 3.2.593.751 1.486 1.131 2.669 1.131.946 0 1.852-.2 2.715-.607.865-.433 1.458-.957 1.782-1.578l-.568-.973.006.003Zm-7.774-6.033c0 .915-.136 1.794-.405 2.631a7.723 7.723 0 0 1-1.095 2.146 5.35 5.35 0 0 1-1.617 1.417 3.74 3.74 0 0 1-1.946.524c-.973 0-1.755-.283-2.345-.849-.594-.568-.893-1.297-.893-2.187 0-.59.136-1.173.405-1.741.296-.569.768-1.134 1.416-1.7.649-.568 1.497-1.134 2.551-1.702 1.081-.568 2.39-1.145 3.929-1.741v3.202Z"
       fill="#726378"
     />
+  </svg>
+);
+
+const DropdownIcon = ({ ...props }) => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={20}
+    height={20}
+    viewBox='0 0 20 20'
+    fill='none'
+    {...props}
+  >
+    <path
+      d='m5 8 5 5 5-5'
+      stroke='#726378'
+      strokeWidth={1.5}
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  </svg>
+);
+
+const BackIcon = ({ ...props }) => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={20}
+    height={20}
+    viewBox='0 0 20 20'
+    fill='none'
+    {...props}
+  >
+    <path
+      d='m12.5 15-5-5 5-5'
+      stroke='#97879D'
+      strokeWidth={1.5}
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  </svg>
+);
+
+const IndicatorIcon = ({ ...props }) => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={12}
+    height={12}
+    viewBox='0 0 12 12'
+    fill='#F489A9'
+    {...props}
+  >
+    <path d='M5.84.142c.022-.19.298-.19.32 0l.189 1.591a4.476 4.476 0 0 0 3.918 3.918l1.59.189c.19.022.19.298 0 .32l-1.59.189a4.476 4.476 0 0 0-3.918 3.918l-.189 1.59c-.022.19-.298.19-.32 0l-.189-1.59a4.476 4.476 0 0 0-3.918-3.918L.143 6.16c-.19-.022-.19-.298 0-.32l1.59-.189a4.476 4.476 0 0 0 3.918-3.918L5.84.143Z' />
   </svg>
 );

@@ -23,7 +23,7 @@ export default function Checkbox({ label, register, errors, ...props }: Checkbox
       </p>
     </label>
   );
-};
+}
 
 const CheckmarkIcon = () => (
   <svg

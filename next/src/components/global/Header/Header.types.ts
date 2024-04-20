@@ -11,7 +11,7 @@ export type HeaderQueryTypes = {
         href: string;
         img: ImgDataTypes;
       }[];
-    }[]
+    }[];
   };
   socials: {
     instagram?: string;
@@ -26,4 +26,20 @@ export type SocialMediaTypes = {
     youtube?: string;
     tiktok?: string;
   }
+}
+
+export type _HeaderTypes = {
+  logo: React.ReactNode;
+  DropdownIcon: React.ReactNode;
+  IndicatorIcon: React.ReactNode;
+  BackIcon: React.ReactNode;
+  links: {
+    name: string;
+    href: string;
+    links?: {
+      name: string;
+      href: string;
+      img: React.ReactNode;
+    }[];
+  }[]
 }
