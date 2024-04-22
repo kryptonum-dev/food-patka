@@ -99,7 +99,11 @@ export default function Header({ logo, links, DropdownIcon, IndicatorIcon, BackI
               ))}
             </ul>
           </nav>
-          <button className={styles.menuButton} onClick={() => setOpened(prevState => !prevState)}>
+          <button
+            className={styles.menuButton}
+            onClick={() => setOpened(prevState => !prevState)}
+            aria-label={`${opened ? 'Ukryj' : 'Pokaż'} nawigację`}
+          >
             <span></span>
             <span></span>
             <span></span>

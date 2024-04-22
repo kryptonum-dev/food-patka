@@ -35,7 +35,7 @@ type ImageTypes = (
 ) & {
   sizes: string;
   priority?: boolean;
-};
+} & React.HTMLAttributes<HTMLImageElement>;
 
 export const ImgDataQuery = `
   asset -> {
