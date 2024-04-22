@@ -1,6 +1,9 @@
 .Decoration {
   margin-bottom: -1px;
   position: relative;
+  .WaveSvg {
+    max-height: 174px;
+  }
   .Decoration1Icon,
   .Decoration2Icon,
   .Decoration3Icon {
