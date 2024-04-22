@@ -1,13 +1,13 @@
 'use server';
 import { createClient, type QueryParams } from 'next-sanity';
-import { isDraftDeployment } from './is-draft-deployment';
+import { isPreviewDeployment, isProductionDeployment } from './is-preview-deployment';
 
 const projectId = process.env.SANITY_PROJECT_ID;
 const token = process.env.SANITY_API_TOKEN;
 const dataset = 'production';
 const apiVersion = '2024-04-22';
 
-if (isDraftDeployment && !token) {
+if (isPreviewDeployment && !token) {
   throw new Error('The `SANITY_API_TOKEN` environment variable is required.');
 }
 
@@ -16,8 +16,8 @@ const client = createClient({
   dataset,
   apiVersion,
   useCdn: false,
-  perspective: isDraftDeployment ? 'previewDrafts' : 'published',
-  ...(isDraftDeployment && { token }),
+  perspective: isPreviewDeployment ? 'previewDrafts' : 'published',
+  ...(isPreviewDeployment && { token }),
 });
 
 /**
@@ -37,11 +37,19 @@ export default async function sanityFetch<QueryResponse>({
   params?: QueryParams;
 }): Promise<QueryResponse> {
   return await client.fetch<QueryResponse>(query, params, {
-    cache: isDraftDeployment || !tags ? 'no-cache' : 'default',
-    ...(tags && {
-      next: {
-        tags: tags,
-      },
-    }),
+    ...!isProductionDeployment ? {
+      cache: 'reload',
+    } : {
+      ...(isPreviewDeployment || !tags) ? {
+        cache: 'no-cache',
+      } : {
+        cache: 'force-cache',
+        next: {
+          tags,
+          // 1 month time revalidation
+          revalidate: 2592000
+        }
+      }
+    }
   });
 }
