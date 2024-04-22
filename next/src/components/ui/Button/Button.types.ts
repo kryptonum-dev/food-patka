@@ -1,5 +1,5 @@
 export type ButtonTypes = (
-  {
+  | {
     data: ButtonDataTypes;
     href?: never;
     children?: never;
