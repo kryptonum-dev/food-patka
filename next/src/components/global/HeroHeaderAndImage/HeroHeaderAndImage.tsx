@@ -17,7 +17,7 @@ export default function HeroHeaderAndImage({ index, heading, paragraph, cta, img
       <div className={styles.img}>
         <Img
           data={img}
-          sizes=''
+          sizes='(max-width: 767px) 358px, 456px'
           priority={true}
         />
         <DecorationIcon className={styles.DecorationIcon} />

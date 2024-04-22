@@ -35,7 +35,7 @@ type ImageTypes = (
 ) & {
   sizes: string;
   priority?: boolean;
-} & React.HTMLAttributes<HTMLImageElement>;
+};
 
 export const ImgDataQuery = `
   asset -> {
@@ -51,8 +51,7 @@ export const ImgDataQuery = `
   },
 `;
 
-
-export default function Img({ data, src, width, height, alt, sizes, priority, ...props }: ImageTypes) {
+export default function Image({ data, src, width, height, alt, sizes, priority, ...props }: ImageTypes) {
   const placeholder = data?.asset.metadata?.lqip || defaultPlaceholder;
   if (data) {
     src = data.asset.url;
