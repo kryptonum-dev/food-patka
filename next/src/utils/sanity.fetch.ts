@@ -36,7 +36,6 @@ export default async function sanityFetch<QueryResponse>({
   tags?: string[];
   params?: QueryParams;
 }): Promise<QueryResponse> {
-  console.log(process.env.VERCEL_BRANCH_URL);
   return await client.fetch<QueryResponse>(query, params, {
     cache: isDraftDeployment || !tags ? 'no-cache' : 'default',
     ...(tags && {
