@@ -138,7 +138,7 @@ main,
 main {
   display: grid;
   row-gap: clamp(96px, calc(132vw / 7.68), 152px);
-  margin: clamp(32px, calc(36vw / 7.68), 40px) auto clamp(96px, calc(132vw / 7.68), 152px);
+  margin: clamp(32px, calc(42vw / 7.68), 42px) auto clamp(96px, calc(132vw / 7.68), 152px);
 }
 
 h1,
