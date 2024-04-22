@@ -114,6 +114,7 @@ export default function Header({ logo, links, DropdownIcon, IndicatorIcon, BackI
         className={styles['Overlay']}
         role='button'
         onClick={() => setOpened(false)}
+        aria-label='Zamknij nawigację'
       />
     </>
   );
