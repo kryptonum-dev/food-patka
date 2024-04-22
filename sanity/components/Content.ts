@@ -1,5 +1,6 @@
 import { defineType } from "sanity";
 import HeroHeaderAndImage from "../schema/components/HeroHeaderAndImage";
+import FlexTiles from "../schema/components/FlexTiles";
 
 export default defineType({
   name: 'content',
@@ -7,6 +8,7 @@ export default defineType({
   title: 'Komponenty',
   of: [
     HeroHeaderAndImage,
+    FlexTiles,
     { type: 'InstagramShowcase' },
   ],
 });
