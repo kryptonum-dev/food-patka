@@ -1,0 +1,1 @@
+export const isDraftDeployment = process.env.VERCEL_BRANCH_URL === 'preview';

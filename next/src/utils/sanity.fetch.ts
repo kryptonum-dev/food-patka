@@ -1,13 +1,13 @@
 'use server';
 import { createClient, type QueryParams } from 'next-sanity';
-import { isPreviewDeployment } from './is-preview-deployment';
+import { isDraftDeployment } from './is-draft-deployment';
 
 const projectId = process.env.SANITY_PROJECT_ID;
 const token = process.env.SANITY_API_TOKEN;
 const dataset = 'production';
 const apiVersion = '2024-04-15';
 
-if (isPreviewDeployment && !token) {
+if (isDraftDeployment && !token) {
   throw new Error('The `SANITY_API_TOKEN` environment variable is required.');
 }
 
@@ -16,8 +16,8 @@ const client = createClient({
   dataset,
   apiVersion,
   useCdn: false,
-  perspective: isPreviewDeployment ? 'previewDrafts' : 'published',
-  ...(isPreviewDeployment && { token }),
+  perspective: isDraftDeployment ? 'previewDrafts' : 'published',
+  ...(isDraftDeployment && { token }),
 });
 
 /**
@@ -36,8 +36,9 @@ export default async function sanityFetch<QueryResponse>({
   tags?: string[];
   params?: QueryParams;
 }): Promise<QueryResponse> {
+  console.log(process.env.VERCEL_BRANCH_URL);
   return await client.fetch<QueryResponse>(query, params, {
-    cache: isPreviewDeployment || !tags ? 'no-cache' : 'default',
+    cache: isDraftDeployment || !tags ? 'no-cache' : 'default',
     ...(tags && {
       next: {
         tags: tags,
