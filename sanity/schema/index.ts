@@ -6,6 +6,7 @@ import Content from '../components/Content';
 import Partners_Collection from './collectionTypes/Partners_Collection';
 import About_Page from './singleTypes/About_Page';
 import Faq_Collection from './collectionTypes/Faq_Collection';
+import Partners_Page from './singleTypes/Partners_Page';
 
 export const schemaTypes = [
   cta,
@@ -16,6 +17,7 @@ export const schemaTypes = [
   // Single types
   Index_Page,
   About_Page,
+  Partners_Page,
 
   // Collection types
   Partners_Collection,
