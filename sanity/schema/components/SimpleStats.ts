@@ -30,7 +30,7 @@ export default defineField({
               validation: Rule => Rule.required(),
             }),
             defineField({
-              name: 'description',
+              name: 'label',
               type: 'string',
               title: 'Opis',
               validation: Rule => Rule.required(),
@@ -39,7 +39,7 @@ export default defineField({
           preview: {
             select: {
               title: 'number',
-              subtitle: 'description',
+              subtitle: 'label',
             },
             prepare({ title, subtitle }) {
               return ({
