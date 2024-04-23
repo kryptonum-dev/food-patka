@@ -1,0 +1,102 @@
+.SimpleStats {
+  margin: 0 auto;
+  width: 90%;
+  aspect-ratio: 1/1;
+  max-width: clamp(500px, calc(500vw / 7.68), 593px);
+  max-height: clamp(500px, calc(500vw / 7.68), 593px);
+  border: 3px solid var(--primary-400, #ffd7e4);
+  border-radius: 50%;
+  .innerCircle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    width: clamp(145px, calc(298vw / 7.68), 339px);
+    height: clamp(145px, calc(298vw / 7.68), 339px);
+    background: var(--primary-300, #fff6f9);
+    border-radius: 50%;
+  }
+  position: relative;
+  img {
+    position: absolute;
+    top: 58%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: clamp(139px, calc(282vw / 7.68), 326px);
+    z-index: 2;
+  }
+  .list {
+    span {
+      font-family: var(--font-libre-baskerville);
+      font-size: clamp(18px, calc(24vw / 7.68), 24px);
+    }
+    p {
+      font-size: clamp(12px, calc(14vw / 7.68), 14px);
+      max-width: clamp(102px, calc(136vw / 7.68), 136px);
+      line-height: 146%;
+    }
+    .item {
+      position: absolute;
+      text-align: center;
+      z-index: 3;
+      svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+      }
+      &:nth-child(1) {
+        left: 50%;
+        top: 0;
+        transform: translate(0, -35%);
+        svg {
+          width: clamp(100px, calc(196vw / 7.68), 196px);
+        }
+      }
+      &:nth-child(2) {
+        right: -3%;
+        bottom: 15%;
+        svg {
+          width: clamp(119px, calc(226vw / 7.68), 226px);
+        }
+      }
+      &:nth-child(3) {
+        left: 5%;
+        top: 50%;
+        transform: translate(-50%, -25%);
+        svg {
+          width: clamp(87px, calc(145vw / 7.68), 145px);
+        }
+        p {
+          max-width: 104px;
+        }
+      }
+    }
+  }
+  .Brushes {
+    width: clamp(41px, calc(96vw / 7.68), 96px);
+    position: absolute;
+    left: 25%;
+    top: 15%;
+  }
+  .Stars1 {
+    width: clamp(30px, calc(57vw / 7.68), 81px);
+    position: absolute;
+    left: -10%;
+    top: 0;
+  }
+  .Stars2 {
+    width: clamp(16px, calc(40vw / 7.68), 57px);
+    position: absolute;
+    right: -15%;
+    top: 30%;
+  }
+  .Dot {
+    width: clamp(5px, calc(8vw / 7.68), 11px);
+    position: absolute;
+    left: 60%;
+    bottom: -15%;
+  }
+}
