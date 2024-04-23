@@ -15,15 +15,15 @@ export default async function IndexPage() {
 const query = async (): Promise<{ content: ComponentTypes[] }> => {
   return await sanityFetch({
     query: /* groq */ `
-      *[_type == "Index_Page"][0] {
+      *[_type == "About_Page"][0] {
         ${Components_Query}
       }
     `,
-    tags: ['Index_Page'],
+    tags: ['About_Page'],
   });
 };
 
 
 export async function generateMetadata() {
-  return await QueryMetadata('Index_Page', '/');
+  return await QueryMetadata('About_Page', '/o-marce');
 }
