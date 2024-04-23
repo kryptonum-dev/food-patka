@@ -3,6 +3,7 @@ import FlexTiles, { type FlexTilesTypes, FlexTiles_Query } from './global/FlexTi
 import AboutSection, { type AboutSectionTypes, AboutSection_Query } from './global/AboutSection';
 import SimpleStats, { type SimpleStatsTypes, SimpleStats_Query } from './global/SimpleStats';
 import Partners, { type PartnersTypes, Partners_Query } from './global/Partners';
+import Faq, { type FaqTypes, Faq_Query } from './global/Faq';
 
 type componentsMapTypes = {
   HeroHeaderAndImage: HeroHeaderAndImageTypes;
@@ -10,6 +11,7 @@ type componentsMapTypes = {
   AboutSection: AboutSectionTypes;
   SimpleStats: SimpleStatsTypes;
   Partners: PartnersTypes;
+  Faq: FaqTypes;
 };
 
 export type ComponentTypes = componentsMapTypes[keyof componentsMapTypes] & { _type: string };
@@ -23,6 +25,7 @@ export default function Components({ data }: { data: ComponentTypes[] }) {
       AboutSection: <AboutSection {...(item as AboutSectionTypes)} />,
       SimpleStats: <SimpleStats {...(item as SimpleStatsTypes)} />,
       Partners: <Partners {...(item as PartnersTypes)} />,
+      Faq: <Faq {...(item as FaqTypes)} />,
     };
     const DynamicComponent = componentsMapTypes[componentType];
     if (!DynamicComponent) return null;
@@ -38,5 +41,6 @@ export const Components_Query = /* groq */ `
     ${AboutSection_Query}
     ${SimpleStats_Query}
     ${Partners_Query}
+    ${Faq_Query}
   },
 `;

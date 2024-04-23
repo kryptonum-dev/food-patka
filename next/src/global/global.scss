@@ -203,5 +203,15 @@ h3,
 .orderedList,
 .unorderedList {
   display: grid;
-  gap: clamp(4px, calc(8vw / 7.68), 8px);
+  gap: 8px;
+}
+.unorderedList {
+  li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px;
+    svg {
+      margin-top: clamp(2px, calc(4vw / 7.68), 4px);
+    }
+  }
 }

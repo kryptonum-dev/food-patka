@@ -1,0 +1,90 @@
+.Faq {
+  header {
+    max-width: calc(587rem / 16);
+    margin: 0 auto clamp(32px, calc(36vw / 7.68), 48px);
+    text-align: center;
+    h2 {
+      margin-bottom: clamp(12px, calc(16vw / 7.68), 20px);
+    }
+  }
+  .list {
+    display: grid;
+    gap: 12px;
+    details {
+      border-radius: 6px;
+      border: 1px solid var(--primary-500, #ffb8ce);
+      position: relative;
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--primary-300, #fff6f9);
+        opacity: 0;
+        transition: opacity 0.5s;
+        z-index: -1;
+      }
+      &[data-opened='true'] {
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+    summary {
+      padding: clamp(12px, calc(20vw / 7.68), 24px) clamp(12px, calc(20vw / 7.68), 28px);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(12px, calc(12vw / 7.68), 20px);
+      h3 {
+        color: var(--secondary-500, #726378);
+      }
+      .indicator {
+        margin-top: 4px;
+        width: 20px;
+        height: 20px;
+        background-color: var(--primary-300, #fff6f9);
+        border: 1.5px solid var(--primary-500, #ffb8ce);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        transition: background-color 0.5s;
+        span {
+          position: absolute;
+          display: block;
+          width: 10px;
+          height: 1.5px;
+          border-radius: 3px;
+          background-color: var(--primary-500, #ffb8ce);
+          transition: transform 0.5s var(--easing), background-color 0.5s;
+          &:first-child {
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+    .answer {
+      overflow: hidden;
+      .answerMarkdown {
+        max-width: calc(866rem / 16);
+        margin: 0 clamp(12px, calc(20vw / 7.68), 28px) clamp(12px, calc(20vw / 7.68), 24px)
+          clamp(12px, calc(20vw / 7.68), 28px);
+        & > *:not(:last-child) {
+          margin-bottom: 12px;
+        }
+      }
+    }
+    details[data-opened='true'] {
+      .indicator {
+        background-color: var(--primary-500, #ffb8ce);
+        span {
+          background-color: var(--primary-300, #fff6f9);
+          &:first-child {
+            transform: rotate(0deg);
+          }
+        }
+      }
+    }
+  }
+}
