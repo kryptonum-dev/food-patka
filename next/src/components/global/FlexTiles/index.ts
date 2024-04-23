@@ -1,5 +1,5 @@
 import { ImgDataQuery } from '@/components/ui/image';
-import { ButtonQuery } from '@/components/ui/Button';
+import { ButtonDataQuery } from '@/components/ui/Button';
 import FlexTiles from './FlexTiles';
 export default FlexTiles;
 export type { FlexTilesTypes } from './FlexTiles.types';
@@ -14,7 +14,7 @@ export const FlexTiles_Query = `
       heading,
       paragraph,
       cta {
-        ${ButtonQuery}
+        ${ButtonDataQuery}
       }
     },
   },

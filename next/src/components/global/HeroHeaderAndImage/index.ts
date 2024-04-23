@@ -1,4 +1,4 @@
-import { ButtonQuery } from '@/components/ui/Button';
+import { ButtonDataQuery } from '@/components/ui/Button';
 import { ImgDataQuery } from '@/components/ui/image';
 import HeroHeaderAndImage from './HeroHeaderAndImage';
 export default HeroHeaderAndImage;
@@ -9,7 +9,7 @@ export const HeroHeaderAndImage_Query = `
     heading,
     paragraph,
     cta {
-      ${ButtonQuery}
+      ${ButtonDataQuery}
     },
     img {
       ${ImgDataQuery}

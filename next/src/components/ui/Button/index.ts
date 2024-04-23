@@ -1,7 +1,7 @@
 import Button from './Button';
 export default Button;
 
-export const ButtonQuery = `
+export const ButtonDataQuery = `
   text,
   href,
 `;
