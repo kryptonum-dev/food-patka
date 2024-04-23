@@ -15,7 +15,7 @@ export const FlexTiles_Query = `
       paragraph,
       cta {
         ${ButtonDataQuery}
-      }
+      },
     },
   },
 `;
