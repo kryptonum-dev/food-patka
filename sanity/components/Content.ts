@@ -3,6 +3,7 @@ import HeroHeaderAndImage from "../schema/components/HeroHeaderAndImage";
 import FlexTiles from "../schema/components/FlexTiles";
 import AboutSection from "../schema/components/AboutSection";
 import SimpleStats from "../schema/components/SimpleStats";
+import InstagramShowcase from "../schema/components/InstagramShowcase";
 
 export default defineType({
   name: 'content',
@@ -13,6 +14,6 @@ export default defineType({
     FlexTiles,
     AboutSection,
     SimpleStats,
-    { type: 'InstagramShowcase' },
+    InstagramShowcase,
   ],
 });

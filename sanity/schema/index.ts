@@ -3,7 +3,7 @@ import { global } from './singleTypes/global';
 import Index_Page from './singleTypes/Index_Page';
 import seo from './components/seo';
 import Content from '../components/Content';
-import InstagramShowcase from './components/InstagramShowcase';
+import Partners_Collection from './collectionTypes/Partners_Collection';
 
 export const schemaTypes = [
   cta,
@@ -11,5 +11,5 @@ export const schemaTypes = [
   global,
   Content,
   Index_Page,
-  InstagramShowcase
+  Partners_Collection,
 ];

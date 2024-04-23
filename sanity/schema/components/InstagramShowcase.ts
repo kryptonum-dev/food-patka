@@ -1,10 +1,10 @@
-import { defineField, defineType } from 'sanity';
+import { defineField } from 'sanity';
 import { removeMarkdown } from '../../utils/remove-markdown';
 
 const title = 'Prezentacja instagrama';
 const icon = () => '📸';
 
-export default defineType({
+export default defineField({
   name: 'InstagramShowcase',
   type: 'object',
   title,
