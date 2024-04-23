@@ -6,7 +6,7 @@ import type { SimpleStatsTypes } from './SimpleStats.types';
 export default function SimpleStats({ img, list }: SimpleStatsTypes) {
   return (
     <section className={styles['SimpleStats']}>
-      <Img data={img} sizes='' />
+      <Img data={img} sizes='(max-width: 767px) 282px, 326px' />
       <div className={styles.innerCircle} />
       <Brushes className={styles.Brushes} />
       <Stars1 className={styles.Stars1} />
