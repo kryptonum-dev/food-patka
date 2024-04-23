@@ -4,6 +4,7 @@ import FlexTiles from "../schema/components/FlexTiles";
 import AboutSection from "../schema/components/AboutSection";
 import SimpleStats from "../schema/components/SimpleStats";
 import InstagramShowcase from "../schema/components/InstagramShowcase";
+import Partners from "../schema/components/Partners";
 
 export default defineType({
   name: 'content',
@@ -15,5 +16,6 @@ export default defineType({
     AboutSection,
     SimpleStats,
     InstagramShowcase,
+    Partners,
   ],
 });
