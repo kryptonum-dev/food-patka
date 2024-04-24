@@ -5,6 +5,7 @@ import SimpleStats, { type SimpleStatsTypes, SimpleStats_Query } from './global/
 import Partners, { type PartnersTypes, Partners_Query } from './global/Partners';
 import Faq, { type FaqTypes, Faq_Query } from './global/Faq';
 import ColumnHeaderAndStats, { type ColumnHeaderAndStatsTypes, ColumnHeaderAndStats_Query } from './global/ColumnHeaderAndStats';
+import ContactForm, { ContactFormTypes } from './global/ContactForm';
 
 type componentsMapTypes = {
   HeroHeaderAndImage: HeroHeaderAndImageTypes;
@@ -14,25 +15,28 @@ type componentsMapTypes = {
   Partners: PartnersTypes;
   Faq: FaqTypes;
   ColumnHeaderAndStats: ColumnHeaderAndStatsTypes;
+  ContactForm: ContactFormTypes;
 };
 
 export type ComponentTypes = componentsMapTypes[keyof componentsMapTypes] & { _type: string };
 
 export default function Components({ data }: { data: ComponentTypes[] }) {
   return data?.map((item, index) => {
+    item = { ...item, index };
     const componentType = item._type as keyof componentsMapTypes;
     const componentsMapTypes: Record<string, React.ReactNode> = {
-      HeroHeaderAndImage: <HeroHeaderAndImage {...(item as HeroHeaderAndImageTypes)} index={index} />,
+      HeroHeaderAndImage: <HeroHeaderAndImage {...(item as HeroHeaderAndImageTypes)} />,
       FlexTiles: <FlexTiles {...(item as FlexTilesTypes)} />,
       AboutSection: <AboutSection {...(item as AboutSectionTypes)} />,
       SimpleStats: <SimpleStats {...(item as SimpleStatsTypes)} />,
       Partners: <Partners {...(item as PartnersTypes)} />,
       Faq: <Faq {...(item as FaqTypes)} />,
-      ColumnHeaderAndStats: <ColumnHeaderAndStats {...(item as ColumnHeaderAndStatsTypes)} index={index} />,
+      ColumnHeaderAndStats: <ColumnHeaderAndStats {...(item as ColumnHeaderAndStatsTypes)} />,
+      ContactForm: <ContactForm {...(item as ContactFormTypes)} />,
     };
     const DynamicComponent = componentsMapTypes[componentType];
     if (!DynamicComponent) return null;
-    return componentsMapTypes[componentType];
+    return DynamicComponent;
   });
 }
 
