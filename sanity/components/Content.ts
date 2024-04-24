@@ -7,6 +7,7 @@ import InstagramShowcase from "../schema/components/InstagramShowcase";
 import Partners from "../schema/components/Partners";
 import Faq from "../schema/components/Faq";
 import ColumnHeaderAndStats from "../schema/components/ColumnHeaderAndStats";
+import ContactForm from "../schema/components/ContactForm";
 
 export default defineType({
   name: 'content',
@@ -21,5 +22,6 @@ export default defineType({
     Partners,
     Faq,
     ColumnHeaderAndStats,
+    ContactForm,
   ],
 });
