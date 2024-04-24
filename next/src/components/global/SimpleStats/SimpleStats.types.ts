@@ -7,6 +7,3 @@ export type SimpleStatsTypes = {
     label: string;
   }[];
 }
-export type CounterTypes = {
-  value: number;
-};

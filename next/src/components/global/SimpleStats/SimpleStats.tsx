@@ -1,6 +1,6 @@
 import Img from '@/components/ui/image';
 import styles from './SimpleStats.module.scss';
-import Counter from './_Counter';
+import Counter from '@/components/ui/Counter';
 import type { SimpleStatsTypes } from './SimpleStats.types';
 
 export default function SimpleStats({ img, list }: SimpleStatsTypes) {
@@ -19,7 +19,7 @@ export default function SimpleStats({ img, list }: SimpleStatsTypes) {
             {i === 1 && <Item2 className={styles.Item2} />}
             {i === 2 && <Item3 className={styles.Item3} />}
             <Counter value={number} />
-            <p className={styles.label}>{label}</p>
+            <p>{label}</p>
           </li>
         ))}
       </ul>

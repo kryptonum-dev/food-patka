@@ -1,7 +1,10 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import { useInView, useMotionValue, useSpring } from 'framer-motion';
-import type { CounterTypes } from './SimpleStats.types';
+
+type CounterTypes = {
+  value: number;
+};
 
 export default function Counter({ value }: CounterTypes) {
   const ref = useRef<HTMLSpanElement>(null);

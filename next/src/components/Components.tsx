@@ -4,6 +4,7 @@ import AboutSection, { type AboutSectionTypes, AboutSection_Query } from './glob
 import SimpleStats, { type SimpleStatsTypes, SimpleStats_Query } from './global/SimpleStats';
 import Partners, { type PartnersTypes, Partners_Query } from './global/Partners';
 import Faq, { type FaqTypes, Faq_Query } from './global/Faq';
+import ColumnHeaderAndStats, { type ColumnHeaderAndStatsTypes, ColumnHeaderAndStats_Query } from './global/ColumnHeaderAndStats';
 
 type componentsMapTypes = {
   HeroHeaderAndImage: HeroHeaderAndImageTypes;
@@ -12,6 +13,7 @@ type componentsMapTypes = {
   SimpleStats: SimpleStatsTypes;
   Partners: PartnersTypes;
   Faq: FaqTypes;
+  ColumnHeaderAndStats: ColumnHeaderAndStatsTypes;
 };
 
 export type ComponentTypes = componentsMapTypes[keyof componentsMapTypes] & { _type: string };
@@ -26,6 +28,7 @@ export default function Components({ data }: { data: ComponentTypes[] }) {
       SimpleStats: <SimpleStats {...(item as SimpleStatsTypes)} />,
       Partners: <Partners {...(item as PartnersTypes)} />,
       Faq: <Faq {...(item as FaqTypes)} />,
+      ColumnHeaderAndStats: <ColumnHeaderAndStats {...(item as ColumnHeaderAndStatsTypes)} index={index} />,
     };
     const DynamicComponent = componentsMapTypes[componentType];
     if (!DynamicComponent) return null;
@@ -42,5 +45,6 @@ export const Components_Query = /* groq */ `
     ${SimpleStats_Query}
     ${Partners_Query}
     ${Faq_Query}
+    ${ColumnHeaderAndStats_Query}
   },
 `;
