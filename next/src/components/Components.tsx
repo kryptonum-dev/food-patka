@@ -5,7 +5,7 @@ import SimpleStats, { type SimpleStatsTypes, SimpleStats_Query } from './global/
 import Partners, { type PartnersTypes, Partners_Query } from './global/Partners';
 import Faq, { type FaqTypes, Faq_Query } from './global/Faq';
 import ColumnHeaderAndStats, { type ColumnHeaderAndStatsTypes, ColumnHeaderAndStats_Query } from './global/ColumnHeaderAndStats';
-import ContactForm, { ContactFormTypes } from './global/ContactForm';
+import ContactForm, { ContactFormTypes, ContactForm_Query } from './global/ContactForm';
 
 type componentsMapTypes = {
   HeroHeaderAndImage: HeroHeaderAndImageTypes;
@@ -50,5 +50,6 @@ export const Components_Query = /* groq */ `
     ${Partners_Query}
     ${Faq_Query}
     ${ColumnHeaderAndStats_Query}
+    ${ContactForm_Query}
   },
 `;

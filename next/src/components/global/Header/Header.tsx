@@ -2,12 +2,12 @@ import sanityFetch from '@/utils/sanity.fetch';
 import Markdown from '@/components/ui/markdown';
 import Img, { ImgDataQuery } from '@/components/ui/image';
 import styles from './Header.module.scss';
-import SocialMedia from './SocialMedia';
 import _Header from './_Header';
+import SocialMedia from '../SocialMedia';
 import type { HeaderQueryTypes } from './Header.types';
 
 export default async function Header() {
-  const { nav, nav: { links }, socials } = await query();
+  const { nav, nav: { links } } = await query();
   const _links = links.map(({ links, ...props }) => ({
     ...links && {
       links: links.map(({ img, ...props }) => ({
@@ -30,7 +30,7 @@ export default async function Header() {
         <aside className={styles['Annotation']}>
           <div className={`${styles.maxWidth} max-width`}>
             <Markdown.p>{nav.annotation}</Markdown.p>
-            <SocialMedia data={socials} />
+            <SocialMedia />
           </div>
         </aside>
       )}
@@ -62,11 +62,6 @@ const query = async (): Promise<HeaderQueryTypes> => {
               }
             },
           },
-        },
-        socials {
-          instagram,
-          youtube,
-          tiktok,
         },
       }
     `,

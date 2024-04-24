@@ -1,10 +1,13 @@
-import styles from './Header.module.scss';
-import type { SocialMediaTypes } from './Header.types';
+import sanityFetch from '@/utils/sanity.fetch';
+import styles from './SocialMedia.module.scss';
+import type { SocialMediaQueryTypes } from './SocialMedia.types';
 
-export default async function SocialMedia({ data }: SocialMediaTypes) {
+export default async function SocialMedia() {
+  const { socials } = await query();
+
   return (
-    <ul className={styles['Socials']}>
-      {Object.entries(data).map(([platform, url]) => (
+    <ul className={styles['SocialMedia']}>
+      {Object.entries(socials).map(([platform, url]) => (
         <li key={platform}>
           <a href={url} target="_blank" rel="noreferrer">
             {platform === 'instagram' && <InstagramIcon />}
@@ -16,6 +19,21 @@ export default async function SocialMedia({ data }: SocialMediaTypes) {
     </ul>
   );
 }
+
+const query = async (): Promise<SocialMediaQueryTypes> => {
+  return await sanityFetch<SocialMediaQueryTypes>({
+    query: /* groq */ `
+      *[_id == 'global'][0] {
+        socials {
+          instagram,
+          youtube,
+          tiktok,
+        },
+      }
+    `,
+    tags: ['global'],
+  });
+};
 
 const InstagramIcon = () => (
   <svg
