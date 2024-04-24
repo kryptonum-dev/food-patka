@@ -32,6 +32,7 @@ $waveBottomHeight: clamp(41px, calc(87vw / 7.68), 156px);
 }
 
 .Form {
+  position: relative;
   max-width: calc(483rem / 16);
   display: grid;
   gap: clamp(12px, calc(16vw / 7.68), 16px);

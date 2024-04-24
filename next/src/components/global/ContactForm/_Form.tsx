@@ -67,7 +67,6 @@ export default function Form() {
         label='Twoja wiadomość'
         register={register('message', {
           required: { value: true, message: 'Wiadomość jest wymagana' },
-          pattern: { value: REGEX.string, message: 'Wiadomość jest wymagana' },
         })}
         errors={errors}
       />
