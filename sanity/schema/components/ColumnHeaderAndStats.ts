@@ -73,6 +73,7 @@ export default defineField({
           },
         },
       ],
+      validation: Rule => Rule.max(3),
       title: 'Lista statystyk',
     }),
   ],
