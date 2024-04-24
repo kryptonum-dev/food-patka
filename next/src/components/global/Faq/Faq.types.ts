@@ -1,4 +1,5 @@
 export type FaqTypes = {
+  index: number;
   heading: string;
   paragraph: string;
   list: {
