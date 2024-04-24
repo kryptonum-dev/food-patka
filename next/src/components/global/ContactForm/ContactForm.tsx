@@ -17,7 +17,7 @@ export default async function ContactForm({ index, isHighlighted, heading, parag
         <Heading>{heading}</Heading>
         <Markdown className={styles.paragraph}>{paragraph}</Markdown>
         <SocialMedia />
-        {img && <Img data={img} sizes='' />}
+        {img && <Img data={img} sizes='307px' priority={index === 0} />}
       </header>
       <Form />
       {isHighlighted && (
