@@ -47,8 +47,9 @@
         background-color: var(--primary-300, #fff6f9);
         border: 1.5px solid var(--primary-500, #ffb8ce);
         border-radius: 50%;
-        display: grid;
-        place-items: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition: background-color 0.5s;
         span {
           position: absolute;
