@@ -1,5 +1,4 @@
 import type { ImgDataTypes } from '@/components/ui/image';
-import type { SocialMediaTypes } from '../SocialMedia';
 
 export type HeaderQueryTypes = {
   nav: {
@@ -14,7 +13,6 @@ export type HeaderQueryTypes = {
       }[];
     }[];
   };
-  socials: SocialMediaTypes
 }
 
 export type _HeaderTypes = {
