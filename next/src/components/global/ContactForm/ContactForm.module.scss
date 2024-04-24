@@ -43,6 +43,7 @@ $waveBottomHeight: clamp(41px, calc(87vw / 7.68), 156px);
 .WaveTop,
 .WaveBottom {
   position: absolute;
+  z-index: -1;
   width: 100vw;
   left: calc(var(--pageMargin) * -1);
   @media (min-width: 1280px) {
