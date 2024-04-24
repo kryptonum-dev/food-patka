@@ -8,7 +8,7 @@ export default function FormState({ errorState, successState, isSuccess, setStat
     isSuccess !== undefined && (
       <div
         className={styles['FormState']}
-        data-issuccess={!!isSuccess}
+        data-is-success={!!isSuccess}
         data-element='FormState'
       >
         <h3>

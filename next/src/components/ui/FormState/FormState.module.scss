@@ -1,10 +1,10 @@
 .FormState {
-  &[data-issuccess='true'] {
+  &[data-is-success='true'] {
     h3 {
       color: var(--success-500, #298543);
     }
   }
-  &[data-issuccess='false'] {
+  &[data-is-success='false'] {
     h3 {
       color: var(--error-500, #cb2f2f);
     }
@@ -17,5 +17,15 @@
   }
   p {
     margin: 16px 0 28px;
+  }
+  animation: FormState 0.5s both;
+  @keyframes FormState {
+    from {
+      opacity: 0;
+      transform: translateY(13px);
+    }
+    to {
+      opacity: 1;
+    }
   }
 }

@@ -1,12 +1,12 @@
 'use client';
 import { useState } from 'react';
-import { useForm, type FieldValues, } from 'react-hook-form';
-import styles from './Newsletter.module.scss';
+import { useForm, type FieldValues } from 'react-hook-form';
 import Input from '@/components/ui/Input';
-import Button from '@/components/ui/Button';
 import Checkbox from '@/components/ui/Checkbox';
+import Button from '@/components/ui/Button';
 import Loader from '@/components/ui/Loader';
 import FormState from '@/components/ui/FormState';
+import styles from './ContactForm.module.scss';
 import { REGEX } from '@/global/constants';
 import type { FormStatusTypes } from '@/global/types';
 
@@ -21,9 +21,8 @@ export default function Form() {
 
   const onSubmit = async (data: FieldValues) => {
     setStatus({ sending: true, success: undefined });
-    data.groupID = 'test';
     try {
-      const response = await fetch('/api/mailerlite', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -63,6 +62,15 @@ export default function Form() {
         })}
         errors={errors}
       />
+      <Input
+        textarea={true}
+        label='Twoja wiadomość'
+        register={register('message', {
+          required: { value: true, message: 'Wiadomość jest wymagana' },
+          pattern: { value: REGEX.string, message: 'Wiadomość jest wymagana' },
+        })}
+        errors={errors}
+      />
       <Checkbox
         label={
           <>
@@ -87,25 +95,25 @@ export default function Form() {
         className={styles.cta}
         disabled={status?.sending}
       >
-        Zapisz się
+        Wyślij wiadomość
       </Button>
 
       <Loader loading={status.sending} />
       <FormState
         errorState={{
-          heading: 'Nie udało się zapisać do newslettera',
+          heading: 'Nie udało się wysłać wiadomości',
           paragraph: <>
-            Podczas przesyłania informacji pojawił się problem z serwerem. Jeśli problem się powtórzy, skontaktuj się z nami przez formularz kontaktowy lub napisz na adres:&nbsp;
+            Podczas przesyłania, wystąpił problem z serwerem. Wyślij wiadomość ponownie. W razie niepowodzenia, skontaktuj się z nami mailowo:&nbsp;
             <a href="mailto:patrycja@foodpatka.pl" className='link' target='_blank' rel='noreferrer'>patrycja@foodpatka.pl</a>
           </>,
         }}
         successState={{
-          heading: 'Dziękujemy za zapis do newslettera!',
-          paragraph: 'Od teraz będziesz na bieżąco z nowościami i aktualnościami ze świata FoodPatki!',
+          heading: 'Dziękujemy za kontakt',
+          paragraph: 'Twoja wiadomość właśnie dotarła do naszej skrzynki mailowej. Odezwiemy się najszybciej, jak to możliwe.',
         }}
         isSuccess={status?.success}
         setStatus={setStatus}
       />
-    </form >
+    </form>
   );
 }

@@ -11,16 +11,17 @@
   input {
     height: 48px;
     padding: 9px 16px;
+    border-radius: 24px;
   }
   textarea {
     min-height: 96px;
     resize: none;
     padding: 9px 16px;
+    border-radius: 16px;
   }
   input,
   textarea {
     width: 100%;
-    border-radius: 48px;
     border: 1px solid var(--primary-500, #ffb8ce);
     font-size: 1rem;
     transition: border-color 0.5s, background-color 0.5s;

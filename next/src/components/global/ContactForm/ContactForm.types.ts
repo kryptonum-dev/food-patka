@@ -1,5 +1,4 @@
 import type { ImgDataTypes } from '@/components/ui/image';
-import { SocialMediaTypes } from '../SocialMedia';
 
 export type ContactFormTypes = {
   index: number;
@@ -9,6 +8,7 @@ export type ContactFormTypes = {
   img: ImgDataTypes;
 }
 
-export type ContactFormQueryTypes = {
-  socials: SocialMediaTypes;
+export type FormStatusTypes = {
+  sending: boolean;
+  success: boolean;
 }

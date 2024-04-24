@@ -1,4 +1,6 @@
-export default function Textarea({ ...props }) {
+import { forwardRef } from 'react';
+
+const Textarea = forwardRef((props, ref) => {
   const handleExpand = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const textarea = e.target;
     textarea.style.height = 'auto';
@@ -8,7 +10,12 @@ export default function Textarea({ ...props }) {
   return (
     <textarea
       onInput={handleExpand}
+      ref={ref as React.Ref<HTMLTextAreaElement>}
       {...props}
     />
   );
-}
+});
+
+Textarea.displayName = 'Textarea';
+
+export default Textarea;

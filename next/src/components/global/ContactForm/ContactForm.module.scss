@@ -1,3 +1,33 @@
 .ContactForm {
-  
+  display: grid;
+  gap: clamp(12px, calc(20vw / 7.68), 20px) clamp(64px, calc(64vw / 7.68), 138px);
+  align-items: center;
+  @media (min-width: 1000px) {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  header {
+    max-width: calc(587rem / 16);
+    .paragraph {
+      margin: clamp(12px, calc(20vw / 7.68), 20px) 0 clamp(16px, calc(32vw / 7.68), 32px);
+    }
+  }
+  img {
+    width: clamp(154px, calc(307vw / 7.68), 307px);
+    margin-left: 20%;
+    @media (max-width: 599px) {
+      margin-left: 40%;
+    }
+    margin-top: -10%;
+  }
+}
+
+.Form {
+  max-width: calc(483rem / 16);
+  display: grid;
+  gap: clamp(12px, calc(16vw / 7.68), 16px);
+  &:has([data-element='FormState']) {
+    & > *:not([data-element='FormState']) {
+      display: none;
+    }
+  }
 }
