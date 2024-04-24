@@ -1,13 +1,13 @@
 .SocialMedia {
   display: flex;
   gap: clamp(4px, calc(8vw / 7.68), 8px);
-  z-index: 1;
   a {
     width: 44px;
     height: 44px;
     display: grid;
     place-items: center;
     position: relative;
+    z-index: 2;
     &::before {
       content: '';
       position: absolute;
