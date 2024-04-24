@@ -6,6 +6,7 @@ import SimpleStats from "../schema/components/SimpleStats";
 import InstagramShowcase from "../schema/components/InstagramShowcase";
 import Partners from "../schema/components/Partners";
 import Faq from "../schema/components/Faq";
+import ColumnHeaderAndStats from "../schema/components/ColumnHeaderAndStats";
 
 export default defineType({
   name: 'content',
@@ -19,5 +20,6 @@ export default defineType({
     InstagramShowcase,
     Partners,
     Faq,
+    ColumnHeaderAndStats,
   ],
 });
