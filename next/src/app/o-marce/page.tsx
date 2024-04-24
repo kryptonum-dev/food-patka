@@ -1,12 +1,19 @@
 import sanityFetch from '@/utils/sanity.fetch';
 import { QueryMetadata } from '@/global/Seo/query-metadata';
+import Breadcrumbs from '@/components/global/Breadcrumbs';
 import Components, { ComponentTypes, Components_Query } from '@/components/Components';
+
+const currentPath = '/o-marce';
+const breadcrumbs = [
+  { name: 'O Marce', path: currentPath },
+];
 
 export default async function AboutPage() {
   const { content } = await query();
 
   return (
     <>
+      <Breadcrumbs data={breadcrumbs} />
       <Components data={content} />
     </>
   );
@@ -25,5 +32,5 @@ const query = async (): Promise<{ content: ComponentTypes[] }> => {
 
 
 export async function generateMetadata() {
-  return await QueryMetadata('About_Page', '/o-marce');
+  return await QueryMetadata('About_Page', currentPath);
 }

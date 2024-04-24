@@ -1,0 +1,25 @@
+.Breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow: hidden;
+  margin-bottom: clamp(28px, calc(32vw / 7.68), 32px);
+  font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
+  + * {
+    margin-top: calc(var(--gap) * -1) !important;
+  }
+  .item {
+    white-space: nowrap;
+    &:not(a:last-of-type) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  a {
+    color: var(--secondary-500);
+    transition: opacity 0.5s;
+    &:not(:hover) {
+      opacity: 0.76;
+    }
+  }
+}

@@ -28,6 +28,8 @@
 
   --easing: cubic-bezier(0.6, -0.15, 0.27, 1.15);
 
+  --gap: clamp(96px, calc(132vw / 7.68), 152px);
+
   --pageMargin: clamp(16px, calc(40vw / 7.68), 40px);
   @media (max-width: 899px) and (min-width: 600px) {
     --pageMargin: clamp(40px, calc(80vw / 7.68), 80px);
@@ -137,8 +139,8 @@ main,
 }
 main {
   display: grid;
-  row-gap: clamp(96px, calc(132vw / 7.68), 152px);
-  margin: clamp(32px, calc(42vw / 7.68), 42px) auto clamp(96px, calc(132vw / 7.68), 152px);
+  row-gap: var(--gap);
+  margin: clamp(32px, calc(42vw / 7.68), 42px) auto var(--gap);
 }
 
 h1,
