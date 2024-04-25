@@ -31,10 +31,14 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      transition: background-color 0.5s;
       border: 1px solid var(--primary-400, #ffd7e4);
       background: var(--primary-300, #fff6f9);
+      transition: background-color 0.5s, border-color 0.5s;
       &:hover {
+        background: var(--primary-400, #ffd7e4);
+      }
+      &[aria-current='page'] {
+        border-color: var(--primary-500, #ffb8ce);
         background: var(--primary-400, #ffd7e4);
       }
     }
@@ -44,6 +48,7 @@
       right: 0;
       top: 0;
       transform: translate(50%, -50%);
+      pointer-events: none;
       path {
         animation: Brushes 1s var(--easing) both;
         transform-origin: bottom left;

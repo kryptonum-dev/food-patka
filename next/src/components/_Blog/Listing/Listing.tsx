@@ -4,7 +4,7 @@ import Markdown from '@/components/ui/markdown';
 import styles from './Listing.module.scss';
 import type { ListingQueryTypes, ListingTypes } from './Listing.types';
 
-export default async function Listing({ heading, paragraph }: ListingTypes) {
+export default async function Listing({ heading, paragraph, currentCategorySlug }: ListingTypes) {
   const { categories } = await query();
 
   return (
@@ -16,7 +16,10 @@ export default async function Listing({ heading, paragraph }: ListingTypes) {
       <ul className={styles.categories}>
         {categories.map(({ name, slug }, i) => (
           <li key={i}>
-            <Link href={`/blog/kategoria/${slug}`}>{name}</Link>
+            <Link
+              href={`/blog/kategoria/${slug}`}
+              aria-current={slug === currentCategorySlug ? 'page' : undefined}
+            >{name}</Link>
           </li>
         ))}
         <Brushes className={styles.Brushes} />

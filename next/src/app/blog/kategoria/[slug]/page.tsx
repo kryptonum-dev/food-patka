@@ -1,42 +1,76 @@
+import { notFound } from 'next/navigation';
 import sanityFetch from '@/utils/sanity.fetch';
 import { QueryMetadata } from '@/global/Seo/query-metadata';
 import Breadcrumbs from '@/components/global/Breadcrumbs';
 import Components, { Components_Query } from '@/components/Components';
-import Listing, { Listing_Query } from '@/components/_Blog/Listing';
-import type { BlogPageQueryTypes } from './page.types';
+import Listing from '@/components/_Blog/Listing';
+import type { BlogCategoryPageQueryTypes, BlogCategoryPageTypes } from './page.types';
+import type { generateStaticParamsTypes } from '@/global/types';
 
-const currentPath = '/blog';
-const breadcrumbs = [
-  { name: 'Blog', path: currentPath },
-];
-
-export default async function AboutPage() {
-  const { listing, content } = await query();
+export default async function BlogCategoryPage({ params: { slug } }: BlogCategoryPageTypes) {
+  const {
+    category: {
+      name: categoryName,
+      slug: categorySlug,
+      header,
+    },
+    page: {
+      content
+    }
+  } = await query(slug);
 
   return (
     <>
-      <Breadcrumbs data={breadcrumbs} />
-      <Listing {...listing} />
+      <Breadcrumbs data={[
+        { name: 'Blog', path: '/blog' },
+        { name: categoryName, path: `/blog/kategoria/${categorySlug}` },
+      ]} />
+      <Listing  {...header} currentCategorySlug={slug} />
       <Components data={content} />
     </>
   );
 }
 
-const query = async (): Promise<BlogPageQueryTypes> => {
-  return await sanityFetch<BlogPageQueryTypes>({
+const query = async (slug: string): Promise<BlogCategoryPageQueryTypes> => {
+  const data = await sanityFetch<BlogCategoryPageQueryTypes>({
     query: /* groq */ `
-      *[_type == 'BlogCategory_Collection' && slug.current == $slug][0] {
-        name,
-        "filteredBlogPosts": *[_type=="BlogPost_Collection" && $slug in category[]->slug.current],
-      }
-      *[_type == "Blog_Page"][0] {
-        ${Components_Query}
+      {
+        "category": *[_type == 'BlogCategory_Collection' && slug.current == $slug][0] {
+          name,
+          'slug': slug.current,
+          header {
+            heading,
+            paragraph,
+          },
+          // "filteredBlogPosts": *[_type=="BlogPost_Collection" && $slug in category[]->slug.current],
+        },
+        "page": *[_type == "Blog_Page"][0] {
+          ${Components_Query}
+        },
       }
     `,
-    tags: ['Blog_Page'],
+    params: { slug },
+    tags: ['Blog_Page', 'BlogCategory_Collection'],
   });
+  if (!data.category) notFound();
+  return data;
 };
 
-export async function generateMetadata({ params: { slug } }: { params: { slug: string } }) {
-  return await QueryMetadata('Blog_Page', `/blog/kategoria/${slug}`, `${slug}`);
+export async function generateMetadata({ params: { slug } }: BlogCategoryPageTypes) {
+  return await QueryMetadata('BlogCategory_Collection', `/blog/kategoria/${slug}`, `${slug}`);
+}
+
+export async function generateStaticParams(): Promise<generateStaticParamsTypes> {
+  const collection = await sanityFetch<generateStaticParamsTypes>({
+    query: /* groq */ `
+      *[_type == 'BlogCategory_Collection'] {
+        'slug': slug.current,
+      }
+    `,
+    tags: ['BlogCategory_Collection'],
+  });
+
+  return collection.map(({ slug }) => ({
+    slug: slug,
+  }));
 }

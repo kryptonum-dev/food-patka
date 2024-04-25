@@ -1,4 +1,4 @@
-export type generateStaticParamsType = {
+export type generateStaticParamsTypes = {
   slug: string;
 }[];
 

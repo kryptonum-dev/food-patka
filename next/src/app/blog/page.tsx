@@ -10,7 +10,7 @@ const breadcrumbs = [
   { name: 'Blog', path: currentPath },
 ];
 
-export default async function AboutPage() {
+export default async function BlogPage() {
   const { listing, content } = await query();
 
   return (
