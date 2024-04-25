@@ -8,6 +8,7 @@ import About_Page from './singleTypes/About_Page';
 import Faq_Collection from './collectionTypes/Faq_Collection';
 import Partners_Page from './singleTypes/Partners_Page';
 import Contact_Page from './singleTypes/Contact_Page';
+import NotFound_Page from './singleTypes/NotFound_Page';
 
 export const schemaTypes = [
   cta,
@@ -20,6 +21,7 @@ export const schemaTypes = [
   About_Page,
   Partners_Page,
   Contact_Page,
+  NotFound_Page,
 
   // Collection types
   Partners_Collection,
