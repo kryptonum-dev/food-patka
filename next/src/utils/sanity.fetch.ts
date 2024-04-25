@@ -43,7 +43,6 @@ export default async function sanityFetch<QueryResponse>({
       ...(isPreviewDeployment || !tags) ? {
         cache: 'no-cache',
       } : {
-        cache: 'force-cache',
         next: {
           tags,
           // 1 month time revalidation
