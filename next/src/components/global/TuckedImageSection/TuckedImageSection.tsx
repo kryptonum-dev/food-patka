@@ -15,7 +15,11 @@ export default function TuckedImageSection({ index, heading, paragraph, cta, img
         {cta && <Button data={cta} className={styles.cta} />}
       </header>
       <div className={styles.img}>
-        <Img data={img} sizes='' priority={index === 0} />
+        <Img
+          data={img}
+          sizes='(max-width: 420px) 282px, (max-width: 767px) 66vw, 520px'
+          priority={index === 0}
+        />
         <Line className={styles.Line} />
         <Brushes className={styles.Brushes} />
         <Sygnet className={styles.Sygnet} />
