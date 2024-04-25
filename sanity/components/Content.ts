@@ -9,6 +9,7 @@ import Faq from "../schema/components/Faq";
 import ColumnHeaderAndStats from "../schema/components/ColumnHeaderAndStats";
 import ContactForm from "../schema/components/ContactForm";
 import HeaderImageAndFeautures from "../schema/components/HeaderImageAndFeautures";
+import TuckedImageSection from "../schema/components/TuckedImageSection";
 
 export default defineType({
   name: 'content',
@@ -25,5 +26,6 @@ export default defineType({
     ColumnHeaderAndStats,
     ContactForm,
     HeaderImageAndFeautures,
+    TuckedImageSection,
   ],
 });
