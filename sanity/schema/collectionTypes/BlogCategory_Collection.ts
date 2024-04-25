@@ -36,7 +36,7 @@ export default defineType({
         }).required(),
     },),
     defineField({
-      name: 'seo',
+      name: 'header',
       type: 'object',
       options: { collapsible: true },
       validation: Rule => Rule.required(),
@@ -55,6 +55,12 @@ export default defineType({
         }),
       ]
     }),
+    defineField({
+      name: 'seo',
+      type: 'seo',
+      title: 'SEO',
+      group: 'seo',
+    }),
   ],
   preview: {
     select: {
@@ -67,4 +73,10 @@ export default defineType({
       icon,
     }),
   },
+  groups: [
+    {
+      name: 'seo',
+      title: 'SEO',
+    },
+  ],
 });
