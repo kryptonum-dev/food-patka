@@ -1,11 +1,11 @@
 import { defineField } from 'sanity';
 import { removeMarkdown } from '../../utils/remove-markdown';
 
-const title = 'Sekcja kolumna z nagłówkiem i statystykami';
-const icon = () => '📈';
+const title = 'Sekcja z nagłówkiem, zdjęciem i cechami';
+const icon = () => '✅';
 
 export default defineField({
-  name: 'ColumnHeaderAndStats',
+  name: 'HeaderImageAndFeautures',
   type: 'object',
   title,
   icon,
@@ -15,17 +15,6 @@ export default defineField({
       type: 'markdown',
       title: 'Nagłówek',
       validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'paragraph',
-      type: 'markdown',
-      title: 'Paragraf',
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'cta',
-      type: 'cta',
-      title: 'Wezwanie do działania (opcjonalnie)',
     }),
     defineField({
       name: 'img',
@@ -41,40 +30,32 @@ export default defineField({
           type: 'object',
           fields: [
             defineField({
-              name: 'number',
-              type: 'number',
-              title: 'Liczba',
+              name: 'heading',
+              type: 'markdown',
+              title: 'Nagłówek',
               validation: Rule => Rule.required(),
             }),
             defineField({
-              name: 'label',
-              type: 'string',
-              title: 'Etykieta',
-              validation: Rule => Rule.required(),
-            }),
-            defineField({
-              name: 'icon',
-              type: 'image',
-              title: 'Ikona',
+              name: 'paragraph',
+              type: 'markdown',
+              title: 'Paragraf',
               validation: Rule => Rule.required(),
             }),
           ],
           preview: {
             select: {
-              title: 'number',
-              subtitle: 'label',
-              media: 'icon',
+              title: 'heading',
+              subtitle: 'paragraph',
             },
-            prepare: ({ title, subtitle, media }) => ({
+            prepare: ({ title, subtitle }) => ({
               title,
               subtitle,
-              media,
             }),
           },
         },
       ],
       validation: Rule => Rule.max(3),
-      title: 'Lista statystyk',
+      title: 'Lista cech',
     }),
   ],
   preview: {
