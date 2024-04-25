@@ -9,6 +9,7 @@ import Faq_Collection from './collectionTypes/Faq_Collection';
 import Partners_Page from './singleTypes/Partners_Page';
 import Contact_Page from './singleTypes/Contact_Page';
 import NotFound_Page from './singleTypes/NotFound_Page';
+import BlogCategory_Collection from './collectionTypes/BlogCategory_Collection';
 
 export const schemaTypes = [
   cta,
@@ -26,4 +27,5 @@ export const schemaTypes = [
   // Collection types
   Partners_Collection,
   Faq_Collection,
+  BlogCategory_Collection,
 ];
