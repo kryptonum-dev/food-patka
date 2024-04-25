@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 import { slugify } from "../../utils/slugify";
 
 const title = 'Blog – Kategorie';
-const icon = () => '📚';
+const icon = () => '';
 
 export default defineType({
   name: 'BlogCategory_Collection',
