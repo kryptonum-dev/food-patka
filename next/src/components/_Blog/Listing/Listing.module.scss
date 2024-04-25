@@ -1,0 +1,89 @@
+.Listing {
+  header {
+    max-width: calc(587rem / 16);
+    margin: 0 auto clamp(36px, calc(48vw / 7.68), 64px);
+    text-align: center;
+    h1 {
+      margin-bottom: clamp(12px, calc(16vw / 7.68), 20px);
+    }
+  }
+  .categories {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    gap: clamp(8px, calc(16vw / 7.68), 16px);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border-radius: 23px;
+    border: 1.5px solid var(--primary-300, #fff6f9);
+    li {
+      display: grid;
+    }
+    a {
+      display: block;
+      height: 44px;
+      line-height: 44px;
+      padding: 0 24px;
+      border-radius: 22px;
+      font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: background-color 0.5s;
+      border: 1px solid var(--primary-400, #ffd7e4);
+      background: var(--primary-300, #fff6f9);
+      &:hover {
+        background: var(--primary-400, #ffd7e4);
+      }
+    }
+    position: relative;
+    .Brushes {
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translate(50%, -50%);
+      path {
+        animation: Brushes 1s var(--easing) both;
+        transform-origin: bottom left;
+        transform-box: fill-box;
+        &:nth-child(1) {
+          animation-delay: 0s;
+        }
+        &:nth-child(2) {
+          animation-delay: 0.1s;
+        }
+        &:nth-child(3) {
+          animation-delay: 0.2s;
+        }
+        &:nth-child(4) {
+          animation-delay: 0.3s;
+        }
+        &:nth-child(5) {
+          animation-delay: 0.4s;
+        }
+        &:nth-child(6) {
+          animation-delay: 0.5s;
+        }
+        &:nth-child(7) {
+          animation-delay: 0.6s;
+        }
+        &:nth-child(8) {
+          animation-delay: 0.7s;
+        }
+        &:nth-child(9) {
+          animation-delay: 0.8s;
+        }
+        @keyframes Brushes {
+          from {
+            transform: scale(0);
+          }
+          to {
+            transform: scale(1);
+          }
+        }
+      }
+    }
+  }
+}
