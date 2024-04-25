@@ -1,0 +1,142 @@
+.HeaderImageAndFeautures {
+  display: grid;
+  align-items: flex-start;
+  column-gap: clamp(82px, calc(82vw / 7.68), 134px);
+  @media (min-width: 1000px) {
+    header {
+      grid-column: 3/1;
+    }
+    .list {
+      order: 1;
+    }
+    grid-template-columns: 1.2fr 1fr;
+  }
+  header {
+    max-width: calc(587rem / 16);
+    text-align: center;
+    margin: 0 auto clamp(32px, calc(36vw / 7.68), 42px);
+  }
+  .list {
+    max-width: calc(608rem / 16);
+    margin-left: auto;
+    margin-right: auto;
+    @media (max-width: 999px) {
+      margin-bottom: clamp(42px, calc(64vw / 7.68), 64px);
+    }
+    display: grid;
+    gap: 16px;
+    h3 {
+      margin-bottom: clamp(8px, calc(12vw / 7.68), 12px);
+      color: var(--secondary-500, #726378);
+    }
+    .item {
+      padding: clamp(16px, calc(24vw / 7.68), 24px) clamp(16px, calc(28vw / 7.68), 28px);
+      border-radius: 20px;
+      border: 1px solid var(--primary-400, #ffd7e4);
+      background: var(--primary-300, #fff6f9);
+    }
+  }
+  .img {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 608px;
+    img {
+      display: block;
+      width: 90%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    position: relative;
+    .Stars1,
+    .Stars2,
+    .Stars3,
+    .Arrow {
+      position: absolute;
+    }
+    .Stars1 {
+      width: clamp(43px, calc(78vw / 7.68), 78px);
+      left: 0;
+      top: 5%;
+      path {
+        transform-origin: center;
+        transform-box: fill-box;
+        animation: Stars 1s var(--easing) both;
+        &:nth-child(1) {
+          animation-delay: 0.2s;
+        }
+        &:nth-child(2) {
+          animation-delay: 0.3s;
+        }
+      }
+    }
+    .Stars2 {
+      width: clamp(25px, calc(46vw / 7.68), 46px);
+      right: 0;
+      top: 20%;
+      path {
+        transform-origin: center;
+        transform-box: fill-box;
+        animation: Stars 1s var(--easing) both;
+        animation-delay: 0.8s;
+      }
+    }
+    .Stars3 {
+      width: clamp(47px, calc(84vw / 7.68), 84px);
+      right: 10%;
+      bottom: 0;
+      path {
+        transform-origin: center;
+        transform-box: fill-box;
+        animation: Stars 1s var(--easing) both;
+        &:nth-child(1) {
+          animation-delay: 1.2s;
+        }
+        &:nth-child(2) {
+          animation-delay: 1.3s;
+        }
+      }
+    }
+    .Arrow {
+      @media (max-width: 999px) {
+        display: none;
+      }
+      right: 0;
+      bottom: 20%;
+      transform: translate(50%, 0);
+      path {
+        &:nth-child(1) {
+          animation: ArrowPath1 1s var(--easing) both;
+          animation-delay: 2s;
+          @keyframes ArrowPath1 {
+            from {
+              stroke-dasharray: 0 173;
+            }
+            to {
+              stroke-dasharray: 173 173;
+            }
+          }
+        }
+        &:nth-child(2) {
+          animation: ArrowPath2 1s var(--easing) both;
+          animation-delay: 2.4s;
+          @keyframes ArrowPath2 {
+            from {
+              stroke-dasharray: 0 28;
+            }
+            to {
+              stroke-dasharray: 28 28;
+            }
+          }
+        }
+      }
+    }
+    @keyframes Stars {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+}

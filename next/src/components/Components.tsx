@@ -6,6 +6,7 @@ import Partners, { type PartnersTypes, Partners_Query } from './global/Partners'
 import Faq, { type FaqTypes, Faq_Query } from './global/Faq';
 import ColumnHeaderAndStats, { type ColumnHeaderAndStatsTypes, ColumnHeaderAndStats_Query } from './global/ColumnHeaderAndStats';
 import ContactForm, { ContactFormTypes, ContactForm_Query } from './global/ContactForm';
+import HeaderImageAndFeautures, { type HeaderImageAndFeauturesTypes, HeaderImageAndFeautures_Query } from './global/HeaderImageAndFeautures';
 
 type componentsMapTypes = {
   HeroHeaderAndImage: HeroHeaderAndImageTypes;
@@ -16,6 +17,7 @@ type componentsMapTypes = {
   Faq: FaqTypes;
   ColumnHeaderAndStats: ColumnHeaderAndStatsTypes;
   ContactForm: ContactFormTypes;
+  HeaderImageAndFeautures: HeaderImageAndFeauturesTypes;
 };
 
 export type ComponentTypes = componentsMapTypes[keyof componentsMapTypes] & { _type: string };
@@ -33,6 +35,7 @@ export default function Components({ data }: { data: ComponentTypes[] }) {
       Faq: <Faq {...(item as FaqTypes)} />,
       ColumnHeaderAndStats: <ColumnHeaderAndStats {...(item as ColumnHeaderAndStatsTypes)} />,
       ContactForm: <ContactForm {...(item as ContactFormTypes)} />,
+      HeaderImageAndFeautures: <HeaderImageAndFeautures {...(item as HeaderImageAndFeauturesTypes)} />,
     };
     const DynamicComponent = componentsMapTypes[componentType];
     if (!DynamicComponent) return null;
@@ -51,5 +54,6 @@ export const Components_Query = /* groq */ `
     ${Faq_Query}
     ${ColumnHeaderAndStats_Query}
     ${ContactForm_Query}
+    ${HeaderImageAndFeautures_Query}
   },
 `;
