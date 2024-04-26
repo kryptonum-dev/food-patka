@@ -1,19 +1,20 @@
 import { defineField, defineType } from "sanity";
 import { slugify } from "../../utils/slugify";
+import { removeMarkdown } from "../../utils/remove-markdown";
 
-const title = 'Blog – Kategorie';
-const icon = () => '📂';
+const title = 'Blog – Artykuły';
+const icon = () => '🗞️';
 
 export default defineType({
-  name: 'BlogCategory_Collection',
+  name: 'BlogPost_Collection',
   type: 'document',
   title,
   icon,
   fields: [
     defineField({
-      name: 'name',
-      type: 'string',
-      title: 'Nazwa',
+      name: 'title',
+      type: 'markdown',
+      title: 'Tytuł',
       validation: Rule => Rule.required(),
     }),
     defineField({
@@ -23,7 +24,7 @@ export default defineType({
       description:
         'Slug, to unikalny ciąg znaków, który znajdziemy zazwyczaj po ukośniku w adresie URL podstrony. Dzięki niemu jego forma jest zrozumiała dla użytkowników.',
       options: {
-        source: 'name',
+        source: 'title',
         slugify: input => `${slugify(input)}`,
       },
       validation: Rule =>
@@ -36,24 +37,23 @@ export default defineType({
         }).required(),
     }),
     defineField({
-      name: 'header',
-      type: 'object',
-      options: { collapsible: true },
+      name: 'subtitle',
+      type: 'markdown',
+      title: 'Podtytuł',
       validation: Rule => Rule.required(),
-      fields: [
-        defineField({
-          name: 'heading',
-          type: 'markdown',
-          title: 'Nagłówek',
-          validation: Rule => Rule.required(),
-        }),
-        defineField({
-          name: 'paragraph',
-          type: 'markdown',
-          title: 'Paragraf',
-          validation: Rule => Rule.required(),
-        }),
-      ]
+    }),
+    defineField({
+      name: 'img',
+      type: 'image',
+      title: 'Zdjęcie',
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: 'category',
+      type: 'reference',
+      title: 'Powiązana kategoria',
+      to: { type: 'BlogCategory_Collection' },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'seo',
@@ -64,12 +64,14 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'name',
+      title: 'title',
       subtitle: 'slug.current',
+      media: 'img',
     },
-    prepare: ({ title, subtitle }) => ({
-      title: title,
+    prepare: ({ title, subtitle, media }) => ({
+      title: removeMarkdown(title),
       subtitle: subtitle,
+      media,
       icon,
     }),
   },
