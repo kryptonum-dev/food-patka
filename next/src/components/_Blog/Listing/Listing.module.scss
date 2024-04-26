@@ -8,7 +8,7 @@
     }
   }
   .categories {
-    margin: 0 auto;
+    margin: 0 auto clamp(52px, calc(64vw / 7.68), 84px);
     width: fit-content;
     display: flex;
     gap: clamp(8px, calc(16vw / 7.68), 16px);
@@ -22,7 +22,9 @@
       display: grid;
     }
     a {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       height: 44px;
       line-height: 44px;
       padding: 0 24px;
@@ -50,7 +52,7 @@
       transform: translate(50%, -50%);
       pointer-events: none;
       path {
-        animation: Brushes 1s var(--easing) both;
+        animation: Brushes 0.8s var(--easing) both;
         transform-origin: bottom left;
         transform-box: fill-box;
         &:nth-child(1) {
@@ -88,6 +90,75 @@
             transform: scale(1);
           }
         }
+      }
+    }
+  }
+}
+
+.Posts {
+  display: grid;
+  gap: clamp(20px, calc(24vw / 7.68), 32px);
+  @media (min-width: 1050px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .item {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    .img {
+      overflow: hidden;
+      border-radius: 20px 20px 0px 0px;
+      img {
+        height: calc(100% + 5px);
+        transition: transform 0.5s var(--easing);
+      }
+    }
+    &:has(a:hover) {
+      img {
+        transform: translateY(-5px);
+      }
+    }
+    .wrapper {
+      z-index: 2;
+      margin: -28px 0 0 0;
+      border-radius: 20px;
+      border: 1px solid var(--primary-500, #ffb8ce);
+      background: var(--primary-200, #fffdfd);
+      padding: clamp(12px, calc(28vw / 7.68), 28px);
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      .subtitle {
+        margin: clamp(8px, calc(12vw / 7.68), 12px) 0 clamp(20px, calc(24vw / 7.68), 24px);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+      }
+      a {
+        margin-top: auto;
+      }
+    }
+    @media (max-width: 1049px) and (min-width: 500px) {
+      grid-template-columns: 1fr 1fr;
+      .img {
+        border-radius: 20px 0px 0px 20px;
+        img {
+          height: 100%;
+          width: calc(100% + 5px);
+          max-width: calc(100% + 5px);
+        }
+      }
+      &:has(a:hover) {
+        img {
+          transform: translateX(-5px);
+        }
+      }
+      .wrapper {
+        margin: 0 0 0 -28px;
+        align-items: flex-start;
+        text-align: left;
       }
     }
   }

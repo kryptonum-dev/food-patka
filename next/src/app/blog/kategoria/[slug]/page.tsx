@@ -25,7 +25,7 @@ export default async function BlogCategoryPage({ params: { slug } }: BlogCategor
         { name: 'Blog', path: '/blog' },
         { name: categoryName, path: `/blog/kategoria/${categorySlug}` },
       ]} />
-      <Listing  {...header} currentCategorySlug={slug} />
+      <Listing {...header} currentCategorySlug={slug} />
       <Components data={content} />
     </>
   );
@@ -42,7 +42,6 @@ const query = async (slug: string): Promise<BlogCategoryPageQueryTypes> => {
             heading,
             paragraph,
           },
-          // "filteredBlogPosts": *[_type=="BlogPost_Collection" && $slug in category[]->slug.current],
         },
         "page": *[_type == "Blog_Page"][0] {
           ${Components_Query}
