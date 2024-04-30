@@ -86,7 +86,7 @@
         transform-box: fill-box;
         animation: Stars 1s var(--easing) both;
         &:nth-child(1) {
-          animation-delay: .9s;
+          animation-delay: 0.9s;
         }
         &:nth-child(2) {
           animation-delay: 1s;
@@ -102,20 +102,20 @@
       transform: translate(50%, 0);
       path {
         &:nth-child(1) {
-          animation: ArrowPath1 1s var(--easing) both;
+          animation: ArrowPath1 1.5s var(--easing) both;
           animation-delay: 1.6s;
           @keyframes ArrowPath1 {
             from {
-              stroke-dasharray: 0 173;
+              stroke-dasharray: 0 380;
             }
             to {
-              stroke-dasharray: 173 173;
+              stroke-dasharray: 380 380;
             }
           }
         }
         &:nth-child(2) {
-          animation: ArrowPath2 1s var(--easing) both;
-          animation-delay: 1.9s;
+          animation: ArrowPath2 1.5s var(--easing) both;
+          animation-delay: 2s;
           @keyframes ArrowPath2 {
             from {
               stroke-dasharray: 0 28;

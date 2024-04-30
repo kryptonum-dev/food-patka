@@ -78,15 +78,20 @@ const Arrow = ({ ...props }) => (
     height={134}
     viewBox='0 0 198 134'
     fill='none'
-    stroke='#FFD7E4'
-    strokeWidth={3}
     {...props}
   >
-    <path d='M2.35.07C1.102 56.566 35.66 70.61 61.657 67.104m0 0c23.72-3.199 40.311-21.007 16.083-34.513-12.661-7.06-19.365 11.532-16.083 34.513Zm0 0c5.805 40.636 42.834 94.997 133.358 45.548' />
+    <path
+      d='M2.35.07C-.036 108.109 128.524 60.9 77.74 32.59c-35.05-19.54-24.445 157.476 117.275 80.061'
+      stroke='#FFD7E4'
+      strokeWidth={3}
+    />
     <path
       d='m183 108 13 4-3.5 13.5'
+      stroke='#FFD7E4'
+      strokeWidth={3}
       strokeLinecap='round'
       strokeLinejoin='round'
     />
   </svg>
+
 );
