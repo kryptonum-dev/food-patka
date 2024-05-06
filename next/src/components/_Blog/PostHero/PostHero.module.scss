@@ -1,0 +1,68 @@
+.PostHero {
+  header {
+    max-width: calc(587rem / 16);
+    margin: 0 auto 16px;
+    text-align: center;
+  }
+  .category {
+    border-radius: 23px;
+    border: 1px solid var(--primary-400, #ffd7e4);
+    background: var(--primary-300, #fff6f9);
+    padding: 12px 23px;
+    font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
+  }
+  h1 {
+    margin: clamp(16px, calc(20vw / 7.68), 28px) 0 clamp(12px, calc(16vw / 7.68), 20px);
+  }
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    margin-top: clamp(16px, calc(20vw / 7.68), 28px);
+    font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
+  }
+  .img {
+    max-width: 857px;
+    margin: 0 auto;
+    img {
+      mask-image: url('/image-mask-blog.svg');
+      mask-repeat: no-repeat;
+    }
+    position: relative;
+    .ArrowIcon {
+      width: clamp(81px, calc(122vw / 7.68), 214px);
+      position: absolute;
+      left: 90%;
+      top: 50%;
+      @media (max-width: 999px) {
+        left: 80%;
+        top: 80%;
+      }
+      path {
+        &:nth-child(1) {
+          animation: ArrowIcon1 1.5s var(--easing) both;
+          @keyframes ArrowIcon1 {
+            from {
+              stroke-dasharray: 0 283;
+            }
+            to {
+              stroke-dasharray: 283 283;
+            }
+          }
+        }
+        &:nth-child(2) {
+          animation: ArrowIcon2 1s .8s var(--easing) both;
+          @keyframes ArrowIcon2 {
+            from {
+              stroke-dasharray: 0 27;
+            }
+            to {
+              stroke-dasharray: 27 27;
+            }
+          }
+        }
+      }
+    }
+  }
+}
