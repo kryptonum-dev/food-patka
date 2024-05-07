@@ -3,6 +3,7 @@ import { ImgDataTypes } from '@/components/ui/image';
 export type ListingTypes = {
   heading: string;
   paragraph: string;
+  currentPage?: number;
   currentCategorySlug?: string;
 }
 
@@ -12,6 +13,7 @@ export type ListingQueryTypes = {
     slug: string;
     postCount: number;
   }[];
+  totalPosts: number;
   posts: {
     title: string;
     subtitle: string;

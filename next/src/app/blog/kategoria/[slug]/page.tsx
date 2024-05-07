@@ -56,7 +56,7 @@ const query = async (slug: string): Promise<BlogCategoryPageQueryTypes> => {
 };
 
 export async function generateMetadata({ params: { slug } }: BlogCategoryPageTypes) {
-  return await QueryMetadata('BlogCategory_Collection', `/blog/kategoria/${slug}`, `${slug}`);
+  return await QueryMetadata('BlogCategory_Collection', `/blog/kategoria/${slug}`, slug);
 }
 
 export async function generateStaticParams(): Promise<generateStaticParamsTypes> {

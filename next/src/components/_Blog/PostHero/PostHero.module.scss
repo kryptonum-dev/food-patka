@@ -41,18 +41,18 @@
       }
       path {
         &:nth-child(1) {
-          animation: ArrowIcon1 1.5s var(--easing) both;
+          animation: ArrowIcon1 2s var(--easing) both;
           @keyframes ArrowIcon1 {
             from {
-              stroke-dasharray: 0 283;
+              stroke-dasharray: 0 695;
             }
             to {
-              stroke-dasharray: 283 283;
+              stroke-dasharray: 695 695;
             }
           }
         }
         &:nth-child(2) {
-          animation: ArrowIcon2 1s .8s var(--easing) both;
+          animation: ArrowIcon2 1.5s 1s var(--easing) both;
           @keyframes ArrowIcon2 {
             from {
               stroke-dasharray: 0 27;

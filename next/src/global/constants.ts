@@ -55,3 +55,9 @@ export const REGEX: { email: RegExp; phone: RegExp; string: RegExp } = {
  * @constant
  */
 export const EASING: number[] = [0.6, -0.15, 0.27, 1.15];
+
+/**
+ * Declaration of global easing.
+ * @constant
+ */
+export const PAGINATION_LIMIT: number = 2;

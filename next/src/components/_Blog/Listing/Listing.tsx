@@ -1,13 +1,17 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import sanityFetch from '@/utils/sanity.fetch';
 import Markdown from '@/components/ui/markdown';
 import styles from './Listing.module.scss';
 import { ImgDataQuery } from '@/components/ui/image';
 import Posts from './_Posts';
 import type { ListingQueryTypes, ListingTypes } from './Listing.types';
+import Pagination from '@/components/ui/Pagination';
 
-export default async function Listing({ heading, paragraph, currentCategorySlug }: ListingTypes) {
-  const { categories, posts } = await query();
+const POSTS_PER_PAGE = 1;
+
+export default async function Listing({ heading, paragraph, currentPage = 1, currentCategorySlug }: ListingTypes) {
+  const { categories, totalPosts, posts } = await query(currentPage);
   const _categories = categories.filter(category => category.postCount > 0);
 
   return (
@@ -31,12 +35,20 @@ export default async function Listing({ heading, paragraph, currentCategorySlug 
         <Brushes className={styles.Brushes} />
       </ul>
       <Posts posts={posts} />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={Math.ceil(totalPosts / POSTS_PER_PAGE)}
+      />
     </section>
   );
 }
 
-const query = async (): Promise<ListingQueryTypes> => {
-  return await sanityFetch<ListingQueryTypes>({
+const query = async (currentPage: number): Promise<ListingQueryTypes> => {
+  const OFFSET = POSTS_PER_PAGE * (currentPage - 1);
+  const PAGINATION_BEFORE = OFFSET;
+  const PAGINATION_AFTER = OFFSET + POSTS_PER_PAGE;
+
+  const data = await sanityFetch<ListingQueryTypes>({
     query: /* groq */ `
       {
         "categories": *[_type == "BlogCategory_Collection"] {
@@ -44,7 +56,8 @@ const query = async (): Promise<ListingQueryTypes> => {
           "slug": slug.current,
           "postCount": count(*[_type == "BlogPost_Collection" && references(^._id )]),
         },
-        "posts": *[_type == "BlogPost_Collection"] {
+        "totalPosts": count(*[_type == "BlogPost_Collection"]),
+        "posts": *[_type == "BlogPost_Collection"] | order(_createdAt) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
           title,
           subtitle,
           img {
@@ -54,8 +67,15 @@ const query = async (): Promise<ListingQueryTypes> => {
         }
       }
     `,
-    tags: ['BlogCategory_Collection'],
+    params: {
+      POSTS_PER_PAGE: POSTS_PER_PAGE,
+      PAGINATION_BEFORE: PAGINATION_BEFORE,
+      PAGINATION_AFTER: PAGINATION_AFTER,
+    },
+    tags: ['BlogCategory_Collection', 'BlogPost_Collection'],
   });
+  if (data.posts.length === 0) notFound();
+  return data;
 };
 
 const Brushes = ({ ...props }) => (

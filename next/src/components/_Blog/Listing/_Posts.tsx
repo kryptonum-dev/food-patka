@@ -16,7 +16,7 @@ export default function Posts({ posts }: PostsTypes) {
           <div className={styles.wrapper}>
             <Markdown.h2 className='h3'>{removeMarkdown(title)}</Markdown.h2>
             <Markdown className={styles.subtitle}>{subtitle}</Markdown>
-            <Button href={slug}>Przeczytaj więcej</Button>
+            <Button href={`/blog/${slug}`}>Przeczytaj więcej</Button>
           </div>
         </div>
       ))}
