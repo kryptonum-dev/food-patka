@@ -65,10 +65,27 @@ export default defineType({
         {
           type: 'block',
           styles: [
-            { title: 'Normal', value: 'normal' },
-            { title: 'Heading 2', value: 'h2' },
-            { title: 'Heading 3', value: 'h3' },
+            {
+              title: 'Normal',
+              value: 'normal',
+            },
+            {
+              title: 'Heading 2',
+              value: 'h2',
+              component: ({ children }) => <span style={{ fontWeight: 400, fontSize: '1.618em' }} >{children}</span>,
+            },
+            {
+              title: 'Heading 3',
+              value: 'h3',
+              component: ({ children }) => <div style={{ fontWeight: 400, fontSize: '1.4em' }} >{children}</div>,
+            },
           ],
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+            ],
+          }
         },
         ImageGrid,
         Quote,
