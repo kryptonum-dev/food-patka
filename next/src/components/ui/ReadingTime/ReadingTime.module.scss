@@ -1,0 +1,9 @@
+.ReadingTime {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  svg {
+    width: clamp(16px, calc(20vw / 7.68), 20px);
+    height: clamp(16px, calc(20vw / 7.68), 20px);
+  }
+}
