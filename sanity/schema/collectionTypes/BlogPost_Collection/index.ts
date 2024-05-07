@@ -1,6 +1,9 @@
 import { defineField, defineType } from "sanity";
-import { slugify } from "../../utils/slugify";
-import { removeMarkdown } from "../../utils/remove-markdown";
+import { slugify } from "../../../utils/slugify";
+import { removeMarkdown } from "../../../utils/remove-markdown";
+import ImageGrid from "./ImageGrid";
+import Quote from "./Quote";
+import OrderedList from "./OrderedList";
 
 const title = 'Blog – Artykuły';
 const icon = () => '🗞️';
@@ -53,6 +56,26 @@ export default defineType({
       type: 'reference',
       title: 'Powiązana kategoria',
       to: { type: 'BlogCategory_Collection' },
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: 'content',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [
+            { title: 'Normal', value: 'normal' },
+            { title: 'Heading 2', value: 'h2' },
+            { title: 'Heading 3', value: 'h3' },
+          ],
+        },
+        ImageGrid,
+        Quote,
+        OrderedList,
+      ],
+
+      title: 'Zawartość',
       validation: Rule => Rule.required(),
     }),
     defineField({
