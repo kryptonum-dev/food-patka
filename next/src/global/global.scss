@@ -118,6 +118,7 @@ body {
   overflow-x: clip;
 }
 html {
+  scroll-behavior: smooth;
   scroll-padding-top: 123px;
 }
 body {
@@ -144,11 +145,17 @@ main {
 }
 
 h1,
+.h1,
 h2,
+.h2,
 h3,
+.h3,
 h4,
+.h4,
 h5,
-h6 {
+.h5,
+h6,
+.h6 {
   overflow-wrap: anywhere;
   font-weight: 400;
   line-height: 142%;

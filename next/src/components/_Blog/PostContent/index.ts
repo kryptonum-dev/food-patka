@@ -7,6 +7,7 @@ export default PostContent;
 export type { PostContentTypes } from './PostContent.types';
 
 export const PostContent_Query = `
+  "headings": content[length(style) == 2 && string::startsWith(style, "h2")],
   content[] {
     ...,
     _type == "image" => {

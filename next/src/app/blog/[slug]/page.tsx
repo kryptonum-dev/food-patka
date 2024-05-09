@@ -10,7 +10,7 @@ import { toPlainText } from 'next-sanity';
 import type { generateStaticParamsTypes } from '@/global/types';
 
 export default async function BlogPostPage({ params: { slug } }: BlogPostPageTypes) {
-  const { title, subtitle, img, slug: postSlug, _createdAt, category, content } = await query(slug);
+  const { title, subtitle, img, slug: postSlug, _createdAt, category, content, headings } = await query(slug);
 
   return (
     <>
@@ -26,7 +26,7 @@ export default async function BlogPostPage({ params: { slug } }: BlogPostPageTyp
         category,
         readingTimeContent: toPlainText(content)
       }} />
-      <PostContent content={content} />
+      <PostContent headings={headings} content={content} />
     </>
   );
 }
