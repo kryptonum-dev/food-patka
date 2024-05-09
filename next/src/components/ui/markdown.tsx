@@ -2,7 +2,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import { isExternalLink } from '@/utils/is-external-link';
 
-const LinkRenderer = ({
+export const LinkRenderer = ({
   href,
   children,
 }: React.AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -25,9 +25,9 @@ const LinkRenderer = ({
   );
 };
 
-const ListRenderer = ({
-  children,
+export const ListRenderer = ({
   ordered,
+  children,
 }: React.LiHTMLAttributes<HTMLLIElement> & {
   children?: React.ReactNode;
   ordered?: boolean;
