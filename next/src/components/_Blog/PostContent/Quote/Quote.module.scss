@@ -1,0 +1,31 @@
+.Quote {
+  margin: clamp(12px, calc(20vw / 7.68), 20px) 0;
+  padding: clamp(16px, calc(24vw / 7.68), 24px);
+  border-radius: 20px;
+  background: var(--primary-300, #fff6f9);
+  .content {
+    margin-bottom: clamp(12px, calc(20vw / 7.68), 20px);
+    & > *:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+  .author {
+    width: fit-content;
+    margin-left: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px;
+    font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
+    svg {
+      margin-top: clamp(2px, calc(5vw / 7.68), 5px);
+    }
+  }
+  position: relative;
+  .QuoteIcon {
+    width: clamp(25px, calc(32vw / 7.68), 32px);
+    position: absolute;
+    right: 28px;
+    top: 0;
+    transform: translateY(-50%);
+  }
+}

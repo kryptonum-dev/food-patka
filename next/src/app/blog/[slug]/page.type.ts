@@ -1,4 +1,5 @@
-import { ImgDataTypes } from '@/components/ui/image';
+import type { ImgDataTypes } from '@/components/ui/image';
+import type { PortableTextBlock } from 'next-sanity';
 
 export type BlogPostPageTypes = {
   params: {
@@ -16,4 +17,5 @@ export type BlogPostPageQueryTypes = {
     slug: string;
   };
   _createdAt: string;
+  content: PortableTextBlock;
 }

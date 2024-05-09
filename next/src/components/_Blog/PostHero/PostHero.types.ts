@@ -9,4 +9,5 @@ export type PostHeroTypes = {
     name: string;
     slug: string;
   };
+  readingTimeContent: string;
 };

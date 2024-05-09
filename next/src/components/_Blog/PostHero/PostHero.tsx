@@ -3,9 +3,10 @@ import Markdown from '@/components/ui/markdown';
 import Img from '@/components/ui/image';
 import styles from './PostHero.module.scss';
 import { dateFormat } from '@/utils/date-format';
+import ReadingTime from '@/components/ui/ReadingTime';
 import type { PostHeroTypes } from './PostHero.types';
 
-export default function PostHero({ title, subtitle, img, _createdAt, category }: PostHeroTypes) {
+export default function PostHero({ title, subtitle, img, _createdAt, category, readingTimeContent }: PostHeroTypes) {
   return (
     <section className={styles['PostHero']}>
       <header>
@@ -19,6 +20,7 @@ export default function PostHero({ title, subtitle, img, _createdAt, category }:
         <Markdown>{subtitle}</Markdown>
         <div className={styles.info}>
           <p>{dateFormat(_createdAt)}</p>
+          <ReadingTime content={readingTimeContent} />
         </div>
       </header>
       <div className={styles.img}>
