@@ -4,6 +4,7 @@ export type { QuoteTypes } from './Quote.types';
 
 export const Quote_Query = `
   _type == "Quote" => {
-
+    quote,
+    author,
   },
 `;
