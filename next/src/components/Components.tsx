@@ -8,6 +8,7 @@ import ColumnHeaderAndStats, { type ColumnHeaderAndStatsTypes, ColumnHeaderAndSt
 import ContactForm, { ContactFormTypes, ContactForm_Query } from './global/ContactForm';
 import HeaderImageAndFeautures, { type HeaderImageAndFeauturesTypes, HeaderImageAndFeautures_Query } from './global/HeaderImageAndFeautures';
 import TuckedImageSection, { type TuckedImageSectionTypes, TuckedImageSection_Query } from './global/TuckedImageSection';
+import LatestBlogEntries, { type LatestBlogEntriesTypes, LatestBlogEntries_Query } from './global/LatestBlogEntries';
 
 type componentsMapTypes = {
   HeroHeaderAndImage: HeroHeaderAndImageTypes;
@@ -20,6 +21,7 @@ type componentsMapTypes = {
   ContactForm: ContactFormTypes;
   HeaderImageAndFeautures: HeaderImageAndFeauturesTypes;
   TuckedImageSection: TuckedImageSectionTypes;
+  LatestBlogEntries: LatestBlogEntriesTypes;
 };
 
 export type ComponentTypes = componentsMapTypes[keyof componentsMapTypes] & { _type: string };
@@ -39,6 +41,7 @@ export default function Components({ data }: { data: ComponentTypes[] }) {
       ContactForm: <ContactForm {...(item as ContactFormTypes)} />,
       HeaderImageAndFeautures: <HeaderImageAndFeautures {...(item as HeaderImageAndFeauturesTypes)} />,
       TuckedImageSection: <TuckedImageSection {...(item as TuckedImageSectionTypes)} />,
+      LatestBlogEntries: <LatestBlogEntries {...(item as LatestBlogEntriesTypes)} />,
     };
     const DynamicComponent = componentsMapTypes[componentType];
     if (!DynamicComponent) return null;
@@ -59,5 +62,6 @@ export const Components_Query = /* groq */ `
     ${ContactForm_Query}
     ${HeaderImageAndFeautures_Query}
     ${TuckedImageSection_Query}
+    ${LatestBlogEntries_Query}
   },
 `;

@@ -1,0 +1,17 @@
+.LatestBlogEntries {
+  header {
+    text-align: center;
+    max-width: calc(587rem / 16);
+    margin: 0 auto clamp(28px, calc(36vw / 7.68), 48px);
+    h2 {
+      margin-bottom: clamp(12px, calc(20vw / 7.68), 20px);
+    }
+  }
+  .posts {
+    display: grid;
+    gap: clamp(20px, calc(24vw / 7.68), 32px);
+    @media (min-width: 1050px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}

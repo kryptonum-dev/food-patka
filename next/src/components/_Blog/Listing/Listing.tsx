@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation';
 import sanityFetch from '@/utils/sanity.fetch';
 import Markdown from '@/components/ui/markdown';
 import styles from './Listing.module.scss';
-import { ImgDataQuery } from '@/components/ui/image';
 import Posts from './_Posts';
-import type { ListingQueryTypes, ListingTypes } from './Listing.types';
+import { BlogPostCard_Query } from '@/components/global/BlogPostCard';
 import Pagination from '@/components/ui/Pagination';
+import type { ListingQueryTypes, ListingTypes } from './Listing.types';
 
 const POSTS_PER_PAGE = 1;
 
@@ -57,14 +57,9 @@ const query = async (currentPage: number): Promise<ListingQueryTypes> => {
           "postCount": count(*[_type == "BlogPost_Collection" && references(^._id )]),
         },
         "totalPosts": count(*[_type == "BlogPost_Collection"]),
-        "posts": *[_type == "BlogPost_Collection"] | order(_createdAt) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
-          title,
-          subtitle,
-          img {
-            ${ImgDataQuery}
-          },
-          "slug": slug.current,
-        }
+        "posts": *[_type == "BlogPost_Collection"] | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
+          ${BlogPostCard_Query}
+        },
       }
     `,
     params: {

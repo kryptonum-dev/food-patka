@@ -1,4 +1,4 @@
-import { ImgDataTypes } from '@/components/ui/image';
+import type { BlogPostCardTypes } from '@/components/global/BlogPostCard';
 
 export type ListingTypes = {
   heading: string;
@@ -14,12 +14,7 @@ export type ListingQueryTypes = {
     postCount: number;
   }[];
   totalPosts: number;
-  posts: {
-    title: string;
-    subtitle: string;
-    img: ImgDataTypes;
-    slug: string;
-  }[]
+  posts: BlogPostCardTypes[];
 };
 
 export type PostsTypes = {
