@@ -41,10 +41,12 @@
     p {
       margin-bottom: clamp(8px, calc(12vw / 7.68), 12px);
     }
+    > img {
+      margin: clamp(16px, calc(28vw / 7.68), 28px) 0;
+    }
     img {
       border-radius: 20px;
       border: 2px solid var(--primary-400, #ffd7e4);
-      margin: clamp(16px, calc(28vw / 7.68), 28px) 0;
     }
   }
 }
