@@ -66,16 +66,21 @@ export default defineType({
           type: 'block',
           styles: [
             {
-              title: 'Normal',
+              title: 'Normalny',
               value: 'normal',
             },
             {
-              title: 'Heading 2',
+              title: 'Duży tekst',
+              value: 'largeText',
+              component: ({ children }) => <span style={{ fontWeight: 400, fontSize: '1.2em' }} >{children}</span>,
+            },
+            {
+              title: 'Nagłówek H2',
               value: 'h2',
               component: ({ children }) => <span style={{ fontWeight: 400, fontSize: '1.618em' }} >{children}</span>,
             },
             {
-              title: 'Heading 3',
+              title: 'Nagłówek H3',
               value: 'h3',
               component: ({ children }) => <div style={{ fontWeight: 400, fontSize: '1.4em' }} >{children}</div>,
             },
@@ -87,6 +92,7 @@ export default defineType({
             ],
           }
         },
+        { type: 'image' },
         ImageGrid,
         Quote,
         OrderedList,
