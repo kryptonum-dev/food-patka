@@ -4,7 +4,7 @@ import type { PostsTypes } from './Listing.types';
 
 export default function Posts({ posts }: PostsTypes) {
   return (
-    <div className={styles['Posts']}>
+    <div className={styles['Posts']} id='wpisy'>
       {posts.map((item, i) => (
         <BlogPostCard key={i} {...item} />
       ))}

@@ -38,6 +38,7 @@ export default async function Listing({ heading, paragraph, currentPage = 1, cur
       <Pagination
         currentPage={currentPage}
         totalPages={Math.ceil(totalPosts / POSTS_PER_PAGE)}
+        slugBase='/blog'
       />
     </section>
   );
@@ -63,7 +64,6 @@ const query = async (currentPage: number): Promise<ListingQueryTypes> => {
       }
     `,
     params: {
-      POSTS_PER_PAGE: POSTS_PER_PAGE,
       PAGINATION_BEFORE: PAGINATION_BEFORE,
       PAGINATION_AFTER: PAGINATION_AFTER,
     },

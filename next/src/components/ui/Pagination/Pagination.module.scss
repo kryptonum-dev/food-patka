@@ -1,3 +1,39 @@
 .Pagination {
-  
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  div,
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-variant-numeric: lining-nums proportional-nums;
+    width: 44px;
+    height: 44px;
+  }
+  a {
+    border-radius: 50%;
+    position: relative;
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: inherit;
+      background: var(--primary-400, #ffd7e4);
+      z-index: -1;
+      transform: scale(0);
+      transition: transform 0.3s var(--easing);
+    }
+    &:hover,
+    &[aria-current='page'] {
+      &::before {
+        transform: scale(1);
+      }
+    }
+  }
 }
