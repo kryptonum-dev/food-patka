@@ -8,7 +8,7 @@ import { BlogPostCard_Query } from '@/components/global/BlogPostCard';
 import Pagination from '@/components/ui/Pagination';
 import type { ListingQueryTypes, ListingTypes } from './Listing.types';
 
-const POSTS_PER_PAGE = 1;
+const POSTS_PER_PAGE = 9;
 
 export default async function Listing({ heading, paragraph, currentPage = 1, currentCategorySlug }: ListingTypes) {
   const { categories, totalPosts, posts } = await query(currentPage);

@@ -3,14 +3,17 @@ import styles from './Pagination.module.scss';
 import type { PaginationTypes } from './Pagination.types';
 
 export default function Pagination({ currentPage, totalPages, slugBase }: PaginationTypes) {
+  if (totalPages <= 1) return null;
+
   currentPage = Number(currentPage);
+
   const slugPrefix = (number?: number) => (number && number > 1) ? `${slugBase}/strona/${number}#wpisy` : `${slugBase}#wpisy`;
 
   const LinkRender = (number: number) => (
     <Link aria-current={currentPage === number ? 'page' : undefined} href={slugPrefix(number)}>{number}</Link>
   );
 
-  const renderPageNumbers = () => {
+  const renderPagination = () => {
     const pagination = [];
     if (totalPages <= 5) {
       for (let i = 1; i <= totalPages; i++) {
@@ -41,7 +44,7 @@ export default function Pagination({ currentPage, totalPages, slugBase }: Pagina
   };
 
   return (
-    <div className={styles['Pagination']}>
+    <nav className={styles['Pagination']}>
       {currentPage > 1 ? (
         <Link
           href={slugPrefix(currentPage - 1)}
@@ -55,7 +58,7 @@ export default function Pagination({ currentPage, totalPages, slugBase }: Pagina
           <LeftArrowIcon />
         </div>
       )}
-      {renderPageNumbers()}
+      {renderPagination()}
       {currentPage < totalPages ? (
         <Link
           href={slugPrefix(currentPage - 1)}
@@ -69,7 +72,7 @@ export default function Pagination({ currentPage, totalPages, slugBase }: Pagina
           <RightArrowIcon />
         </div>
       )}
-    </div>
+    </nav>
   );
 }
 
