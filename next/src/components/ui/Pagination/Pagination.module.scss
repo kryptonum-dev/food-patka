@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
   div,
   a {
     display: flex;
@@ -12,9 +12,31 @@
     font-variant-numeric: lining-nums proportional-nums;
     width: 44px;
     height: 44px;
+    border-radius: 50%;
+  }
+  div:not(.arrow) {
+    width: 24px;
+  }
+  div.arrow {
+    opacity: 0.62;
+  }
+  .arrow {
+    svg {
+      z-index: 1;
+      position: relative;
+    }
+    &::before {
+      z-index: 0;
+    }
+    &:first-child {
+      margin-right: 2px;
+    }
+    &:last-child {
+      margin-left: 2px;
+    }
+    background: var(--primary-300, #fff6f9);
   }
   a {
-    border-radius: 50%;
     position: relative;
     &::before {
       content: '';

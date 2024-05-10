@@ -12,58 +12,63 @@ export default function Pagination({ currentPage, totalPages, slugBase }: Pagina
 
   const renderPageNumbers = () => {
     const pagination = [];
-    if (totalPages <= 7) {
+    if (totalPages <= 5) {
       for (let i = 1; i <= totalPages; i++) {
         pagination.push(LinkRender(i));
       }
-    } else if (totalPages === 8) {
-      if (currentPage <= 4) {
-        for (let i = 1; i <= 5; i++) {
-          pagination.push(LinkRender(i));
-        }
-        pagination.push(<div>...</div>);
-        pagination.push(LinkRender(totalPages));
-      } else {
-        pagination.push(LinkRender(1));
-        pagination.push(<div>...</div>);
-        for (let i = totalPages - 5; i <= totalPages; i++) {
-          pagination.push(LinkRender(i));
-        }
-      }
     } else {
-      if (currentPage <= 4) {
-        for (let i = 1; i <= 5; i++) {
+      if (currentPage <= 2) {
+        for (let i = 1; i <= 3; i++) {
           pagination.push(LinkRender(i));
         }
         pagination.push(<div>...</div>);
         pagination.push(LinkRender(totalPages));
-      } else if (currentPage >= 5 && totalPages - currentPage >= 4) {
+      } else if (currentPage >= 3 && totalPages - currentPage >= 3) {
         pagination.push(LinkRender(1));
         pagination.push(<div>...</div>);
-        pagination.push(LinkRender(currentPage - 1));
         pagination.push(LinkRender(currentPage));
-        pagination.push(LinkRender(currentPage + 1));
         pagination.push(<div>...</div>);
         pagination.push(LinkRender(totalPages));
       } else {
         pagination.push(LinkRender(1));
         pagination.push(<div>...</div>);
-        for (let i = totalPages - 4; i <= totalPages; i++) {
+        for (let i = totalPages - 2; i <= totalPages; i++) {
           pagination.push(LinkRender(i));
         }
       }
     }
     return pagination;
   };
+
   return (
     <div className={styles['Pagination']}>
-      <Link href={slugPrefix(currentPage - 1)} aria-label='Przejdź do poprzedniej strony'>
-        <LeftArrowIcon />
-      </Link>
+      {currentPage > 1 ? (
+        <Link
+          href={slugPrefix(currentPage - 1)}
+          aria-label='Przejdź do poprzedniej strony'
+          className={styles.arrow}
+        >
+          <LeftArrowIcon />
+        </Link>
+      ) : (
+        <div className={styles.arrow}>
+          <LeftArrowIcon />
+        </div>
+      )}
       {renderPageNumbers()}
-      <Link href={slugPrefix(currentPage + 1)} aria-label='Przejdź do następnej strony'>
-        <RightArrowIcon />
-      </Link>
+      {currentPage < totalPages ? (
+        <Link
+          href={slugPrefix(currentPage - 1)}
+          aria-label='Przejdź do następnej strony'
+          className={styles.arrow}
+        >
+          <RightArrowIcon />
+        </Link>
+      ) : (
+        <div className={styles.arrow}>
+          <RightArrowIcon />
+        </div>
+      )}
     </div>
   );
 }
