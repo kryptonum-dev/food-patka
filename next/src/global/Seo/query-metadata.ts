@@ -5,10 +5,11 @@ import type { Metadata } from 'next';
 import type { QueryMetadataTypes, QueryTypes } from './Seo.types';
 
 /**
- * Performs a SEO query.
- * @param {string} name - The name of the SEO query for GROQ, it will be: `*[_id == "${name}"][0]` or `* [_type=='${name}' && slug.current == $slug][0]` if the `dynamicSlug` will be provided.
- * @param {string} path - The cannonical path for the URL.
+ * Performs an SEO query.
+ * @param {string} name - The name of the SEO query for GROQ. It will be `*[_id == "${name}"][0]` or `*[_type=='${name}' && slug.current == $slug][0]` if the `dynamicSlug` is provided.
+ * @param {string} path - The canonical path for the URL.
  * @param {string} [dynamicSlug] - Optional. Used to query dynamic pages, like blog posts.
+ * @param {string} [titleSuffix] - Optional suffix to append to the SEO title.
  * @returns {Promise<Metadata>} Returns a promise of the SEO object.
  */
 export const QueryMetadata = async ({
