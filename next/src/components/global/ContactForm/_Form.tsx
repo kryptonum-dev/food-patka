@@ -8,9 +8,10 @@ import Loader from '@/components/ui/Loader';
 import FormState from '@/components/ui/FormState';
 import styles from './ContactForm.module.scss';
 import { REGEX } from '@/global/constants';
+import type { FormTypes } from './ContactForm.types';
 import type { FormStatusTypes } from '@/global/types';
 
-export default function Form() {
+export default function Form({ privacyPolicyLink }: FormTypes) {
   const [status, setStatus] = useState<FormStatusTypes>({ sending: false, success: undefined });
   const {
     register,
@@ -76,9 +77,9 @@ export default function Form() {
             Akceptuję warunki{' '}
             <a
               className='link'
-              href='/polityka-prywatnosci'
+              href={privacyPolicyLink}
               target='_blank'
-              rel='noopener'
+              rel='noreferrer'
             >
               polityki prywatności
             </a>

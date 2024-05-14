@@ -3,4 +3,8 @@ export type NewsletterTypes = {
     heading: string;
     paragraph: string;
   }
-}
+};
+
+export type FormTypes = {
+  privacyPolicyLink: string;
+};

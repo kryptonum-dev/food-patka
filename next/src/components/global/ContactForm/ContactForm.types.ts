@@ -6,9 +6,8 @@ export type ContactFormTypes = {
   heading: string;
   paragraph: string;
   img: ImgDataTypes;
-}
+};
 
-export type FormStatusTypes = {
-  sending: boolean;
-  success: boolean;
-}
+export type FormTypes = {
+  privacyPolicyLink: string;
+};

@@ -4,6 +4,7 @@ import styles from './ContactForm.module.scss';
 import SocialMedia from '../SocialMedia';
 import Form from './_Form';
 import type { ContactFormTypes } from './ContactForm.types';
+import getLegalLink from '@/components/ui/get-legal-link';
 
 export default async function ContactForm({ index, isHighlighted, heading, paragraph, img }: ContactFormTypes) {
   const Heading = index === 0 ? Markdown.h1 : Markdown.h2;
@@ -19,7 +20,7 @@ export default async function ContactForm({ index, isHighlighted, heading, parag
         <SocialMedia />
         {img && <Img data={img} sizes='307px' priority={index === 0} />}
       </header>
-      <Form />
+      <Form privacyPolicyLink={(await getLegalLink()).termsAndConditions} />
       {isHighlighted && (
         <>
           <WaveTop className={styles.WaveTop} />

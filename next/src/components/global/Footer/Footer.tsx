@@ -1,10 +1,11 @@
 import sanityFetch from '@/utils/sanity.fetch';
 import Newsletter from './Newsletter';
 import styles from './Footer.module.scss';
+import getLegalLink from '@/components/ui/get-legal-link';
 import type { FooterQueryTypes } from './Footer.types';
 
 export default async function Footer() {
-  const { footer, privacyPolicy, termsAndConditions } = await query();
+  const { footer } = await query();
 
   return (
     <>
@@ -24,7 +25,7 @@ export default async function Footer() {
             </p>
             <div className={styles.legal}>
               <a
-                href={privacyPolicy}
+                href={(await getLegalLink()).privacyPolicy}
                 target='_blank'
                 rel='noreferrer'
                 className='link'
@@ -32,7 +33,7 @@ export default async function Footer() {
                 Polityka prywatności
               </a>
               <a
-                href={termsAndConditions}
+                href={(await getLegalLink()).termsAndConditions}
                 target='_blank'
                 rel='noreferrer'
                 className='link'
@@ -56,8 +57,6 @@ const query = async (): Promise<FooterQueryTypes> => {
           heading,
           paragraph,
         },
-        privacyPolicy,
-        termsAndConditions,
       }
     `,
     tags: ['global'],
