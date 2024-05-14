@@ -61,7 +61,7 @@ export default function Pagination({ currentPage, totalPages, slugBase }: Pagina
       {renderPagination()}
       {currentPage < totalPages ? (
         <Link
-          href={slugPrefix(currentPage - 1)}
+          href={slugPrefix(currentPage + 1)}
           aria-label='Przejdź do następnej strony'
           className={styles.arrow}
         >

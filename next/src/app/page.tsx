@@ -29,5 +29,8 @@ const query = async (): Promise<{ content: ComponentTypes[] }> => {
 
 
 export async function generateMetadata() {
-  return await QueryMetadata('Index_Page', currentPath);
+  return await QueryMetadata({
+    name: 'Index_Page',
+    path: currentPath
+  });
 }

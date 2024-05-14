@@ -25,5 +25,8 @@ const query = async (): Promise<{ content: ComponentTypes[] }> => {
 
 
 export async function generateMetadata() {
-  return await QueryMetadata('NotFound_Page', '/404');
+  return await QueryMetadata({
+    name: 'NotFound_Page',
+    path: '/404'
+  });
 }

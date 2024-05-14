@@ -8,10 +8,10 @@ import { BlogPostCard_Query } from '@/components/global/BlogPostCard';
 import Pagination from '@/components/ui/Pagination';
 import type { ListingQueryTypes, ListingTypes } from './Listing.types';
 
-const POSTS_PER_PAGE = 9;
+const POSTS_PER_PAGE = 1;
 
 export default async function Listing({ heading, paragraph, currentPage = 1, currentCategorySlug }: ListingTypes) {
-  const { categories, totalPosts, posts } = await query(currentPage);
+  const { categories, totalPosts, posts } = await query(currentPage, currentCategorySlug);
   const _categories = categories.filter(category => category.postCount > 0);
 
   return (
@@ -24,8 +24,9 @@ export default async function Listing({ heading, paragraph, currentPage = 1, cur
         {_categories.map(({ name, slug, postCount }, i) => (
           <li key={i}>
             <Link
-              href={`/blog/kategoria/${slug}`}
+              href={slug === currentCategorySlug ? '/blog' : `/blog/kategoria/${slug}`}
               aria-current={slug === currentCategorySlug ? 'page' : undefined}
+              scroll={false}
             >
               {slug === currentCategorySlug && <StarIndicator />}
               <span>{name} ({postCount})</span>
@@ -38,13 +39,13 @@ export default async function Listing({ heading, paragraph, currentPage = 1, cur
       <Pagination
         currentPage={currentPage}
         totalPages={Math.ceil(totalPosts / POSTS_PER_PAGE)}
-        slugBase='/blog'
+        slugBase={`/blog${currentCategorySlug ? `/kategoria/${currentCategorySlug}` : ''}`}
       />
     </section>
   );
 }
 
-const query = async (currentPage: number): Promise<ListingQueryTypes> => {
+const query = async (currentPage: number, currentCategorySlug: string | undefined): Promise<ListingQueryTypes> => {
   const OFFSET = POSTS_PER_PAGE * (currentPage - 1);
   const PAGINATION_BEFORE = OFFSET;
   const PAGINATION_AFTER = OFFSET + POSTS_PER_PAGE;
@@ -57,8 +58,14 @@ const query = async (currentPage: number): Promise<ListingQueryTypes> => {
           "slug": slug.current,
           "postCount": count(*[_type == "BlogPost_Collection" && references(^._id )]),
         },
-        "totalPosts": count(*[_type == "BlogPost_Collection"]),
-        "posts": *[_type == "BlogPost_Collection"] | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
+        "totalPosts": count(
+          *[_type == "BlogPost_Collection"
+            ${currentCategorySlug ? `&& category -> slug.current == "${currentCategorySlug}"` : ''}
+          ]
+        ),
+        "posts": *[_type == "BlogPost_Collection"
+          ${currentCategorySlug ? `&& category -> slug.current == "${currentCategorySlug}"` : ''}]
+        | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
           ${BlogPostCard_Query}
         },
       }
@@ -66,6 +73,9 @@ const query = async (currentPage: number): Promise<ListingQueryTypes> => {
     params: {
       PAGINATION_BEFORE: PAGINATION_BEFORE,
       PAGINATION_AFTER: PAGINATION_AFTER,
+      ...currentCategorySlug && {
+        category: currentCategorySlug,
+      },
     },
     tags: ['BlogCategory_Collection', 'BlogPost_Collection'],
   });

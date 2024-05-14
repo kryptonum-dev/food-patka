@@ -35,5 +35,8 @@ const query = async (): Promise<BlogPageQueryTypes> => {
 };
 
 export async function generateMetadata() {
-  return await QueryMetadata('Blog_Page', currentPath);
+  return await QueryMetadata({
+    name: 'Blog_Page',
+    path: currentPath
+  });
 }

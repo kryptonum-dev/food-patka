@@ -42,7 +42,11 @@ const query = async (): Promise<BlogPaginationPageQueryTypes> => {
 };
 
 export async function generateMetadata({ params: { page } }: BlogPaginationPageTypes) {
-  return await QueryMetadata('Blog_Page', `/blog/strona/${page}`);
+  return await QueryMetadata({
+    name: 'Blog_Page',
+    path: `/blog/strona/${page}`,
+    titleSuffix: ` - Strona ${page}`,
+  });
 }
 
 // export async function generateStaticParams(page): Promise<generateStaticParamsTypes> {

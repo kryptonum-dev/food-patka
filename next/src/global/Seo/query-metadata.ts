@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import sanityFetch from '@/utils/sanity.fetch';
 import Seo from '@/global/Seo';
 import type { Metadata } from 'next';
-import type { QueryTypes } from './Seo.types';
+import type { QueryMetadataTypes, QueryTypes } from './Seo.types';
 
 /**
  * Performs a SEO query.
@@ -11,13 +11,18 @@ import type { QueryTypes } from './Seo.types';
  * @param {string} [dynamicSlug] - Optional. Used to query dynamic pages, like blog posts.
  * @returns {Promise<Metadata>} Returns a promise of the SEO object.
  */
-export const QueryMetadata = async (name: string, path: string, dynamicSlug?: string): Promise<Metadata> => {
+export const QueryMetadata = async ({
+  name,
+  path,
+  dynamicSlug,
+  titleSuffix = '',
+}: QueryMetadataTypes): Promise<Metadata> => {
   const customQuery = dynamicSlug ? `*[_type == '${name}' && slug.current == $slug][0]` : `*[_id == "${name}"][0]`;
 
   const { title, description, img } = await query(customQuery, name, dynamicSlug);
 
   return Seo({
-    title,
+    title: title + titleSuffix,
     description,
     path: path,
     img,

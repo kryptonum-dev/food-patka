@@ -109,7 +109,7 @@ export default function Header({ logo, links, DropdownIcon, IndicatorIcon, BackI
             <span></span>
           </button>
         </div>
-      </header >
+      </header>
       <div
         className={styles['Overlay']}
         role='button'
