@@ -3,4 +3,6 @@ export type FooterQueryTypes = {
     heading: string;
     paragraph: string;
   }
+  privacyPolicy: string;
+  termsAndConditions: string;
 }

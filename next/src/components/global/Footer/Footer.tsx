@@ -1,11 +1,10 @@
-import Link from 'next/link';
 import sanityFetch from '@/utils/sanity.fetch';
 import Newsletter from './Newsletter';
 import styles from './Footer.module.scss';
 import type { FooterQueryTypes } from './Footer.types';
 
 export default async function Footer() {
-  const { footer } = await query();
+  const { footer, privacyPolicy, termsAndConditions } = await query();
 
   return (
     <>
@@ -24,8 +23,22 @@ export default async function Footer() {
               <a href="https://kryptonum.eu/pl" className="link" target='_blank' rel='noreferrer'>Kryptonum</a>
             </p>
             <div className={styles.legal}>
-              <Link href='/polityka-prywatnosci' className='link'>Polityka prywatności</Link>
-              <Link href='reglulamin' className='link'>Regulamin</Link>
+              <a
+                href={privacyPolicy}
+                target='_blank'
+                rel='noreferrer'
+                className='link'
+              >
+                Polityka prywatności
+              </a>
+              <a
+                href={termsAndConditions}
+                target='_blank'
+                rel='noreferrer'
+                className='link'
+              >
+                Regulamin
+              </a>
               <button className="link">Zarządzaj ciasteczkami</button>
             </div>
           </div>
@@ -43,6 +56,8 @@ const query = async (): Promise<FooterQueryTypes> => {
           heading,
           paragraph,
         },
+        privacyPolicy,
+        termsAndConditions,
       }
     `,
     tags: ['global'],
