@@ -13,6 +13,8 @@ import BlogCategory_Collection from './collectionTypes/BlogCategory_Collection';
 import Blog_Page from './singleTypes/Blog_Page';
 import BlogPost_Collection from './collectionTypes/BlogPost_Collection';
 import Shop_Page from './singleTypes/Shop_Page';
+import ShopCategory_Collection from './collectionTypes/ShopCategory_Collection';
+import Product_Collection from './collectionTypes/Product_Collection';
 
 export const schemaTypes = [
   cta,
@@ -34,4 +36,6 @@ export const schemaTypes = [
   Faq_Collection,
   BlogCategory_Collection,
   BlogPost_Collection,
+  ShopCategory_Collection,
+  Product_Collection,
 ];
