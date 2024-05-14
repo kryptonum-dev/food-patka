@@ -136,6 +136,18 @@ export const global = defineType({
       ],
     }),
     defineField({
+      name: 'privacyPolicy',
+      type: 'url',
+      title: 'Polityka Prywatności',
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: 'termsAndConditions',
+      type: 'url',
+      title: 'Regulamin',
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
       name: 'email',
       type: 'string',
       title: 'Adres e-mail',
@@ -144,7 +156,7 @@ export const global = defineType({
     defineField({
       name: 'tel',
       type: 'string',
-      title: 'Numer telefonu',
+      title: 'Numer telefonu (opcjonalnie)',
     }),
     defineField({
       name: 'socials',
