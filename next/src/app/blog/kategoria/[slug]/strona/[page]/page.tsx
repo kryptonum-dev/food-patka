@@ -68,19 +68,19 @@ export async function generateMetadata({ params: { slug, page } }: BlogCategoryP
   });
 }
 
-export async function generateStaticParams(): Promise<{ slug: string, page: number }[]> {
-  const collection = await sanityFetch<{ slug: string, page: number }[]>({
-    query: /* groq */ `
-      *[_type == 'BlogCategory_Collection'] {
-        'slug': slug.current,
-        'page': count(*[_type == 'BlogPost_Collection' && references(^._id)]),
-      }
-    `,
-    tags: ['BlogCategory_Collection'],
-  });
+// export async function generateStaticParams(): Promise<{ slug: string, page: number }[]> {
+//   const collection = await sanityFetch<{ slug: string, page: number }[]>({
+//     query: /* groq */ `
+//       *[_type == 'BlogCategory_Collection'] {
+//         'slug': slug.current,
+//         'page': count(*[_type == 'BlogPost_Collection' && references(^._id)]),
+//       }
+//     `,
+//     tags: ['BlogCategory_Collection'],
+//   });
 
-  return collection.map(({ slug, page }) => ({
-    slug: slug,
-    page: Math.ceil(page / 10),
-  }));
-}
+//   return collection.map(({ slug, page }) => ({
+//     slug: slug,
+//     page: Math.ceil(page / 10),
+//   }));
+// }
