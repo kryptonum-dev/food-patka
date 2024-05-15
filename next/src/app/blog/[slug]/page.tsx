@@ -48,7 +48,11 @@ const query = async (slug: string): Promise<BlogPostPageQueryTypes> => {
 };
 
 export async function generateMetadata({ params: { slug } }: BlogPostPageTypes) {
-  return await QueryMetadata('BlogPost_Collection', `/blog/${slug}`, slug);
+  return await QueryMetadata({
+    name: 'BlogPost_Collection',
+    path: `/blog/${slug}`,
+    dynamicSlug: slug
+  });
 }
 
 export async function generateStaticParams(): Promise<generateStaticParamsTypes> {
