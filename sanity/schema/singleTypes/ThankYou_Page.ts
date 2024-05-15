@@ -11,6 +11,12 @@ export default defineType({
       type: 'object',
       fields: [
         defineField({
+          name: 'img',
+          type: 'image',
+          title: 'Zdjęcie',
+          validation: Rule => Rule.required(),
+        }),
+        defineField({
           name: 'heading',
           type: 'markdown',
           title: 'Nagłówek',
