@@ -35,6 +35,12 @@ export const DEFAULT_TITLE: string = 'FoodPatka';
 export const DEFAULT_DESCRIPTION: string = 'Przyjemność z jedzenia może iść w parze z dbaniem o zdrowie!';
 
 /**
+ * URL for the main icon.
+ * @constant
+ */
+export const ICON_URL: string = `${DOMAIN}/food-patka-icon.png`;
+
+/**
  * URL for the main logo.
  * @constant
  */
