@@ -1,15 +1,34 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
 import Stripe from 'stripe';
+import SendPromoCode from '@/emails/send-promo-code';
+
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function GET() {
-  const promotionCode = await stripe.promotionCodes.create({
-    coupon: 'ejUvFl45',
-  });
+const receipment = ['bogumil@kryptonum.eu'];
 
-  const { code } = promotionCode;
+export async function POST() {
+  try {
+    const { code } = await stripe.promotionCodes.create({
+      coupon: 'ejUvFl45',
+    });
 
-  console.log(code);
-
-  return NextResponse.json({ code: code, success: true }, { status: 200 });
+    await resend.emails.send({
+      from: 'FoodPatka <sklep@foodpatka.pl>',
+      reply_to: 'wspolpraca@foodpatka.pl',
+      to: receipment,
+      subject: 'Twój kod rabatowy od FoodPatka!',
+      react: SendPromoCode({ code: code }),
+    });
+    return NextResponse.json({
+      success: true,
+      message: 'Promo code successfully generated and sent.'
+    }, { status: 200 });
+  } catch {
+    return NextResponse.json({
+      success: false,
+      message: 'Something went wrong with generating promo code or with sending it via email.'
+    }, { status: 500 });
+  }
 }

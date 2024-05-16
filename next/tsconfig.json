@@ -23,7 +23,8 @@
       "@/components/*": ["./src/components/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/assets/*": ["./src/assets/*"],
-      "@/public/*": ["./public/*"]
+      "@/public/*": ["./public/*"],
+      "@/emails/*": ["./emails/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "noUncheckedIndexedAccess": true
