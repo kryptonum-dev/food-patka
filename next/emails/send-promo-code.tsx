@@ -4,7 +4,7 @@ import {
 
 const DOMAIN = 'https://food-patka-git-dev-kryptonum.vercel.app';
 
-export default function NotionMagicLinkEmail({ code }: { code: string }) {
+export default function SendPromoCode({ code }: { code: string }) {
   return (
     <Html>
       <Head>
