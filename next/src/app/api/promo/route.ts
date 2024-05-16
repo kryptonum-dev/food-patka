@@ -2,13 +2,17 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import Stripe from 'stripe';
 import SendPromoCode from '@/emails/send-promo-code';
+import type { RequestTypes } from './route.types';
 
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const receipment = ['bogumil@kryptonum.eu'];
+export async function POST(request: Request) {
+  const {
+    customer_email,
+    shipping: { first_name },
+  } = await request.json() as RequestTypes;
 
-export async function POST() {
   try {
     const { code } = await stripe.promotionCodes.create({
       coupon: 'ejUvFl45',
@@ -17,9 +21,11 @@ export async function POST() {
     await resend.emails.send({
       from: 'FoodPatka <sklep@foodpatka.pl>',
       reply_to: 'wspolpraca@foodpatka.pl',
-      to: receipment,
+      to: customer_email,
       subject: 'Twój kod rabatowy od FoodPatka!',
-      react: SendPromoCode({ code: code }),
+      react: SendPromoCode({
+        name: first_name, code: code
+      }),
     });
     return NextResponse.json({
       success: true,

@@ -4,7 +4,12 @@ import {
 
 const DOMAIN = 'https://food-patka-git-dev-kryptonum.vercel.app';
 
-export default function SendPromoCode({ code }: { code: string }) {
+type SendPromoCodeTypes = {
+  name: string;
+  code: string;
+};
+
+export default function SendPromoCode({ name, code }: SendPromoCodeTypes) {
   return (
     <Html>
       <Head>
@@ -38,7 +43,7 @@ export default function SendPromoCode({ code }: { code: string }) {
               alt="FoodPatka"
             />
           </Link>
-          <Heading style={h1}>Oto Twój kod rabatowy</Heading>
+          <Heading style={h1}>{name}, oto Twój kod rabatowy</Heading>
           <Text style={{ ...text }}>W ramach podziękowania, za zakupy w moim sklepie, otrzymujesz ode mnie kod rabatowy! Możesz go wykorzystać przez okres następnych 3 miesięcy. Kod jest ważny tylko na jedno zamówienie.</Text>
           <Text style={{ ...text, marginBottom: '14px' }}>
             Oto Twój unikalny kod rabatowy:
