@@ -9,9 +9,17 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   const {
+    event,
     customer_email,
     customer_first_name,
   } = await request.json() as RequestTypes;
+
+  if (event !== 'single_product_bought') {
+    return NextResponse.json({
+      success: false,
+      message: 'invalid event type.'
+    }, { status: 400 });
+  }
 
   try {
     const { code } = await stripe.promotionCodes.create({
