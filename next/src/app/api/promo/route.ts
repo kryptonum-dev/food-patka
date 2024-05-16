@@ -10,7 +10,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   const {
     customer_email,
-    shipping: { first_name },
+    customer_first_name,
   } = await request.json() as RequestTypes;
 
   try {
@@ -24,7 +24,8 @@ export async function POST(request: Request) {
       to: customer_email,
       subject: 'Twój kod rabatowy od FoodPatka!',
       react: SendPromoCode({
-        name: first_name, code: code
+        name: customer_first_name,
+        code: code
       }),
     });
     return NextResponse.json({
