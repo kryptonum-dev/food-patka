@@ -15,12 +15,14 @@ export default defineField({
       type: 'markdown',
       title: 'Nagłówek',
       validation: Rule => Rule.required(),
+      initialValue: 'Blog pełen treści o **zdrowej diecie**',
     }),
     defineField({
       name: 'paragraph',
       type: 'markdown',
       title: 'Paragraf',
       validation: Rule => Rule.required(),
+      initialValue: 'Masz ochotę na trochę wiedzy o zdrowym żywieniu? Sprawdź artykuły, które dla Ciebie przygotowałam!',
     }),
   ],
   preview: {
