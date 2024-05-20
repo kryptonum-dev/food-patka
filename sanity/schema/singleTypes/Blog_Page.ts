@@ -15,11 +15,13 @@ export default defineType({
           name: 'heading',
           type: 'markdown',
           title: 'Nagłówek',
+          validation: Rule => Rule.required(),
         }),
         defineField({
           name: 'paragraph',
           type: 'markdown',
           title: 'Paragraf',
+          validation: Rule => Rule.required(),
         }),
       ],
       validation: Rule => Rule.required(),

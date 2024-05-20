@@ -7,22 +7,24 @@ export default defineType({
   icon: () => '🛒',
   fields: [
     defineField({
-      name: 'header',
+      name: 'listing',
       type: 'object',
       fields: [
         defineField({
           name: 'heading',
           type: 'markdown',
           title: 'Nagłówek',
+          validation: Rule => Rule.required(),
         }),
         defineField({
           name: 'paragraph',
           type: 'markdown',
           title: 'Paragraf',
+          validation: Rule => Rule.required(),
         }),
       ],
-      title: 'Sekcja Hero',
-      options: { collapsible: true },
+      title: 'Widok listy wpisów',
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'content',
