@@ -11,6 +11,7 @@ import ContactForm from "../schema/components/ContactForm";
 import HeaderImageAndFeautures from "../schema/components/HeaderImageAndFeautures";
 import TuckedImageSection from "../schema/components/TuckedImageSection";
 import LatestBlogEntries from "../schema/components/LatestBlogEntries";
+import Features from "../schema/components/Features";
 
 export default defineType({
   name: 'content',
@@ -29,5 +30,6 @@ export default defineType({
     HeaderImageAndFeautures,
     TuckedImageSection,
     LatestBlogEntries,
+    Features,
   ],
 });
