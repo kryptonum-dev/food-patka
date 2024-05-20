@@ -33,7 +33,7 @@ export const slugify = (text: string) => {
 
   return text
     .replace(/\s+/g, '-')
-    .replace(/[^-a-zа-я\u0370-\u03ff\u1f00-\u1fff]+/g, '')
+    .replace(/[^-\w]+/g, '')
     .replace(/--+/g, '-')
     .replace(/^-+/, '')
     .replace(/-+$/, '');
