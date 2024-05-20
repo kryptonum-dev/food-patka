@@ -1,0 +1,33 @@
+.Features {
+  header {
+    max-width: calc(587rem / 16);
+    text-align: center;
+    margin: 0 auto clamp(32px, calc(48vw / 7.68), 48px);
+  }
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    $gap: 32px;
+    gap: $gap;
+    text-align: center;
+    img {
+      width: 154px;
+      height: 144px;
+      object-fit: contain;
+      object-position: bottom;
+    }
+    h3 {
+      margin: 20px 0 8px;
+    }
+    .item {
+      @media (min-width: 500px) {
+        width: calc(100% / 2 - $gap * (1 - 1 / 2));
+      }
+      @media (min-width: 1050px) {
+        width: calc(100% / 3 - $gap * (1 - 1 / 3));
+      }
+    }
+  }
+}
