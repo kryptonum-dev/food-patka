@@ -5,7 +5,7 @@ const title = 'Sklep – Kategorie';
 const icon = () => '📂';
 
 export default defineType({
-  name: 'ShopCategory_Collection',
+  name: 'ProductCategory_Collection',
   type: 'document',
   title,
   icon,
@@ -36,10 +36,35 @@ export default defineType({
         }).required(),
     }),
     defineField({
-      name: 'subcategory',
-      type: 'array',
-      of: [{ type: 'string' }],
-      title: 'Podkategoria',
+      type: 'boolean',
+      name: 'isSubcategory',
+      title: 'Czy jest podkategorią?',
+      description: 'Zaznacz, jeśli utworzona kategoria, ma być subkategorią dla głównej kategorii.',
+      fieldset: 'subcategory',
+    }),
+    defineField({
+      name: 'mainCategory',
+      type: 'reference',
+      to: [
+        { type: 'ProductCategory_Collection' }
+      ],
+      options: {
+        filter: ({ document }) => {
+          return {
+            filter: 'isSubcategory == $isSubcategory',
+            params: {
+              isSubcategory: !document?.isSubcategory
+            }
+          }
+        }
+      },
+      title: 'Główna kategoria',
+      hidden: ({ document }) => !document?.isSubcategory,
+      validation: Rule => Rule.custom((_, { document }) => {
+        if (!document?.isSubcategory) return true;
+        return 'Główna kategoria musi być uzupełniona.';
+      }),
+      fieldset: 'subcategory',
     }),
     defineField({
       name: 'thumbnail',
@@ -80,14 +105,22 @@ export default defineType({
       title: 'name',
       subtitle: 'slug.current',
       media: 'thumbnail',
+      isSubcategory: 'isSubcategory',
     },
-    prepare: ({ title, subtitle, media }) => ({
-      title: title,
+    prepare: ({ title, subtitle, media, isSubcategory }) => ({
+      title: `${title}${isSubcategory ? ` (Jako subkategoria)` : ''}`,
       subtitle: subtitle,
       icon,
       media,
     }),
   },
+  fieldsets: [
+    {
+      name: 'subcategory',
+      title: 'Podkategoria',
+      options: { collapsible: true },
+    }
+  ],
   groups: [
     {
       name: 'seo',

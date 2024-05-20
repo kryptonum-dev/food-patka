@@ -50,7 +50,7 @@ export default defineType({
     defineField({
       name: 'category',
       type: 'reference',
-      to: [{ type: 'ShopCategory_Collection' }],
+      to: [{ type: 'ProductCategory_Collection' }],
       title: 'Kategoria',
       validation: Rule => Rule.required(),
     }),

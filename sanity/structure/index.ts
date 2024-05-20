@@ -18,7 +18,7 @@ export const structure: StructureResolver = (S) =>
       createSingleton(S, "NotFound_Page"),
       S.divider(),
       createSingleton(S, "Shop_Page"),
-      S.documentTypeListItem("ShopCategory_Collection"),
+      S.documentTypeListItem("ProductCategory_Collection"),
       S.documentTypeListItem("Product_Collection"),
       S.divider(),
       createSingleton(S, "Blog_Page"),
