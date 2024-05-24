@@ -3,13 +3,3 @@ export type RequestTypes = {
   email: string;
   legal: boolean;
 };
-
-export type BodyTypes = {
-  data: {
-    type: 'profile',
-    attributes: {
-      email: string,
-      first_name: string,
-    },
-  }
-};

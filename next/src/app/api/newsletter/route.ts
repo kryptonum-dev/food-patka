@@ -1,76 +1,80 @@
 import { NextResponse } from 'next/server';
 import { REGEX } from '@/global/constants';
-import type { BodyTypes, RequestTypes } from './route.types';
+import type { RequestTypes } from './route.types';
 
 const NEWSLETTER_LIST_ID = 'Xpp3AD';
 const HEADERS = {
   accept: 'application/json',
   revision: '2024-05-15',
-  'Content-type': 'application/json',
+  'Content-Type': 'application/json',
   Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_API_KEY!}`
 };
-
-async function createProfile(body: BodyTypes) {
-  const response = await fetch('https://a.klaviyo.com/api/profile-import/', {
-    method: 'POST',
-    headers: HEADERS,
-    body: JSON.stringify(body),
-  });
-  return response.json();
-}
-
-async function addProfileToList(profileId: string) {
-  const response = await fetch(`https://a.klaviyo.com/api/lists/${NEWSLETTER_LIST_ID}/relationships/profiles/`, {
-    method: 'POST',
-    headers: HEADERS,
-    body: JSON.stringify({
-      data: [{ type: 'profile', id: profileId }]
-    }),
-  });
-  return response.status === 204 ? {} : response.json();
-}
 
 export async function POST(request: Request) {
   try {
     const { name, email, legal } = await request.json() as RequestTypes;
 
-    if (!name || !email || !REGEX.email.test(email) || !legal) {
-      return NextResponse.json({ success: false }, { status: 422 });
+    const isValid = name && (email && REGEX.email.test(email)) && legal;
+
+    if (!isValid) {
+      return NextResponse.json({
+        success: false,
+        message: 'Data is not valid'
+      }, { status: 422 });
     }
 
-    const body: BodyTypes = {
-      data: {
-        type: 'profile',
-        attributes: {
-          email,
-          first_name: name,
+    const createUserApi = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
+      method: 'POST',
+      headers: HEADERS,
+      body: JSON.stringify({
+        data: {
+          type: 'profile-subscription-bulk-create-job',
+          attributes: {
+            profiles: {
+              data: [{
+                type: 'profile',
+                attributes: {
+                  email: email,
+                  subscriptions: {
+                    email: {
+                      marketing: { consent: 'SUBSCRIBED' }
+                    },
+                  },
+                },
+              }]
+            },
+          },
+          relationships: { list: { data: { type: 'list', id: NEWSLETTER_LIST_ID } } }
         },
+      })
+    });
+
+    if (createUserApi.status === 202) {
+      const updateNameApi = await fetch('https://a.klaviyo.com/api/profile-import/', {
+        method: 'POST',
+        headers: HEADERS,
+        body: JSON.stringify({
+          data: {
+            type: 'profile',
+            attributes: {
+              email: email,
+              first_name: name,
+            },
+          }
+        })
+      });
+      if (updateNameApi.status === 200 || updateNameApi.status === 201) {
+        return NextResponse.json({
+          success: true,
+          message: 'Successfully created new subscriber'
+        });
       }
-    };
-
-    const profileResponse = await createProfile(body);
-
-    if (!profileResponse.data?.id) {
-      return NextResponse.json({
-        success: false,
-        message: 'Unable to create new subscriber'
-      }, { status: 422 });
-    }
-
-    try {
-      await addProfileToList(profileResponse.data.id);
-    } catch {
-      return NextResponse.json({
-        success: false,
-        message: 'Failed to add profile to list'
-      }, { status: 422 });
     }
 
     return NextResponse.json({
-      success: true,
-      message: 'Successfully created new subscriber and added to list'
-    });
-
+      success: false,
+      message: 'Failed to create a new subscriber'
+    }, { status: 422 });
   } catch {
     return NextResponse.json({
       success: false,
