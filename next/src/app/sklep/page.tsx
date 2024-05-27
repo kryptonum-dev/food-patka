@@ -1,7 +1,9 @@
 import sanityFetch from '@/utils/sanity.fetch';
 import { QueryMetadata } from '@/global/Seo/query-metadata';
 import Breadcrumbs from '@/components/global/Breadcrumbs';
-import Components, { ComponentTypes, Components_Query } from '@/components/Components';
+import Components, { Components_Query } from '@/components/Components';
+import Listing, { Listing_Query } from '@/components/_Shop/Listing';
+import type { ShopPageQueryTypes } from './page.types';
 
 const currentPath = '/sklep';
 const breadcrumbs = [
@@ -9,20 +11,22 @@ const breadcrumbs = [
 ];
 
 export default async function ShopPage() {
-  const { content } = await query();
+  const { listing, content } = await query();
 
   return (
     <>
       <Breadcrumbs data={breadcrumbs} />
+      <Listing {...listing} />
       <Components data={content} />
     </>
   );
 }
 
-const query = async (): Promise<{ content: ComponentTypes[] }> => {
-  return await sanityFetch({
+const query = async (): Promise<ShopPageQueryTypes> => {
+  return await sanityFetch<ShopPageQueryTypes>({
     query: /* groq */ `
       *[_type == "Shop_Page"][0] {
+        ${Listing_Query}
         ${Components_Query}
       }
     `,
