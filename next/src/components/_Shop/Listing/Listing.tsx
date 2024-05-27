@@ -3,14 +3,14 @@ import { notFound } from 'next/navigation';
 import sanityFetch from '@/utils/sanity.fetch';
 import Markdown from '@/components/ui/markdown';
 import styles from './Listing.module.scss';
-import BlogPostCard, { BlogPostCard_Query } from '@/components/global/BlogPostCard';
 import Pagination from '@/components/ui/Pagination';
+import ProductCard, { ProductCard_Query } from '@/components/global/ProductCard';
 import type { ListingQueryTypes, ListingTypes } from './Listing.types';
 
-const POSTS_PER_PAGE = 1;
+const ITEMS_PER_PAGE = 9;
 
 export default async function Listing({ heading, paragraph, currentPage = 1, currentCategorySlug }: ListingTypes) {
-  const { categories, totalPosts, posts } = await query(currentPage, currentCategorySlug);
+  const { categories, totalPosts, products } = await query(currentPage, currentCategorySlug);
   const _categories = categories.filter(category => category.postCount > 0);
 
   return (
@@ -24,7 +24,7 @@ export default async function Listing({ heading, paragraph, currentPage = 1, cur
           {_categories.map(({ name, slug, postCount }, i) => (
             <li key={i}>
               <Link
-                href={slug === currentCategorySlug ? '/blog' : `/blog/kategoria/${slug}`}
+                href={slug === currentCategorySlug ? '/sklep' : `/sklep/kategoria/${slug}`}
                 aria-current={slug === currentCategorySlug ? 'page' : undefined}
                 scroll={false}
               >
@@ -36,55 +36,53 @@ export default async function Listing({ heading, paragraph, currentPage = 1, cur
           <Brushes className={styles.Brushes} />
         </ul>
       )}
-      <div className={styles['Posts']} id='strona'>
-        {posts.map((item, i) => (
-          <BlogPostCard key={i} {...item} />
+      <div className={styles['Products']} id='strona'>
+        {products.map((item, i) => (
+          <ProductCard key={i} {...item} />
         ))}
       </div>
       <Pagination
         currentPage={currentPage}
-        totalPages={Math.ceil(totalPosts / POSTS_PER_PAGE)}
-        slugBase={`/blog${currentCategorySlug ? `/kategoria/${currentCategorySlug}` : ''}`}
+        totalPages={Math.ceil(totalPosts / ITEMS_PER_PAGE)}
+        slugBase={`/sklep${currentCategorySlug ? `/kategoria/${currentCategorySlug}` : ''}`}
       />
     </section>
   );
 }
 
 const query = async (currentPage: number, currentCategorySlug: string | undefined): Promise<ListingQueryTypes> => {
-  const OFFSET = POSTS_PER_PAGE * (currentPage - 1);
+  const OFFSET = ITEMS_PER_PAGE * (currentPage - 1);
   const PAGINATION_BEFORE = OFFSET;
-  const PAGINATION_AFTER = OFFSET + POSTS_PER_PAGE;
+  const PAGINATION_AFTER = OFFSET + ITEMS_PER_PAGE;
 
   const data = await sanityFetch<ListingQueryTypes>({
     query: /* groq */ `
       {
-        "categories": *[_type == "BlogCategory_Collection"] {
+        "categories": *[_type == "ProductCategory_Collection" && isSubcategory == false] {
           name,
           "slug": slug.current,
-          "postCount": count(*[_type == "BlogPost_Collection" && references(^._id )]),
+          "postCount": count(*[_type == "Product_Collection" && references(^._id )]),
         },
         "totalPosts": count(
-          *[_type == "BlogPost_Collection"
+          *[_type == "Product_Collection"
             ${currentCategorySlug ? `&& category -> slug.current == "${currentCategorySlug}"` : ''}
           ]
         ),
-        "posts": *[_type == "BlogPost_Collection"
+        "products": *[_type == "Product_Collection"
           ${currentCategorySlug ? `&& category -> slug.current == "${currentCategorySlug}"` : ''}]
         | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
-          ${BlogPostCard_Query}
+          ${ProductCard_Query}
         },
       }
     `,
     params: {
       PAGINATION_BEFORE: PAGINATION_BEFORE,
       PAGINATION_AFTER: PAGINATION_AFTER,
-      ...currentCategorySlug && {
-        category: currentCategorySlug,
-      },
+      ...currentCategorySlug && { category: currentCategorySlug },
     },
-    tags: ['BlogCategory_Collection', 'BlogPost_Collection'],
+    tags: ['ProductCategory_Collection', 'BlogPost_Collection'],
   });
-  if (data.posts.length === 0) notFound();
+  if (data.products.length === 0) notFound();
   return data;
 };
 

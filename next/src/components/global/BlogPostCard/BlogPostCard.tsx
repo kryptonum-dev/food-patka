@@ -8,7 +8,7 @@ import type { BlogPostCardTypes } from './BlogPostCard.types';
 
 export default function BlogPostCard({ title, subtitle, img, slug }: BlogPostCardTypes) {
   return (
-    <section className={styles['BlogPostCard']}>
+    <article className={styles['BlogPostCard']}>
       <Link href={`/blog/${slug}`} className={styles.img}>
         <Img data={img} sizes='' />
       </Link>
@@ -17,6 +17,6 @@ export default function BlogPostCard({ title, subtitle, img, slug }: BlogPostCar
         <Markdown className={styles.subtitle}>{subtitle}</Markdown>
         <Button href={`/blog/${slug}`}>Przeczytaj więcej</Button>
       </div>
-    </section>
+    </article>
   );
 }

@@ -22,9 +22,8 @@ export default function Form({ privacyPolicyLink }: FormTypes) {
 
   const onSubmit = async (data: FieldValues) => {
     setStatus({ sending: true, success: undefined });
-    data.groupID = 'test';
     try {
-      const response = await fetch('/api/mailerlite', {
+      const response = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),

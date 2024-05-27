@@ -7,7 +7,7 @@ export default function Pagination({ currentPage, totalPages, slugBase }: Pagina
 
   currentPage = Number(currentPage);
 
-  const slugPrefix = (number?: number) => (number && number > 1) ? `${slugBase}/strona/${number}#wpisy` : `${slugBase}#wpisy`;
+  const slugPrefix = (number?: number) => (number && number > 1) ? `${slugBase}/strona/${number}#strona` : `${slugBase}#strona`;
 
   const LinkRender = (number: number) => (
     <Link aria-current={currentPage === number ? 'page' : undefined} href={slugPrefix(number)}>{number}</Link>

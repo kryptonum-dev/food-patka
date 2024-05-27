@@ -1,5 +1,5 @@
 .Listing {
-  header {
+  > header {
     max-width: calc(587rem / 16);
     margin: 0 auto clamp(36px, calc(48vw / 7.68), 64px);
     text-align: center;
@@ -95,9 +95,9 @@
   }
 }
 
-.Posts {
+.Products {
   display: grid;
-  gap: clamp(20px, calc(24vw / 7.68), 32px);
+  gap: clamp(28px, calc(28vw / 7.68), 48px) 32px;
   @media (min-width: 1050px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
