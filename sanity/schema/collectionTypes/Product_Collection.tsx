@@ -51,7 +51,9 @@ export default defineType({
     defineField({
       name: 'category',
       type: 'reference',
-      to: [{ type: 'ProductCategory_Collection' }],
+      to: [
+        { type: 'ProductCategory_Collection' }
+      ],
       title: 'Kategoria',
       validation: Rule => Rule.required(),
     }),
@@ -96,6 +98,18 @@ export default defineType({
               }).warning(),
               fieldset: 'price',
             }),
+            defineField({
+              name: 'omnibus',
+              type: 'number',
+              title: 'Najniższa cena z ostatnich 30 dni',
+              description: (
+                <>
+                  Za sprawą <a href='https://www.parp.gov.pl/component/content/article/82715:dyrektywa-omnibus-obowiazek-informowania-o-cenach' target='_blank' rel='noreferrer'>dyretywy Omnibus</a> należy wprowadzić najniższą cenę produktu z ostatnich 30 dni.
+                </>
+              ),
+              validation: Rule => Rule.required(),
+              fieldset: 'price',
+            }),
           ],
           fieldsets: [
             {
@@ -108,13 +122,15 @@ export default defineType({
               title: 'name',
               price: 'price',
               oldPrice: 'oldPrice',
+              omnibus: 'omnibus',
             },
-            prepare: ({ title, price, oldPrice }) => {
+            prepare: ({ title, price, oldPrice, omnibus }) => {
               const priceText = price ? `Cena: ${price}zł` : 'Brak ceny';
               const oldPriceText = oldPrice ? `Stara cena: ${oldPrice}zł` : '';
+              const omnibusText = omnibus ? `Omnibus: ${omnibus}zł` : '';
               return {
                 title: title,
-                subtitle: [priceText, oldPriceText].filter(Boolean).join(' | '),
+                subtitle: [priceText, oldPriceText, omnibusText].filter(Boolean).join(' | '),
               }
             },
           },
@@ -151,6 +167,19 @@ export default defineType({
         };
         return true
       }).warning(),
+      fieldset: 'price',
+    }),
+    defineField({
+      name: 'omnibus',
+      type: 'number',
+      title: 'Najniższa cena z ostatnich 30 dni',
+      description: (
+        <>
+          Za sprawą <a href='https://www.parp.gov.pl/component/content/article/82715:dyrektywa-omnibus-obowiazek-informowania-o-cenach' target='_blank' rel='noreferrer'>dyretywy Omnibus</a> należy wprowadzić najniższą cenę produktu z ostatnich 30 dni.
+        </>
+      ),
+      hidden: ({ document }) => !!document?.hasVariants,
+      validation: Rule => Rule.required(),
       fieldset: 'price',
     }),
     defineField({
