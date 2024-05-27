@@ -42,8 +42,8 @@ export default defineType({
       title: 'Link do produktu',
       description: (
         <>
-          Link do produktu w{' '}
-          <a href='https://app.easycart.pl/admin/products' target='_blank' rel='noreferrer'>EasyCart</a>. Powinien wyglądać tak: <b>https://app.easycart.pl/checkout/food-patka/***</b>.
+          Skrócony link do produktu w{' '}
+          <a href='https://app.easycart.pl/admin/products' target='_blank' rel='noreferrer'>EasyCart</a>. Powinien wyglądać następująco: <b>https://easl.ink/***</b>.
         </>
       ),
       validation: Rule => Rule.required(),
@@ -179,7 +179,12 @@ export default defineType({
         </>
       ),
       hidden: ({ document }) => !!document?.hasVariants,
-      validation: Rule => Rule.required(),
+      validation: Rule => Rule.custom((value, { document }) => {
+        if (!document?.hasVariants && !value) {
+          return 'Cena jest wymagana'
+        };
+        return true
+      }),
       fieldset: 'price',
     }),
     defineField({
