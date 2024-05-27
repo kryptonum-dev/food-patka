@@ -1,0 +1,45 @@
+.ProductCard {
+  max-width: calc(608rem / 16);
+  display: grid;
+  gap: clamp(12px, calc(16vw / 7.68), 16px);
+  position: relative;
+  .link {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+  .img {
+    border-radius: 20px;
+    overflow: hidden;
+    img {
+      aspect-ratio: 380/477;
+      object-fit: cover;
+      transition: transform 0.5s var(--easing);
+    }
+  }
+  &:has(a:hover) {
+    img {
+      transform: scale(1.03);
+    }
+  }
+  text-align: center;
+  .price {
+    margin: clamp(4px, calc(12vw / 7.68), 12px) auto clamp(8px, calc(16vw / 7.68), 16px);
+    del {
+      font-size: calc(14rem / 16);
+      color: var(--secondary-400, #97879d);
+    }
+  }
+  .cta {
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 1049px) and (min-width: 500px) {
+    text-align: left;
+    grid-template-columns: 0.6fr 1fr;
+  }
+}
