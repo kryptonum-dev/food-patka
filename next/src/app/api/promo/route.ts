@@ -23,7 +23,7 @@ export async function POST(request: Request) {
 
   try {
     const { code } = await stripe.promotionCodes.create({
-      coupon: 'ejUvFl45',
+      coupon: 'A3HWb4WV',
     });
 
     await resend.emails.send({
