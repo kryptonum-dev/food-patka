@@ -60,9 +60,9 @@ export default defineType({
       },
       title: 'Główna kategoria',
       hidden: ({ document }) => !document?.isSubcategory,
-      validation: Rule => Rule.custom((_, { document }) => {
-        if (!document?.isSubcategory) return true;
-        return 'Główna kategoria musi być uzupełniona.';
+      validation: Rule => Rule.custom((value, { document }) => {
+        if (!value && document?.isSubcategory) return 'Główna kategoria musi być uzupełniona.';
+        return true;
       }),
       fieldset: 'subcategory',
     }),
