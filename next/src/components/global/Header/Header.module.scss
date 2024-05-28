@@ -85,12 +85,13 @@
         }
         @media (min-width: 1000px) {
           &:hover,
-          &:focus-within {
+          &:has(a:focus-visible) {
             .DropdownIcon {
               transform: rotateX(180deg);
             }
             .dropdown {
-              visibility: visible;
+              opacity: 1;
+              pointer-events: auto;
             }
           }
         }
@@ -121,7 +122,8 @@
           left: 2px;
         }
       }
-      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
     }
     a {
       position: relative;
@@ -202,7 +204,7 @@
             &[aria-expanded='true'] {
               & + .dropdown {
                 opacity: 1;
-                visibility: visible;
+                pointer-events: auto;
               }
             }
           }
