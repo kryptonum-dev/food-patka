@@ -12,7 +12,7 @@ const HEADERS = {
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   const {
     event,
     customer_email,
