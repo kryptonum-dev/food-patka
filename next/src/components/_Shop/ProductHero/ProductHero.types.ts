@@ -24,4 +24,8 @@ export type ProductHeroTypes = {
   omnibus: number;
   gallery: ImgDataTypes[];
   currentVariantParam?: number;
-}
+};
+
+export type GalleryTypes = {
+  data: ImgDataTypes[];
+};

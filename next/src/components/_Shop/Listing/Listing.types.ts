@@ -1,4 +1,4 @@
-import type { BlogPostCardTypes } from '@/components/global/BlogPostCard';
+import type { ProductCardTypes } from '@/components/global/ProductCard';
 
 export type ListingTypes = {
   heading: string;
@@ -16,7 +16,3 @@ export type ListingQueryTypes = {
   totalPosts: number;
   products: ProductCardTypes[];
 };
-
-export type PostsTypes = {
-  posts: ListingQueryTypes['posts'];
-}

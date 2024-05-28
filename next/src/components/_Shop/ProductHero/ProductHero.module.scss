@@ -64,3 +64,18 @@
     }
   }
 }
+
+.Gallery {
+  .thumbnails {
+    margin-top: 12px;
+    gap: 12px;
+    display: flex;
+    overflow: auto;
+    img {
+      width: clamp(52px, calc(80vw / 7.68), 80px);
+      height: clamp(52px, calc(80vw / 7.68), 80px);
+      border-radius: 6px;
+      object-fit: cover;
+    }
+  }
+}
