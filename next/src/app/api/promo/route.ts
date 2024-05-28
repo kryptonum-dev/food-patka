@@ -7,6 +7,7 @@ import type { RequestTypes } from './route.types';
 const HEADERS = {
   'Access-Control-Allow-Origin': '138.68.104.42',
   'Access-Control-Allow-Methods': 'POST',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
 
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
