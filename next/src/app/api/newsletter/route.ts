@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     if (!isValid) {
       return NextResponse.json({
         success: false,
-        message: 'Data is not valid'
+        message: 'Request data is invalid'
       }, { status: 422 });
     }
 
