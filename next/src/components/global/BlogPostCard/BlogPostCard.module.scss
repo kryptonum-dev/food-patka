@@ -1,9 +1,21 @@
 .BlogPostCard {
   display: grid;
   grid-template-rows: auto 1fr;
+  position: relative;
+  .link {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    border-radius: inherit;
+  }
+  border-radius: 20px;
+  overflow: hidden;
   .img {
     overflow: hidden;
-    border-radius: 20px 20px 0px 0px;
+    z-index: -1;
     img {
       height: calc(100% + 5px);
       transition: transform 0.5s var(--easing);
@@ -15,7 +27,6 @@
     }
   }
   .wrapper {
-    z-index: 2;
     margin: -28px 0 0 0;
     border-radius: 20px;
     border: 1px solid var(--primary-500, #ffb8ce);
@@ -35,6 +46,8 @@
     }
     a {
       margin-top: auto;
+      position: relative;
+      z-index: 3;
     }
   }
   @media (max-width: 1049px) and (min-width: 500px) {
