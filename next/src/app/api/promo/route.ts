@@ -8,6 +8,7 @@ const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
+  const ip = request.headers.get('x-forwarded-for');
   const {
     event,
     customer_email,
@@ -25,6 +26,7 @@ export async function POST(request: Request) {
     const { code } = await stripe.promotionCodes.create({
       coupon: 'A3HWb4WV',
     });
+    console.log(code);
 
     await resend.emails.send({
       from: 'FoodPatka <sklep@foodpatka.pl>',
@@ -33,12 +35,12 @@ export async function POST(request: Request) {
       subject: 'Twój kod rabatowy od FoodPatka!',
       react: SendPromoCode({
         name: customer_first_name,
-        code: code
+        code: ip as string,
       }),
     });
     return NextResponse.json({
       success: true,
-      message: 'Promo code successfully generated and sent.'
+      message: 'Promo code successfully generated and sent.',
     }, { status: 200 });
   } catch {
     return NextResponse.json({

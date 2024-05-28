@@ -12,19 +12,6 @@ const nextConfig = {
       },
     ],
   },
-  async headers() {
-    return [
-      {
-        source: '/api/promo',
-        headers: [
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '138.68.104.42',
-          },
-        ],
-      },
-    ];
-  }
 };
 
 export default nextConfig;
