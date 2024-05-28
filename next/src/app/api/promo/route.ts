@@ -4,12 +4,6 @@ import Stripe from 'stripe';
 import SendPromoCode from '@/emails/send-promo-code';
 import type { RequestTypes } from './route.types';
 
-const HEADERS = {
-  'Access-Control-Allow-Origin': '138.68.104.42',
-  'Access-Control-Allow-Methods': 'POST',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-};
-
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -24,7 +18,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: false,
       message: 'Invalid request data'
-    }, { status: 400, headers: HEADERS });
+    }, { status: 400 });
   }
 
   try {
@@ -45,11 +39,11 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: 'Promo code successfully generated and sent.'
-    }, { status: 200, headers: HEADERS });
+    }, { status: 200 });
   } catch {
     return NextResponse.json({
       success: false,
       message: 'Something went wrong with generating promo code or with sending it via email.'
-    }, { status: 500, headers: HEADERS });
+    }, { status: 500 });
   }
 }
