@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 
   try {
     const { code } = await stripe.promotionCodes.create({
-      coupon: 'A3HWb4WV',
+      coupon: '6npPuQLr',
     });
 
     await resend.emails.send({
@@ -45,12 +45,12 @@ export async function POST(request: Request) {
     });
     return NextResponse.json({
       success: true,
-      message: 'Promo code successfully generated and sent.',
+      message: 'Promo code successfully generated and sent',
     }, { status: 200 });
   } catch {
     return NextResponse.json({
       success: false,
-      message: 'Something went wrong with generating promo code or with sending it via email.'
+      message: 'Something went wrong with generating promo code or with sending it via email'
     }, { status: 500 });
   }
 }
