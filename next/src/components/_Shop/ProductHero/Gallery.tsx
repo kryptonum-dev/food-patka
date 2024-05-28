@@ -6,7 +6,7 @@ export default function Gallery({ data }: GalleryTypes) {
   return (
     <div className={styles['Gallery']}>
       <div className={styles.preview}>
-        <Img data={data[0]} sizes='' />
+        {/* <Img data={data[0]} sizes='' /> */}
       </div>
       {data.length > 1 && (
         <div className={styles.thumbnails}>

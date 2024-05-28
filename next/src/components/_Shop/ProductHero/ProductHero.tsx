@@ -1,11 +1,10 @@
+import Link from 'next/link';
 import Markdown from '@/components/ui/markdown';
 import styles from './ProductHero.module.scss';
 import Button from '@/components/ui/Button';
-import Img from '@/components/ui/image';
-import type { ProductHeroTypes } from './ProductHero.types';
-import Link from 'next/link';
-import { PaymentIcon } from './PaymentIcon';
 import Gallery from './Gallery';
+import { PaymentIcon } from './PaymentIcon';
+import type { ProductHeroTypes } from './ProductHero.types';
 
 export default function ProductHero({
   name,
