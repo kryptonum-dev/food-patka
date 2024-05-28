@@ -27,6 +27,7 @@ export default defineField({
       type: 'boolean',
       title: 'Czy odwrócić kolejność?',
       description: 'Domyślnie zdjęcie jest z lewej strony. Jeśli odwrócisz kolejność to zdjęcie będzie po prawej.',
+      initialValue: false,
       hidden: ({ parent }) => !parent?.img,
     }),
     defineField({
