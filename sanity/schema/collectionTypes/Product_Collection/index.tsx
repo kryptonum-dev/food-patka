@@ -2,6 +2,7 @@ import { defineField, defineType } from "sanity";
 import { slugify } from "../../../utils/slugify";
 import { removeMarkdown } from "../../../utils/remove-markdown";
 import CommunityTrust from "./CommunityTrust";
+import HighlightedSection from "./HighlightedSection";
 
 const title = 'Sklep – Produkty';
 const icon = () => '📦';
@@ -232,8 +233,8 @@ export default defineType({
             ],
           }
         },
-        { type: 'image' },
         CommunityTrust,
+        HighlightedSection,
       ],
       title: 'Opis produktu',
       validation: Rule => Rule.required().min(1),
