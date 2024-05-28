@@ -97,7 +97,6 @@ export default defineType({
         Quote,
         OrderedList,
       ],
-
       title: 'Zawartość',
       validation: Rule => Rule.required(),
     }),

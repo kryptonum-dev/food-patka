@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
-import { slugify } from "../../utils/slugify";
-import { removeMarkdown } from "../../utils/remove-markdown";
+import { slugify } from "../../../utils/slugify";
+import { removeMarkdown } from "../../../utils/remove-markdown";
+import CommunityTrust from "./CommunityTrust";
 
 const title = 'Sklep – Produkty';
 const icon = () => '📦';
@@ -195,6 +196,46 @@ export default defineType({
       ],
       title: 'Galeria zdjęć',
       description: 'Pierwsze zdjęcie zostanie również wykorzystane jako miniatura.',
+      validation: Rule => Rule.required().min(1),
+    }),
+    defineField({
+      name: 'description',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [
+            {
+              title: 'Normalny',
+              value: 'normal',
+            },
+            {
+              title: 'Duży tekst',
+              value: 'largeText',
+              component: ({ children }) => <span style={{ fontWeight: 400, fontSize: '1.2em' }} >{children}</span>,
+            },
+            {
+              title: 'Nagłówek H2',
+              value: 'h2',
+              component: ({ children }) => <span style={{ fontWeight: 400, fontSize: '1.618em' }} >{children}</span>,
+            },
+            {
+              title: 'Nagłówek H3',
+              value: 'h3',
+              component: ({ children }) => <div style={{ fontWeight: 400, fontSize: '1.4em' }} >{children}</div>,
+            },
+          ],
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+            ],
+          }
+        },
+        { type: 'image' },
+        CommunityTrust,
+      ],
+      title: 'Opis produktu',
       validation: Rule => Rule.required().min(1),
     }),
     defineField({
