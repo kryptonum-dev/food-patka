@@ -1,4 +1,4 @@
-import type { ProductHeroTypes } from '@/components/_Shop/ProductHero';
+import type { ProductTypes } from '@/components/_Shop/Product';
 
 export type ShopProductPageTypes = {
   params: {
@@ -9,4 +9,4 @@ export type ShopProductPageTypes = {
   };
 };
 
-export type BlogPostPageQueryTypes = Omit<ProductHeroTypes, 'currentVariantParam'>;
+export type ShopProductPageQueryTypes = Omit<ProductTypes, 'currentVariantParam'>;

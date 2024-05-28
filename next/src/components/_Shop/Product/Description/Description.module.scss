@@ -1,0 +1,8 @@
+.Description {
+  max-width: calc(587rem / 16);
+  & > h2,
+  & > h3 {
+    margin-top: clamp(42px, calc(48vw / 7.68), 64px);
+    margin-bottom: clamp(16px, calc(20vw / 7.68), 20px);
+  }
+}

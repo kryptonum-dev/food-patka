@@ -1,6 +1,7 @@
 import type { ImgDataTypes } from '@/components/ui/image';
+import type { DescriptionTypes } from './Description';
 
-export type ProductHeroTypes = {
+export type ProductTypes = {
   name: string;
   url: string;
   category: {
@@ -24,10 +25,5 @@ export type ProductHeroTypes = {
   omnibus: number;
   gallery: ImgDataTypes[];
   currentVariantParam?: number;
-};
 
-export type GalleryTypes = {
-  data: ImgDataTypes[];
-  ArrowLeftIcon: React.ReactNode;
-  ArrowRightIcon: React.ReactNode;
-};
+} & Omit<DescriptionTypes, 'className'>;

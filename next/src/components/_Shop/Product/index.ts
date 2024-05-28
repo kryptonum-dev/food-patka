@@ -1,9 +1,10 @@
 import { ImgDataQuery } from '@/components/ui/image';
-import ProductHero from './ProductHero';
-export default ProductHero;
-export type { ProductHeroTypes } from './ProductHero.types';
+import Product from './Product';
+import { Description_Query } from './Description';
+export default Product;
+export type { ProductTypes } from './Product.types';
 
-export const ProductHero_Query = `
+export const Product_Query = `
   name,
   url,
   category -> {
@@ -23,5 +24,7 @@ export const ProductHero_Query = `
   omnibus,
   gallery[] {
     ${ImgDataQuery}
-  }
+  },
+  
+  ${Description_Query}
 `;

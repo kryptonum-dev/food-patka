@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
 import sanityFetch from '@/utils/sanity.fetch';
-import { QueryMetadata } from '@/global/Seo/query-metadata';
 import Breadcrumbs from '@/components/global/Breadcrumbs';
+import { QueryMetadata } from '@/global/Seo/query-metadata';
 import { removeMarkdown } from '@/utils/remove-markdown';
-import ProductHero, { ProductHero_Query } from '@/components/_Shop/ProductHero';
+import Product, { Product_Query } from '@/components/_Shop/Product';
+import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
 import type { generateStaticParamsTypes } from '@/global/types';
-import type { BlogPostPageQueryTypes, ShopProductPageTypes } from './page.types';
 
 export default async function ShopProductPage({
   params: { slug },
@@ -22,6 +22,7 @@ export default async function ShopProductPage({
     oldPrice,
     omnibus,
     gallery,
+    description,
   } = await query(slug);
 
   const breadcrumbsSchema = [
@@ -40,27 +41,30 @@ export default async function ShopProductPage({
   return (
     <>
       <Breadcrumbs data={breadcrumbsSchema} />
-      <ProductHero {...{
-        name,
-        url,
-        hasVariants,
-        variants,
-        cheapestVariant,
-        price,
-        oldPrice,
-        omnibus,
-        gallery,
-        currentVariantParam,
-      }} />
+      <Product
+        {...{
+          name,
+          url,
+          hasVariants,
+          variants,
+          cheapestVariant,
+          price,
+          oldPrice,
+          omnibus,
+          gallery,
+          currentVariantParam,
+          description,
+        }}
+      />
     </>
   );
 }
 
-const query = async (slug: string): Promise<BlogPostPageQueryTypes> => {
-  const data = await sanityFetch<BlogPostPageQueryTypes>({
+const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
+  const data = await sanityFetch<ShopProductPageQueryTypes>({
     query: /* groq */ `
       *[_type == "Product_Collection" && $slug == slug.current][0] {
-        ${ProductHero_Query}
+        ${Product_Query}
       }
     `,
     params: { slug },
@@ -80,7 +84,8 @@ export async function generateMetadata({
   return await QueryMetadata({
     name: 'Product_Collection',
     path: currentVariant ? `/sklep/${slug}?v=${currentVariantParam}` : `/sklep/${slug}`,
-    dynamicSlug: slug
+    dynamicSlug: slug,
+    titleSuffix: currentVariant ? ` - ${currentVariant.name}` : '',
   });
 }
 

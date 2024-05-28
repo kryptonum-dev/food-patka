@@ -1,21 +1,22 @@
 'use client';
 import { useState } from 'react';
 import Img from '@/components/ui/image';
-import styles from './ProductHero.module.scss';
-import type { GalleryTypes } from './ProductHero.types';
+import styles from './Gallery.module.scss';
+import type { GalleryTypes } from './Gallery.types';
 
-export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon }: GalleryTypes) {
+export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon, className }: GalleryTypes) {
   const [preview, setPreview] = useState(0);
   const handleChange = (direction: number) => setPreview((preview + direction + data.length) % data.length);
 
   return (
-    <div className={styles['Gallery']}>
+    <div className={`${styles['Gallery']} ${className}`}>
       <div className={styles.preview}>
         {data.map((img, i) => (
           <Img
             data={img}
             sizes=''
             key={i}
+            priority={i === 0}
             style={{
               display: i !== preview ? 'none' : undefined,
             }}
@@ -49,6 +50,6 @@ export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon }: Gallery
           ))}
         </div>
       )}
-    </div >
+    </div>
   );
 }
