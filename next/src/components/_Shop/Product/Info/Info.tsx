@@ -43,29 +43,27 @@ export default function Info({
             ))}
           </ul>
         )}
-        <div className={styles.price}>
-          {hasVariants ? (
-            currentVariant ? (
-              <>
-                {currentVariant.oldPrice ? (
-                  <p><del>{currentVariant.oldPrice} zł</del> {currentVariant.price} zł</p>
-                ) : (
-                  <p>{currentVariant.price} zł</p>
-                )}
-              </>
-            ) : (
-              <>
-                {cheapestVariant.oldPrice ? (
-                  <p>od <del>{cheapestVariant.oldPrice} zł</del> {cheapestVariant.price} zł</p>
-                ) : (
-                  <p>od {cheapestVariant.price} zł</p>
-                )}
-              </>
-            )
+        {hasVariants ? (
+          currentVariant ? (
+            <>
+              {currentVariant.oldPrice ? (
+                <p className={styles.price}><del>{currentVariant.oldPrice} zł</del> {currentVariant.price} zł</p>
+              ) : (
+                <p className={styles.price}>{currentVariant.price} zł</p>
+              )}
+            </>
           ) : (
-            <p>{oldPrice && <del>{oldPrice}&nbsp;zł</del>} {price}&nbsp;zł</p>
-          )}
-        </div>
+            <>
+              {cheapestVariant.oldPrice ? (
+                <p className={styles.price}>od <del>{cheapestVariant.oldPrice} zł</del> {cheapestVariant.price} zł</p>
+              ) : (
+                <p className={styles.price}>od {cheapestVariant.price} zł</p>
+              )}
+            </>
+          )
+        ) : (
+          <p>{oldPrice && <del>{oldPrice}&nbsp;zł</del>} {price}&nbsp;zł</p>
+        )}
         <p className={styles.omnibus}>Najniższa cena z 30 dni przed obniżką: {omnibusPrice} zł</p>
         <Button href={url}>Kup teraz</Button>
         <div className={styles.paymentInfo}>
