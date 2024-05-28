@@ -28,4 +28,6 @@ export type ProductHeroTypes = {
 
 export type GalleryTypes = {
   data: ImgDataTypes[];
+  ArrowLeftIcon: React.ReactNode;
+  ArrowRightIcon: React.ReactNode;
 };

@@ -70,10 +70,16 @@ const query = async (slug: string): Promise<BlogPostPageQueryTypes> => {
   return data;
 };
 
-export async function generateMetadata({ params: { slug } }: ShopProductPageTypes) {
+export async function generateMetadata({
+  params: { slug },
+  searchParams: { v: currentVariantParam }
+}: ShopProductPageTypes) {
+  const { hasVariants, variants } = await query(slug);
+  const currentVariant = (hasVariants && variants && currentVariantParam) ? variants[currentVariantParam - 1] : null;
+
   return await QueryMetadata({
     name: 'Product_Collection',
-    path: `/sklep/${slug}`,
+    path: currentVariant ? `/sklep/${slug}?v=${currentVariantParam}` : `/sklep/${slug}`,
     dynamicSlug: slug
   });
 }
