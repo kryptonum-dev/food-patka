@@ -8,6 +8,7 @@ const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
+  console.log('Request', request);
   const {
     event,
     customer_email,
@@ -17,7 +18,7 @@ export async function POST(request: Request) {
   if (event !== 'single_product_bought') {
     return NextResponse.json({
       success: false,
-      message: 'invalid event type.'
+      message: 'Invalid event type.'
     }, { status: 400 });
   }
 
