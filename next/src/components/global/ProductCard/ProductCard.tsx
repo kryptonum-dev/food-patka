@@ -30,7 +30,7 @@ export default function ProductCard({
         />
       </div>
       <header>
-        <Markdown.h3 className={styles.heading}>{name}</Markdown.h3>
+        <Markdown.h3 className={styles.heading}>{removeMarkdown(name)}</Markdown.h3>
         {(hasVariants && cheapestVariant) ? (
           <p className={styles.price}>od {cheapestVariant.oldPrice && <del>{cheapestVariant.oldPrice}&nbsp;zł</del>} {cheapestVariant.price}&nbsp;zł</p>
         ) : (
