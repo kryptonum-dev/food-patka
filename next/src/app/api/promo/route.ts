@@ -4,22 +4,26 @@ import Stripe from 'stripe';
 import SendPromoCode from '@/emails/send-promo-code';
 import type { RequestTypes } from './route.types';
 
+const HEADERS = {
+  'Access-Control-Allow-Origin': '138.68.104.42',
+  'Access-Control-Allow-Methods': 'POST',
+};
+
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(request: Request) {
-  console.log('Request', request);
+export async function GET(request: Request) {
   const {
     event,
     customer_email,
     customer_first_name,
   } = await request.json() as RequestTypes;
 
-  if (event !== 'single_product_bought') {
+  if (event !== 'single_product_bought' || !customer_email || !customer_first_name) {
     return NextResponse.json({
       success: false,
-      message: 'Invalid event type.'
-    }, { status: 400 });
+      message: 'Invalid request data'
+    }, { status: 400, headers: HEADERS });
   }
 
   try {
@@ -40,11 +44,11 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: 'Promo code successfully generated and sent.'
-    }, { status: 200 });
+    }, { status: 200, headers: HEADERS });
   } catch {
     return NextResponse.json({
       success: false,
       message: 'Something went wrong with generating promo code or with sending it via email.'
-    }, { status: 500 });
+    }, { status: 500, headers: HEADERS });
   }
 }
