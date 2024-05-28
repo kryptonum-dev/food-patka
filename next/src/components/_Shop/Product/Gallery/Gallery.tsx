@@ -22,20 +22,24 @@ export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon, className
             }}
           />
         ))}
-        <button
-          aria-label='Poprzednie zdjęcie'
-          onClick={() => handleChange(-1)}
-          className={`${styles.navigation} ${styles.prev}`}
-        >
-          {ArrowLeftIcon}
-        </button>
-        <button
-          aria-label='Następne zdjęcie'
-          onClick={() => handleChange(1)}
-          className={`${styles.navigation} ${styles.next}`}
-        >
-          {ArrowRightIcon}
-        </button>
+        {data.length > 1 && (
+          <>
+            <button
+              aria-label='Poprzednie zdjęcie'
+              onClick={() => handleChange(-1)}
+              className={`${styles.navigation} ${styles.prev}`}
+            >
+              {ArrowLeftIcon}
+            </button>
+            <button
+              aria-label='Następne zdjęcie'
+              onClick={() => handleChange(1)}
+              className={`${styles.navigation} ${styles.next}`}
+            >
+              {ArrowRightIcon}
+            </button>
+          </>
+        )}
       </div>
       {data.length > 1 && (
         <div className={styles.thumbnails}>
