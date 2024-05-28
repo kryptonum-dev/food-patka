@@ -8,7 +8,13 @@ const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-  const ip = request.headers.get('x-forwarded-for');
+  if (request.headers.get('x-forwarded-for') !== '138.68.104.42') {
+    return NextResponse.json({
+      success: false,
+      message: 'You are not authorized to access this endpoint'
+    }, { status: 401 });
+  }
+
   const {
     event,
     customer_email,
@@ -26,7 +32,6 @@ export async function POST(request: Request) {
     const { code } = await stripe.promotionCodes.create({
       coupon: 'A3HWb4WV',
     });
-    console.log(code);
 
     await resend.emails.send({
       from: 'FoodPatka <sklep@foodpatka.pl>',
@@ -35,7 +40,7 @@ export async function POST(request: Request) {
       subject: 'Twój kod rabatowy od FoodPatka!',
       react: SendPromoCode({
         name: customer_first_name,
-        code: ip as string,
+        code: code,
       }),
     });
     return NextResponse.json({
