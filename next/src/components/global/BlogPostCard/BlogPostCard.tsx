@@ -13,6 +13,7 @@ export default function BlogPostCard({ title, subtitle, img, slug }: BlogPostCar
         href={`/blog/${slug}`}
         aria-label={`Przeczytaj artykuł: ${removeMarkdown(title)}`}
         className={styles.link}
+        tabIndex={-1}
       />
       <div className={styles.img}>
         <Img
