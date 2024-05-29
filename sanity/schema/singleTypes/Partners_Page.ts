@@ -3,7 +3,7 @@ import { defineField, defineType } from "sanity";
 export default defineType({
   name: 'Partners_Page',
   type: 'document',
-  title: 'Partnerzy',
+  title: 'Współpraca',
   icon: () => '🤝',
   fields: [
     defineField({

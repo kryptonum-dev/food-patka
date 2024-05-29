@@ -1,7 +1,7 @@
 import { defineField } from 'sanity';
 import { removeMarkdown } from '../../utils/remove-markdown';
 
-const title = 'Partnerzy';
+const title = 'Współpraca';
 const icon = () => '🤝';
 
 export default defineField({
