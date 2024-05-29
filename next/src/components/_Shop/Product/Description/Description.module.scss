@@ -5,4 +5,15 @@
     margin-top: clamp(42px, calc(48vw / 7.68), 64px);
     margin-bottom: clamp(16px, calc(20vw / 7.68), 20px);
   }
+  & > p:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  & > img {
+    &:not(:first-child) {
+      margin-top: clamp(20px, calc(28vw / 7.68), 32px);
+    }
+    &:not(:last-child) {
+      margin-bottom: clamp(20px, calc(28vw / 7.68), 32px);
+    }
+  }
 }
