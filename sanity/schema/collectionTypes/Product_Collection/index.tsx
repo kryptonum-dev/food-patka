@@ -234,7 +234,7 @@ export default defineType({
             ],
           }
         },
-        { type: 'image', title: 'Zdjęcie' },
+        { type: 'image', title: 'Zdjęcie', validation: Rule => Rule.required() },
         CommunityTrust,
         HighlightedSection,
         OrderedList,
