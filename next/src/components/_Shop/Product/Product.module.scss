@@ -5,9 +5,11 @@
     grid-template-columns: 1fr 1fr;
     align-items: flex-start;
     grid-template-areas: 'Gallery Info' 'Description Info';
-    .Info {
-      position: sticky;
-      top: calc(clamp(60px, calc(76vw / 7.68), 80px) + 21px);
+    @media (min-height: 450px) {
+      .Info {
+        position: sticky;
+        top: calc(clamp(60px, calc(76vw / 7.68), 80px) + 21px);
+      }
     }
     .Gallery {
       grid-area: Gallery;
