@@ -234,6 +234,7 @@ export default defineType({
             ],
           }
         },
+        { type: 'image' },
         CommunityTrust,
         HighlightedSection,
         OrderedList,
