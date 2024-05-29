@@ -4,6 +4,7 @@ import { LinkRenderer, ListRenderer } from '@/components/ui/markdown';
 import HighlightedSection, { type HighlightedSectionTypes } from './HighlightedSection';
 import CommunityTrust, { type CommunityTrustTypes } from './CommunityTrust';
 import OrderedList, { type OrderedListTypes } from './OrderedList';
+import InfoTile, { type InfoTileTypes } from './InfoTile';
 import styles from './Description.module.scss';
 import type { DescriptionTypes } from './Description.types';
 
@@ -28,6 +29,7 @@ const components = {
     CommunityTrust: ({ value }: { value: CommunityTrustTypes }) => <CommunityTrust {...value} />,
     HighlightedSection: ({ value }: { value: HighlightedSectionTypes }) => <HighlightedSection {...value} />,
     OrderedList: ({ value }: { value: OrderedListTypes }) => <OrderedList {...value} />,
+    InfoTile: ({ value }: { value: InfoTileTypes }) => <InfoTile {...value} />,
   }
 } as Partial<PortableTextReactComponents>;
 

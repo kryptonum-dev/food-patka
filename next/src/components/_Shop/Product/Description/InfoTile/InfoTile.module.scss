@@ -1,0 +1,30 @@
+.InfoTile {
+  $margin: clamp(24px, calc(32vw / 7.68), 32px);
+  &:not(:last-child) {
+    margin-bottom: $margin;
+  }
+  &:not(:first-child) {
+    margin-top: $margin;
+  }
+  display: grid;
+  gap: clamp(16px, calc(24vw / 7.68), 24px);
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  @media (max-width: 449px) {
+    grid-template-columns: 1fr;
+    header {
+      max-width: calc(282rem / 16);
+    }
+  }
+  img {
+    border-radius: 12px;
+    max-width: 174px;
+  }
+  h2 {
+    margin-bottom: clamp(8px, calc(12vw / 7.68), 12px);
+    font-size: clamp(1rem, calc(18vw / 7.68), calc(18rem / 16));
+  }
+  .paragraph {
+    font-size: clamp(calc(14rem / 16), calc(16vw / 7.68), 1rem);
+  }
+}
