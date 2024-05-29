@@ -17,6 +17,7 @@ export default defineField({
         { type: 'markdown' }
       ],
       title: 'Lista',
+      validation: Rule => Rule.required(),
     }),
   ],
   preview: {
