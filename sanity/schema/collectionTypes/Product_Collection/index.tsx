@@ -4,6 +4,7 @@ import { removeMarkdown } from "../../../utils/remove-markdown";
 import CommunityTrust from "./CommunityTrust";
 import HighlightedSection from "./HighlightedSection";
 import OrderedList from "./OrderedList";
+import InfoTile from "./InfoTile";
 
 const title = 'Sklep – Produkty';
 const icon = () => '📦';
@@ -238,9 +239,10 @@ export default defineType({
         CommunityTrust,
         HighlightedSection,
         OrderedList,
+        InfoTile,
       ],
       title: 'Opis produktu',
-      validation: Rule => Rule.required().min(1),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'seo',
