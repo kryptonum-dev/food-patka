@@ -41,7 +41,7 @@ export default defineField({
       name: 'video',
       type: 'file',
       options: {
-        accept: 'video/*',
+        accept: 'video/mp4',
       },
       title: 'Wideo (opcjonalne)',
       fieldset: 'media',
