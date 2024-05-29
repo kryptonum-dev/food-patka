@@ -15,21 +15,21 @@
   }
   img {
     border-radius: 12px;
+    width: 100%;
+    max-width: 418px;
   }
   &[data-has-image='true'] {
     display: grid;
-    grid-template-columns: 1.8fr 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: clamp(16px, calc(16vw / 7.68), 20px);
     &[data-is-reversed='true'] {
-      grid-template-columns: 1fr 1.8fr;
       img {
         order: -1;
       }
     }
   }
   @media (max-width: 549px) {
-    max-width: calc(328rem / 16);
     &[data-has-image='true'] {
       grid-template-columns: 1fr !important;
       img {

@@ -15,7 +15,7 @@ export default function HighlightedSection({ heading, paragraph, isReversed, img
         <Markdown className={styles.paragraph}>{paragraph}</Markdown>
       </header>
       {img && (
-        <Img data={img} sizes='(max-width: 549px) 304px, 188px' />
+        <Img data={img} sizes='(max-width: 479px) 100vw, (max-width: 549px) 418px, 258px' />
       )}
     </section>
   );
