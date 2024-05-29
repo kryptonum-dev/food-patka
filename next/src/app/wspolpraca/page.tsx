@@ -3,12 +3,12 @@ import { QueryMetadata } from '@/global/Seo/query-metadata';
 import Breadcrumbs from '@/components/global/Breadcrumbs';
 import Components, { ComponentTypes, Components_Query } from '@/components/Components';
 
-const currentPath = '/partnerzy';
+const currentPath = '/wspolpraca';
 const breadcrumbs = [
-  { name: 'Partnerzy', path: currentPath },
+  { name: 'Współpraca', path: currentPath },
 ];
 
-export default async function PartnersPage() {
+export default async function CooperationPage() {
   const { content } = await query();
 
   return (
