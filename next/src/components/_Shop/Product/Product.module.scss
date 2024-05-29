@@ -1,6 +1,6 @@
 .Product {
   display: grid;
-  gap: clamp(32px, calc(44vw / 7.68), 64px) 32px;
+  gap: clamp(32px, calc(44vw / 7.68), 64px) 44px;
   @media (min-width: 1000px) {
     grid-template-columns: 1fr 1fr;
     align-items: flex-start;
