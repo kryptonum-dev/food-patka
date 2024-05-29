@@ -13,26 +13,31 @@
   .paragraph {
     font-size: clamp(calc(14rem / 16), calc(16vw / 7.68), calc(16rem / 16));
   }
-  img {
+  img,
+  video {
     border-radius: 12px;
     width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
     max-width: 418px;
   }
-  &[data-has-image='true'] {
+  &[data-has-media='true'] {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: clamp(16px, calc(16vw / 7.68), 20px);
     &[data-is-reversed='true'] {
-      img {
+      img,
+      video {
         order: -1;
       }
     }
   }
   @media (max-width: 549px) {
-    &[data-has-image='true'] {
+    &[data-has-media='true'] {
       grid-template-columns: 1fr !important;
-      img {
+      img,
+      video {
         order: -1;
       }
     }

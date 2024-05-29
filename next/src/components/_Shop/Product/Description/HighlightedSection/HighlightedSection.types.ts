@@ -5,4 +5,5 @@ export type HighlightedSectionTypes = {
   paragraph: string;
   isReversed: boolean;
   img?: ImgDataTypes;
+  video?: string;
 };

@@ -11,5 +11,6 @@ export const HighlightedSection_Query = `
     img {
       ${ImgDataQuery}
     },
+    "video": video.asset -> url,
   },
 `;
