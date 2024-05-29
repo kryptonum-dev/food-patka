@@ -1,9 +1,10 @@
 import { PortableText, PortableTextReactComponents } from 'next-sanity';
-import styles from './Description.module.scss';
+import Img from '@/components/ui/image';
 import { LinkRenderer, ListRenderer } from '@/components/ui/markdown';
 import HighlightedSection, { type HighlightedSectionTypes } from './HighlightedSection';
 import CommunityTrust, { type CommunityTrustTypes } from './CommunityTrust';
 import OrderedList, { type OrderedListTypes } from './OrderedList';
+import styles from './Description.module.scss';
 import type { DescriptionTypes } from './Description.types';
 
 const components = {
@@ -23,6 +24,7 @@ const components = {
     bullet: ({ children }) => ListRenderer({ ordered: false, children }),
   },
   types: {
+    image: ({ value }) => <Img data={value} sizes='(max-width: 747px) 100vw, 587px' />,
     CommunityTrust: ({ value }: { value: CommunityTrustTypes }) => <CommunityTrust {...value} />,
     HighlightedSection: ({ value }: { value: HighlightedSectionTypes }) => <HighlightedSection {...value} />,
     OrderedList: ({ value }: { value: OrderedListTypes }) => <OrderedList {...value} />,

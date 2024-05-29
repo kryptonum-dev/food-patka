@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { PortableText, toPlainText, type PortableTextReactComponents } from 'next-sanity';
-import Img from '@/components/ui/image';
-import styles from './PostContent.module.scss';
+import { LinkRenderer, ListRenderer } from '@/components/ui/markdown';
 import { slugify } from '@/utils/slugify';
+import Img from '@/components/ui/image';
 import ImageGrid, { type ImageGridTypes } from './ImageGrid';
 import Quote, { type QuoteTypes } from './Quote';
 import OrderedList, { type OrderedListTypes } from './OrderedList';
+import styles from './PostContent.module.scss';
 import type { PostContentTypes } from './PostContent.types';
-import { LinkRenderer, ListRenderer } from '@/components/ui/markdown';
 
 const components = {
   block: {
