@@ -18,7 +18,7 @@ export default function HighlightedSection({ heading, paragraph, isReversed, img
         <Img data={img} sizes='(max-width: 479px) 100vw, (max-width: 549px) 418px, 258px' />
       )}
       {video && (
-        <video autoPlay muted playsInline controlsList='nodownload'>
+        <video autoPlay muted loop playsInline controlsList='nodownload'>
           <source src={video} type='video/mp4' />
         </video>
       )}

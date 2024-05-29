@@ -20,6 +20,7 @@
     aspect-ratio: 1/1;
     object-fit: cover;
     max-width: 418px;
+    background: var(--primary-400, #ffd7e4);
   }
   &[data-has-media='true'] {
     display: grid;
