@@ -3,6 +3,7 @@ import styles from './Description.module.scss';
 import { LinkRenderer, ListRenderer } from '@/components/ui/markdown';
 import HighlightedSection, { type HighlightedSectionTypes } from './HighlightedSection';
 import CommunityTrust, { type CommunityTrustTypes } from './CommunityTrust';
+import OrderedList, { type OrderedListTypes } from './OrderedList';
 import type { DescriptionTypes } from './Description.types';
 
 const components = {
@@ -24,6 +25,7 @@ const components = {
   types: {
     CommunityTrust: ({ value }: { value: CommunityTrustTypes }) => <CommunityTrust {...value} />,
     HighlightedSection: ({ value }: { value: HighlightedSectionTypes }) => <HighlightedSection {...value} />,
+    OrderedList: ({ value }: { value: OrderedListTypes }) => <OrderedList {...value} />,
   }
 } as Partial<PortableTextReactComponents>;
 
