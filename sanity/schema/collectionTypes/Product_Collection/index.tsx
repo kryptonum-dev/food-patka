@@ -245,6 +245,13 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: 'content',
+      type: 'content',
+      title: 'Komponenty podstrony',
+      description: 'Możesz dodać dodatkowe komponenty do postrony. Wyświetlą się one poniżej opisu produktu.',
+      options: { collapsible: true },
+    }),
+    defineField({
       name: 'seo',
       type: 'seo',
       title: 'SEO',
