@@ -15,8 +15,8 @@
       text-overflow: ellipsis;
     }
   }
+  color: var(--secondary-600);
   a {
-    color: var(--secondary-500);
     transition: opacity 0.5s;
     &:not(:hover) {
       opacity: 0.76;
