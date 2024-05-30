@@ -12,13 +12,9 @@
   align-items: center;
   @media (max-width: 449px) {
     grid-template-columns: 1fr;
-    header {
-      max-width: calc(282rem / 16);
-    }
   }
   img {
     border-radius: 12px;
-    max-width: 174px;
   }
   h2 {
     margin-bottom: clamp(8px, calc(12vw / 7.68), 12px);
