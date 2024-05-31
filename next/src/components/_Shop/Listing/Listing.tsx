@@ -20,21 +20,23 @@ export default async function Listing({ heading, paragraph, currentPage = 1, cur
         <Markdown>{paragraph}</Markdown>
       </header>
       {_categories.length > 0 && (
-        <ul className={styles.categories}>
-          {_categories.map(({ name, slug, postCount }, i) => (
-            <li key={i}>
-              <Link
-                href={slug === currentCategorySlug ? '/sklep' : `/sklep/kategoria/${slug}`}
-                aria-current={slug === currentCategorySlug ? 'page' : undefined}
-                scroll={false}
-              >
-                {slug === currentCategorySlug && <StarIndicator />}
-                <span>{name} ({postCount})</span>
-              </Link>
-            </li>
-          ))}
+        <div className={styles.categories}>
+          <ul>
+            {_categories.map(({ name, slug, postCount }, i) => (
+              <li key={i}>
+                <Link
+                  href={slug === currentCategorySlug ? '/sklep' : `/sklep/kategoria/${slug}`}
+                  aria-current={slug === currentCategorySlug ? 'page' : undefined}
+                  scroll={false}
+                >
+                  {slug === currentCategorySlug && <StarIndicator />}
+                  <span>{name} ({postCount})</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
           <Brushes className={styles.Brushes} />
-        </ul>
+        </div>
       )}
       <div className={styles['Products']} id='strona'>
         {products.map((item, i) => (

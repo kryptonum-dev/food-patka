@@ -10,16 +10,18 @@
   .categories {
     margin: 0 auto clamp(52px, calc(64vw / 7.68), 84px);
     width: fit-content;
-    display: flex;
-    gap: clamp(8px, calc(16vw / 7.68), 16px);
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding: 4px;
-    border-radius: 26px;
-    border: 1.5px solid var(--primary-300, #fff6f9);
-    li {
-      display: grid;
+    ul {
+      display: flex;
+      gap: clamp(8px, calc(16vw / 7.68), 16px);
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 4px;
+      border-radius: 26px;
+      border: 1.5px solid var(--primary-300, #fff6f9);
+      li {
+        display: grid;
+      }
     }
     a {
       display: flex;
