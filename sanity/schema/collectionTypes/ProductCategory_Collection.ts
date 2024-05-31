@@ -36,8 +36,8 @@ export default defineType({
         }).required(),
     }),
     defineField({
-      type: 'boolean',
       name: 'isSubcategory',
+      type: 'boolean',
       title: 'Czy jest podkategorią?',
       description: 'Zaznacz, jeśli utworzona kategoria, ma być subkategorią dla głównej kategorii.',
       fieldset: 'subcategory',

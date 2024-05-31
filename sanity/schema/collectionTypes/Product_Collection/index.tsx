@@ -261,7 +261,7 @@ export default defineType({
   preview: {
     select: {
       title: 'name',
-      subtitle: 'slug.current',
+      subtitle: 'category.name',
       img: 'gallery',
     },
     prepare: ({ title, subtitle, img }) => ({
