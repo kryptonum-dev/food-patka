@@ -1,6 +1,7 @@
 .ProductCard {
   max-width: calc(608rem / 16);
   display: grid;
+  grid-template-rows: auto 1fr;
   gap: clamp(12px, calc(16vw / 7.68), 16px);
   position: relative;
   .link {
@@ -41,5 +42,6 @@
   @media (max-width: 1049px) and (min-width: 500px) {
     text-align: left;
     grid-template-columns: 0.6fr 1fr;
+    grid-template-rows: unset;
   }
 }
