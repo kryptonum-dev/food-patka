@@ -1,10 +1,10 @@
 .InfoTile {
-  $margin: clamp(24px, calc(32vw / 7.68), 32px);
-  &:not(:last-child) {
-    margin-bottom: $margin;
-  }
+  $margin: clamp(12px, calc(16vw / 7.68), 16px);
   &:not(:first-child) {
     margin-top: $margin;
+  }
+  &:not(:last-child) {
+    margin-bottom: $margin;
   }
   display: grid;
   gap: clamp(16px, calc(24vw / 7.68), 24px);
