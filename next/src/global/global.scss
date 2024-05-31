@@ -172,6 +172,10 @@ h1,
 h2,
 .h2 {
   font-size: clamp(calc(24rem / 16), calc(36vw / 7.68), calc(36rem / 16));
+  color: var(--secondary-400, #97879d);
+  strong {
+    color: var(--secondary-500, #726378);
+  }
 }
 h3,
 .h3 {
