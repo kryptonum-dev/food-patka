@@ -12,6 +12,7 @@ import HeaderImageAndFeautures from "../schema/components/HeaderImageAndFeauture
 import TuckedImageSection from "../schema/components/TuckedImageSection";
 import LatestBlogEntries from "../schema/components/LatestBlogEntries";
 import Features from "../schema/components/Features";
+import FeaturedProducts from "../schema/components/FeaturedProducts";
 
 export default defineType({
   name: 'content',
@@ -31,5 +32,6 @@ export default defineType({
     TuckedImageSection,
     LatestBlogEntries,
     Features,
+    FeaturedProducts,
   ],
 });
