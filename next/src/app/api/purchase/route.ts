@@ -43,14 +43,25 @@ export async function POST(request: Request) {
         code: code,
       }),
     });
+
+    await fetch('/api/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: customer_first_name,
+        email: customer_email,
+        legal: true,
+      }),
+    });
+
     return NextResponse.json({
       success: true,
-      message: 'Promo code successfully generated and sent',
+      message: 'Promo code successfully generated and sent. Newsletter subscription added.',
     }, { status: 200 });
   } catch {
     return NextResponse.json({
       success: false,
-      message: 'Something went wrong with generating promo code or with sending it via email'
+      message: 'Something went wrong with generating promo code or with sending it via email, or with adding newsletter subscription.'
     }, { status: 500 });
   }
 }
