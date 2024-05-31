@@ -4,6 +4,8 @@ import Stripe from 'stripe';
 import SendPromoCode from '@/emails/send-promo-code';
 import type { RequestTypes } from './route.types';
 
+const DOMAIN = 'https://food-patka-git-dev-kryptonum.vercel.app'; // TODO: Change to production domain
+
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -44,7 +46,7 @@ export async function POST(request: Request) {
       }),
     });
 
-    await fetch('/api/newsletter', {
+    await fetch(`${DOMAIN}/api/newsletter`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
