@@ -6,8 +6,7 @@ import styles from './Listing.module.scss';
 import BlogPostCard, { BlogPostCard_Query } from '@/components/global/BlogPostCard';
 import Pagination from '@/components/ui/Pagination';
 import type { ListingQueryTypes, ListingTypes } from './Listing.types';
-
-const POSTS_PER_PAGE = 1;
+import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
 
 export default async function Listing({ heading, paragraph, currentPage = 1, currentCategorySlug }: ListingTypes) {
   const { categories, totalPosts, posts } = await query(currentPage, currentCategorySlug);
@@ -45,7 +44,7 @@ export default async function Listing({ heading, paragraph, currentPage = 1, cur
       </div>
       <Pagination
         currentPage={currentPage}
-        totalPages={Math.ceil(totalPosts / POSTS_PER_PAGE)}
+        totalPages={Math.ceil(totalPosts / ITEMS_PER_PAGE)}
         slugBase={`/blog${currentCategorySlug ? `/kategoria/${currentCategorySlug}` : ''}`}
       />
     </section>
@@ -53,9 +52,9 @@ export default async function Listing({ heading, paragraph, currentPage = 1, cur
 }
 
 const query = async (currentPage: number, currentCategorySlug: string | undefined): Promise<ListingQueryTypes> => {
-  const OFFSET = POSTS_PER_PAGE * (currentPage - 1);
+  const OFFSET = ITEMS_PER_PAGE * (currentPage - 1);
   const PAGINATION_BEFORE = OFFSET;
-  const PAGINATION_AFTER = OFFSET + POSTS_PER_PAGE;
+  const PAGINATION_AFTER = OFFSET + ITEMS_PER_PAGE;
 
   const data = await sanityFetch<ListingQueryTypes>({
     query: /* groq */ `

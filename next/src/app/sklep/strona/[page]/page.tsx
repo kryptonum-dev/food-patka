@@ -4,8 +4,8 @@ import { QueryMetadata } from '@/global/Seo/query-metadata';
 import Breadcrumbs from '@/components/global/Breadcrumbs';
 import Components, { Components_Query } from '@/components/Components';
 import Listing from '@/components/_Shop/Listing';
-import { ITEMS_PER_PAGE } from '../../page';
 import { ProductCard_Query } from '@/components/global/ProductCard';
+import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
 import type { ShopPaginationPageQueryTypes, ShopPaginationPageTypes } from './page.types';
 
 export default async function ShopPaginationPage({ params: { page } }: ShopPaginationPageTypes) {
@@ -82,19 +82,19 @@ export async function generateMetadata({ params: { page } }: ShopPaginationPageT
   });
 }
 
-export async function generateStaticParams(): Promise<{ page: number }[]> {
-  const { totalPosts } = await sanityFetch<{ totalPosts: number }>({
-    query: /* groq */ `
-      {
-        "totalPosts": count(*[_type == "Product_Collection"]),
-      }
-    `,
-    tags: ['Product_Collection'],
-  });
+// export async function generateStaticParams(): Promise<{ page: string }[]> {
+//   const { totalPosts } = await sanityFetch<{ totalPosts: number }>({
+//     query: /* groq */ `
+//       {
+//         "totalPosts": count(*[_type == "Product_Collection"]),
+//       }
+//     `,
+//     tags: ['Product_Collection'],
+//   });
 
-  const totalPages = Math.ceil(totalPosts / ITEMS_PER_PAGE);
+//   const totalPages = Math.ceil(totalPosts / ITEMS_PER_PAGE);
 
-  return Array.from({ length: totalPages }, (_, i) => ({
-    page: i + 1,
-  }));
-}
+//   return Array.from({ length: totalPages }, (_, i) => ({
+//     page: (i + 1).toString(),
+//   }));
+// }

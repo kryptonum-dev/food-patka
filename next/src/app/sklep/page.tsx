@@ -4,9 +4,8 @@ import Breadcrumbs from '@/components/global/Breadcrumbs';
 import Components, { Components_Query } from '@/components/Components';
 import Listing from '@/components/_Shop/Listing';
 import { ProductCard_Query } from '@/components/global/ProductCard';
+import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
 import type { ShopPageQueryTypes } from './page.types';
-
-export const ITEMS_PER_PAGE = 1;
 
 const currentPath = '/sklep';
 const breadcrumbs = [
