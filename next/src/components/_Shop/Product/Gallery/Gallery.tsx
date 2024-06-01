@@ -14,7 +14,7 @@ export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon, className
         {data.map((img, i) => (
           <Img
             data={img}
-            sizes=''
+            sizes='(max-width: 539px) 100vw, 485px'
             key={i}
             priority={i === 0}
             style={{
@@ -48,6 +48,7 @@ export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon, className
               key={i}
               onClick={() => setPreview(i)}
               aria-current={i === preview ? 'true' : undefined}
+              aria-label={`Zobacz ${i + 1} zdjęcie`}
             >
               <Img data={img} sizes='80px' key={i} />
             </button>
