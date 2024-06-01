@@ -5,7 +5,6 @@ import Breadcrumbs from '@/components/global/Breadcrumbs';
 import Components, { Components_Query } from '@/components/Components';
 import Listing from '@/components/_Blog/Listing';
 import type { BlogCategoryPageQueryTypes, BlogCategoryPageTypes } from './page.types';
-import type { generateStaticParamsTypes } from '@/global/types';
 
 export default async function BlogCategoryPage({ params: { slug } }: BlogCategoryPageTypes) {
   const {
@@ -63,11 +62,11 @@ export async function generateMetadata({ params: { slug } }: BlogCategoryPageTyp
   });
 }
 
-export async function generateStaticParams(): Promise<generateStaticParamsTypes> {
-  const collection = await sanityFetch<generateStaticParamsTypes>({
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const collection = await sanityFetch<{ slug: string }[]>({
     query: /* groq */ `
       *[_type == 'BlogCategory_Collection'] {
-        'slug': slug.current,
+        "slug": slug.current,
       }
     `,
     tags: ['BlogCategory_Collection'],

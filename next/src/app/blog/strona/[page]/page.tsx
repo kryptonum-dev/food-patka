@@ -5,6 +5,7 @@ import Breadcrumbs from '@/components/global/Breadcrumbs';
 import { BlogPaginationPageQueryTypes, BlogPaginationPageTypes } from './page.type';
 import Listing, { Listing_Query } from '@/components/_Blog/Listing';
 import Components, { Components_Query } from '@/components/Components';
+import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
 
 export default async function BlogPaginationPage({ params: { page } }: BlogPaginationPageTypes) {
   const { listing, content } = await query();
@@ -49,20 +50,17 @@ export async function generateMetadata({ params: { page } }: BlogPaginationPageT
   });
 }
 
-// export async function generateStaticParams(page): Promise<generateStaticParamsTypes> {
-//   const collection = await sanityFetch<generateStaticParamsTypes>({
-//     query: /* groq */ `
-//       *[_type == 'BlogPost_Collection'] {
-//         'slug': slug.current,
-//       }
-//     `,
-//     params: {
-//       page: page,
-//     },
-//     tags: ['BlogPost_Collection'],
-//   });
+export async function generateStaticParams(): Promise<{ page: string }[]> {
+  const totalPosts = await sanityFetch<number>({
+    query: /* groq */ `
+      count(*[_type == "BlogPost_Collection"])
+    `,
+    tags: ['BlogPost_Collection'],
+  });
 
-//   return collection.map(({ slug }) => ({
-//     slug: slug,
-//   }));
-// }
+  const totalPages = Math.ceil(totalPosts / ITEMS_PER_PAGE);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    page: (i + 1).toString(),
+  }));
+}

@@ -13,7 +13,7 @@ export type ShopPaginationPageQueryTypes = {
     slug: string;
     postCount: number;
   }[];
-  totalPosts: number;
+  totalProducts: number;
   products: ProductCardTypes[];
   pageContent: {
     header: {

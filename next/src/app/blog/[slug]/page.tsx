@@ -7,7 +7,6 @@ import { removeMarkdown } from '@/utils/remove-markdown';
 import PostHero, { PostHero_Query } from '@/components/_Blog/PostHero';
 import PostContent, { PostContent_Query } from '@/components/_Blog/PostContent';
 import { toPlainText } from 'next-sanity';
-import type { generateStaticParamsTypes } from '@/global/types';
 
 export default async function BlogPostPage({ params: { slug } }: BlogPostPageTypes) {
   const { title, subtitle, img, slug: postSlug, _createdAt, category, content, headings } = await query(slug);
@@ -55,11 +54,11 @@ export async function generateMetadata({ params: { slug } }: BlogPostPageTypes) 
   });
 }
 
-export async function generateStaticParams(): Promise<generateStaticParamsTypes> {
-  const collection = await sanityFetch<generateStaticParamsTypes>({
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const collection = await sanityFetch<{ slug: string }[]>({
     query: /* groq */ `
       *[_type == 'BlogPost_Collection'] {
-        'slug': slug.current,
+        "slug": slug.current,
       }
     `,
     tags: ['BlogPost_Collection'],

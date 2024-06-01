@@ -11,7 +11,7 @@ import type { ShopPaginationPageQueryTypes, ShopPaginationPageTypes } from './pa
 export default async function ShopPaginationPage({ params: { page } }: ShopPaginationPageTypes) {
   const {
     categories,
-    totalPosts,
+    totalProducts,
     products,
     pageContent,
   } = await query(page);
@@ -27,7 +27,7 @@ export default async function ShopPaginationPage({ params: { page } }: ShopPagin
         paragraph={pageContent.header.paragraph}
         categories={categories}
         products={products}
-        totalPages={Math.ceil(totalPosts / ITEMS_PER_PAGE)}
+        totalPages={Math.ceil(totalProducts / ITEMS_PER_PAGE)}
         currentPage={page}
       />
       <Components data={pageContent.content} />
@@ -51,7 +51,7 @@ const query = async (currentPage: number): Promise<ShopPaginationPageQueryTypes>
           "slug": slug.current,
           "postCount": count(*[_type == "Product_Collection" && references(^._id )]),
         },
-        "totalPosts": count(*[_type == "Product_Collection"]),
+        "totalProducts": count(*[_type == "Product_Collection"]),
         "products": *[_type == "Product_Collection"] | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
           ${ProductCard_Query}
         },
@@ -83,14 +83,14 @@ export async function generateMetadata({ params: { page } }: ShopPaginationPageT
 }
 
 export async function generateStaticParams(): Promise<{ page: string }[]> {
-  const totalPosts = await sanityFetch<number>({
+  const totalProducts = await sanityFetch<number>({
     query: /* groq */ `
       count(*[_type == "Product_Collection"])
     `,
     tags: ['Product_Collection'],
   });
 
-  const totalPages = Math.ceil(totalPosts / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(totalProducts / ITEMS_PER_PAGE);
 
   return Array.from({ length: totalPages }, (_, i) => ({
     page: (i + 1).toString(),
