@@ -82,19 +82,17 @@ export async function generateMetadata({ params: { page } }: ShopPaginationPageT
   });
 }
 
-// export async function generateStaticParams(): Promise<{ page: string }[]> {
-//   const { totalPosts } = await sanityFetch<{ totalPosts: number }>({
-//     query: /* groq */ `
-//       {
-//         "totalPosts": count(*[_type == "Product_Collection"]),
-//       }
-//     `,
-//     tags: ['Product_Collection'],
-//   });
+export async function generateStaticParams(): Promise<{ page: string }[]> {
+  const totalPosts = await sanityFetch<number>({
+    query: /* groq */ `
+      count(*[_type == "Product_Collection"])
+    `,
+    tags: ['Product_Collection'],
+  });
 
-//   const totalPages = Math.ceil(totalPosts / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(totalPosts / ITEMS_PER_PAGE);
 
-//   return Array.from({ length: totalPages }, (_, i) => ({
-//     page: (i + 1).toString(),
-//   }));
-// }
+  return Array.from({ length: totalPages }, (_, i) => ({
+    page: (i + 1).toString(),
+  }));
+}
