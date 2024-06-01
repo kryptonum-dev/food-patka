@@ -69,7 +69,7 @@ const query = async (currentPage: number = 1): Promise<ShopPageQueryTypes> => {
       PAGINATION_BEFORE: PAGINATION_BEFORE,
       PAGINATION_AFTER: PAGINATION_AFTER,
     },
-    tags: ['Shop_Page'],
+    tags: ['Shop_Page', 'ProductCategory_Collection', 'Product_Collection'],
   });
 };
 
