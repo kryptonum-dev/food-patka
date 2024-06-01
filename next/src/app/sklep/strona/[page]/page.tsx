@@ -68,7 +68,7 @@ const query = async (currentPage: number): Promise<ShopPaginationPageQueryTypes>
       PAGINATION_BEFORE: PAGINATION_BEFORE,
       PAGINATION_AFTER: PAGINATION_AFTER,
     },
-    tags: ['Shop_Page'],
+    tags: ['Shop_Page', 'Product_Collection', 'ProductCategory_Collection'],
   });
   if (data.products.length === 0) notFound();
   return data;
