@@ -1,28 +1,29 @@
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import sanityFetch from '@/utils/sanity.fetch';
 import Markdown from '@/components/ui/markdown';
 import styles from './Listing.module.scss';
 import Pagination from '@/components/ui/Pagination';
-import ProductCard, { ProductCard_Query } from '@/components/global/ProductCard';
-import type { ListingQueryTypes, ListingTypes } from './Listing.types';
+import ProductCard from '@/components/global/ProductCard';
+import type { ListingTypes } from './Listing.types';
 
-const ITEMS_PER_PAGE = 9;
-
-export default async function Listing({ heading, paragraph, currentPage = 1, currentCategorySlug }: ListingTypes) {
-  const { categories, totalPosts, products } = await query(currentPage, currentCategorySlug);
-  const _categories = categories.filter(category => category.postCount > 0);
-
+export default async function Listing({
+  heading,
+  paragraph,
+  categories,
+  products,
+  totalPages,
+  currentPage,
+  currentCategorySlug,
+}: ListingTypes) {
   return (
     <section className={styles['Listing']}>
       <header>
         <Markdown.h1>{heading}</Markdown.h1>
         <Markdown>{paragraph}</Markdown>
       </header>
-      {_categories.length > 0 && (
+      {categories.length > 0 && (
         <div className={styles.categories}>
           <ul>
-            {_categories.map(({ name, slug, postCount }, i) => (
+            {categories.map(({ name, slug, postCount }, i) => (
               <li key={i}>
                 <Link
                   href={slug === currentCategorySlug ? '/sklep' : `/sklep/kategoria/${slug}`}
@@ -44,49 +45,13 @@ export default async function Listing({ heading, paragraph, currentPage = 1, cur
         ))}
       </div>
       <Pagination
+        totalPages={totalPages}
         currentPage={currentPage}
-        totalPages={Math.ceil(totalPosts / ITEMS_PER_PAGE)}
         slugBase={`/sklep${currentCategorySlug ? `/kategoria/${currentCategorySlug}` : ''}`}
       />
     </section>
   );
 }
-
-const query = async (currentPage: number, currentCategorySlug: string | undefined): Promise<ListingQueryTypes> => {
-  const OFFSET = ITEMS_PER_PAGE * (currentPage - 1);
-  const PAGINATION_BEFORE = OFFSET;
-  const PAGINATION_AFTER = OFFSET + ITEMS_PER_PAGE;
-
-  const data = await sanityFetch<ListingQueryTypes>({
-    query: /* groq */ `
-      {
-        "categories": *[_type == "ProductCategory_Collection" && isSubcategory == false] {
-          name,
-          "slug": slug.current,
-          "postCount": count(*[_type == "Product_Collection" && references(^._id )]),
-        },
-        "totalPosts": count(
-          *[_type == "Product_Collection"
-            ${currentCategorySlug ? `&& category -> slug.current == "${currentCategorySlug}"` : ''}
-          ]
-        ),
-        "products": *[_type == "Product_Collection"
-          ${currentCategorySlug ? `&& category -> slug.current == "${currentCategorySlug}"` : ''}]
-        | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
-          ${ProductCard_Query}
-        },
-      }
-    `,
-    params: {
-      PAGINATION_BEFORE: PAGINATION_BEFORE,
-      PAGINATION_AFTER: PAGINATION_AFTER,
-      ...currentCategorySlug && { category: currentCategorySlug },
-    },
-    tags: ['ProductCategory_Collection', 'BlogPost_Collection'],
-  });
-  if (data.products.length === 0) notFound();
-  return data;
-};
 
 const Brushes = ({ ...props }) => (
   <svg

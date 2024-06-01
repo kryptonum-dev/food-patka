@@ -1,48 +1,46 @@
+import { notFound } from 'next/navigation';
 import sanityFetch from '@/utils/sanity.fetch';
 import { QueryMetadata } from '@/global/Seo/query-metadata';
 import Breadcrumbs from '@/components/global/Breadcrumbs';
 import Components, { Components_Query } from '@/components/Components';
 import Listing from '@/components/_Shop/Listing';
+import { ITEMS_PER_PAGE } from '../../page';
 import { ProductCard_Query } from '@/components/global/ProductCard';
-import type { ShopPageQueryTypes } from './page.types';
+import type { ShopPaginationPageQueryTypes, ShopPaginationPageTypes } from './page.types';
 
-export const ITEMS_PER_PAGE = 1;
-
-const currentPath = '/sklep';
-const breadcrumbs = [
-  { name: 'Sklep', path: currentPath },
-];
-
-export default async function ShopPage() {
+export default async function ShopPaginationPage({ params: { page } }: ShopPaginationPageTypes) {
   const {
     categories,
     totalPosts,
     products,
     pageContent,
-  } = await query();
+  } = await query(page);
 
   return (
     <>
-      <Breadcrumbs data={breadcrumbs} />
+      <Breadcrumbs data={[
+        { name: 'Sklep', path: '/sklep' },
+        { name: `Strona ${page}`, path: `/sklep/strona/${page}` },
+      ]} />
       <Listing
         heading={pageContent.header.heading}
         paragraph={pageContent.header.paragraph}
         categories={categories}
         products={products}
         totalPages={Math.ceil(totalPosts / ITEMS_PER_PAGE)}
-        currentPage={1}
+        currentPage={page}
       />
       <Components data={pageContent.content} />
     </>
   );
 }
 
-const query = async (currentPage: number = 1): Promise<ShopPageQueryTypes> => {
+const query = async (currentPage: number): Promise<ShopPaginationPageQueryTypes> => {
   const OFFSET = ITEMS_PER_PAGE * (currentPage - 1);
   const PAGINATION_BEFORE = OFFSET;
   const PAGINATION_AFTER = OFFSET + ITEMS_PER_PAGE;
 
-  return await sanityFetch<ShopPageQueryTypes>({
+  const data = await sanityFetch<ShopPaginationPageQueryTypes>({
     query: /* groq */ `
       {
         "categories": *[_type == "ProductCategory_Collection"
@@ -72,12 +70,31 @@ const query = async (currentPage: number = 1): Promise<ShopPageQueryTypes> => {
     },
     tags: ['Shop_Page'],
   });
+  if (data.products.length === 0) notFound();
+  return data;
 };
 
-
-export async function generateMetadata() {
+export async function generateMetadata({ params: { page } }: ShopPaginationPageTypes) {
   return await QueryMetadata({
     name: 'Shop_Page',
-    path: currentPath
+    path: page == 1 ? '/sklep' : `/sklep/strona/${page}`,
+    titleSuffix: ` - Strona ${page}`,
   });
+}
+
+export async function generateStaticParams(): Promise<{ page: number }[]> {
+  const { totalPosts } = await sanityFetch<{ totalPosts: number }>({
+    query: /* groq */ `
+      {
+        "totalPosts": count(*[_type == "Product_Collection"]),
+      }
+    `,
+    tags: ['Product_Collection'],
+  });
+
+  const totalPages = Math.ceil(totalPosts / ITEMS_PER_PAGE);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    page: i + 1,
+  }));
 }

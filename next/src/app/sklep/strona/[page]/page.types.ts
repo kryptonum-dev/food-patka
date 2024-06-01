@@ -1,7 +1,13 @@
 import type { ComponentTypes } from '@/components/Components';
 import type { ProductCardTypes } from '@/components/global/ProductCard';
 
-export type ShopPageQueryTypes = {
+export type ShopPaginationPageTypes = {
+  params: {
+    page: number;
+  };
+};
+
+export type ShopPaginationPageQueryTypes = {
   categories: {
     name: string;
     slug: string;

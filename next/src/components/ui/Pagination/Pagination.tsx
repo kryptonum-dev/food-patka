@@ -2,7 +2,11 @@ import Link from 'next/link';
 import styles from './Pagination.module.scss';
 import type { PaginationTypes } from './Pagination.types';
 
-export default function Pagination({ currentPage, totalPages, slugBase }: PaginationTypes) {
+export default function Pagination({
+  currentPage,
+  totalPages,
+  slugBase
+}: PaginationTypes) {
   if (totalPages <= 1) return null;
 
   currentPage = Number(currentPage);

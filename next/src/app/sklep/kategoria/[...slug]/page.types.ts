@@ -1,12 +1,12 @@
 import type { ComponentTypes } from '@/components/Components';
 
-export type BlogCategoryPageTypes = {
+export type ShopCategoryPageTypes = {
   params: {
-    slug: string;
+    slug: string[];
   };
 };
 
-export type BlogCategoryPageQueryTypes = {
+export type ShopCategoryPageQueryTypes = {
   category: {
     name: string;
     slug: string;

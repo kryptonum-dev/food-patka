@@ -1,5 +1,5 @@
 export type PaginationTypes = {
-  currentPage: number;
   totalPages: number;
+  currentPage: number;
   slugBase: string;
 }
