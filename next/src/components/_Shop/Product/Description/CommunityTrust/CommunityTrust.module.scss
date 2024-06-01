@@ -3,9 +3,9 @@
   padding: 6px 20px 6px 8px;
   border-radius: 30px;
   background-color: var(--primary-400, #ffd7e4);
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   width: fit-content;
-  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
   .images {
@@ -24,9 +24,9 @@
   }
   .title {
     font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
+    color: var(--secondary-600, #504752);
     strong {
       display: block;
-      color: var(--secondary-600, #504752);
       font-weight: normal;
       font-size: calc(18em / 14);
     }
