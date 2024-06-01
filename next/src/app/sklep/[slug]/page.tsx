@@ -5,7 +5,6 @@ import { QueryMetadata } from '@/global/Seo/query-metadata';
 import { removeMarkdown } from '@/utils/remove-markdown';
 import Product, { Product_Query } from '@/components/_Shop/Product';
 import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
-import type { generateStaticParamsTypes } from '@/global/types';
 
 export default async function ShopProductPage({
   params: { slug },
@@ -89,11 +88,11 @@ export async function generateMetadata({
   });
 }
 
-export async function generateStaticParams(): Promise<generateStaticParamsTypes> {
-  const collection = await sanityFetch<generateStaticParamsTypes>({
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const collection = await sanityFetch<{ slug: string }[]>({
     query: /* groq */ `
       *[_type == 'Product_Collection'] {
-        'slug': slug.current,
+        "slug": slug.current,
       }
     `,
     tags: ['Product_Collection'],
