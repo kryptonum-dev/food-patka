@@ -7,7 +7,7 @@ export default defineType({
   icon: () => '🛒',
   fields: [
     defineField({
-      name: 'listing',
+      name: 'header',
       type: 'object',
       fields: [
         defineField({
@@ -23,7 +23,7 @@ export default defineType({
           validation: Rule => Rule.required(),
         }),
       ],
-      title: 'Widok listy wpisów',
+      title: 'Widok listy produktów',
       validation: Rule => Rule.required(),
     }),
     defineField({
