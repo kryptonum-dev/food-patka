@@ -119,7 +119,7 @@ export async function generateStaticParams(): Promise<{ mainCategorySlug: string
         "productCount": count(*[_type == "Product_Collection" && references(^._id)]),
       }
     `,
-    tags: ['ProductCategory_Collection'],
+    tags: ['ProductCategory_Collection', 'Product_Collection'],
   });
 
   return mainCategories.flatMap(({ slug, productCount }) => {

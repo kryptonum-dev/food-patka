@@ -7,7 +7,7 @@ import Listing from '@/components/_Shop/Listing';
 import { ProductCard_Query } from '@/components/global/ProductCard';
 import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
 import { ImgDataQuery } from '@/components/ui/image';
-import { ShopPageQueryTypes, ShopPageTypes } from '@/app/sklep/page.types';
+import type { ShopPageQueryTypes, ShopPageTypes } from '@/app/sklep/page.types';
 
 export default async function ShopPaginationPage({ params: { page, mainCategorySlug, subCategorySlug } }: ShopPageTypes) {
   const {
