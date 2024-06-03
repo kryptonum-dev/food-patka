@@ -24,7 +24,7 @@
     max-height: calc(100dvh - var(--pageMargin) * 2);
     display: grid;
     grid-template-rows: auto 1fr auto;
-    border-radius: 4px;
+    border-radius: 20px;
     border: 1px solid var(--primary-500);
     background: var(--primary-100);
     position: relative;
