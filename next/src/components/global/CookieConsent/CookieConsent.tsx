@@ -52,7 +52,7 @@ const CloseIcon = (
 const query = async (): Promise<QueryType> => {
   return await sanityFetch<QueryType>({
     query: /* groq */ `
-      *[_type == "global"][1] {
+      *[_id == "global"][0] {
         CookieConsent {
           heading,
           paragraph,
