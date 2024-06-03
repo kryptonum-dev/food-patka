@@ -11,18 +11,19 @@
     "email": "email dev --dir emails"
   },
   "dependencies": {
+    "@next/third-parties": "latest",
+    "@react-email/components": "^0.0.17",
     "framer-motion": "^11.1.7",
     "next": "latest",
     "next-mdx-remote": "^4.4.1",
     "next-sanity": "^9.0.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-email": "^2.1.2",
     "react-hook-form": "^7.51.3",
     "resend": "^3.2.0",
     "sass": "^1.75.0",
-    "stripe": "^15.6.0",
-    "react-email": "^2.1.2",
-    "@react-email/components": "^0.0.17"
+    "stripe": "^15.6.0"
   },
   "devDependencies": {
     "@types/node": "^20",
