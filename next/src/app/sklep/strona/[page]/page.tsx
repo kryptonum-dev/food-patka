@@ -81,7 +81,7 @@ const query = async (currentPage: number): Promise<ShopPageQueryTypes> => {
 export async function generateMetadata({ params: { page } }: ShopPageTypes) {
   return await QueryMetadata({
     name: 'Shop_Page',
-    path: `/sklep${page == 1 && `/strona/${page}`}`,
+    path: `/sklep${page !== 1 ? `/strona/${page}` : ''}`,
     titleSuffix: ` - Strona ${page}`,
   });
 }

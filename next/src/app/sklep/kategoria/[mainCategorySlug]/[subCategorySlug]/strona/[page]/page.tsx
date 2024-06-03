@@ -111,7 +111,7 @@ const query = async ({
 export async function generateMetadata({ params: { page, mainCategorySlug, subCategorySlug } }: ShopPageTypes) {
   return await QueryMetadata({
     name: 'ProductCategory_Collection',
-    path: `/sklep/kategoria/${mainCategorySlug}/${subCategorySlug}${page == 1 && `/strona/${page}`}`,
+    path: `/sklep/kategoria/${mainCategorySlug}/${subCategorySlug}${page !== 1 ? `/strona/${page}` : ''}`,
     dynamicSlug: subCategorySlug,
     titleSuffix: ` - Strona ${page}`,
   });
