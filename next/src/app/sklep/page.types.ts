@@ -14,7 +14,7 @@ export type ShopPageQueryTypes = {
   categories: {
     name: string;
     slug: string;
-    postCount: number;
+    productCount: number;
     thumbnail: ImgDataTypes;
   }[];
   mainCategory: {

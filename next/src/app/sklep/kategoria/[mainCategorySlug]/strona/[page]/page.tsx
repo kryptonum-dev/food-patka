@@ -62,7 +62,7 @@ const query = async ({
         ]{
           name,
           "slug": slug.current,
-          "postCount": count(*[_type == "Product_Collection" && (references(^._id) || mainCategory -> _id == ^._id)]) ,
+          "productCount": count(*[_type == "Product_Collection" && (references(^._id) || mainCategory -> _id == ^._id)]),
           thumbnail {
             ${ImgDataQuery}
           },
@@ -111,17 +111,24 @@ export async function generateMetadata({ params: { page, mainCategorySlug } }: S
   });
 }
 
-// export async function generateStaticParams(): Promise<{ page: string }[]> {
-//   const totalProducts = await sanityFetch<number>({
-//     query: /* groq */ `
-//       count(*[_type == "Product_Collection"])
-//     `,
-//     tags: ['Product_Collection'],
-//   });
 
-//   const totalPages = Math.ceil(totalProducts / ITEMS_PER_PAGE);
+export async function generateStaticParams(): Promise<{ mainCategorySlug: string; page: string; }[]> {
+  const mainCategories = await sanityFetch<{ slug: string, productCount: number; }[]>({
+    query: /* groq */ `
+      *[_type == "ProductCategory_Collection" && isSubcategory == false] {
+        "slug": slug.current,
+        "productCount": count(*[_type == "Product_Collection" && references(^._id)]),
+      }
+    `,
+    tags: ['ProductCategory_Collection'],
+  });
 
-//   return Array.from({ length: totalPages }, (_, i) => ({
-//     page: (i + 1).toString(),
-//   }));
-// }
+  return mainCategories.flatMap(({ slug, productCount }) => {
+    const totalPages = Math.ceil(productCount / ITEMS_PER_PAGE);
+    return Array.from({ length: totalPages }, (_, i) => ({
+      mainCategorySlug: slug,
+      page: (i + 1).toString(),
+    }));
+  });
+}
+

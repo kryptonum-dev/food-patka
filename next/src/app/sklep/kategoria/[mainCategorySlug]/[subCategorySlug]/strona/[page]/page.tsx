@@ -69,7 +69,7 @@ const query = async ({
         ]{
           name,
           "slug": slug.current,
-          "postCount": count(*[_type == "Product_Collection" && (references(^._id) || mainCategory -> _id == ^._id)]) ,
+          "productCount": count(*[_type == "Product_Collection" && (references(^._id) || mainCategory -> _id == ^._id)]) ,
           thumbnail {
             ${ImgDataQuery}
           },

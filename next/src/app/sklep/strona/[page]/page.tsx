@@ -50,7 +50,7 @@ const query = async (currentPage: number): Promise<ShopPageQueryTypes> => {
         ]{
           name,
           "slug": slug.current,
-          "postCount": count(*[_type == "Product_Collection" && references(^._id )]),
+          "productCount": count(*[_type == "Product_Collection" && (references(^._id) || category -> mainCategory -> _id == ^._id)]),
           thumbnail {
             ${ImgDataQuery}
           },
@@ -89,8 +89,8 @@ export async function generateMetadata({ params: { page } }: ShopPageTypes) {
 export async function generateStaticParams(): Promise<{ page: string }[]> {
   const totalProducts = await sanityFetch<number>({
     query: /* groq */ `
-      count(* [_type == "Product_Collection"])
-      `,
+      count(*[_type == "Product_Collection"])
+    `,
     tags: ['Product_Collection'],
   });
 

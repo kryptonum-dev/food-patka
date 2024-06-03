@@ -27,7 +27,7 @@ export default async function Listing({
       {categories.length > 0 && (
         <div className={styles.categories}>
           <ul>
-            {categories.map(({ name, slug, postCount, thumbnail }, i) => (
+            {categories.map(({ name, slug, productCount, thumbnail }, i) => (
               <li key={i}>
                 <Link
                   href={slug === subCategorySlug
@@ -40,7 +40,7 @@ export default async function Listing({
                   scroll={false}
                 >
                   <Img data={thumbnail} sizes='48px' />
-                  <span>{name} ({postCount})</span>
+                  <span>{name} ({productCount})</span>
                 </Link>
               </li>
             ))}
