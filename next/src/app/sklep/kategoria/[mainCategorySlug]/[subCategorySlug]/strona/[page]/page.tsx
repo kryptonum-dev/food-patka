@@ -117,17 +117,24 @@ export async function generateMetadata({ params: { page, mainCategorySlug, subCa
   });
 }
 
-// export async function generateStaticParams(): Promise<{ page: string }[]> {
-//   const totalProducts = await sanityFetch<number>({
-//     query: /* groq */ `
-//       count(*[_type == "Product_Collection"])
-//     `,
-//     tags: ['Product_Collection'],
-//   });
+export async function generateStaticParams(): Promise<{ mainCategorySlug: string; subCategorySlug: string; page: string; }[]> {
+  const data = await sanityFetch<{ subCategorySlug: string; mainCategorySlug: string; productCount: number; }[]>({
+    query: /* groq */ `
+      *[_type == "ProductCategory_Collection" && isSubcategory == true] {
+        "subCategorySlug": slug.current,
+        "mainCategorySlug": mainCategory -> slug.current,
+        "productCount": count(*[_type == "Product_Collection" && references(^._id)]),
+      }
+    `,
+    tags: ['ProductCategory_Collection', 'Product_Collection'],
+  });
 
-//   const totalPages = Math.ceil(totalProducts / ITEMS_PER_PAGE);
-
-//   return Array.from({ length: totalPages }, (_, i) => ({
-//     page: (i + 1).toString(),
-//   }));
-// }
+  return data.flatMap(({ subCategorySlug, mainCategorySlug, productCount }) => {
+    const totalPages = Math.ceil(productCount / ITEMS_PER_PAGE);
+    return Array.from({ length: totalPages - 1 }, (_, i) => ({
+      subCategorySlug: subCategorySlug,
+      mainCategorySlug: mainCategorySlug,
+      page: (i + 2).toString(),
+    }));
+  });
+}

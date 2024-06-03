@@ -111,16 +111,16 @@ export async function generateMetadata({ params: { mainCategorySlug } }: ShopPag
 }
 
 export async function generateStaticParams(): Promise<{ mainCategorySlug: string }[]> {
-  const mainCategories = await sanityFetch<{ slug: string }[]>({
+  const mainCategories = await sanityFetch<{ mainCategorySlug: string }[]>({
     query: /* groq */ `
       *[_type == "ProductCategory_Collection" && isSubcategory == false] {
-        "slug": slug.current,
+        "mainCategorySlug": slug.current,
       }
     `,
     tags: ['ProductCategory_Collection'],
   });
 
-  return mainCategories.map(({ slug }) => ({
-    mainCategorySlug: slug,
+  return mainCategories.map(({ mainCategorySlug }) => ({
+    mainCategorySlug: mainCategorySlug,
   }));
 }

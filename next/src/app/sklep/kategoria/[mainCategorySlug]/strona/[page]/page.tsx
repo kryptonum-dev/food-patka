@@ -111,7 +111,6 @@ export async function generateMetadata({ params: { page, mainCategorySlug } }: S
   });
 }
 
-
 export async function generateStaticParams(): Promise<{ mainCategorySlug: string; page: string; }[]> {
   const mainCategories = await sanityFetch<{ slug: string, productCount: number; }[]>({
     query: /* groq */ `
@@ -125,9 +124,9 @@ export async function generateStaticParams(): Promise<{ mainCategorySlug: string
 
   return mainCategories.flatMap(({ slug, productCount }) => {
     const totalPages = Math.ceil(productCount / ITEMS_PER_PAGE);
-    return Array.from({ length: totalPages }, (_, i) => ({
+    return Array.from({ length: totalPages - 1 }, (_, i) => ({
       mainCategorySlug: slug,
-      page: (i + 1).toString(),
+      page: (i + 2).toString(),
     }));
   });
 }
