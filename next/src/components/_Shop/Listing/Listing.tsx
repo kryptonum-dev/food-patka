@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Markdown from '@/components/ui/markdown';
-import styles from './Listing.module.scss';
+import Img from '@/components/ui/image';
 import Pagination from '@/components/ui/Pagination';
 import ProductCard from '@/components/global/ProductCard';
+import styles from './Listing.module.scss';
 import type { ListingTypes } from './Listing.types';
 
 export default async function Listing({
@@ -12,8 +13,11 @@ export default async function Listing({
   products,
   totalPages,
   currentPage,
-  currentCategorySlug,
+  mainCategorySlug,
+  subCategorySlug,
 }: ListingTypes) {
+  const currentCategorySlug = subCategorySlug || mainCategorySlug;
+
   return (
     <section className={styles['Listing']}>
       <header>
@@ -23,14 +27,19 @@ export default async function Listing({
       {categories.length > 0 && (
         <div className={styles.categories}>
           <ul>
-            {categories.map(({ name, slug, postCount }, i) => (
+            {categories.map(({ name, slug, postCount, thumbnail }, i) => (
               <li key={i}>
                 <Link
-                  href={slug === currentCategorySlug ? '/sklep' : `/sklep/kategoria/${slug}`}
+                  href={slug === subCategorySlug
+                    ? `/sklep/kategoria/${mainCategorySlug}`
+                    : slug === mainCategorySlug
+                      ? '/sklep'
+                      : `/sklep/kategoria/${mainCategorySlug ? `${mainCategorySlug}/` : ''}${slug}`
+                  }
                   aria-current={slug === currentCategorySlug ? 'page' : undefined}
                   scroll={false}
                 >
-                  {slug === currentCategorySlug && <StarIndicator />}
+                  <Img data={thumbnail} sizes='48px' />
                   <span>{name} ({postCount})</span>
                 </Link>
               </li>
@@ -47,7 +56,7 @@ export default async function Listing({
       <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
-        slugBase={`/sklep${currentCategorySlug ? `/kategoria/${currentCategorySlug}` : ''}`}
+        slugBase={`/sklep${mainCategorySlug ? `/kategoria/${mainCategorySlug}` : ''}`}
       />
     </section>
   );
@@ -71,18 +80,5 @@ const Brushes = ({ ...props }) => (
     <path d='M67.256 46.403c-.666.13-2.543.412-7.823.924-2.388.221-6.965 1.134-7.33 1.455-.727.64 3.6.483 11.724-.436 1.757-.204 3.439-.341 3.75-.293 1.462.163.924-1.886-.32-1.65Z' />
     <path d='M66.553 64.326c1.982.296 3.648.172 4.195-.308.758-.667.161-1.805-1.136-2.087-8.595-1.912-19.049-2.297-19.037-.724.013 1.544 1.374 1.93 8.645 2.458 3.2.244 6.498.537 7.333.661Z' />
     <path d='M66.256 76.686c-5.334-3.466-16.088-8.873-17.274-8.661-.824.134-.155 1.934.962 2.561l4.18 2.307c6.43 3.549 14.774 7.532 15.123 7.225.7-.642-.112-1.565-2.991-3.432Z' />
-  </svg>
-);
-
-const StarIndicator = ({ ...props }) => (
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    width={16}
-    height={16}
-    viewBox='0 0 16 16'
-    fill='#F489A9'
-    {...props}
-  >
-    <path d='M7.787.19c.03-.253.396-.253.426 0l.252 2.121a5.97 5.97 0 0 0 5.224 5.224l2.121.252c.253.03.253.396 0 .426l-2.121.252a5.97 5.97 0 0 0-5.224 5.224l-.252 2.121c-.03.253-.396.253-.426 0l-.252-2.121A5.97 5.97 0 0 0 2.31 8.465L.19 8.213c-.253-.03-.253-.396 0-.426l2.121-.252A5.97 5.97 0 0 0 7.535 2.31z' />
   </svg>
 );

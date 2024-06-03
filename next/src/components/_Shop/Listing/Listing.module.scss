@@ -17,20 +17,25 @@
       justify-content: center;
       align-items: center;
       padding: 4px;
-      border-radius: 26px;
+      border-radius: 32px;
       border: 1.5px solid var(--primary-300, #fff6f9);
       li {
         display: grid;
       }
     }
     a {
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      img {
+        width: clamp(36px, calc(48vw / 7.68), 48px);
+        height: clamp(36px, calc(48vw / 7.68), 48px);
+        object-fit: cover;
+        border-radius: 50%;
+      }
       align-items: center;
       gap: 6px;
-      height: 44px;
-      line-height: 44px;
-      padding: 0 24px;
-      border-radius: 22px;
+      padding: 4px 16px 4px 4px;
+      border-radius: 28px;
       font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
       overflow: hidden;
       text-overflow: ellipsis;

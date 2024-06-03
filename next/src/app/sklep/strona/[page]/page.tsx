@@ -6,9 +6,10 @@ import Components, { Components_Query } from '@/components/Components';
 import Listing from '@/components/_Shop/Listing';
 import { ProductCard_Query } from '@/components/global/ProductCard';
 import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
-import type { ShopPaginationPageQueryTypes, ShopPaginationPageTypes } from './page.types';
+import { ImgDataQuery } from '@/components/ui/image';
+import type { ShopPageQueryTypes, ShopPageTypes } from '@/app/sklep/page.types';
 
-export default async function ShopPaginationPage({ params: { page } }: ShopPaginationPageTypes) {
+export default async function ShopPaginationPage({ params: { page = 1 } }: ShopPageTypes) {
   const {
     categories,
     totalProducts,
@@ -35,12 +36,12 @@ export default async function ShopPaginationPage({ params: { page } }: ShopPagin
   );
 }
 
-const query = async (currentPage: number): Promise<ShopPaginationPageQueryTypes> => {
+const query = async (currentPage: number): Promise<ShopPageQueryTypes> => {
   const OFFSET = ITEMS_PER_PAGE * (currentPage - 1);
   const PAGINATION_BEFORE = OFFSET;
   const PAGINATION_AFTER = OFFSET + ITEMS_PER_PAGE;
 
-  const data = await sanityFetch<ShopPaginationPageQueryTypes>({
+  const data = await sanityFetch<ShopPageQueryTypes>({
     query: /* groq */ `
       {
         "categories": *[_type == "ProductCategory_Collection"
@@ -50,6 +51,9 @@ const query = async (currentPage: number): Promise<ShopPaginationPageQueryTypes>
           name,
           "slug": slug.current,
           "postCount": count(*[_type == "Product_Collection" && references(^._id )]),
+          thumbnail {
+            ${ImgDataQuery}
+          },
         },
         "totalProducts": count(*[_type == "Product_Collection"]),
         "products": *[_type == "Product_Collection"] | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
@@ -74,10 +78,10 @@ const query = async (currentPage: number): Promise<ShopPaginationPageQueryTypes>
   return data;
 };
 
-export async function generateMetadata({ params: { page } }: ShopPaginationPageTypes) {
+export async function generateMetadata({ params: { page } }: ShopPageTypes) {
   return await QueryMetadata({
     name: 'Shop_Page',
-    path: page == 1 ? '/sklep' : `/sklep/strona/${page}`,
+    path: `/sklep${page == 1 && `/strona/${page}`}`,
     titleSuffix: ` - Strona ${page}`,
   });
 }
@@ -85,8 +89,8 @@ export async function generateMetadata({ params: { page } }: ShopPaginationPageT
 export async function generateStaticParams(): Promise<{ page: string }[]> {
   const totalProducts = await sanityFetch<number>({
     query: /* groq */ `
-      count(*[_type == "Product_Collection"])
-    `,
+      count(* [_type == "Product_Collection"])
+      `,
     tags: ['Product_Collection'],
   });
 

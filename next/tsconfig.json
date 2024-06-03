@@ -24,7 +24,8 @@
       "@/utils/*": ["./src/utils/*"],
       "@/assets/*": ["./src/assets/*"],
       "@/public/*": ["./public/*"],
-      "@/emails/*": ["./emails/*"]
+      "@/emails/*": ["./emails/*"],
+      "@/app/*": ["./src/app/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "noUncheckedIndexedAccess": true

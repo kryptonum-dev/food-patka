@@ -1,13 +1,39 @@
 import type { ComponentTypes } from '@/components/Components';
 import type { ProductCardTypes } from '@/components/global/ProductCard';
+import type { ImgDataTypes } from '@/components/ui/image';
+
+export type ShopPageTypes = {
+  params: {
+    page: number;
+    mainCategorySlug: string;
+    subCategorySlug: string;
+  };
+};
 
 export type ShopPageQueryTypes = {
   categories: {
     name: string;
     slug: string;
     postCount: number;
+    thumbnail: ImgDataTypes;
   }[];
-  totalPosts: number;
+  mainCategory: {
+    name: string;
+    slug: string;
+    header: {
+      heading: string;
+      paragraph: string;
+    };
+  };
+  subCategory: {
+    name: string;
+    slug: string;
+    header: {
+      heading: string;
+      paragraph: string;
+    };
+  };
+  totalProducts: number;
   products: ProductCardTypes[];
   pageContent: {
     header: {

@@ -5,6 +5,7 @@ import Components, { Components_Query } from '@/components/Components';
 import Listing from '@/components/_Shop/Listing';
 import { ProductCard_Query } from '@/components/global/ProductCard';
 import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
+import { ImgDataQuery } from '@/components/ui/image';
 import type { ShopPageQueryTypes } from './page.types';
 
 const currentPath = '/sklep';
@@ -15,7 +16,7 @@ const breadcrumbs = [
 export default async function ShopPage() {
   const {
     categories,
-    totalPosts,
+    totalProducts,
     products,
     pageContent,
   } = await query();
@@ -28,7 +29,7 @@ export default async function ShopPage() {
         paragraph={pageContent.header.paragraph}
         categories={categories}
         products={products}
-        totalPages={Math.ceil(totalPosts / ITEMS_PER_PAGE)}
+        totalPages={Math.ceil(totalProducts / ITEMS_PER_PAGE)}
         currentPage={1}
       />
       <Components data={pageContent.content} />
@@ -50,9 +51,12 @@ const query = async (currentPage: number = 1): Promise<ShopPageQueryTypes> => {
         ]{
           name,
           "slug": slug.current,
-          "postCount": count(*[_type == "Product_Collection" && references(^._id )]),
+          "postCount": count(*[_type == "Product_Collection" && (references(^._id) || category -> mainCategory -> _id == ^._id)]),
+          thumbnail {
+            ${ImgDataQuery}
+          },
         },
-        "totalPosts": count(*[_type == "Product_Collection"]),
+        "totalProducts": count(*[_type == "Product_Collection"]),
         "products": *[_type == "Product_Collection"] | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
           ${ProductCard_Query}
         },
