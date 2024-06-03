@@ -7,6 +7,10 @@ export type ProductTypes = {
   category: {
     name: string,
     slug: string;
+    mainCategory?: {
+      name: string;
+      slug: string;
+    };
   };
   hasVariants: boolean;
   variants?: {

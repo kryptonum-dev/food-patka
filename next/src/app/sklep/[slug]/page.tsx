@@ -24,11 +24,18 @@ export default async function ShopProductPage({
     description,
   } = await query(slug);
 
-  const breadcrumbsSchema = [
-    { name: 'Sklep', path: '/sklep' },
-    { name: category.name, path: `/sklep/kategoria/${category.slug}` },
-    { name: removeMarkdown(name), path: `/sklep/${slug}` },
-  ];
+  const breadcrumbsSchema = [{ name: 'Sklep', path: '/sklep' }];
+  if (category.mainCategory) {
+    breadcrumbsSchema.push(
+      { name: category.mainCategory.name, path: `/sklep/kategoria/${category.mainCategory.slug}` },
+      { name: category.name, path: `/sklep/kategoria/${category.mainCategory.slug}/${category.slug}` },
+    );
+  } else {
+    breadcrumbsSchema.push(
+      { name: category.name, path: `/sklep/kategoria/${category.slug}` },
+    );
+  }
+  breadcrumbsSchema.push({ name: removeMarkdown(name), path: `/sklep/${slug}` });
   const currentVariant = (hasVariants && variants && currentVariantParam) ? variants[currentVariantParam - 1] : null;
   if (currentVariant) {
     breadcrumbsSchema.push({
@@ -89,7 +96,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const collection = await sanityFetch<{ slug: string }[]>({
+  const products = await sanityFetch<{ slug: string }[]>({
     query: /* groq */ `
       *[_type == 'Product_Collection'] {
         "slug": slug.current,
@@ -98,7 +105,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
     tags: ['Product_Collection'],
   });
 
-  return collection.map(({ slug }) => ({
+  return products.map(({ slug }) => ({
     slug: slug,
   }));
 }

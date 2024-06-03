@@ -9,7 +9,11 @@ export const Product_Query = `
   url,
   category -> {
     name,
-    'slug': slug.current,
+    "slug": slug.current,
+    "mainCategory": mainCategory -> {
+      name,
+      "slug": slug.current,
+    },
   },
   hasVariants,
   variants[] {
@@ -25,6 +29,5 @@ export const Product_Query = `
   gallery[] {
     ${ImgDataQuery}
   },
-  
   ${Description_Query}
 `;
