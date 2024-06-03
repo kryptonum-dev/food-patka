@@ -57,12 +57,13 @@ const query = async ({
     query: /* groq */ `
       {
         "categories": *[_type == "ProductCategory_Collection"
-          && isSubcategory == false
+          && isSubcategory == true
           && count(*[_type == "Product_Collection" && references(^._id)]) > 0
+          && mainCategory -> slug.current == $mainCategory
         ]{
           name,
           "slug": slug.current,
-          "productCount": count(*[_type == "Product_Collection" && (references(^._id) || mainCategory -> _id == ^._id)]),
+          "productCount": count(*[_type == "Product_Collection" && (references(^._id) || mainCategory -> _id == ^._id)]) ,
           thumbnail {
             ${ImgDataQuery}
           },
