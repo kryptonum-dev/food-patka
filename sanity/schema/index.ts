@@ -15,12 +15,17 @@ import BlogPost_Collection from './collectionTypes/BlogPost_Collection';
 import Shop_Page from './singleTypes/Shop_Page';
 import ProductCategory_Collection from './collectionTypes/ProductCategory_Collection';
 import Product_Collection from './collectionTypes/Product_Collection';
+import CookieConsent, { CookieConsent_Details, CookieConsent_Details_List, CookieConsent_Details_List_Cookies } from './components/CookieConsent';
 
 export const schemaTypes = [
   cta,
   seo,
   global,
   Content,
+  CookieConsent,
+  CookieConsent_Details,
+  CookieConsent_Details_List,
+  CookieConsent_Details_List_Cookies,
 
   // Single types
   Index_Page,

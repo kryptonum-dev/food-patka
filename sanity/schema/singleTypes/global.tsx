@@ -220,11 +220,11 @@ export const global = defineType({
       fields: OrganizationSchema,
       options: { collapsible: true, collapsed: true },
     }),
-    // {
-    //   name: 'CookieConsent',
-    //   type: 'CookieConsent',
-    //   title: 'Baner z informacją o ciasteczkach',
-    // },
+    {
+      name: 'CookieConsent',
+      type: 'CookieConsent',
+      title: 'Baner z informacją o ciasteczkach',
+    },
   ],
   preview: {
     prepare: () => ({
