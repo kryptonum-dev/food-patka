@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import Stripe from 'stripe';
+import sanityFetch from '@/utils/sanity.fetch';
 import SendPromoCode from '@/emails/send-promo-code';
 import type { RequestTypes } from './route.types';
 
@@ -10,6 +11,10 @@ const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
+  const { isPromoCodeAfterPurchase } = await query();
+
+  if (!isPromoCodeAfterPurchase) return null;
+
   if (request.headers.get('x-forwarded-for') !== '138.68.104.42') {
     return NextResponse.json({
       success: false,
@@ -66,4 +71,15 @@ export async function POST(request: Request) {
       message: 'Something went wrong with generating promo code or with sending it via email, or with adding newsletter subscription.'
     }, { status: 500 });
   }
+}
+
+async function query(): Promise<{ isPromoCodeAfterPurchase: boolean; }> {
+  return await sanityFetch<{ isPromoCodeAfterPurchase: boolean; }>({
+    query: /* groq */ `
+      *[_id == "global"][0] {
+        isPromoCodeAfterPurchase,
+      }
+    `,
+    tags: ['global'],
+  });
 }
