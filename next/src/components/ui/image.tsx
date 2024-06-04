@@ -52,12 +52,12 @@ export const ImgDataQuery = `
 `;
 
 export default function Img({ data, src, width, height, alt, sizes, priority, ...props }: ImageTypes) {
-  const placeholder = data?.asset.metadata?.lqip || defaultPlaceholder;
+  const placeholder = data?.asset?.metadata?.lqip || defaultPlaceholder;
   if (data) {
     src = data.asset.url;
-    width = width || data.asset.metadata.dimensions.width;
-    height = height || data.asset.metadata.dimensions.height;
-    alt = alt || data.asset.altText;
+    width = width || data.asset?.metadata?.dimensions?.width;
+    height = height || data.asset?.metadata?.dimensions?.height;
+    alt = alt || data.asset?.altText;
   }
 
   return (
