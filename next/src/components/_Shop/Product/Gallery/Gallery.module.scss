@@ -35,6 +35,9 @@
         transition: transform 0.3s var(--easing);
       }
       &[aria-current='true'] {
+        img {
+          transform: translateY(-3px);
+        }
         &::before {
           transform: scaleY(1);
         }
@@ -43,6 +46,7 @@
         width: clamp(52px, calc(80vw / 7.68), 80px);
         height: clamp(52px, calc(80vw / 7.68), 80px);
         object-fit: cover;
+        transition: transform 0.3s var(--easing);
       }
     }
   }

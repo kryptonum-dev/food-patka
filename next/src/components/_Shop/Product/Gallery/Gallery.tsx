@@ -1,39 +1,44 @@
 'use client';
-import { useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 import Img from '@/components/ui/image';
 import styles from './Gallery.module.scss';
+import { usePagination, useNavigation } from '@/components/global/Carousel';
+import '@/components/global/Carousel/embla.scss';
 import type { GalleryTypes } from './Gallery.types';
 
 export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon, className }: GalleryTypes) {
-  const [preview, setPreview] = useState(0);
-  const handleChange = (direction: number) => setPreview((preview + direction + data.length) % data.length);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', skipSnaps: true, loop: true });
+  const { selectedIndex, onDotButtonClick } = usePagination(emblaApi);
+  const { onPrevButtonClick, onNextButtonClick } = useNavigation(emblaApi);
 
   return (
     <div className={`${styles['Gallery']} ${className}`}>
-      <div className={styles.preview}>
-        {data.map((img, i) => (
-          <Img
-            data={img}
-            sizes='(max-width: 539px) 100vw, 485px'
-            key={i}
-            priority={i === 0}
-            style={{
-              display: i !== preview ? 'none' : undefined,
-            }}
-          />
-        ))}
+      <div className={`embla ${styles.preview}`}>
+        <div className="embla__viewport" ref={emblaRef}>
+          <div className="embla__container">
+            {data.map((img, i) => (
+              <Img
+                className='embla__slide'
+                data={img}
+                sizes='(max-width: 539px) 100vw, 485px'
+                key={i}
+                priority={i === 0}
+              />
+            ))}
+          </div>
+        </div>
         {data.length > 1 && (
           <>
             <button
               aria-label='Poprzednie zdjęcie'
-              onClick={() => handleChange(-1)}
+              onClick={onPrevButtonClick}
               className={`${styles.navigation} ${styles.prev}`}
             >
               {ArrowLeftIcon}
             </button>
             <button
               aria-label='Następne zdjęcie'
-              onClick={() => handleChange(1)}
+              onClick={onNextButtonClick}
               className={`${styles.navigation} ${styles.next}`}
             >
               {ArrowRightIcon}
@@ -46,8 +51,8 @@ export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon, className
           {data.map((img, i) => (
             <button
               key={i}
-              onClick={() => setPreview(i)}
-              aria-current={i === preview ? 'true' : undefined}
+              onClick={() => onDotButtonClick(i)}
+              aria-current={i === selectedIndex ? 'true' : undefined}
               aria-label={`Zobacz ${i + 1} zdjęcie`}
             >
               <Img data={img} sizes='80px' key={i} />
