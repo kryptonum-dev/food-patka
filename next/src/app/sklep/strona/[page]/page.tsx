@@ -96,7 +96,7 @@ export async function generateStaticParams(): Promise<{ page: string }[]> {
 
   const totalPages = Math.ceil(totalProducts / ITEMS_PER_PAGE);
 
-  return Array.from({ length: totalPages }, (_, i) => ({
-    page: (i + 1).toString(),
+  return Array.from({ length: totalPages - 1 }, (_, i) => ({
+    page: (i + 2).toString(),
   }));
 }
