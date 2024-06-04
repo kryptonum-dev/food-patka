@@ -13,7 +13,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   const { isPromoCodeAfterPurchase } = await query();
 
-  if (!isPromoCodeAfterPurchase) return null;
+  if (!isPromoCodeAfterPurchase) return;
 
   if (request.headers.get('x-forwarded-for') !== '138.68.104.42') {
     return NextResponse.json({
