@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-import { redirects } from './redirects';
+import { redirects } from './redirects.ts';
 
 const nextConfig = {
   productionBrowserSourceMaps: true,
