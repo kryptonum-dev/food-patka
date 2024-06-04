@@ -17,6 +17,8 @@
     overflow: hidden;
     z-index: -1;
     img {
+      aspect-ratio: 381 / 259;
+      object-fit: cover;
       height: calc(100% + 5px);
       transition: transform 0.5s var(--easing);
     }
