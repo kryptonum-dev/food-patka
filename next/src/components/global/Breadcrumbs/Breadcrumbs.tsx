@@ -8,7 +8,7 @@ export default function Breadcrumbs({ data = [], visible = true }: BreadcrumbsTy
   data = [
     {
       name: 'Strona główna',
-      path: '',
+      path: '/',
     },
     ...data,
   ];
