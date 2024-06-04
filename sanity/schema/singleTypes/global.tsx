@@ -220,11 +220,17 @@ export const global = defineType({
       fields: OrganizationSchema,
       options: { collapsible: true, collapsed: true },
     }),
-    {
+    defineField({
       name: 'CookieConsent',
       type: 'CookieConsent',
       title: 'Baner z informacją o ciasteczkach',
-    },
+    }),
+    defineField({
+      name: 'isPromoCodeAfterPurchase',
+      type: 'boolean',
+      title: 'Czy wysyłać kod 10% promocyjny po udanym zakupie z koszyka EasyCart?',
+      description: 'Jeśli zaznaczysz tą opcje, każda osoba, która zakupi produkt z koszyka EasyCart, otrzyma jednorazowy kod rabatowy 10% na kolejne zakupy',
+    })
   ],
   preview: {
     prepare: () => ({
