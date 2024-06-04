@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import { redirects } from './redirects';
 
 const nextConfig = {
   productionBrowserSourceMaps: true,
@@ -11,6 +12,9 @@ const nextConfig = {
         pathname: '**',
       },
     ],
+  },
+  async redirects() {
+    return redirects;
   },
 };
 
