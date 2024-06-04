@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from './Pagination.module.scss';
 import type { PaginationTypes } from './Pagination.types';
 
-export const ITEMS_PER_PAGE = 2;
+export const ITEMS_PER_PAGE = 9;
 
 export default function Pagination({
   currentPage,
