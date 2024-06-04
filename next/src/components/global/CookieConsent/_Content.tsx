@@ -7,6 +7,11 @@ import { getCookie } from '@/utils/get-cookie';
 import { setCookie } from '@/utils/set-cookie';
 import type { ContentProps } from './CookieConsent.types';
 
+window.dataLayer = window.dataLayer || [];
+function gtag(...args: unknown[]) {
+  window.dataLayer?.push(args);
+}
+
 const cookieObjectKeys = ['preferences', 'statistics', 'marketing'];
 
 type CookiesObject = {
