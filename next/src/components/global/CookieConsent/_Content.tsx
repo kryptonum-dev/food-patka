@@ -7,6 +7,8 @@ import { getCookie } from '@/utils/get-cookie';
 import { setCookie } from '@/utils/set-cookie';
 import type { ContentProps } from './CookieConsent.types';
 
+declare const window: Window & { dataLayer: Record<string, unknown>[]; };
+
 const cookieObjectKeys = ['preferences', 'statistics', 'marketing'];
 
 type CookiesObject = {
@@ -21,7 +23,6 @@ const activeCookiesObject: CookiesObject = cookieObjectKeys.reduce((acc, name) =
 }, {} as CookiesObject);
 
 export default function Content({ CloseIcon, heading, paragraph, details }: ContentProps) {
-  window.dataLayer = window.dataLayer || [];
   function gtag(...args: unknown[]) {
     window.dataLayer?.push(args);
   }
