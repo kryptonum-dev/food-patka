@@ -3,6 +3,7 @@ import Newsletter from './Newsletter';
 import styles from './Footer.module.scss';
 import getLegalLink from '@/components/ui/get-legal-link';
 import type { FooterQueryTypes } from './Footer.types';
+import CookieButton from './_CookieButton';
 
 export default async function Footer() {
   const { footer } = await query();
@@ -40,7 +41,7 @@ export default async function Footer() {
               >
                 Regulamin
               </a>
-              <button className="link">Zarządzaj ciasteczkami</button>
+              <CookieButton />
             </div>
           </div>
         </div>
