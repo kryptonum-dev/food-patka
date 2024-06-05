@@ -66,6 +66,7 @@ export default defineType({
       type: 'boolean',
       title: 'Czy produkt posiada warianty?',
       description: 'Jeśli produkt posiada warianty, zaznacz tę opcję. Zostaną wyświetlone prawidłowe pola do ich konfiguracji.',
+      initialValue: false,
     }),
     defineField({
       name: 'variants',
