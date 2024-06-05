@@ -66,15 +66,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
     })),
     ...blogCategories.map(({ slug }) => ({
-      url: `${DOMAIN}/${slug}`,
+      url: `${DOMAIN}/blog/kategoria/${slug}`,
       lastModified: new Date(),
     })),
     ...blogPosts.map(({ slug }) => ({
-      url: `${DOMAIN}/${slug}`,
+      url: `${DOMAIN}/blog/${slug}`,
       lastModified: new Date(),
     })),
     ...products.map(({ slug }) => ({
-      url: `${DOMAIN}/${slug}`,
+      url: `${DOMAIN}/sklep/${slug}`,
       lastModified: new Date(),
     })),
     ...productsPagination.map(({ slug }) => ({
