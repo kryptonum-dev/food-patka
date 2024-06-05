@@ -20,13 +20,13 @@ export const QueryMetadata = async ({
 }: QueryMetadataTypes): Promise<Metadata> => {
   const customQuery = dynamicSlug ? `*[_type == '${name}' && slug.current == $slug][0]` : `*[_id == "${name}"][0]`;
 
-  const { title, description, img } = await query(customQuery, name, dynamicSlug);
+  const { title, description, openGraphImage } = await query(customQuery, name, dynamicSlug);
 
   return Seo({
     title: title + titleSuffix,
     description,
     path: path,
-    img,
+    ...openGraphImage?.url && { openGraphImage },
   });
 };
 
@@ -36,7 +36,10 @@ const query = async (customQuery: string, tag: string, dynamicSlug?: string): Pr
       ${customQuery} {
         "title": seo.title,
         "description": seo.description,
-        "img": seo.img.asset -> url + "?w=1200"
+        "openGraphImage": {
+          "url": seo.img.asset -> url + "?w=1200",
+          "height": round(1200 / seo.img.asset -> metadata.dimensions.aspectRatio),
+        },
       }
     `,
     tags: [tag],

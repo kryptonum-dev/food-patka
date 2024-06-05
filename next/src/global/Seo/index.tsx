@@ -3,16 +3,18 @@ import { DEFAULT_TITLE, DOMAIN, LOCALE } from '@/global/constants';
 import type { Metadata } from 'next';
 import type { GlobalQueryTypes, SeoTypes } from './Seo.types';
 
-const Seo = async ({ title, description, path, img, ...props }: SeoTypes): Promise<Metadata> => {
-  const { og_Img } = await query();
+export default async function Seo({ title, description, path, openGraphImage, ...props }: SeoTypes): Promise<Metadata> {
+  const { globalOpenGraphImage } = await query();
 
   const url = `${DOMAIN}${path}`;
+
+  console.log(openGraphImage);
 
   const seo = {
     title: title || DEFAULT_TITLE,
     description: description || '',
     url,
-    ogImage: img || og_Img || '',
+    image: openGraphImage || globalOpenGraphImage,
   };
 
   const metadata: Metadata = {
@@ -29,9 +31,9 @@ const Seo = async ({ title, description, path, img, ...props }: SeoTypes): Promi
       url: seo.url,
       images: [
         {
-          url: seo.ogImage,
+          url: seo.image.url,
           width: 1200,
-          height: 630,
+          height: seo.image.height,
         },
       ],
       locale: LOCALE,
@@ -40,15 +42,16 @@ const Seo = async ({ title, description, path, img, ...props }: SeoTypes): Promi
     ...props,
   };
   return metadata;
-};
-
-export default Seo;
+}
 
 const query = async (): Promise<GlobalQueryTypes> => {
   return await sanityFetch<GlobalQueryTypes>({
     query: /* groq */ `
       *[_id == "global"][0] {
-        "og_Img": seo.og_Img.asset -> url+"?w=1200"
+        "globalOpenGraphImage": {
+          "url": seo.og_Img.asset -> url + "?w=1200",
+          "height": round(1200 / seo.og_Img.asset -> metadata.dimensions.aspectRatio),
+        }
       }
     `,
     tags: ['global'],

@@ -7,19 +7,24 @@ export type QueryMetadataTypes = {
   titleSuffix?: string;
 };
 
+type OpenGraphImageTypes = {
+  url: string;
+  height: number;
+};
+
 export type QueryTypes = {
   title: string;
   description: string;
-  img?: string;
+  openGraphImage?: OpenGraphImageTypes;
 };
 
 export type SeoTypes = {
   title: string;
   description: string;
   path: string;
-  img?: string;
+  openGraphImage?: OpenGraphImageTypes;
 } & Metadata;
 
 export type GlobalQueryTypes = {
-  og_Img: string;
+  globalOpenGraphImage: OpenGraphImageTypes
 };
