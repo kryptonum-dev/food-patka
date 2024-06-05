@@ -29,5 +29,11 @@ export default defineType({
         Rule.required()
       ],
     }),
+    defineField({
+      name: 'img',
+      type: 'image',
+      title: 'Social Share Image (opcjonalne)',
+      description: 'Social Share Image to zdjęcie, które pojawia się np. podczas udostępniania linku w mediach społecznościowych. ',
+    }),
   ],
 });
