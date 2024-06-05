@@ -5,6 +5,7 @@ import CommunityTrust from "./CommunityTrust";
 import HighlightedSection from "./HighlightedSection";
 import OrderedList from "./OrderedList";
 import InfoTile from "./InfoTile";
+import YummyWishes from "./YummyWishes";
 
 const title = 'Sklep – Produkty';
 const icon = () => '📦';
@@ -241,6 +242,7 @@ export default defineType({
         HighlightedSection,
         OrderedList,
         InfoTile,
+        YummyWishes,
       ],
       title: 'Opis produktu',
       validation: Rule => Rule.required(),
