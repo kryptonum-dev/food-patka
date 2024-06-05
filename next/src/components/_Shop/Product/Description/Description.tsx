@@ -5,6 +5,7 @@ import HighlightedSection, { type HighlightedSectionTypes } from './HighlightedS
 import CommunityTrust, { type CommunityTrustTypes } from './CommunityTrust';
 import OrderedList, { type OrderedListTypes } from './OrderedList';
 import InfoTile, { type InfoTileTypes } from './InfoTile';
+import YummyWishes, { type YummyWishesTypes } from './YummyWishes';
 import styles from './Description.module.scss';
 import type { DescriptionTypes } from './Description.types';
 
@@ -30,6 +31,7 @@ const components = {
     HighlightedSection: ({ value }: { value: HighlightedSectionTypes }) => <HighlightedSection {...value} />,
     OrderedList: ({ value }: { value: OrderedListTypes }) => <OrderedList {...value} />,
     InfoTile: ({ value }: { value: InfoTileTypes }) => <InfoTile {...value} />,
+    YummyWishes: ({ value }: { value: YummyWishesTypes }) => <YummyWishes {...value} />,
   }
 } as Partial<PortableTextReactComponents>;
 
