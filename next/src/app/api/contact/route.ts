@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
   try {
     await resend.emails.send({
-      from: `${name} <formularz@foodpatka.pl>`,
+      from: `${name} przez Formularz <formularz@foodpatka.pl>`,
       to: 'patrycja@foodpatka.pl',
       reply_to: `${name} <${email}>`,
       subject: `${name} przesyła wiadomość przez formularz kontaktowy`,
