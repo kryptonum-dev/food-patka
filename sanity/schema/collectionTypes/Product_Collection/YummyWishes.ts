@@ -28,7 +28,7 @@ export default defineField({
       type: 'markdown',
       title: 'Nagłówek',
       validation: Rule => Rule.required(),
-      initialValue: 'Życzę smacznego 😊',
+      initialValue: 'Życzę smacznego 😊',
     }),
     defineField({
       name: 'paragraph',
