@@ -6,11 +6,6 @@ import type { RequestTypes } from './route.types';
 
 const resend = new Resend(process.env.RESEND_API_TOKEN);
 
-const emailData = {
-  from: 'FoodPatka <patrycja@foodpatka.pl>',
-  to: 'bogumil@kryptonum.eu',
-};
-
 export async function POST(request: Request) {
   const req = await request.json() as RequestTypes;
   const { name, email, message, legal } = req;
@@ -30,8 +25,8 @@ export async function POST(request: Request) {
 
   try {
     await resend.emails.send({
-      from: emailData.from,
-      to: emailData.to,
+      from: `${name} <formularz@foodpatka.pl>`,
+      to: 'patrycja@foodpatka.pl',
       reply_to: `${name} <${email}>`,
       subject: `${name} przesyła wiadomość przez formularz kontaktowy`,
       html: body,
