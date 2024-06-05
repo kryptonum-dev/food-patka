@@ -47,7 +47,7 @@ const query = async (currentPage: number = 1): Promise<ShopPageQueryTypes> => {
       {
         "categories": *[_type == "ProductCategory_Collection"
           && isSubcategory == false
-          && count(*[_type == "Product_Collection" && references(^._id)]) > 0
+          && count(*[_type == "Product_Collection" && (references(^._id) || category -> mainCategory -> _id == ^._id)]) > 0
         ]{
           name,
           "slug": slug.current,
