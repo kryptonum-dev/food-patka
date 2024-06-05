@@ -43,11 +43,9 @@ export default function SendPromoCode({ name, code }: SendPromoCodeTypes) {
               alt="FoodPatka"
             />
           </Link>
-          <Heading style={h1}>{name}, oto Twój kod rabatowy</Heading>
-          <Text style={{ ...text }}>W ramach podziękowania, za zakupy w moim sklepie, otrzymujesz ode mnie kod rabatowy! Możesz go wykorzystać przez okres następnych 3 miesięcy. Kod jest ważny tylko na jedno zamówienie.</Text>
-          <Text style={{ ...text, marginBottom: '14px' }}>
-            Oto Twój unikalny kod rabatowy:
-          </Text>
+          <Heading style={h1}>{name}, otrzymujesz kod rabatowy na zakupy w sklepie FoodPatka!</Heading>
+          <Text style={{ ...text }}>Mam dla Ciebie specjalny kod rabatowy w wysokości 10% na kolejne zakupy. Możesz wykorzystać go w ciągu 3. miesięcy od otrzymania tego maila – wystarczy, że wpiszesz poniższy kod podczas finalizacji zamówienia.</Text>
+          <Text style={{ ...text, marginBottom: '14px' }}>Oto Twój unikalny kod rabatowy:</Text>
           <code style={{
             fontSize: '18px',
             fontFamily: 'monospace',
