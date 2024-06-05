@@ -37,7 +37,7 @@ export async function POST(request: Request) {
 
   try {
     const { code } = await stripe.promotionCodes.create({
-      coupon: 'wsJNbjk8',
+      coupon: 'jBOzfLLF',
       max_redemptions: 1,
       // expires_at: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 90, // 90 days
       expires_at: Math.floor(Date.now() / 1000) + 5 * 60 // 5 minutes for testing
