@@ -82,7 +82,7 @@ const query = async ({
         "products": *[_type == "Product_Collection"
           && (category -> slug.current == $mainCategory
           || category -> mainCategory -> slug.current == $mainCategory)
-        ] | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER]
+        ] | order(_updatedAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER]
           {
             ${ProductCard_Query}
         },

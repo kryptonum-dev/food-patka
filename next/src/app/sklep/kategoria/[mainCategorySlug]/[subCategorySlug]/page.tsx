@@ -87,7 +87,7 @@ const query = async ({
         }[0],
         "totalProducts": count(*[_type == "Product_Collection" && category -> slug.current == $subCategory]),
         "products": *[_type == "Product_Collection" && category -> slug.current == $subCategory]
-          | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
+          | order(_updatedAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
             ${ProductCard_Query}
         },
         "pageContent": *[_type == "Shop_Page"][0] {

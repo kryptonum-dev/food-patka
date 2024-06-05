@@ -57,7 +57,7 @@ const query = async (currentPage: number = 1): Promise<ShopPageQueryTypes> => {
           },
         },
         "totalProducts": count(*[_type == "Product_Collection"]),
-        "products": *[_type == "Product_Collection"] | order(_createdAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
+        "products": *[_type == "Product_Collection"] | order(_updatedAt desc) [$PAGINATION_BEFORE...$PAGINATION_AFTER] {
           ${ProductCard_Query}
         },
         "pageContent": *[_type == "Shop_Page"][0] {
