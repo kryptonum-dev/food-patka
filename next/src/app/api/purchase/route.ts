@@ -3,9 +3,8 @@ import { Resend } from 'resend';
 import Stripe from 'stripe';
 import sanityFetch from '@/utils/sanity.fetch';
 import SendPromoCode from '@/emails/send-promo-code';
+import { DOMAIN } from '@/global/constants';
 import type { RequestTypes } from './route.types';
-
-const DOMAIN = 'https://food-patka-git-dev-kryptonum.vercel.app'; // TODO: Change to production domain
 
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -39,8 +38,7 @@ export async function POST(request: Request) {
     const { code } = await stripe.promotionCodes.create({
       coupon: 'jBOzfLLF',
       max_redemptions: 1,
-      // expires_at: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 90, // 90 days
-      expires_at: Math.floor(Date.now() / 1000) + 5 * 60 // 5 minutes for testing
+      expires_at: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 90, // 90 days
     });
 
     await resend.emails.send({
