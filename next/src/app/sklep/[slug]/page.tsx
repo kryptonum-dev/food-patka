@@ -5,6 +5,7 @@ import { QueryMetadata } from '@/global/Seo/query-metadata';
 import { removeMarkdown } from '@/utils/remove-markdown';
 import Product, { Product_Query } from '@/components/_Shop/Product';
 import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
+import Components, { Components_Query } from '@/components/Components';
 
 export default async function ShopProductPage({
   params: { slug },
@@ -22,6 +23,7 @@ export default async function ShopProductPage({
     omnibus,
     gallery,
     description,
+    content: pageContent,
   } = await query(slug);
 
   const breadcrumbsSchema = [{ name: 'Sklep', path: '/sklep' }];
@@ -62,6 +64,7 @@ export default async function ShopProductPage({
           description,
         }}
       />
+      <Components data={pageContent} />
     </>
   );
 }
@@ -71,6 +74,7 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
     query: /* groq */ `
       *[_type == "Product_Collection" && $slug == slug.current][0] {
         ${Product_Query}
+        ${Components_Query}
       }
     `,
     params: { slug },

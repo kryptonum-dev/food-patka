@@ -1,3 +1,4 @@
+import type { ComponentTypes } from '@/components/Components';
 import type { ProductTypes } from '@/components/_Shop/Product';
 
 export type ShopProductPageTypes = {
@@ -9,4 +10,6 @@ export type ShopProductPageTypes = {
   };
 };
 
-export type ShopProductPageQueryTypes = Omit<ProductTypes, 'currentVariantParam'>;
+export type ShopProductPageQueryTypes = Omit<ProductTypes, 'currentVariantParam'> & {
+  content: ComponentTypes[];
+};
