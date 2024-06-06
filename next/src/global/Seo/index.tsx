@@ -8,8 +8,6 @@ export default async function Seo({ title, description, path, openGraphImage, ..
 
   const url = `${DOMAIN}${path}`;
 
-  console.log(openGraphImage);
-
   const seo = {
     title: title || DEFAULT_TITLE,
     description: description || '',

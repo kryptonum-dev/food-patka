@@ -1,6 +1,8 @@
 .Gallery {
+  min-width: 0;
   max-width: 485px;
   margin: 0 auto;
+  width: 100%;
   .preview {
     position: relative;
     border-radius: 20px;
