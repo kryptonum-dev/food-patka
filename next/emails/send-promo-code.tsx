@@ -1,8 +1,7 @@
+import { DOMAIN } from '@/global/constants';
 import {
   Body, Container, Font, Head, Heading, Hr, Html, Img, Link, Preview, Text
 } from '@react-email/components';
-
-const DOMAIN = 'https://food-patka-git-dev-kryptonum.vercel.app';
 
 type SendPromoCodeTypes = {
   name: string;
