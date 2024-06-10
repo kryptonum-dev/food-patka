@@ -15,6 +15,22 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        has: [
+          {
+            type: 'query',
+            key: 'download_file',
+          },
+          {
+            type: 'query',
+            key: 'order',
+          },
+        ],
+        destination: 'https://legacy.foodpatka.pl/:path*',
+        permanent: false,
+      },
+
+      {
         source: '/najlepsze-przepisy-na-zdrowe-sniadanie-top-5',
         destination: '/blog',
         permanent: true,
