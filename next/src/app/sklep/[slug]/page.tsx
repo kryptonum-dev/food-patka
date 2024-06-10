@@ -4,8 +4,9 @@ import Breadcrumbs from '@/components/global/Breadcrumbs';
 import { QueryMetadata } from '@/global/Seo/query-metadata';
 import { removeMarkdown } from '@/utils/remove-markdown';
 import Product, { Product_Query } from '@/components/_Shop/Product';
-import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
 import Components, { Components_Query } from '@/components/Components';
+import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
+import Analytics from './Analytics';
 
 export default async function ShopProductPage({
   params: { slug },
@@ -24,6 +25,7 @@ export default async function ShopProductPage({
     gallery,
     description,
     content: pageContent,
+    analytics,
   } = await query(slug);
 
   const breadcrumbsSchema = [{ name: 'Sklep', path: '/sklep' }];
@@ -65,6 +67,10 @@ export default async function ShopProductPage({
         }}
       />
       <Components data={pageContent} />
+      <Analytics
+        item_name={analytics.item_name}
+        item_id={analytics.item_id}
+      />
     </>
   );
 }
@@ -75,6 +81,10 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
       *[_type == "Product_Collection" && $slug == slug.current][0] {
         ${Product_Query}
         ${Components_Query}
+        analytics {
+          item_name,
+          item_id,
+        },
       }
     `,
     params: { slug },

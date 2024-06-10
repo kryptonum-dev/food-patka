@@ -12,4 +12,8 @@ export type ShopProductPageTypes = {
 
 export type ShopProductPageQueryTypes = Omit<ProductTypes, 'currentVariantParam'> & {
   content: ComponentTypes[];
+  analytics: {
+    item_name: string;
+    item_id: string;
+  };
 };

@@ -19,7 +19,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <CookieConsent />
       </body>
-      {process.env.NODE_ENV === 'production' && <GoogleTagManager gtmId='GTM-KNPVL7L7' />}
+      {/* {process.env.NODE_ENV === 'production' && <GoogleTagManager gtmId='GTM-KNPVL7L7' />} */}
+      <GoogleTagManager gtmId='GTM-KNPVL7L7' />
     </html>
   );
 }
