@@ -260,6 +260,28 @@ export default defineType({
       title: 'SEO',
       group: 'seo',
     }),
+    defineField({
+      name: 'analytics',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'item_name',
+          type: 'string',
+          title: 'Nazwa produktu z EasyCart',
+          description: 'Główna nazwa produktu z panelu EasyCart.',
+          validation: Rule => Rule.required(),
+        }),
+        defineField({
+          name: 'item_id',
+          type: 'string',
+          title: 'ID produktu',
+          description: 'ID produktu z EasyCart. Znajdziesz go w linku (adresie URL) podczas edycji produktu w panelu EasyCart. Przykład: f89a1a56-7b42-4578-a103-f4aa482c664c.',
+          validation: Rule => Rule.required(),
+        }),
+      ],
+      title: 'Analityka',
+      group: 'analytics',
+    }),
   ],
   preview: {
     select: {
@@ -284,6 +306,10 @@ export default defineType({
     {
       name: 'seo',
       title: 'SEO',
+    },
+    {
+      name: 'analytics',
+      title: 'Analytics',
     },
   ],
 });
