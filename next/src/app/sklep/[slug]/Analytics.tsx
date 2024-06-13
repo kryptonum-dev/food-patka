@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import { sendGTMEvent } from '@next/third-parties/google';
 
 export default function Analytics({
-  item_name,
   item_id,
+  item_name,
 }: {
-  item_name: string;
   item_id: string;
-}) {
+  item_name: string;
+  }) {
   useEffect(() => {
     if (!item_name || !item_id) return;
 
@@ -16,8 +16,8 @@ export default function Analytics({
       event: 'view_item',
       items: [
         {
-          item_name: item_name,
           item_id: item_id,
+          item_name: item_name,
           quantity: 1,
         },
       ],

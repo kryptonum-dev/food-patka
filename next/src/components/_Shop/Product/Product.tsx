@@ -17,6 +17,8 @@ export default function Product({
   currentVariantParam,
   gallery,
   description,
+  content_id,
+  content_name,
 }: Omit<ProductTypes, 'category'>) {
   return (
     <section className={styles['Product']}>
@@ -28,6 +30,8 @@ export default function Product({
       />
       <Info
         className={styles.Info}
+        content_id={content_id}
+        content_name={content_name}
         {...{
           name,
           url,

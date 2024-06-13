@@ -65,11 +65,13 @@ export default async function ShopProductPage({
           currentVariantParam,
           description,
         }}
+        content_id={analytics.item_id}
+        content_name={analytics.item_name}
       />
       <Components data={pageContent} />
       <Analytics
-        item_name={analytics.item_name}
         item_id={analytics.item_id}
+        item_name={analytics.item_name}
       />
     </>
   );
