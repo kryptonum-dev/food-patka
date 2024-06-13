@@ -6,6 +6,8 @@ import SendPromoCode from '@/emails/send-promo-code';
 import { DOMAIN } from '@/global/constants';
 import type { RequestTypes } from './route.types';
 
+const AUTHORIZED_IP = '138.68.104.42';
+
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -14,7 +16,7 @@ export async function POST(request: Request) {
 
   if (!isPromoCodeAfterPurchase) return;
 
-  if (request.headers.get('x-forwarded-for') !== '138.68.104.42') {
+  if (request.headers.get('x-forwarded-for') !== AUTHORIZED_IP) {
     return NextResponse.json({
       success: false,
       message: 'You are not authorized to access this endpoint'
@@ -25,12 +27,22 @@ export async function POST(request: Request) {
     event,
     customer_email,
     customer_first_name,
+    checkboxes: {
+      newsletter,
+    },
   } = await request.json() as RequestTypes;
 
-  if (event !== 'single_product_bought' || !customer_email || !customer_first_name) {
+  if (event !== 'single_product_bought') {
     return NextResponse.json({
       success: false,
-      message: 'Invalid request data'
+      message: 'Invalid event type'
+    }, { status: 400 });
+  }
+
+  if (!customer_email || !customer_first_name) {
+    return NextResponse.json({
+      success: false,
+      message: 'Missing required fields'
     }, { status: 400 });
   }
 
@@ -52,19 +64,26 @@ export async function POST(request: Request) {
       }),
     });
 
-    await fetch(`${DOMAIN}/api/newsletter`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: customer_first_name,
-        email: customer_email,
-        legal: true,
-      }),
-    });
+    if (newsletter) {
+      await fetch(`${DOMAIN}/api/newsletter`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: customer_first_name,
+          email: customer_email,
+          legal: true,
+        }),
+      });
+
+      return NextResponse.json({
+        success: true,
+        message: 'Promo code successfully generated and sent. Newsletter subscription added.',
+      }, { status: 200 });
+    }
 
     return NextResponse.json({
       success: true,
-      message: 'Promo code successfully generated and sent. Newsletter subscription added.',
+      message: 'Promo code successfully generated and sent.',
     }, { status: 200 });
   } catch {
     return NextResponse.json({
