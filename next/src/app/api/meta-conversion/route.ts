@@ -30,14 +30,18 @@ export async function POST(request: Request) {
             'user_data': {
               'client_ip_address': client_ip_address,
               'client_user_agent': client_user_agent,
-              'em': await hash(email),
+              ...email && {
+                'em': await hash(email),
+              }
             },
             'custom_data': {
               'content_ids': content_id,
               'content_name': content_name,
-              'value': content_price,
-              'currency': 'PLN',
-              'content_type': 'product'
+              'content_type': 'product',
+              ...content_price && {
+                'value': content_price,
+                'currency': 'PLN',
+              },
             },
           },
         ],
