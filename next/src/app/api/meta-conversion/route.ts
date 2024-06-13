@@ -45,7 +45,6 @@ export async function POST(request: Request) {
             },
           },
         ],
-        'test_event_code': 'TEST6627'
       }),
     });
     return NextResponse.json({
