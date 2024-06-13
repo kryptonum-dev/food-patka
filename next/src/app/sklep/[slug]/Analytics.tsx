@@ -1,6 +1,10 @@
 'use client';
 import { useEffect } from 'react';
-import { sendGTMEvent } from '@next/third-parties/google';
+
+window.dataLayer = window.dataLayer || [];
+function gtag(...args: unknown[]) {
+  window.dataLayer?.push(args);
+}
 
 export default function Analytics({
   item_id,
@@ -8,19 +12,17 @@ export default function Analytics({
 }: {
   item_id: string;
   item_name: string;
-  }) {
+}) {
   useEffect(() => {
     if (!item_name || !item_id) return;
-
-    sendGTMEvent({
-      event: 'view_item',
+    gtag('event', 'view_item', {
       items: [
         {
           item_id: item_id,
           item_name: item_name,
           quantity: 1,
         },
-      ],
+      ]
     });
   });
 
