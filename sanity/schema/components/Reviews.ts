@@ -36,7 +36,7 @@ export default defineField({
         },
       ],
       title: 'Lista opinii',
-      validation: Rule => Rule.required(),
+      validation: Rule => Rule.required().unique(),
     }),
   ],
   preview: {

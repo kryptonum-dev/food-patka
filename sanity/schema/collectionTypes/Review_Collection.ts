@@ -23,7 +23,7 @@ export default defineType({
         list: ['1', '2', '3', '4', '5']
       },
       title: 'Ocena',
-      validation: Rule => Rule.required().min(1).max(5),
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'product',
