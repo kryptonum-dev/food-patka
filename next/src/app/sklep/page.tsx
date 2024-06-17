@@ -20,7 +20,7 @@ export default async function ShopPage() {
     products,
     pageContent,
   } = await query();
-
+  
   return (
     <>
       <Breadcrumbs data={breadcrumbs} />

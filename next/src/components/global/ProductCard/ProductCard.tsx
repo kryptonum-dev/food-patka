@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import BuyButton from '@/components/ui/BuyButton';
 import Img from '@/components/ui/image';
 import Markdown from '@/components/ui/markdown';
-import Button from '@/components/ui/Button';
 import styles from './ProductCard.module.scss';
 import { removeMarkdown } from '@/utils/remove-markdown';
 import type { ProductCardTypes } from './ProductCard.types';
+import ReviewScore from '@/components/ui/ReviewScore';
 
 export default function ProductCard({
   thumbnail,
@@ -14,7 +15,10 @@ export default function ProductCard({
   hasVariants,
   cheapestVariant,
   price,
-  oldPrice
+  oldPrice,
+  analytics,
+  rating,
+  totalReviews
 }: ProductCardTypes) {
   return (
     <article className={styles['ProductCard']}>
@@ -30,18 +34,20 @@ export default function ProductCard({
         />
       </div>
       <header>
+        <ReviewScore rating={rating} totalReviews={totalReviews} className={styles.ReviewScore} />
         <Markdown.h2 className={`${styles.heading} h3`}>{removeMarkdown(name)}</Markdown.h2>
         {(hasVariants && cheapestVariant) ? (
           <p className={styles.price}>od {cheapestVariant.oldPrice && <del>{cheapestVariant.oldPrice}&nbsp;zł</del>} {cheapestVariant.price}&nbsp;zł</p>
         ) : (
           <p className={styles.price}>{oldPrice && <del>{oldPrice}&nbsp;zł</del>} {price}&nbsp;zł</p>
         )}
-        <Button
+        <BuyButton
           href={url}
-          className={styles.cta}
+          content_id={analytics?.item_id}
+          content_name={analytics?.item_name}
         >
           Kup teraz
-        </Button>
+        </BuyButton>
       </header>
     </article>
   );

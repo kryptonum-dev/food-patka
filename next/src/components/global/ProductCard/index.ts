@@ -14,4 +14,10 @@ export const ProductCard_Query = `
   'cheapestVariant': variants[] | order(price asc)[0],
   price,
   oldPrice,
+  analytics {
+    item_name,
+    item_id,
+  },
+  "rating": math::avg(*[_type == 'Review_Collection' && references(^._id)]{rating}.rating),
+  "totalReviews": count(*[_type == 'Review_Collection' && references(^._id)]),
 `;

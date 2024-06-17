@@ -1,18 +1,17 @@
 import styles from './ReviewScore.module.scss';
 import type { ReviewScoreTypes } from './ReviewScore.types';
 
-export default function ReviewScore({ rating, totalReviews }: ReviewScoreTypes) {
+export default function ReviewScore({ rating, totalReviews, className }: ReviewScoreTypes) {
   if (rating == null) return;
   return (
-    <div className={styles['ReviewScore']}>
+    <div className={`${styles['ReviewScore']} ${className ? className : ''}`}>
       {Array.from({ length: 5 }, (_, index) => (
         <Icon key={index} filled={index < rating} />
       ))}
-      <p>{rating}/5{totalReviews && ` (${totalReviews})`}</p>
+      <p>{rating}/5{totalReviews && <span> ({totalReviews})</span>}</p>
     </div>
   );
 }
-
 
 const Icon = ({ filled }: { filled: boolean }) => (
   <svg

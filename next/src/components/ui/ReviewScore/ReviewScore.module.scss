@@ -1,5 +1,5 @@
 .ReviewScore {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-size: clamp(calc(14rem / 16), calc(16vw / 7.68), 1rem);
   svg {
@@ -8,5 +8,8 @@
   }
   p {
     margin-left: 4px;
+    span {
+      color: var(--secondary-400, #97879d);
+    }
   }
 }

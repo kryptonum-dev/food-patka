@@ -12,4 +12,10 @@ export type ProductCardTypes = {
   };
   price?: number;
   oldPrice?: number;
+  rating: number;
+  totalReviews: number;
+  analytics: {
+    item_name: string;
+    item_id: string;
+  };
 };

@@ -34,10 +34,15 @@
       color: var(--secondary-400, #97879d);
     }
   }
-  .cta {
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
+  .ReviewScore {
+    margin: 0 auto 6px;
+  }
+  header {
+    > a {
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
   }
   @media (max-width: 1049px) and (min-width: 500px) {
     text-align: left;
