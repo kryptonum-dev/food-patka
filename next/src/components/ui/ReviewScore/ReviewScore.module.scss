@@ -1,0 +1,12 @@
+.ReviewScore {
+  display: flex;
+  align-items: center;
+  font-size: clamp(calc(14rem / 16), calc(16vw / 7.68), 1rem);
+  svg {
+    width: clamp(16px, calc(20vw / 7.68), 20px);
+    height: clamp(16px, calc(20vw / 7.68), 20px);
+  }
+  p {
+    margin-left: 4px;
+  }
+}

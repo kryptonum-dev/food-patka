@@ -13,19 +13,17 @@ export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon, className
 
   return (
     <div className={`${styles['Gallery']} ${className}`}>
-      <div className={`embla ${styles.preview}`}>
-        <div className="embla__viewport" ref={emblaRef}>
-          <div className="embla__container">
-            {data.map((img, i) => (
-              <Img
-                className='embla__slide'
-                data={img}
-                sizes='(max-width: 539px) 100vw, 485px'
-                key={i}
-                priority={i === 0}
-              />
-            ))}
-          </div>
+      <div className={`embla ${styles.preview}`} ref={emblaRef}>
+        <div className="embla__container">
+          {data.map((img, i) => (
+            <Img
+              className='embla__slide'
+              data={img}
+              sizes='(max-width: 539px) 100vw, 485px'
+              key={i}
+              priority={i === 0}
+            />
+          ))}
         </div>
         {data.length > 1 && (
           <>

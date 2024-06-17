@@ -11,6 +11,7 @@ import TuckedImageSection, { type TuckedImageSectionTypes, TuckedImageSection_Qu
 import LatestBlogEntries, { type LatestBlogEntriesTypes, LatestBlogEntries_Query } from '@/components/global/LatestBlogEntries';
 import Features, { type FeaturesTypes, Features_Query } from '@/components/global/Features';
 import FeaturedProducts, { type FeaturedProductsTypes, FeaturedProducts_Query } from '@/components/global/FeaturedProducts';
+import Reviews, { type ReviewsTypes, Reviews_Query } from '@/components/global/Reviews';
 
 type componentsMapTypes = {
   HeroHeaderAndImage: HeroHeaderAndImageTypes;
@@ -26,6 +27,7 @@ type componentsMapTypes = {
   LatestBlogEntries: LatestBlogEntriesTypes;
   Features: FeaturesTypes;
   FeaturedProducts: FeaturedProductsTypes;
+  Reviews: ReviewsTypes;
 };
 
 export type ComponentTypes = componentsMapTypes[keyof componentsMapTypes] & { _type: string };
@@ -48,6 +50,7 @@ export default function Components({ data }: { data: ComponentTypes[] }) {
       LatestBlogEntries: <LatestBlogEntries {...(item as LatestBlogEntriesTypes)} />,
       Features: <Features {...(item as FeaturesTypes)} />,
       FeaturedProducts: <FeaturedProducts {...(item as FeaturedProductsTypes)} />,
+      Reviews: <Reviews {...(item as ReviewsTypes)} />,
     };
     const DynamicComponent = componentsMapTypes[componentType];
     if (!DynamicComponent) return null;
@@ -71,5 +74,6 @@ export const Components_Query = /* groq */ `
     ${LatestBlogEntries_Query}
     ${Features_Query}
     ${FeaturedProducts_Query}
+    ${Reviews_Query}
   },
 `;
