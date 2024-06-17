@@ -50,6 +50,12 @@
       span {
         color: var(--secondary-400, #97879d);
       }
+      a {
+        transition: opacity 0.3s;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
       font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
     }
     .gallery {

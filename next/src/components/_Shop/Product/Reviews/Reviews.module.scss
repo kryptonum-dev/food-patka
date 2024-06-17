@@ -1,0 +1,41 @@
+.Reviews {
+  display: grid;
+  gap: clamp(12px, calc(20vw / 7.68), 20px);
+  .item {
+    margin-top: clamp(10px, calc(13vw / 7.68), 13px);
+    padding: clamp(12px, calc(24vw / 7.68), 24px);
+    border-radius: 20px 20px 20px 0px;
+    background: var(--primary-300, #fff6f9);
+    position: relative;
+    .QuoteIcon {
+      position: absolute;
+      right: 28px;
+      height: clamp(20px, calc(26vw / 7.68), 26px);
+      top: 0;
+      transform: translateY(-50%);
+    }
+    header {
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+      align-items: center;
+      h3 {
+        font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
+        color: var(--primary-700, #e6688d);
+        margin-bottom: 12px;
+      }
+    }
+    .gallery {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      img {
+        width: 96px;
+        height: 96px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+    }
+  }
+}

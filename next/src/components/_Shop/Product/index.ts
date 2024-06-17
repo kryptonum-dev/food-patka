@@ -1,6 +1,7 @@
 import { ImgDataQuery } from '@/components/ui/image';
 import Product from './Product';
 import { Description_Query } from './Description';
+import { Reviews_Query } from '@/components/_Shop/Product/Reviews';
 export default Product;
 export type { ProductTypes } from './Product.types';
 
@@ -30,4 +31,5 @@ export const Product_Query = `
     ${ImgDataQuery}
   },
   ${Description_Query}
+  ${Reviews_Query}
 `;

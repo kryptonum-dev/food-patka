@@ -1,6 +1,7 @@
 import type { ImgDataTypes } from '@/components/ui/image';
 import type { DescriptionTypes } from './Description';
 import type { BuyButtonTypes } from '@/components/ui/BuyButton';
+import type { ReviewsTypes } from '@/components/_Shop/Product/Reviews';
 
 export type ProductTypes = {
   name: string;
@@ -34,4 +35,5 @@ export type ProductTypes = {
   content_name: BuyButtonTypes['content_name'];
   rating: number;
   totalReviews: number;
+  reviews: ReviewsTypes['data'];
 } & Omit<DescriptionTypes, 'className'>;

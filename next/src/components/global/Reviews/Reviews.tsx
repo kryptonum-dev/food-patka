@@ -7,10 +7,11 @@ import type { ReviewsTypes } from './Reviews.types';
 
 export default function Reviews({ index, heading, paragraph, list }: ReviewsTypes) {
   const Heading = index === 0 ? Markdown.h1 : Markdown.h2;
-  const _list = list.map(({ name, rating, productName, content, gallery }) => ({
+  const _list = list.map(({ name, rating, productName, productSlug, content, gallery }) => ({
     name,
     rating,
     productName: removeMarkdown(productName),
+    productSlug,
     content: <Markdown>{content}</Markdown>,
     gallery: gallery && gallery.map((img, i) => <Img data={img} sizes='96px' key={i} />),
   }));

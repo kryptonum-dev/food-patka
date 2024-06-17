@@ -28,6 +28,7 @@ export default async function ShopProductPage({
     analytics,
     rating,
     totalReviews,
+    reviews,
   } = await query(slug);
 
   const breadcrumbsSchema = [{ name: 'Sklep', path: '/sklep' }];
@@ -71,6 +72,7 @@ export default async function ShopProductPage({
         content_name={analytics.item_name}
         rating={rating}
         totalReviews={totalReviews}
+        reviews={reviews}
       />
       <Components data={pageContent} />
       <Analytics

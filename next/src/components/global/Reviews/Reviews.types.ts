@@ -8,6 +8,7 @@ export type ReviewsTypes = {
     name: string;
     rating: number;
     productName: string;
+    productSlug: string;
     content: string;
     gallery?: ImgDataTypes[];
   }[];
@@ -18,6 +19,7 @@ export type SliderTypes = {
     name: string;
     rating: number;
     productName: string;
+    productSlug: string;
     content: React.ReactNode;
     gallery?: React.ReactNode[];
   }[];

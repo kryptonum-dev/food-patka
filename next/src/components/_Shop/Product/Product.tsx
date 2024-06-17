@@ -1,9 +1,10 @@
-
-import Description from './Description';
 import Gallery from './Gallery';
 import Info from './Info';
 import styles from './Product.module.scss';
+import Content from './Content';
 import type { ProductTypes } from './Product.types';
+import Description from './Description';
+import Reviews from './Reviews';
 
 export default function Product({
   name,
@@ -21,6 +22,7 @@ export default function Product({
   content_name,
   rating,
   totalReviews,
+  reviews,
 }: Omit<ProductTypes, 'category'>) {
   return (
     <section className={styles['Product']}>
@@ -48,10 +50,10 @@ export default function Product({
           currentVariantParam
         }}
       />
-      <Description
-        className={styles.Description}
-        description={description}
-      />
+      <Content reviewsCount={reviews.length}>
+        <Description description={description} />
+        <Reviews data={reviews} />
+      </Content>
     </section>
   );
 }

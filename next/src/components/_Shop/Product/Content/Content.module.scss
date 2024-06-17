@@ -1,0 +1,32 @@
+.Content {
+  .tabs {
+    margin-bottom: clamp(42px, calc(48vw / 7.68), 64px);
+    button {
+      width: 50%;
+      max-width: 174px;
+      padding: 11px 8px;
+      text-align: center;
+      border-radius: 4px 4px 0px 0px;
+      position: relative;
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background-color: var(--primary-500, #ffb8ce);
+        transform: scale(0);
+        transform-origin: right;
+        transition: transform 0.5s var(--easing);
+      }
+      &[aria-current='true'] {
+        background: var(--primary-300, #fff6f9);
+        &::after {
+          transform-origin: left;
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}

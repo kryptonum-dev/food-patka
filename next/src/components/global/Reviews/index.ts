@@ -11,6 +11,7 @@ export const Reviews_Query = `
       name,
       rating,
       "productName": product -> name,
+      "productSlug": product -> slug.current,
       content,
       gallery[] {
         ${ImgDataQuery}

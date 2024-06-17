@@ -6,7 +6,6 @@ import CommunityTrust, { type CommunityTrustTypes } from './CommunityTrust';
 import OrderedList, { type OrderedListTypes } from './OrderedList';
 import InfoTile, { type InfoTileTypes } from './InfoTile';
 import YummyWishes, { type YummyWishesTypes } from './YummyWishes';
-import styles from './Description.module.scss';
 import type { DescriptionTypes } from './Description.types';
 
 const components = {
@@ -35,13 +34,11 @@ const components = {
   }
 } as Partial<PortableTextReactComponents>;
 
-export default function Description({ className, description }: DescriptionTypes) {
+export default function Description({ description }: DescriptionTypes) {
   return (
-    <section className={`${styles['Description']} ${className}`}>
-      <PortableText
-        value={description}
-        components={components}
-      />
-    </section>
+    <PortableText
+      value={description}
+      components={components}
+    />
   );
 }
