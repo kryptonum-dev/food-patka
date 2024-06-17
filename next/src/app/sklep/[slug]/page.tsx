@@ -26,6 +26,8 @@ export default async function ShopProductPage({
     description,
     content: pageContent,
     analytics,
+    rating,
+    totalReviews,
   } = await query(slug);
 
   const breadcrumbsSchema = [{ name: 'Sklep', path: '/sklep' }];
@@ -67,6 +69,8 @@ export default async function ShopProductPage({
         }}
         content_id={analytics.item_id}
         content_name={analytics.item_name}
+        rating={rating}
+        totalReviews={totalReviews}
       />
       <Components data={pageContent} />
       <Analytics
@@ -87,6 +91,8 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
           item_name,
           item_id,
         },
+        "rating": math::avg(*[_type == 'Review_Collection' && references(^._id)]{rating}.rating),
+        "totalReviews": count(*[_type == 'Review_Collection' && references(^._id)]),
       }
     `,
     params: { slug },

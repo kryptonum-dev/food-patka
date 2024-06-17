@@ -16,4 +16,6 @@ export type ShopProductPageQueryTypes = Omit<ProductTypes, 'currentVariantParam'
     item_name: string;
     item_id: string;
   };
+  rating: number;
+  totalReviews: number;
 };

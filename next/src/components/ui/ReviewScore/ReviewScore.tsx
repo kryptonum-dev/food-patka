@@ -2,6 +2,7 @@ import styles from './ReviewScore.module.scss';
 import type { ReviewScoreTypes } from './ReviewScore.types';
 
 export default function ReviewScore({ rating, totalReviews }: ReviewScoreTypes) {
+  if (rating == null) return;
   return (
     <div className={styles['ReviewScore']}>
       {Array.from({ length: 5 }, (_, index) => (

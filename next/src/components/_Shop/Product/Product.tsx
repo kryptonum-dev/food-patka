@@ -19,6 +19,8 @@ export default function Product({
   description,
   content_id,
   content_name,
+  rating,
+  totalReviews,
 }: Omit<ProductTypes, 'category'>) {
   return (
     <section className={styles['Product']}>
@@ -32,6 +34,8 @@ export default function Product({
         className={styles.Info}
         content_id={content_id}
         content_name={content_name}
+        rating={rating}
+        totalReviews={totalReviews}
         {...{
           name,
           url,

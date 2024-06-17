@@ -32,4 +32,6 @@ export type ProductTypes = {
   currentVariantParam?: number;
   content_id: BuyButtonTypes['content_id'];
   content_name: BuyButtonTypes['content_name'];
+  rating: number;
+  totalReviews: number;
 } & Omit<DescriptionTypes, 'className'>;
