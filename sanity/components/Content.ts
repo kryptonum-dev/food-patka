@@ -13,6 +13,7 @@ import TuckedImageSection from "../schema/components/TuckedImageSection";
 import LatestBlogEntries from "../schema/components/LatestBlogEntries";
 import Features from "../schema/components/Features";
 import FeaturedProducts from "../schema/components/FeaturedProducts";
+import Reviews from "../schema/components/Reviews";
 
 export default defineType({
   name: 'content',
@@ -33,5 +34,6 @@ export default defineType({
     LatestBlogEntries,
     Features,
     FeaturedProducts,
+    Reviews,
   ],
 });
