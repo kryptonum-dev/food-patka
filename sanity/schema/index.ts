@@ -16,6 +16,7 @@ import Shop_Page from './singleTypes/Shop_Page';
 import ProductCategory_Collection from './collectionTypes/ProductCategory_Collection';
 import Product_Collection from './collectionTypes/Product_Collection';
 import CookieConsent, { CookieConsent_Details, CookieConsent_Details_List, CookieConsent_Details_List_Cookies } from './components/CookieConsent';
+import Review_Collection from './collectionTypes/Review_Collection';
 
 export const schemaTypes = [
   cta,
@@ -43,4 +44,5 @@ export const schemaTypes = [
   BlogPost_Collection,
   ProductCategory_Collection,
   Product_Collection,
+  Review_Collection,
 ];
