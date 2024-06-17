@@ -18,9 +18,9 @@ export default defineType({
     }),
     defineField({
       name: 'rating',
-      type: 'string',
+      type: 'number',
       options: {
-        list: ['1', '2', '3', '4', '5']
+        list: [1, 2, 3, 4, 5],
       },
       title: 'Ocena',
       validation: Rule => Rule.required(),
