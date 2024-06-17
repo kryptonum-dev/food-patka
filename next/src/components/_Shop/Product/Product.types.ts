@@ -1,6 +1,6 @@
 import type { ImgDataTypes } from '@/components/ui/image';
 import type { DescriptionTypes } from './Description';
-import type { ButButtonTypes } from '@/components/ui/ButButton';
+import type { BuyButtonTypes } from '@/components/ui/BuyButton';
 
 export type ProductTypes = {
   name: string;
@@ -30,6 +30,6 @@ export type ProductTypes = {
   omnibus: number;
   gallery: ImgDataTypes[];
   currentVariantParam?: number;
-  content_id: ButButtonTypes['content_id'];
-  content_name: ButButtonTypes['content_name'];
+  content_id: BuyButtonTypes['content_id'];
+  content_name: BuyButtonTypes['content_name'];
 } & Omit<DescriptionTypes, 'className'>;

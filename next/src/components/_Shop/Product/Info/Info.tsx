@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Markdown from '@/components/ui/markdown';
 import styles from './Info.module.scss';
 import { PaymentIcon } from './PaymentIcon';
-import ButButton from '@/components/ui/ButButton';
+import BuyButton from '@/components/ui/BuyButton';
 import type { ProductTypes } from '../Product.types';
 
 export default function Info({
@@ -67,13 +67,13 @@ export default function Info({
           <p>{oldPrice && <del>{oldPrice}&nbsp;zł</del>} {price}&nbsp;zł</p>
         )}
         <p className={styles.omnibus}>Najniższa cena z 30 dni przed obniżką: {omnibusPrice} zł</p>
-        <ButButton
+        <BuyButton
           href={url}
           content_id={content_id}
           content_name={content_name}
         >
           Kup teraz
-        </ButButton>
+        </BuyButton>
         <div className={styles.paymentInfo}>
           <p>Bezpieczne płatności</p>
           <ul>
