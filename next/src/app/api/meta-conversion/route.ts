@@ -1,20 +1,14 @@
-import { NextResponse, userAgent } from 'next/server';
-import { headers } from 'next/headers';
+import { NextResponse } from 'next/server';
 import { hash } from '@/utils/hash';
 
 const API_VERSION = 'v20.0';
 const PIXEL_ID = '961763381554677';
 const PAYLOAD_URL = `https://graph.facebook.com/${API_VERSION}/${PIXEL_ID}/events?access_token=${process.env.META_CONVERSION_API}`;
-const current_timestamp = Math.floor(new Date().getTime() / 1000);
+const current_timestamp = Math.floor(Date.now() / 1000);
 
 export async function POST(request: Request) {
-  const forwardedFor = headers().get('x-forwarded-for');
-  const client_ip_address = forwardedFor ? forwardedFor.split(',')[0] : headers().get('x-real-ip');
-  const client_user_agent = userAgent(request);
-  console.log('IP Address from Vercel', client_ip_address);
-  console.log('IP from default function', request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip'));
-  console.log('UserAgent from Vercel', client_user_agent);
-  console.log('UserAgent from default function', request.headers.get('user-agent'));
+  const client_ip_address = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip');
+  const client_user_agent = request.headers.get('user-agent');
 
   const {
     event_name,
@@ -22,7 +16,10 @@ export async function POST(request: Request) {
     content_id,
     content_name,
     content_price,
+    fbc,
   } = await request.json();
+
+  console.log('fbc', fbc);
 
   try {
     await fetch(PAYLOAD_URL, {
@@ -37,9 +34,8 @@ export async function POST(request: Request) {
             'user_data': {
               'client_ip_address': client_ip_address,
               'client_user_agent': client_user_agent,
-              ...email && {
-                'em': await hash(email),
-              }
+              ...email && { 'em': await hash(email) },
+              ...fbc && { 'fbc': fbc },
             },
             'custom_data': {
               'content_ids': content_id,
