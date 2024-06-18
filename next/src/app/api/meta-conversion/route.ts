@@ -1,4 +1,5 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, userAgent } from 'next/server';
+import { headers } from 'next/headers';
 import { hash } from '@/utils/hash';
 
 const API_VERSION = 'v20.0';
@@ -7,8 +8,13 @@ const PAYLOAD_URL = `https://graph.facebook.com/${API_VERSION}/${PIXEL_ID}/event
 const current_timestamp = Math.floor(new Date().getTime() / 1000);
 
 export async function POST(request: Request) {
-  const client_ip_address = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip');
-  const client_user_agent = request.headers.get('user-agent');
+  const forwardedFor = headers().get('x-forwarded-for');
+  const client_ip_address = forwardedFor ? forwardedFor.split(',')[0] : headers().get('x-real-ip');
+  const client_user_agent = userAgent(request);
+  console.log('IP Address', client_ip_address);
+  console.log('UserAgent from Vercel', client_user_agent);
+  console.log('IP from default function', request.headers.get('user-agent'));
+  
   const {
     event_name,
     email,
