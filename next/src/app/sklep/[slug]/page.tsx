@@ -34,7 +34,7 @@ export default async function ShopProductPage({
   } = await query(slug);
 
   const timestamp = Math.floor(new Date().getTime() / (1000 * 60 * 60 * 1));
-  const stableSeed = await hash(`${slug}-${timestamp}`);
+  const stableSeed = await hash(`${slug}-${timestamp}-${min}-${max}`);
   const seedNumber = BigInt(`0x${stableSeed}`);
   const absSeed = seedNumber >= 0 ? seedNumber : -seedNumber;
   const numberOfRecentPurchases = Number(absSeed % BigInt(max - min + 1) + BigInt(min));
