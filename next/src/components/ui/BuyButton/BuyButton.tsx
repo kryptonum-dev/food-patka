@@ -1,7 +1,8 @@
 'use client';
-import { DOMAIN } from '@/global/constants';
 import Button from '@/components/ui/Button';
 import type { BuyButtonTypes } from './BuyButton.types';
+
+const DOMAIN = 'https://food-patka-git-dev-kryptonum.vercel.app';
 
 export default function BuyButton({ children, href, content_id, content_name }: BuyButtonTypes) {
   const handleClick = () => {
