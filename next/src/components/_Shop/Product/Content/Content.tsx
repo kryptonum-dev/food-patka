@@ -15,25 +15,27 @@ export default function Content({ children, reviewsCount }: ContentTypes) {
           <button
             onClick={() => setTab(0)}
             aria-current={tab === 0}
-            aria-controls="description-tab"
             role="tab"
+            aria-controls="description-tab"
+            id="description-tab-btn"
           >
             Szczegóły
           </button>
           <button
             onClick={() => setTab(1)}
             aria-current={tab === 1}
-            aria-controls="reviews-tab"
             role="tab"
+            aria-controls="reviews-tab"
+            id="reviews-tab-btn"
           >
             Opine ({reviewsCount})
           </button>
         </div>
       )}
       <section
-        id="description-tab"
         role="tabpanel"
-        aria-labelledby="description-tab"
+        id="description-tab"
+        aria-labelledby="description-tab-btn"
         className={DescriptionStyles['Description']}
         style={{ display: tab !== 0 ? 'none' : undefined }}
       >
@@ -41,9 +43,9 @@ export default function Content({ children, reviewsCount }: ContentTypes) {
       </section>
       {reviewsCount > 0 && (
         <section
-          id="reviews-tab"
           role="tabpanel"
-          aria-labelledby="reviews-tab"
+          id="reviews-tab"
+          aria-labelledby="reviews-tab-btn"
           className={ReviewsStyles['Reviews']}
           style={{ display: tab !== 1 ? 'none' : undefined }}
         >
