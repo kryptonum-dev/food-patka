@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { hash } from '@/utils/hash';
 
 const API_VERSION = 'v20.0';
@@ -10,14 +11,15 @@ export async function POST(request: Request) {
   const client_ip_address = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip');
   const client_user_agent = request.headers.get('user-agent');
 
+  const fbc = cookies().get('_fbc');
+  const fbp = cookies().get('_fbp');
+
   const {
     event_name,
     email,
     content_id,
     content_name,
     content_price,
-    fbc,
-    fbp,
   } = await request.json();
 
   console.log('fbc', fbc);

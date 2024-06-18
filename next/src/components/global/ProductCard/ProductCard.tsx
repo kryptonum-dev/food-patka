@@ -4,8 +4,8 @@ import Img from '@/components/ui/image';
 import Markdown from '@/components/ui/markdown';
 import styles from './ProductCard.module.scss';
 import { removeMarkdown } from '@/utils/remove-markdown';
-import type { ProductCardTypes } from './ProductCard.types';
 import ReviewScore from '@/components/ui/ReviewScore';
+import type { ProductCardTypes } from './ProductCard.types';
 
 export default function ProductCard({
   thumbnail,
