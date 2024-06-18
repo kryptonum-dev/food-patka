@@ -10,16 +10,20 @@ export default function Analytics({
 }) {
   useEffect(() => {
     if (!item_name || !item_id) return;
-    window.dataLayer?.push({
-      event: 'view_item',
-      items: [
-        {
-          item_id: item_id,
-          item_name: item_name,
-          quantity: 1,
-        },
-      ],
-    });
+    console.log(window.dataLayer);
+    setTimeout(() => {
+      console.log(window.dataLayer);
+      window.dataLayer?.push({
+        event: 'view_item',
+        items: [
+          {
+            item_id: item_id,
+            item_name: item_name,
+            quantity: 1,
+          },
+        ],
+      });
+    }, 1000);
   }, [item_name, item_id]);
 
   return null;
