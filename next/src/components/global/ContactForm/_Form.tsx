@@ -103,13 +103,13 @@ export default function Form({ privacyPolicyLink }: FormTypes) {
         errorState={{
           heading: 'Nie udało się wysłać wiadomości',
           paragraph: <>
-            Podczas przesyłania, wystąpił problem z serwerem. Wyślij wiadomość ponownie. W razie niepowodzenia, skontaktuj się z nami mailowo:&nbsp;
+            Podczas przesyłania, wystąpił problem z serwerem. Wyślij wiadomość ponownie. W razie niepowodzenia, skontaktuj się ze mną mailowo:&nbsp;
             <a href="mailto:patrycja@foodpatka.pl" className='link' target='_blank' rel='noreferrer'>patrycja@foodpatka.pl</a>
           </>,
         }}
         successState={{
-          heading: 'Dziękujemy za kontakt',
-          paragraph: 'Twoja wiadomość właśnie dotarła do naszej skrzynki mailowej. Odezwiemy się najszybciej, jak to możliwe.',
+          heading: 'Dziękuję za kontakt',
+          paragraph: 'Twoja wiadomość właśnie dotarła do skrzynki mailowej. Odezwiemy się najszybciej, jak to możliwe.',
         }}
         isSuccess={status?.success}
         setStatus={setStatus}
