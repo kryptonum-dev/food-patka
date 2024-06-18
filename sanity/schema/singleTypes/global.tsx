@@ -191,6 +191,29 @@ export const global = defineType({
       ],
     }),
     defineField({
+      name: 'RecentPurchases',
+      type: 'object',
+      title: 'Ostatnie zamówienia',
+      description: 'Pokazuje element „X osób kupiło ten produkt w ciągu 24 godzin”. Liczba dla każdego produktu jest generowana losowo z zakresu min-max.',
+      options: {
+        columns: 2,
+      },
+      fields: [
+        defineField({
+          name: 'min',
+          type: 'number',
+          title: 'Minimalna liczba zakupów',
+          validation: Rule => Rule.required(),
+        }),
+        defineField({
+          name: 'max',
+          type: 'number',
+          title: 'Maksymalna liczba zakupów',
+          validation: Rule => Rule.required(),
+        }),
+      ],
+    }),
+    defineField({
       name: 'seo',
       type: 'object',
       title: 'SEO',
