@@ -95,12 +95,12 @@ export default function Form({ privacyPolicyLink }: FormTypes) {
         errorState={{
           heading: 'Nie udało się zapisać do newslettera',
           paragraph: <>
-            Podczas przesyłania informacji pojawił się problem z serwerem. Jeśli problem się powtórzy, skontaktuj się z nami przez formularz kontaktowy lub napisz na adres:&nbsp;
+            Podczas przesyłania informacji pojawił się problem z serwerem. Jeśli problem się powtórzy, skontaktuj się ze mną przez formularz kontaktowy lub napisz na adres:&nbsp;
             <a href="mailto:patrycja@foodpatka.pl" className='link' target='_blank' rel='noreferrer'>patrycja@foodpatka.pl</a>
           </>,
         }}
         successState={{
-          heading: 'Dziękujemy za zapis do newslettera!',
+          heading: 'Dziękuję za zapis do newslettera!',
           paragraph: 'Od teraz będziesz na bieżąco z nowościami i aktualnościami ze świata FoodPatki!',
         }}
         isSuccess={status?.success}
