@@ -1,5 +1,6 @@
 'use client';
 import { useEffect } from 'react';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 export default function Analytics({
   item_id,
@@ -10,10 +11,8 @@ export default function Analytics({
 }) {
   useEffect(() => {
     if (!item_name || !item_id) return;
-    console.log(window.dataLayer);
     setTimeout(() => {
-      console.log(window.dataLayer);
-      window.dataLayer?.push({
+      sendGTMEvent({
         event: 'view_item',
         items: [
           {
@@ -24,7 +23,7 @@ export default function Analytics({
         ],
       });
     }, 1000);
-  }, [item_name, item_id]);
+  }, [item_id, item_name]);
 
   return null;
 }
