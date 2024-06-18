@@ -7,6 +7,7 @@ import Product, { Product_Query } from '@/components/_Shop/Product';
 import Components, { Components_Query } from '@/components/Components';
 import Analytics from './Analytics';
 import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
+import { hash } from '@/utils/hash';
 
 export default async function ShopProductPage({
   params: { slug },
@@ -29,7 +30,14 @@ export default async function ShopProductPage({
     rating,
     totalReviews,
     reviews,
+    RecentPurchases: { min, max },
   } = await query(slug);
+
+  const timestamp = Math.floor(new Date().getTime() / (1000 * 60 * 60 * 1));
+  const stableSeed = await hash(`${slug}-${timestamp}`);
+  const seedNumber = BigInt(`0x${stableSeed}`);
+  const absSeed = seedNumber >= 0 ? seedNumber : -seedNumber;
+  const numberOfRecentPurchases = Number(absSeed % BigInt(max - min + 1) + BigInt(min));
 
   const breadcrumbsSchema = [{ name: 'Sklep', path: '/sklep' }];
   if (category.mainCategory) {
@@ -67,6 +75,7 @@ export default async function ShopProductPage({
           gallery,
           currentVariantParam,
           description,
+          numberOfRecentPurchases,
         }}
         content_id={analytics.item_id}
         content_name={analytics.item_name}
@@ -95,10 +104,14 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
         },
         "rating": math::avg(*[_type == 'Review_Collection' && references(^._id)]{rating}.rating),
         "totalReviews": count(*[_type == 'Review_Collection' && references(^._id)]),
+        "RecentPurchases": *[_id == 'global'][0].RecentPurchases {
+          min,
+          max,
+        },
       }
     `,
     params: { slug },
-    tags: ['Product_Collection'],
+    tags: ['Product_Collection', 'global'],
   });
   if (!data) notFound();
   return data;

@@ -36,4 +36,5 @@ export type ProductTypes = {
   rating: number;
   totalReviews: number;
   reviews: ReviewsTypes['data'];
+  numberOfRecentPurchases: number;
 } & Omit<DescriptionTypes, 'className'>;

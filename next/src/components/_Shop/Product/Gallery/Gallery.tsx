@@ -6,7 +6,13 @@ import { usePagination, useNavigation } from '@/components/global/Carousel';
 import '@/components/global/Carousel/embla.scss';
 import type { GalleryTypes } from './Gallery.types';
 
-export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon, className }: GalleryTypes) {
+export default function Gallery({
+  data,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  className,
+  numberOfRecentPurchases,
+}: GalleryTypes) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', skipSnaps: true, loop: true });
   const { selectedIndex, onDotButtonClick } = usePagination(emblaApi);
   const { onPrevButtonClick, onNextButtonClick } = useNavigation(emblaApi);
@@ -43,6 +49,7 @@ export default function Gallery({ data, ArrowLeftIcon, ArrowRightIcon, className
             </button>
           </>
         )}
+        <p className={styles.RecentPurchases}>{numberOfRecentPurchases} osób kupiło ten produkt w ciągu ostatnich 24 godzin</p>
       </div>
       {data.length > 1 && (
         <div className={styles.thumbnails}>

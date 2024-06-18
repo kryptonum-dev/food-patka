@@ -18,4 +18,8 @@ export type ShopProductPageQueryTypes = Omit<ProductTypes, 'currentVariantParam'
   };
   rating: number;
   totalReviews: number;
+  RecentPurchases: {
+    min: number;
+    max: number;
+  };
 };

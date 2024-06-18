@@ -3,8 +3,8 @@ import Markdown from '@/components/ui/markdown';
 import styles from './Info.module.scss';
 import { PaymentIcon } from './PaymentIcon';
 import BuyButton from '@/components/ui/BuyButton';
-import type { ProductTypes } from '../Product.types';
 import ReviewScore from '@/components/ui/ReviewScore';
+import type { ProductTypes } from '../Product.types';
 
 export default function Info({
   name,
@@ -21,7 +21,7 @@ export default function Info({
   content_name,
   rating,
   totalReviews,
-}: Omit<ProductTypes, 'gallery' | 'category' | 'description' | 'reviews'> &
+}: Omit<ProductTypes, 'gallery' | 'category' | 'description' | 'reviews' | 'numberOfRecentPurchases'> &
   {
     className: React.HTMLProps<HTMLElement>['className'];
   }

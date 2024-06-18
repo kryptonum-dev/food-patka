@@ -2,9 +2,9 @@ import Gallery from './Gallery';
 import Info from './Info';
 import styles from './Product.module.scss';
 import Content from './Content';
-import type { ProductTypes } from './Product.types';
 import Description from './Description';
 import Reviews from './Reviews';
+import type { ProductTypes } from './Product.types';
 
 export default function Product({
   name,
@@ -23,6 +23,7 @@ export default function Product({
   rating,
   totalReviews,
   reviews,
+  numberOfRecentPurchases,
 }: Omit<ProductTypes, 'category'>) {
   return (
     <section className={styles['Product']}>
@@ -31,6 +32,7 @@ export default function Product({
         data={gallery}
         ArrowLeftIcon={ArrowLeftIcon}
         ArrowRightIcon={ArrowRightIcon}
+        numberOfRecentPurchases={numberOfRecentPurchases}
       />
       <Info
         className={styles.Info}
