@@ -49,7 +49,7 @@ export default function Gallery({
             </button>
           </>
         )}
-        <p className={styles.RecentPurchases}>{numberOfRecentPurchases} osób kupiło ten produkt w ciągu ostatnich 24 godzin</p>
+        <p className={styles.RecentPurchases}>{numberOfRecentPurchases} osób kupiło ten produkt w ciągu ostatnich 24 godzin</p>
       </div>
       {data.length > 1 && (
         <div className={styles.thumbnails}>
