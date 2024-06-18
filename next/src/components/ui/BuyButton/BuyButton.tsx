@@ -1,11 +1,11 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
-import Button from '@/components/ui/Button';
 import type { BuyButtonTypes } from './BuyButton.types';
+import { getCookie } from '@/utils/get-cookie';
+import Button from '@/components/ui/Button';
 
 export default function BuyButton({ children, href, content_id, content_name }: BuyButtonTypes) {
-  const searchParams = useSearchParams();
-  const fbc = searchParams.get('fbc');
+  const fbc = getCookie('_fbc');
+  const fbp = getCookie('_fbp');
 
   const handleClick = () => {
     fetch('/api/meta-conversion', {
@@ -16,6 +16,7 @@ export default function BuyButton({ children, href, content_id, content_name }: 
         content_id: content_id,
         content_name: content_name,
         fbc: fbc,
+        fbp: fbp,
       }),
     });
   };

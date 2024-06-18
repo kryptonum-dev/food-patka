@@ -17,9 +17,11 @@ export async function POST(request: Request) {
     content_name,
     content_price,
     fbc,
+    fbp,
   } = await request.json();
 
   console.log('fbc', fbc);
+  console.log('fbp', fbp);
 
   try {
     await fetch(PAYLOAD_URL, {
@@ -36,6 +38,7 @@ export async function POST(request: Request) {
               'client_user_agent': client_user_agent,
               ...email && { 'em': await hash(email) },
               ...fbc && { 'fbc': fbc },
+              ...fbp && { 'fbc': fbp },
             },
             'custom_data': {
               'content_ids': content_id,
