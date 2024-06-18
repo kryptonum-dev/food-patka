@@ -11,10 +11,11 @@ export async function POST(request: Request) {
   const forwardedFor = headers().get('x-forwarded-for');
   const client_ip_address = forwardedFor ? forwardedFor.split(',')[0] : headers().get('x-real-ip');
   const client_user_agent = userAgent(request);
-  console.log('IP Address', client_ip_address);
+  console.log('IP Address from Vercel', client_ip_address);
+  console.log('IP from default function', request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip'));
   console.log('UserAgent from Vercel', client_user_agent);
-  console.log('IP from default function', request.headers.get('user-agent'));
-  
+  console.log('UserAgent from default function', request.headers.get('user-agent'));
+
   const {
     event_name,
     email,
