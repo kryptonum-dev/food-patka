@@ -6,8 +6,8 @@ import { removeMarkdown } from '@/utils/remove-markdown';
 import Product, { Product_Query } from '@/components/_Shop/Product';
 import Components, { Components_Query } from '@/components/Components';
 import Analytics from './Analytics';
-import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
 import { hash } from '@/utils/hash';
+import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
 
 export default async function ShopProductPage({
   params: { slug },
