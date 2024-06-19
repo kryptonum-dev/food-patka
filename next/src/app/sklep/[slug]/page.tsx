@@ -104,9 +104,9 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
           item_name,
           item_id,
         },
-        "rating": math::avg(*[_type == 'Review_Collection' && references(^._id) && visible]{rating}.rating),
-        "totalReviews": count(*[_type == 'Review_Collection' && references(^._id) && visible]),
-        "RecentPurchases": *[_id == 'global'][0].RecentPurchases {
+        "rating": math::avg(*[_type == "Review_Collection" && references(^._id) && visible]{rating}.rating),
+        "totalReviews": count(*[_type == "Review_Collection" && references(^._id) && visible]),
+        "RecentPurchases": *[_id == "global"][0].RecentPurchases {
           min,
           max,
         },

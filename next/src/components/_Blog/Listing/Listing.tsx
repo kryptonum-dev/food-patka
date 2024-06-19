@@ -59,7 +59,7 @@ const query = async (currentPage: number, currentCategorySlug: string | undefine
   const data = await sanityFetch<ListingQueryTypes>({
     query: /* groq */ `
       {
-        "categories": *[_type == "BlogCategory_Collection"] {
+        "categories": *[_type == "w"] {
           name,
           "slug": slug.current,
           "postCount": count(*[_type == "BlogPost_Collection" && references(^._id )]),
