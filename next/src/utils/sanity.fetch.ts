@@ -5,7 +5,7 @@ import { isPreviewDeployment, isProductionDeployment } from './is-preview-deploy
 const projectId = process.env.SANITY_PROJECT_ID;
 const token = process.env.SANITY_API_TOKEN;
 const dataset = 'production';
-const apiVersion = '2024-04-22';
+const apiVersion = '2024-06-18';
 
 if (isPreviewDeployment && !token) {
   throw new Error('The `SANITY_API_TOKEN` environment variable is required.');

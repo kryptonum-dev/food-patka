@@ -1,10 +1,21 @@
-import type { ImgDataTypes } from '@/components/ui/image';
+import type { ProductTypes } from '../Product.types';
 
 export type ReviewsTypes = {
   data: {
     name: string;
     rating: number;
     content: string;
-    gallery?: ImgDataTypes[];
   }[];
+  productId: ProductTypes['_id'];
 };
+
+export type FormTypes = {
+  productId: ProductTypes['_id'];
+  privacyPolicyLink: string;
+  RatingIcon: React.ReactNode;
+};
+
+export type StarageReviesTypes = {
+  id: ProductTypes['_id'];
+  timestamp: number;
+}[];

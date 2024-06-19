@@ -7,6 +7,7 @@ import Reviews from './Reviews';
 import type { ProductTypes } from './Product.types';
 
 export default function Product({
+  _id,
   name,
   url,
   hasVariants,
@@ -54,7 +55,7 @@ export default function Product({
       />
       <Content reviewsCount={reviews.length}>
         <Description description={description} />
-        <Reviews data={reviews} />
+        <Reviews data={reviews} productId={_id} />
       </Content>
     </section>
   );

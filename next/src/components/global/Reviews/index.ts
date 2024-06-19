@@ -1,9 +1,8 @@
-import { ImgDataQuery } from '@/components/ui/image';
 import Reviews from './Reviews';
 export default Reviews;
 export type { ReviewsTypes } from './Reviews.types';
 
-export const Reviews_Query = `
+export const Reviews_Query = /* groq */ `
   _type == "Reviews" => {
     heading,
     paragraph,
@@ -13,9 +12,6 @@ export const Reviews_Query = `
       "productName": product -> name,
       "productSlug": product -> slug.current,
       content,
-      gallery[] {
-        ${ImgDataQuery}
-      },
     },
   },
 `;

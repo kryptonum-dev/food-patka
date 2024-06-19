@@ -6,6 +6,7 @@ export default Product;
 export type { ProductTypes } from './Product.types';
 
 export const Product_Query = `
+  _id,
   name,
   url,
   category -> {

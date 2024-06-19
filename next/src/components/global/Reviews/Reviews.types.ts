@@ -1,5 +1,3 @@
-import type { ImgDataTypes } from '@/components/ui/image';
-
 export type ReviewsTypes = {
   index: number;
   heading: string;
@@ -10,7 +8,6 @@ export type ReviewsTypes = {
     productName: string;
     productSlug: string;
     content: string;
-    gallery?: ImgDataTypes[];
   }[];
 };
 
@@ -21,7 +18,6 @@ export type SliderTypes = {
     productName: string;
     productSlug: string;
     content: React.ReactNode;
-    gallery?: React.ReactNode[];
   }[];
   QuoteIcon: React.ReactNode;
   LeftArrowIcon: React.ReactNode;

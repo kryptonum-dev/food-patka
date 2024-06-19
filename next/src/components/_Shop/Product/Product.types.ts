@@ -4,6 +4,7 @@ import type { BuyButtonTypes } from '@/components/ui/BuyButton';
 import type { ReviewsTypes } from '@/components/_Shop/Product/Reviews';
 
 export type ProductTypes = {
+  _id: string;
   name: string;
   url: string;
   category: {

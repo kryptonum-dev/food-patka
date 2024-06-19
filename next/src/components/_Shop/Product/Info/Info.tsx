@@ -21,7 +21,7 @@ export default function Info({
   content_name,
   rating,
   totalReviews,
-}: Omit<ProductTypes, 'gallery' | 'category' | 'description' | 'reviews' | 'numberOfRecentPurchases'> &
+}: Omit<ProductTypes, '_id' | 'gallery' | 'category' | 'description' | 'reviews' | 'numberOfRecentPurchases'> &
   {
     className: React.HTMLProps<HTMLElement>['className'];
   }

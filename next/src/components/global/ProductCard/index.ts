@@ -3,7 +3,7 @@ import ProductCard from './ProductCard';
 export default ProductCard;
 export type { ProductCardTypes } from './ProductCard.types';
 
-export const ProductCard_Query = `
+export const ProductCard_Query = /* groq */ `
   'thumbnail': gallery[0] {
     ${ImgDataQuery}
   },
@@ -18,6 +18,6 @@ export const ProductCard_Query = `
     item_name,
     item_id,
   },
-  "rating": math::avg(*[_type == 'Review_Collection' && references(^._id)]{rating}.rating),
-  "totalReviews": count(*[_type == 'Review_Collection' && references(^._id)]),
+  "rating": math::avg(*[_type == 'Review_Collection' && references(^._id) && visible]{rating}.rating),
+  "totalReviews": count(*[_type == 'Review_Collection' && references(^._id) && visible]),
 `;

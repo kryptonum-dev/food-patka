@@ -1,6 +1,8 @@
 .Reviews {
-  display: grid;
-  gap: clamp(12px, calc(20vw / 7.68), 20px);
+  .list {
+    display: grid;
+    gap: clamp(12px, calc(20vw / 7.68), 20px);
+  }
   .item {
     margin-top: clamp(10px, calc(13vw / 7.68), 13px);
     padding: clamp(12px, calc(24vw / 7.68), 24px);
@@ -25,16 +27,93 @@
         margin-bottom: 12px;
       }
     }
-    .gallery {
-      margin-top: 12px;
+  }
+}
+
+.Form {
+  position: relative;
+  margin-bottom: clamp(42px, calc(48vw / 7.68), 64px);
+  display: grid;
+  gap: clamp(12px, calc(12vw / 7.68), 20px);
+  &:has([data-element='FormState']) {
+    & > *:not([data-element='FormState']) {
+      display: none;
+    }
+  }
+  .rating {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    > span[role='alert'] {
+      width: 100%;
+    }
+    p {
+      margin-left: 12px;
+      span {
+        display: none;
+      }
+    }
+    &:has(label:nth-of-type(1) input:checked) p span:nth-of-type(1),
+    &:has(label:nth-of-type(2) input:checked) p span:nth-of-type(2),
+    &:has(label:nth-of-type(3) input:checked) p span:nth-of-type(3),
+    &:has(label:nth-of-type(4) input:checked) p span:nth-of-type(4),
+    &:has(label:nth-of-type(5) input:checked) p span:nth-of-type(5) {
+      display: inline;
+    }
+    &:not(:has(label:hover)) {
+      p span:nth-of-type(6) {
+        display: inline;
+      }
+    }
+    &:has(input:checked) {
+      p span:nth-of-type(6) {
+        display: none;
+      }
+    }
+    &:not(:has(label input:checked)) {
+      &:has(label:nth-of-type(1):hover) p span:nth-of-type(1),
+      &:has(label:nth-of-type(2):hover) p span:nth-of-type(2),
+      &:has(label:nth-of-type(3):hover) p span:nth-of-type(3),
+      &:has(label:nth-of-type(4):hover) p span:nth-of-type(4),
+      &:has(label:nth-of-type(5):hover) p span:nth-of-type(5) {
+        display: inline;
+      }
+    }
+    label {
+      width: 44px;
+      height: 44px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      img {
-        width: 96px;
-        height: 96px;
-        object-fit: cover;
-        border-radius: 6px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      input {
+        opacity: 0;
+        position: absolute;
+      }
+      transition: transform 0.3s var(--easing);
+      &:active {
+        transition-duration: 0s;
+        transform: scale(0.92);
+      }
+      &:has(input:focus-visible) {
+        outline: 1px solid var(--primary-500);
+        outline-offset: 5px;
+      }
+      &:has(input:checked),
+      &:has(input:checked) ~ label,
+      &:hover,
+      &:hover ~ label {
+        svg path:first-child {
+          fill: #ffb8ce;
+        }
+      }
+      &:hover,
+      &:hover ~ label {
+        svg {
+          opacity: 0.8;
+        }
       }
     }
   }
