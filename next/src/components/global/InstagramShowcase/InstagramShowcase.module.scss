@@ -1,0 +1,46 @@
+.InstagramShowcase {
+  display: grid;
+  gap: clamp(20px, calc(28vw / 7.68), 32px);
+  @media (min-width: 1000px) {
+    grid-template-columns: 1fr 2fr;
+  }
+  @media (max-width: 999px) {
+    header {
+      max-width: calc(450rem / 16);
+    }
+    .list {
+      max-width: 768px;
+    }
+  }
+  header {
+    .icon {
+      border-radius: 50%;
+      background: var(--primary-300, #fff6f9);
+      width: clamp(40px, calc(64vw / 7.68), 64px);
+      height: clamp(40px, calc(64vw / 7.68), 64px);
+      display: grid;
+      place-items: center;
+      svg {
+        width: clamp(16px, calc(24vw / 7.68), 24px);
+        height: clamp(16px, calc(24vw / 7.68), 24px);
+      }
+      margin-bottom: clamp(8px, calc(12vw / 7.68), 12px);
+    }
+  }
+  .list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: clamp(16px, calc(24vw / 7.68), 24px);
+    a {
+      display: block;
+      transition: transform 0.3s var(--easing);
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+    img {
+      aspect-ratio: 1/1;
+      border-radius: 12px;
+    }
+  }
+}

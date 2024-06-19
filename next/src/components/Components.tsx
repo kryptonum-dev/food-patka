@@ -12,6 +12,7 @@ import LatestBlogEntries, { type LatestBlogEntriesTypes, LatestBlogEntries_Query
 import Features, { type FeaturesTypes, Features_Query } from '@/components/global/Features';
 import FeaturedProducts, { type FeaturedProductsTypes, FeaturedProducts_Query } from '@/components/global/FeaturedProducts';
 import Reviews, { type ReviewsTypes, Reviews_Query } from '@/components/global/Reviews';
+import InstagramShowcase, { type InstagramShowcaseTypes, InstagramShowcase_Query } from '@/components/global/InstagramShowcase';
 
 type componentsMapTypes = {
   HeroHeaderAndImage: HeroHeaderAndImageTypes;
@@ -28,6 +29,7 @@ type componentsMapTypes = {
   Features: FeaturesTypes;
   FeaturedProducts: FeaturedProductsTypes;
   Reviews: ReviewsTypes;
+  InstagramShowcase: InstagramShowcaseTypes;
 };
 
 export type ComponentTypes = componentsMapTypes[keyof componentsMapTypes] & { _type: string };
@@ -51,6 +53,7 @@ export default function Components({ data }: { data: ComponentTypes[] }) {
       Features: <Features {...(item as FeaturesTypes)} />,
       FeaturedProducts: <FeaturedProducts {...(item as FeaturedProductsTypes)} />,
       Reviews: <Reviews {...(item as ReviewsTypes)} />,
+      InstagramShowcase: <InstagramShowcase {...(item as InstagramShowcaseTypes)} />,
     };
     const DynamicComponent = componentsMapTypes[componentType];
     if (!DynamicComponent) return null;
@@ -75,5 +78,6 @@ export const Components_Query = /* groq */ `
     ${Features_Query}
     ${FeaturedProducts_Query}
     ${Reviews_Query}
+    ${InstagramShowcase_Query}
   },
 `;
