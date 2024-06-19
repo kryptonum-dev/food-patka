@@ -17,6 +17,7 @@ import ProductCategory_Collection from './collectionTypes/ProductCategory_Collec
 import Product_Collection from './collectionTypes/Product_Collection';
 import CookieConsent, { CookieConsent_Details, CookieConsent_Details_List, CookieConsent_Details_List_Cookies } from './components/CookieConsent';
 import Review_Collection from './collectionTypes/Review_Collection';
+import ThankYou_Page from './singleTypes/ThankYou_Page';
 
 export const schemaTypes = [
   cta,
@@ -36,6 +37,7 @@ export const schemaTypes = [
   NotFound_Page,
   Blog_Page,
   Shop_Page,
+  ThankYou_Page,
 
   // Collection types
   Partners_Collection,
