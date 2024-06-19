@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import styles from './Content.module.scss';
 import DescriptionStyles from '../Description/Description.module.scss';
-// import ReviewsStyles from '../Reviews/Reviews.module.scss';
+import ReviewsStyles from '../Reviews/Reviews.module.scss';
 import type { ContentTypes } from './Content.types';
 
-export default function Content({ children, /* reviewsCount */ }: ContentTypes) {
+export default function Content({ children, reviewsCount }: ContentTypes) {
   const [tab, setTab] = useState(0);
 
   return (
@@ -20,7 +20,7 @@ export default function Content({ children, /* reviewsCount */ }: ContentTypes) 
         >
           Szczegóły
         </button>
-        {/* <button
+        <button
           onClick={() => setTab(1)}
           aria-current={tab === 1}
           role="tab"
@@ -28,7 +28,7 @@ export default function Content({ children, /* reviewsCount */ }: ContentTypes) 
           id="reviews-tab-btn"
         >
           Opine ({reviewsCount})
-        </button> */}
+        </button>
       </div>
       <section
         role="tabpanel"
@@ -39,7 +39,7 @@ export default function Content({ children, /* reviewsCount */ }: ContentTypes) 
       >
         {children[0]}
       </section>
-      {/* <section
+      <section
         role="tabpanel"
         id="reviews-tab"
         aria-labelledby="reviews-tab-btn"
@@ -47,7 +47,7 @@ export default function Content({ children, /* reviewsCount */ }: ContentTypes) 
         style={{ display: tab !== 1 ? 'none' : undefined }}
       >
         {children[1]}
-      </section> */}
+      </section>
     </section>
   );
 }
