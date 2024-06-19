@@ -18,6 +18,6 @@ export const ProductCard_Query = /* groq */ `
     item_name,
     item_id,
   },
-  "rating": math::avg(*[_type == "Review_Collection" && references(^._id) && visible]{rating}.rating),
+  "rating": round(math::avg(*[_type == "Review_Collection" && references(^._id) && visible]{rating}.rating), 1),
   "totalReviews": count(*[_type == "Review_Collection" && references(^._id) && visible]),
 `;
