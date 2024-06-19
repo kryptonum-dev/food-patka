@@ -11,8 +11,8 @@ export async function POST(request: Request) {
   const client_ip_address = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip');
   const client_user_agent = request.headers.get('user-agent');
 
-  const fbc = cookies().get('_fbc');
-  const fbp = cookies().get('_fbp');
+  const fbc = cookies().get('_fbc')?.value;
+  const fbp = cookies().get('_fbp')?.value;
 
   const {
     event_name,
@@ -21,9 +21,6 @@ export async function POST(request: Request) {
     content_name,
     content_price,
   } = await request.json();
-
-  console.log('fbc', fbc);
-  console.log('fbp', fbp);
 
   try {
     await fetch(PAYLOAD_URL, {
@@ -53,6 +50,7 @@ export async function POST(request: Request) {
             },
           },
         ],
+        'test_event_code': 'TEST6028'
       }),
     });
     return NextResponse.json({

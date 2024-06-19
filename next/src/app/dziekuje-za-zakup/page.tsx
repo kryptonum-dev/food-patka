@@ -2,17 +2,22 @@ import sanityFetch from '@/utils/sanity.fetch';
 import { QueryMetadata } from '@/global/Seo/query-metadata';
 import Breadcrumbs from '@/components/global/Breadcrumbs';
 import Components, { ComponentTypes, Components_Query } from '@/components/Components';
+import Analytics from './Analytics';
+import type { ThankYouPageTypes } from './page.types';
 
 const currentPath = '/dziekuje-za-zakup';
 const breadcrumbs = [
   { name: 'Dziękuję za zakup', path: currentPath },
 ];
 
-export default async function ThankYouPage() {
+export default async function ThankYouPage({
+  searchParams: { ec_product, ec_product_id }
+}: ThankYouPageTypes) {
   const { content } = await query();
 
   return (
     <>
+      <Analytics {...{ ec_product, ec_product_id }} />
       <Breadcrumbs data={breadcrumbs} />
       <Components data={content} />
     </>
