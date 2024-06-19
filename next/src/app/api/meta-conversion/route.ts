@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   } = await request.json();
 
   try {
-    await fetch(PAYLOAD_URL, {
+    const data = await fetch(PAYLOAD_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -53,6 +53,7 @@ export async function POST(request: Request) {
         'test_event_code': 'TEST6028'
       }),
     });
+    console.log(await data.json());
     return NextResponse.json({
       success: true,
     }, { status: 200 });
