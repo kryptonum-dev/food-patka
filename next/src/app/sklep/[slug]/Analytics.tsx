@@ -11,6 +11,7 @@ export default function Analytics({
 }) {
   useEffect(() => {
     if (!item_name || !item_id) return;
+
     fetch('/api/meta-conversion', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -20,7 +21,21 @@ export default function Analytics({
         content_name: item_name,
       }),
     });
-    setTimeout(() => {
+
+    const handleScroll = () => {
+      fetch('/api/meta-conversion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: 'PageScroll',
+          content_id: item_id,
+          content_name: item_name,
+        }),
+      });
+      window.removeEventListener('scroll', handleScroll);
+    };
+
+    const timeoutId = setTimeout(() => {
       sendGTMEvent({
         event: 'view_item',
         items: [
@@ -31,7 +46,13 @@ export default function Analytics({
           },
         ],
       });
+      window.addEventListener('scroll', handleScroll);
     }, 1000);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
+    };
   }, [item_id, item_name]);
 
   return null;
