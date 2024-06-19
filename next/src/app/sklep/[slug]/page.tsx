@@ -62,6 +62,10 @@ export default async function ShopProductPage({
 
   return (
     <>
+      <Analytics
+        item_id={analytics.item_id}
+        item_name={analytics.item_name}
+      />
       <Breadcrumbs data={breadcrumbsSchema} />
       <Product
         {...{
@@ -86,10 +90,6 @@ export default async function ShopProductPage({
         reviews={reviews}
       />
       <Components data={pageContent} />
-      <Analytics
-        item_id={analytics.item_id}
-        item_name={analytics.item_name}
-      />
     </>
   );
 }

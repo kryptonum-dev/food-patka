@@ -11,6 +11,15 @@ export default function Analytics({
 }) {
   useEffect(() => {
     if (!item_name || !item_id) return;
+    fetch('/api/meta-conversion', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event_name: 'PageView',
+        content_id: item_id,
+        content_name: item_name,
+      }),
+    });
     setTimeout(() => {
       sendGTMEvent({
         event: 'view_item',
