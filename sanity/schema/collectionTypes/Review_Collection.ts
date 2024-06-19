@@ -11,6 +11,14 @@ export default defineType({
   icon,
   fields: [
     defineField({
+      name: 'visible',
+      type: 'boolean',
+      title: 'Czy recencja widoczna?',
+      description: 'Zaznacz, jeśli recenzja ma być widoczna na stronie.',
+      validation: Rule => Rule.required(),
+      initialValue: false,
+    }),
+    defineField({
       name: 'name',
       type: 'string',
       title: 'Imię',
@@ -43,27 +51,19 @@ export default defineType({
       title: 'Treść',
       validation: Rule => Rule.required(),
     }),
-    defineField({
-      name: 'gallery',
-      type: 'array',
-      of: [
-        { type: 'image' }
-      ],
-      title: 'Zdjęcia (opcjonalne)',
-    }),
   ],
   preview: {
     select: {
       name: 'name',
       rating: 'rating',
       content: 'content',
-      gallery: 'gallery',
+      visible: 'visible',
+      product: 'product.name',
     },
-    prepare: ({ name, rating, content, gallery }) => ({
-      title: `${name} ocenił/a na ${rating}/5 gwiazdek`,
-      subtitle: removeMarkdown(content),
-      media: gallery && gallery[0],
-      icon,
+    prepare: ({ name, rating, visible, product }) => ({
+      title: `${name} ocenił/a ${removeMarkdown(product)}`,
+      subtitle: visible ? 'Zatwierdzone' : 'Niezatwierdzone',
+      media: () => `${rating}/5`,
     }),
   },
   groups: [
