@@ -11,6 +11,7 @@ export default function BuyButton({ children, href, content_id, content_name }: 
         event_name: 'AddToCart',
         content_id: content_id,
         content_name: content_name,
+        event_source_url: href,
       }),
     });
   };
