@@ -96,7 +96,7 @@ const query = async ({
       PAGINATION_AFTER: PAGINATION_AFTER,
       mainCategory: mainCategory,
     },
-    tags: ['Shop_Page', 'Product_Collection', 'ProductCategory_Collection'],
+    tags: ['Shop_Page', 'Product_Collection', 'ProductCategory_Collection', 'Review_Collection'],
   });
   if (!data.mainCategory) notFound();
   return data;

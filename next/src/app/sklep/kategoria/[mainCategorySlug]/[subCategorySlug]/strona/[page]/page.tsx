@@ -102,7 +102,7 @@ const query = async ({
       mainCategory: mainCategory,
       subCategory: subCategory,
     },
-    tags: ['Shop_Page', 'Product_Collection', 'ProductCategory_Collection'],
+    tags: ['Shop_Page', 'Product_Collection', 'ProductCategory_Collection', 'Review_Collection'],
   });
   if (!data.subCategory) notFound();
   return data;

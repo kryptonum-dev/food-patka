@@ -113,7 +113,7 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
       }
     `,
     params: { slug },
-    tags: ['Product_Collection', 'global'],
+    tags: ['Product_Collection', 'global', 'Review_Collection'],
   });
   if (!data) notFound();
   return data;
