@@ -37,7 +37,7 @@ export default function Form({ productId, privacyPolicyLink, RatingIcon }: FormT
     formState: { errors },
   } = useForm({ mode: 'onTouched' });
 
-  const reviews = JSON.parse(localStorage.getItem('reviews') || '[]') as StarageReviesTypes;
+  const reviews = JSON.parse(localStorage?.getItem('reviews') || '[]') as StarageReviesTypes;
   const reviewForProduct = reviews.find(({ id }) => id === productId);
   if (reviewForProduct) {
     if (reviewForProduct.timestamp < Date.now() - (60 * 60 * 1000 * .1)) {
