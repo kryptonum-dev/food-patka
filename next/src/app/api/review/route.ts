@@ -31,15 +31,13 @@ export async function POST(request: Request) {
     content: review,
   };
 
-
   try {
     await client.create(data);
     return NextResponse.json({
       success: true,
       message: 'Review successfully created'
     }, { status: 200 });
-  } catch (error) {
-    console.log(error);
+  } catch {
     return NextResponse.json({
       success: false,
       message: 'There was an error creating the review. Try again later.'

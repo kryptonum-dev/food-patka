@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   } = await request.json();
 
   try {
-    const data = await fetch(PAYLOAD_URL, {
+    await fetch(PAYLOAD_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -52,7 +52,6 @@ export async function POST(request: Request) {
         ],
       }),
     });
-    console.log(await data.json());
     return NextResponse.json({
       success: true,
     }, { status: 200 });
