@@ -1,0 +1,39 @@
+import sanityFetch from '@/utils/sanity.fetch';
+import { QueryMetadata } from '@/global/Seo/query-metadata';
+import Breadcrumbs from '@/components/global/Breadcrumbs';
+import Components, { ComponentTypes, Components_Query } from '@/components/Components';
+
+const currentPath = '/dziekuje-za-zakup';
+const breadcrumbs = [
+  { name: 'Dziękuję za zakup', path: currentPath },
+];
+
+export default async function ThankYouPage() {
+  const { content } = await query();
+
+  return (
+    <>
+      <Breadcrumbs data={breadcrumbs} />
+      <Components data={content} />
+    </>
+  );
+}
+
+const query = async (): Promise<{ content: ComponentTypes[] }> => {
+  return await sanityFetch({
+    query: /* groq */ `
+      *[_type == "ThankYou_Page"][0] {
+        ${Components_Query}
+      }
+    `,
+    tags: ['ThankYou_Page'],
+  });
+};
+
+
+export async function generateMetadata() {
+  return await QueryMetadata({
+    name: 'ThankYou_Page',
+    path: currentPath
+  });
+}
