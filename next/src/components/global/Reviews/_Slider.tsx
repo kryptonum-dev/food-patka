@@ -1,12 +1,12 @@
 'use client';
 import { Fragment } from 'react';
+import Link from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import { usePagination, useNavigation } from '@/components/global/Carousel';
 import '@/components/global/Carousel/embla.scss';
 import styles from './Reviews.module.scss';
 import ReviewScore from '@/components/ui/ReviewScore';
 import type { SliderTypes } from './Reviews.types';
-import Link from 'next/link';
 
 export default function Slider({ list, QuoteIcon, LeftArrowIcon, RightArrowIcon, PaginationIcon }: SliderTypes) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', skipSnaps: true, loop: true });
@@ -17,7 +17,7 @@ export default function Slider({ list, QuoteIcon, LeftArrowIcon, RightArrowIcon,
     <>
       <div className={`embla ${styles['Slider']}`} ref={emblaRef}>
         <div className="embla__container">
-          {list.map(({ name, rating, productName, productSlug, content, gallery }, i) => (
+          {list.map(({ name, rating, productName, productSlug, content }, i) => (
             <div className={`embla__slide ${styles.slide}`} key={i}>
               {QuoteIcon}
               <header>
@@ -26,15 +26,6 @@ export default function Slider({ list, QuoteIcon, LeftArrowIcon, RightArrowIcon,
               </header>
               <p className={styles.purchased}><span>Kupił/a:</span> <Link href={`/sklep/${productSlug}`}>{productName}</Link></p>
               {content}
-              {gallery && (
-                <div className={styles.gallery}>
-                  {gallery.map((img, i) => (
-                    <Fragment key={i}>
-                      {img}
-                    </Fragment>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </div>

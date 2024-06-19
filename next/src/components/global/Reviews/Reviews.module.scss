@@ -58,18 +58,6 @@
       }
       font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
     }
-    .gallery {
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      img {
-        width: 96px;
-        height: 96px;
-        object-fit: cover;
-        border-radius: 6px;
-      }
-    }
   }
 }
 
