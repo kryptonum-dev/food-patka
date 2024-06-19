@@ -9,7 +9,7 @@ import type { RequestTypes } from './route.types';
 const AUTHORIZED_IP = '138.68.104.42';
 
 const stripe = new Stripe(process.env.STRAPI_API_KEY!);
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY!);
 
 export async function POST(request: Request) {
   const { isPromoCodeAfterPurchase } = await query();
