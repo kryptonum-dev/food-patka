@@ -20,10 +20,7 @@ export async function POST(request: Request) {
     content_id,
     content_name,
     content_price,
-    event_source_url,
   } = await request.json();
-
-  const referer = event_source_url || request.headers.get('referer');
 
   try {
     await fetch(PAYLOAD_URL, {
@@ -35,7 +32,6 @@ export async function POST(request: Request) {
             'event_name': event_name,
             'event_time': current_timestamp,
             'action_source': 'website',
-            'event_source_url': referer,
             'user_data': {
               'client_ip_address': client_ip_address,
               'client_user_agent': client_user_agent,
@@ -54,7 +50,6 @@ export async function POST(request: Request) {
             },
           },
         ],
-        'test_event_code': 'TEST6028',
       }),
     });
     return NextResponse.json({
