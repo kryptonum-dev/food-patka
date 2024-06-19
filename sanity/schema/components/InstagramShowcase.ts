@@ -20,8 +20,7 @@ export default defineField({
       name: 'list',
       type: 'array',
       of: [
-        defineField({
-          name: 'post',
+        {
           type: 'object',
           title: 'Post',
           fields: [
@@ -48,7 +47,7 @@ export default defineField({
               media: img,
             }),
           }
-        })
+        }
       ],
       title: 'Lista zdjęć',
       validation: Rule => Rule.required().max(3),
