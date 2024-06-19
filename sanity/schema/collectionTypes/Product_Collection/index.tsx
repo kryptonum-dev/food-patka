@@ -47,8 +47,8 @@ export default defineType({
       title: 'Link do produktu',
       description: (
         <>
-          Skrócony link do produktu w{' '}
-          <a href='https://app.easycart.pl/admin/products' target='_blank' rel='noreferrer'>EasyCart</a>. Powinien wyglądać następująco: <b>https://easl.ink/***</b>.
+          Pełny link do produktu w{' '}
+          <a href='https://app.easycart.pl/admin/products' target='_blank' rel='noreferrer'>EasyCart</a>. Powinien wyglądać następująco: <b>https://app.easycart.pl/checkout/food-patka/***</b>.
         </>
       ),
       validation: Rule => Rule.required(),
