@@ -44,7 +44,7 @@ export async function POST(request: Request) {
               ...fbp && { 'fbc': fbp },
             },
             'custom_data': {
-              'content_ids': content_id,
+              'contents': [{ id: content_id, quantity: 1 }],
               'content_name': content_name,
               'content_type': 'product',
               ...content_price && {
