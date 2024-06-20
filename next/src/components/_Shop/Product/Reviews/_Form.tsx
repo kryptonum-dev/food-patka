@@ -37,22 +37,25 @@ export default function Form({ productId, privacyPolicyLink, RatingIcon }: FormT
     formState: { errors },
   } = useForm({ mode: 'onTouched' });
 
-  const reviews = JSON.parse(localStorage?.getItem('reviews') || '[]') as StarageReviesTypes;
-  const reviewForProduct = reviews.find(({ id }) => id === productId);
-  if (reviewForProduct) {
-    if (reviewForProduct.timestamp < Date.now() - (60 * 60 * 1000 * .1)) {
-      localStorage.setItem('reviews', JSON.stringify(reviews.filter(({ id }) => id !== productId)));
+  let reviews = [] as StarageReviesTypes;
+  if (typeof window !== 'undefined') {
+    reviews = JSON.parse(localStorage.getItem('reviews') || '[]') as StarageReviesTypes;
+    const reviewForProduct = reviews.find(({ id }) => id === productId);
+    if (reviewForProduct) {
+      if (reviewForProduct.timestamp < Date.now() - (60 * 60 * 1000 * .1)) {
+        localStorage.setItem('reviews', JSON.stringify(reviews.filter(({ id }) => id !== productId)));
+      }
+      return (
+        <form className={styles['Form']}>
+          <Loader loading={false} />
+          <FormState
+            {...formStateData}
+            isSuccess={true}
+            setStatus={setStatus}
+          />
+        </form>
+      );
     }
-    return (
-      <form className={styles['Form']}>
-        <Loader loading={false} />
-        <FormState
-          {...formStateData}
-          isSuccess={true}
-          setStatus={setStatus}
-        />
-      </form>
-    );
   }
 
   const onSubmit = async (data: FieldValues) => {
