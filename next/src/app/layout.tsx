@@ -5,6 +5,7 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import Header from '@/components/global/Header';
 import Footer from '@/components/global/Footer';
 import CookieConsent from '@/components/global/CookieConsent';
+import SchemaOrganization from '@/global/Schema/Organization';
 
 export const viewport = {
   themeColor: THEME_COLOR,
@@ -18,9 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id='main'>{children}</main>
         <Footer />
         <CookieConsent />
+        <SchemaOrganization />
       </body>
-      {/* {process.env.NODE_ENV === 'production' && <GoogleTagManager gtmId='GTM-KNPVL7L7' />} */}
-      <GoogleTagManager gtmId='GTM-KNPVL7L7' />
+      {process.env.NODE_ENV === 'production' && <GoogleTagManager gtmId='GTM-KNPVL7L7' />}
     </html>
   );
 }

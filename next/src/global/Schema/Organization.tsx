@@ -8,10 +8,12 @@ type QueryTypes = {
   };
   email?: string;
   phone?: string;
-  instagram?: string;
-  facebook?: string;
-  youtube?: string;
-  linkedin?: string;
+  socials: {
+    facebook?: string;
+    instagram?: string;
+    youtube?: string;
+    tiktok?: string;
+  }
 };
 
 const SchemaOrganization = async () => {
@@ -19,13 +21,15 @@ const SchemaOrganization = async () => {
     OrganizationSchema: { name: OrganizationSchema_Name, description: OrganizationSchema_Description },
     email,
     phone,
-    instagram,
-    facebook,
-    youtube,
-    linkedin,
+    socials: {
+      facebook,
+      instagram,
+      youtube,
+      tiktok,
+    }
   } = await query();
 
-  const socialMediaUrls = [instagram, facebook, youtube, linkedin].filter(Boolean);
+  const socialMediaUrls = [facebook, instagram, youtube, tiktok].filter(Boolean);
 
   return (
     <script
@@ -65,17 +69,19 @@ export default SchemaOrganization;
 const query = async (): Promise<QueryTypes> => {
   return await sanityFetch<QueryTypes>({
     query: /* groq */ `
-      *[_type == "global"][0] {
+      *[_id == "global"][0] {
         OrganizationSchema {
           name,
           description,
         },
         email,
         phone,
-        instagram,
-        facebook,
-        youtube,
-        linkedin,
+        socials {
+          facebook,
+          instagram,
+          youtube,
+          tiktok,
+        }
       }
     `,
     tags: ['global'],
