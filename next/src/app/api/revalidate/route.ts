@@ -17,10 +17,9 @@ export async function POST(request: NextRequest) {
   if (authorizationHeader !== `Bearer ${process.env.SANITY_REVALIDATE_TOKEN}`) {
     return new Response('Unauthorized', { status: 401 });
   }
+  console.log('Revalidating:', tag, id);
 
   const { references } = await query(tag, id);
-
-  console.log('Revalidating:', tag, id, references);
 
   if (tag) {
     revalidateTag(tag);
