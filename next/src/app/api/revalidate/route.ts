@@ -20,6 +20,8 @@ export async function POST(request: NextRequest) {
 
   const { references } = await query(tag, id);
 
+  console.log('Revalidating:', tag, id, references);
+
   if (tag) {
     revalidateTag(tag);
     if (references?.length > 0) {
