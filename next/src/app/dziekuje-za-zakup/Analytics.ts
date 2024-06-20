@@ -15,6 +15,7 @@ export default function Analytics({ ec_product, ec_product_uuid, ec_amount }: An
         content_price: ec_amount,
       }),
     });
+    window.history.replaceState(null, '', window.location.pathname);
   }, [ec_product, ec_product_uuid, ec_amount]);
 
   return null;
