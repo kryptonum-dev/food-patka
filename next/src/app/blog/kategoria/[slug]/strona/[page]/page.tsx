@@ -5,6 +5,7 @@ import Breadcrumbs from '@/components/global/Breadcrumbs';
 import Components, { Components_Query } from '@/components/Components';
 import Listing from '@/components/_Blog/Listing';
 import type { BlogCategoryPaginationPageQueryTypes, BlogCategoryPaginationPageTypes } from './page.types';
+import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
 
 export default async function BlogCategoryPaginationPage({ params: { slug, page } }: BlogCategoryPaginationPageTypes) {
   const {
@@ -68,19 +69,22 @@ export async function generateMetadata({ params: { slug, page } }: BlogCategoryP
   });
 }
 
-// export async function generateStaticParams(): Promise<{ slug: string, page: number }[]> {
-//   const collection = await sanityFetch<{ slug: string, page: number }[]>({
-//     query: /* groq */ `
-//       *[_type == 'BlogCategory_Collection'] {
-//         'slug': slug.current,
-//         'page': count(*[_type == 'BlogPost_Collection' && references(^._id)]),
-//       }
-//     `,
-//     tags: ['BlogCategory_Collection'],
-//   });
+export async function generateStaticParams(): Promise<{ slug: string; page: string; }[]> {
+  const data = await sanityFetch<{ slug: string, postCount: number }[]>({
+    query: /* groq */ `
+      *[_type == 'BlogCategory_Collection'] {
+        "slug": slug.current,
+        "postCount": count(*[_type == "Product_Collection" && references(^._id)]),
+      }
+    `,
+    tags: ['BlogPost_Collection', 'BlogCategory_Collection'],
+  });
 
-//   return collection.map(({ slug, page }) => ({
-//     slug: slug,
-//     page: Math.ceil(page / 10),
-//   }));
-// }
+  return data.flatMap(({ slug, postCount }) => {
+    const totalPages = Math.ceil(postCount / ITEMS_PER_PAGE);
+    return Array.from({ length: totalPages - 1 }, (_, i) => ({
+      slug: slug,
+      page: (i + 2).toString(),
+    }));
+  });
+}
