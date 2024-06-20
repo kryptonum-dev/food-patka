@@ -47,5 +47,14 @@
       border-radius: 20px;
       border: 2px solid var(--primary-400, #ffd7e4);
     }
+    ul,
+    ol {
+      &:not(:first-child) {
+        margin-top: clamp(8px, calc(12vw / 7.68), 12px);
+      }
+      &:not(:last-child) {
+        margin-bottom: clamp(8px, calc(12vw / 7.68), 12px);
+      }
+    }
   }
 }
