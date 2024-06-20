@@ -28,7 +28,8 @@
       "@/app/*": ["./src/app/*"]
     },
     "forceConsistentCasingInFileNames": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "types": ["@types/gtag.js"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "plopfile.js"],
   "exclude": ["node_modules"]

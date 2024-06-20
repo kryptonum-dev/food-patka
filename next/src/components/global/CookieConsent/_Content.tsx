@@ -7,7 +7,8 @@ import { getCookie } from '@/utils/get-cookie';
 import { setCookie } from '@/utils/set-cookie';
 import type { ContentProps } from './CookieConsent.types';
 
-declare const window: Window & { dataLayer: Record<string, unknown>[]; };
+// eslint-disable-next-line prefer-rest-params
+const gtag: Gtag.Gtag = function () { window.dataLayer?.push(arguments); };
 
 const cookieObjectKeys = ['preferences', 'statistics', 'marketing'];
 
@@ -23,10 +24,6 @@ const activeCookiesObject: CookiesObject = cookieObjectKeys.reduce((acc, name) =
 }, {} as CookiesObject);
 
 export default function Content({ CloseIcon, heading, paragraph, details }: ContentProps) {
-  function gtag(...args: unknown[]) {
-    window.dataLayer?.push(args);
-  }
-
   const [showSettings, setShowSettings] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
   const [activeCookies, setActiveCookies] = useState(activeCookiesObject);

@@ -1,9 +1,8 @@
 'use client';
 import { useEffect } from 'react';
 
-function gtag(...args: unknown[]) {
-  window.dataLayer?.push(args);
-}
+// eslint-disable-next-line prefer-rest-params
+const gtag: Gtag.Gtag = function () { window.dataLayer?.push(arguments); };
 
 export default function Analytics({
   item_id,
@@ -49,6 +48,7 @@ export default function Analytics({
           },
         ],
       });
+
       window.addEventListener('scroll', handleScroll);
     }, 1000);
 
