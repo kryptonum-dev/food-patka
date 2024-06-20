@@ -1,6 +1,9 @@
 'use client';
 import { useEffect } from 'react';
-import { sendGTMEvent } from '@next/third-parties/google';
+
+function gtag(...args: unknown[]) {
+  window.dataLayer?.push(args);
+}
 
 export default function Analytics({
   item_id,
@@ -36,8 +39,7 @@ export default function Analytics({
     };
 
     const timeoutId = setTimeout(() => {
-      sendGTMEvent({
-        event: 'view_item',
+      gtag('event', 'view_item', {
         send_to: 'G-VMCRFRPEPX',
         items: [
           {
