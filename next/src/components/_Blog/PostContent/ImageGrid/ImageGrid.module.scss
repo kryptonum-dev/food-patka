@@ -5,4 +5,8 @@
   @media (min-width: 400px) {
     grid-template-columns: 1fr 1fr;
   }
+  img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
 }
