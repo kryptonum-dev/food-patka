@@ -22,4 +22,5 @@ export type ShopProductPageQueryTypes = Omit<ProductTypes, 'currentVariantParam'
     min: number;
     max: number;
   };
+  openGraphImageUrl?: string;
 };

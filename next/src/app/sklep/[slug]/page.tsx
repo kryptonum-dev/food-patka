@@ -7,6 +7,7 @@ import Product, { Product_Query } from '@/components/_Shop/Product';
 import Components, { Components_Query } from '@/components/Components';
 import Analytics from './Analytics';
 import { hash } from '@/utils/hash';
+import ProductSchema from '@/global/Schema/ProductSchema';
 import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
 
 export default async function ShopProductPage({
@@ -32,6 +33,7 @@ export default async function ShopProductPage({
     totalReviews,
     reviews,
     RecentPurchases: { min, max },
+    openGraphImageUrl,
   } = await query(slug);
 
   const timestamp = Math.floor(new Date().getTime() / (1000 * 60 * 60 * 1));
@@ -62,6 +64,12 @@ export default async function ShopProductPage({
 
   return (
     <>
+      <ProductSchema
+        name={removeMarkdown(name)}
+        image_url={openGraphImageUrl}
+        rating_value={rating}
+        rating_count={totalReviews}
+      />
       <Analytics
         item_id={analytics.item_id}
         item_name={analytics.item_name}
@@ -110,6 +118,7 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
           min,
           max,
         },
+        "openGraphImageUrl": seo.img.asset -> url + "?w=1200",
       }
     `,
     params: { slug },
