@@ -17,15 +17,14 @@ export async function POST(request: NextRequest) {
   if (authorizationHeader !== `Bearer ${process.env.SANITY_REVALIDATE_TOKEN}`) {
     return new Response('Unauthorized', { status: 401 });
   }
+  
   console.log('Revalidating:', tag, id);
-
-  const { references } = await query(tag, id);
 
   if (tag) {
     revalidateTag(tag);
-    if (references?.length > 0) {
-      references.forEach((tag) => revalidateTag(tag));
-    }
+    const data = await query(tag, id);
+    const references = data?.references;
+    references?.forEach((tag) => revalidateTag(tag));
     return Response.json({ revalidated: true, now: Date.now() });
   } else {
     return Response.json({ revalidated: false, now: Date.now() });
