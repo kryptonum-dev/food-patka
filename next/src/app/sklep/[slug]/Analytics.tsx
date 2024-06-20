@@ -38,6 +38,7 @@ export default function Analytics({
     const timeoutId = setTimeout(() => {
       sendGTMEvent({
         event: 'view_item',
+        send_to: 'G-VMCRFRPEPX',
         items: [
           {
             item_id: item_id,
