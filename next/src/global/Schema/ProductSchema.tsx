@@ -17,11 +17,13 @@ export default function ProductSchema({ name, image_url, rating_value, rating_co
           ...image_url && {
             'image': image_url,
           },
-          'aggregateRating': {
-            '@type': 'AggregateRating',
-            'ratingValue': rating_value,
-            'ratingCount': rating_count,
-            'bestRating': 5,
+          ...(rating_value && rating_count > 0) && {
+            'aggregateRating': {
+              '@type': 'AggregateRating',
+              'ratingValue': rating_value,
+              'ratingCount': rating_count,
+              'bestRating': 5,
+            },
           }
         }),
       }}
