@@ -61,7 +61,7 @@ export async function POST(request: Request) {
       });
     }
     if (tiktok_event_name) {
-      const test = await fetch('https://business-api.tiktok.com/open_api/v1.3/event/track/', {
+      await fetch('https://business-api.tiktok.com/open_api/v1.3/event/track/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +101,6 @@ export async function POST(request: Request) {
           ]
         }),
       });
-      console.log(await test.json());
     }
     return NextResponse.json({
       success: true,
