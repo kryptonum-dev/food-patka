@@ -14,22 +14,23 @@ export default function Analytics({
   useEffect(() => {
     if (!item_name || !item_id) return;
 
-    fetch('/api/meta-conversion', {
+    fetch('/api/server-conversion', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        event_name: 'PageView',
+        meta_event_name: 'PageView',
+        tiktok_event_name: 'ViewContent',
         content_id: item_id,
         content_name: item_name,
       }),
     });
 
     const handleScroll = () => {
-      fetch('/api/meta-conversion', {
+      fetch('/api/server-conversion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          event_name: 'PageScroll',
+          meta_event_name: 'PageScroll',
           content_id: item_id,
           content_name: item_name,
         }),

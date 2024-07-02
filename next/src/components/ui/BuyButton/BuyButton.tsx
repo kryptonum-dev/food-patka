@@ -4,11 +4,12 @@ import type { BuyButtonTypes } from './BuyButton.types';
 
 export default function BuyButton({ children, href, content_id, content_name }: BuyButtonTypes) {
   const handleClick = () => {
-    fetch('/api/meta-conversion', {
+    fetch('/api/server-conversion', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        event_name: 'AddToCart',
+        meta_event_name: 'AddToCart',
+        tiktok_event_name: 'AddToCart',
         content_id: content_id,
         content_name: content_name,
         event_source_url: href,

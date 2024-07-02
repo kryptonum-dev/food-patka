@@ -1,8 +1,9 @@
 export type ThankYouPageTypes = {
   searchParams: {
-    ec_product: string;
-    ec_product_uuid: string;
-    ec_amount: number;
+    ec_product?: string;
+    ec_product_uuid?: string;
+    ec_amount?: number;
+    ttclid?: string;
   };
 };
 

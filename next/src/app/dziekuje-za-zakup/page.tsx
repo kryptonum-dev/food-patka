@@ -11,13 +11,13 @@ const breadcrumbs = [
 ];
 
 export default async function ThankYouPage({
-  searchParams: { ec_product, ec_product_uuid, ec_amount }
+  searchParams: { ec_product, ec_product_uuid, ec_amount, ttclid }
 }: ThankYouPageTypes) {
   const { content } = await query();
 
   return (
     <>
-      <Analytics {...{ ec_product, ec_product_uuid, ec_amount }} />
+      <Analytics {...{ ec_product, ec_product_uuid, ec_amount, ttclid }} />
       <Breadcrumbs data={breadcrumbs} />
       <Components data={content} />
     </>
