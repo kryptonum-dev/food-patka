@@ -108,7 +108,7 @@ export async function POST(request: Request) {
       });
     }
     if (pinterest_event_name) {
-      const pinterest = await fetch(`https://api.pinterest.com/v5/ad_accounts/${PINTEREST_ACCOUNT_ID}/events?test=true`, {
+      await fetch(`https://api.pinterest.com/v5/ad_accounts/${PINTEREST_ACCOUNT_ID}/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -143,7 +143,6 @@ export async function POST(request: Request) {
           ]
         }),
       });
-      console.log(await pinterest.json());
     }
     return NextResponse.json({
       success: true,
