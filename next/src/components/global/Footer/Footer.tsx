@@ -46,6 +46,7 @@ export default async function Footer() {
           </div>
         </div>
       </footer>
+      <div className='klaviyo-form-V7Epu4' />
     </>
   );
 }
