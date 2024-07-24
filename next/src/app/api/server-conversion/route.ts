@@ -4,6 +4,7 @@ import { hash } from '@/utils/hash';
 
 const TIKTOK_PIXEL_ID = 'CJDRTPJC77UF3VO9S3HG';
 const META_PIXEL_ID = '961763381554677';
+const PINTEREST_ACCOUNT_ID = '549767240441';
 const current_timestamp = Math.floor(Date.now() / 1000);
 
 export async function POST(request: Request) {
@@ -17,13 +18,17 @@ export async function POST(request: Request) {
   const {
     meta_event_name,
     tiktok_event_name,
+    pinterest_event_name,
     email,
     content_id,
     content_name,
     content_price,
     event_source_url,
     ttclid,
+    epik,
   } = await request.json();
+
+  const _epik = cookies().get('_epik')?.value || epik;
 
   const referer = event_source_url || request.headers.get('referer');
 
@@ -52,8 +57,8 @@ export async function POST(request: Request) {
                 'content_type': 'product',
                 ...content_price && {
                   'value': content_price,
-                  'currency': 'PLN',
                 },
+                'currency': 'PLN',
               },
             },
           ],
@@ -94,13 +99,51 @@ export async function POST(request: Request) {
                 ],
                 ...content_price && {
                   'value': content_price,
-                  'currency': 'PLN',
                 },
+                'currency': 'PLN',
               }
             }
           ]
         }),
       });
+    }
+    if (pinterest_event_name) {
+      const pinterest = await fetch(`https://api.pinterest.com/v5/ad_accounts/${PINTEREST_ACCOUNT_ID}/events?test=true`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.PINTEREST_ACCESS_TOKEN}`
+        },
+        body: JSON.stringify({
+          'data': [
+            {
+              'event_name': pinterest_event_name,
+              'action_source': 'web',
+              'event_time': current_timestamp,
+              'event_id': Math.random().toString(36).substring(2, 10),
+              'event_source_url': referer,
+              'user_data': {
+                ...email && { 'em': await hash(email) },
+                'client_ip_address': client_ip_address,
+                'client_user_agent': client_user_agent,
+                ..._epik && { 'click_id': _epik },
+              },
+              'custom_data': {
+                'currency': 'PLN',
+                ...content_price && {
+                  'value': content_price,
+                },
+                'content_ids': [content_id],
+                'content_name': content_name,
+                'content_category': 'product',
+                'content_brand': 'FoodPatka',
+                'num_items': 1,
+              },
+            }
+          ]
+        }),
+      });
+      console.log(await pinterest.json());
     }
     return NextResponse.json({
       success: true,

@@ -10,6 +10,7 @@ export default function BuyButton({ children, href, content_id, content_name }: 
       body: JSON.stringify({
         meta_event_name: 'AddToCart',
         tiktok_event_name: 'AddToCart',
+        pinterest_event_name: 'add_to_cart',
         content_id: content_id,
         content_name: content_name,
         event_source_url: href,
