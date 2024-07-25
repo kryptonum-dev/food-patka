@@ -1,13 +1,9 @@
-import sanityFetch from '@/utils/sanity.fetch';
-import Newsletter from './Newsletter';
+
 import styles from './Footer.module.scss';
 import getLegalLink from '@/components/ui/get-legal-link';
-import type { FooterQueryTypes } from './Footer.types';
 import CookieButton from './_CookieButton';
 
 export default async function Footer() {
-  const { footer } = await query();
-
   return (
     <>
       <div className={styles['Decoration']}>
@@ -18,7 +14,7 @@ export default async function Footer() {
       </div>
       <footer className={styles['Footer']}>
         <div className='max-width'>
-          <Newsletter data={footer} />
+          <div className='klaviyo-form-V7Epu4' />
           <div className={styles.info}>
             <p className={styles.copyright}>
               <span>Ⓒ Stworzone przez </span>
@@ -46,24 +42,9 @@ export default async function Footer() {
           </div>
         </div>
       </footer>
-      <div className='klaviyo-form-V7Epu4' />
     </>
   );
 }
-
-const query = async (): Promise<FooterQueryTypes> => {
-  return await sanityFetch<FooterQueryTypes>({
-    query: /* groq */ `
-      *[_id == 'global'][0] {
-        footer {
-          heading,
-          paragraph,
-        },
-      }
-    `,
-    tags: ['global'],
-  });
-};
 
 const WaveSvg = ({ ...props }) => (
   <svg
