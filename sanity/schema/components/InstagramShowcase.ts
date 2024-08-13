@@ -21,6 +21,7 @@ export default defineField({
       type: 'array',
       of: [
         {
+          name: 'post',
           type: 'object',
           title: 'Post',
           fields: [
