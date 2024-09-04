@@ -15,7 +15,6 @@ import BlogPost_Collection from './collectionTypes/BlogPost_Collection';
 import Shop_Page from './singleTypes/Shop_Page';
 import ProductCategory_Collection from './collectionTypes/ProductCategory_Collection';
 import Product_Collection from './collectionTypes/Product_Collection';
-import CookieConsent, { CookieConsent_Details, CookieConsent_Details_List, CookieConsent_Details_List_Cookies } from './components/CookieConsent';
 import Review_Collection from './collectionTypes/Review_Collection';
 import ThankYou_Page from './singleTypes/ThankYou_Page';
 
@@ -24,10 +23,6 @@ export const schemaTypes = [
   seo,
   global,
   Content,
-  CookieConsent,
-  CookieConsent_Details,
-  CookieConsent_Details_List,
-  CookieConsent_Details_List_Cookies,
 
   // Single types
   Index_Page,
