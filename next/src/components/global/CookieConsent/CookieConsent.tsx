@@ -1,29 +1,15 @@
-import Markdown from '@/components/ui/markdown';
-import sanityFetch from '@/utils/sanity.fetch';
+import Script from 'next/script';
 import styles from './CookieConsent.module.scss';
 import Content from './_Content';
-import type { QueryType } from './CookieConsent.types';
 
 export default async function CookieConsent() {
-  let { CookieConsent } = await query();
-  CookieConsent = {
-    ...CookieConsent,
-    heading: <Markdown.h2>{CookieConsent.heading as string}</Markdown.h2>,
-    paragraph: <Markdown className={styles.paragraph}>{CookieConsent.paragraph as string}</Markdown>,
-    details: {
-      ...CookieConsent.details,
-      heading: <Markdown.h3>{CookieConsent.details.heading as string}</Markdown.h3>,
-      paragraph: <Markdown className={styles.paragraph}>{CookieConsent.details.paragraph as string}</Markdown>,
-    },
-  };
-
   return (
-    <aside className={styles['CookieConsent']}>
-      <Content
-        CloseIcon={CloseIcon}
-        {...CookieConsent}
-      />
-    </aside>
+    <>
+      <Script id='gtag'>{'window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments);}'}</Script>
+      <aside className={styles['CookieConsent']}>
+        <Content CloseIcon={CloseIcon} />
+      </aside>
+    </>
   );
 }
 
@@ -48,71 +34,3 @@ const CloseIcon = (
     />
   </svg>
 );
-
-const query = async (): Promise<QueryType> => {
-  return await sanityFetch<QueryType>({
-    query: /* groq */ `
-      *[_id == "global"][0] {
-        CookieConsent {
-          heading,
-          paragraph,
-          details {
-            heading,
-            paragraph,
-            necessary[] {
-              service,
-              cookies[] {
-                name,
-                description,
-                expiry,
-                type,
-              },
-            },
-            necessary_Description,
-            preferences[] {
-              service,
-              cookies[] {
-                name,
-                description,
-                expiry,
-                type,
-              },
-            },
-            preferences_Description,
-            statistical[] {
-              service,
-              cookies[] {
-                name,
-                description,
-                expiry,
-                type,
-              },
-            },
-            statistical_Description,
-            marketing[] {
-              service,
-              cookies[] {
-                name,
-                description,
-                expiry,
-                type,
-              },
-            },
-            marketing_Description,
-            unclassified[] {
-              service,
-              cookies[] {
-                name,
-                description,
-                expiry,
-                type,
-              },
-            },
-            unclassified_Description,
-          },
-        },
-      }
-    `,
-    tags: ['global'],
-  });
-};

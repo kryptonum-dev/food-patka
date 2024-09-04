@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './CookieConsent.module.scss';
 import Button from '@/components/ui/Button';
 import Switch from '@/components/ui/Switch';
@@ -7,117 +7,76 @@ import { getCookie } from '@/utils/get-cookie';
 import { setCookie } from '@/utils/set-cookie';
 import type { ContentProps } from './CookieConsent.types';
 
-// eslint-disable-next-line prefer-rest-params
-const gtag: Gtag.Gtag = function () { window.dataLayer?.push(arguments); };
-
-const cookieObjectKeys = ['preferences', 'statistics', 'marketing'];
-
-type CookiesObject = {
-  preferences: 'granted' | 'denied';
-  statistics: 'granted' | 'denied';
-  marketing: 'granted' | 'denied';
+type Consent = {
+  necessary: boolean;
+  marketing: boolean;
+  analytics: boolean;
+  preferences: boolean;
 };
 
-const activeCookiesObject: CookiesObject = cookieObjectKeys.reduce((acc, name) => {
-  acc[name as keyof CookiesObject] = 'denied';
-  return acc;
-}, {} as CookiesObject);
+function setConsent(consent: Consent) {
+  const consentMode = {
+    functionality_storage: consent.necessary ? 'granted' : 'denied',
+    security_storage: consent.necessary ? 'granted' : 'denied',
+    ad_storage: consent.marketing ? 'granted' : 'denied',
+    ad_user_data: consent.marketing ? 'granted' : 'denied',
+    ad_personalization: consent.marketing ? 'granted' : 'denied',
+    analytics_storage: consent.analytics ? 'granted' : 'denied',
+    personalization_storage: consent.preferences ? 'granted' : 'denied',
+  } as const;
+  gtag('consent', 'update', consentMode);
+  setCookie('cookie-consent', JSON.stringify(consentMode), 365);
+}
 
-export default function Content({ CloseIcon, heading, paragraph, details }: ContentProps) {
+export default function Content({ CloseIcon }: ContentProps) {
+  const wrapper = useRef<HTMLDivElement>(null);
   const [showSettings, setShowSettings] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
-  const [activeCookies, setActiveCookies] = useState(activeCookiesObject);
 
   useEffect(() => {
-    const cookieValue = getCookie('CookieConsent');
-    if (cookieValue) {
-      const cookie = JSON.parse(cookieValue) as CookiesObject;
+    if (getCookie('cookie-consent') === null) {
       gtag('consent', 'default', {
-        ad_personalization: cookie.marketing,
-        ad_storage: cookie.marketing,
-        ad_user_data: cookie.marketing,
-        analytics_storage: cookie.statistics,
-        functionality_storage: cookie.preferences,
-        personalization_storage: cookie.preferences,
-        security_storage: 'granted',
-        wait_for_update: 2500,
-      });
-    } else {
-      gtag('consent', 'default', {
-        ad_personalization: 'denied',
+        functionality_storage: 'denied',
+        security_storage: 'denied',
         ad_storage: 'denied',
         ad_user_data: 'denied',
+        ad_personalization: 'denied',
         analytics_storage: 'denied',
-        functionality_storage: 'denied',
         personalization_storage: 'denied',
-        security_storage: 'granted',
-        wait_for_update: 2500,
       });
       setShowBanner(true);
+    } else {
+      gtag('consent', 'default', JSON.parse(getCookie('cookie-consent')!));
     }
-    gtag('set', 'ads_data_redaction', true);
   }, []);
 
   const acceptAll = () => {
-    setShowBanner(false);
-    const cookies: CookiesObject = cookieObjectKeys.reduce((acc, name) => {
-      acc[name as keyof CookiesObject] = 'granted';
-      return acc;
-    }, {} as CookiesObject);
-    setCookie('CookieConsent', JSON.stringify(cookies), 90);
-    gtag('consent', 'update', {
-      ad_personalization: 'granted',
-      ad_storage: 'granted',
-      ad_user_data: 'granted',
-      analytics_storage: 'granted',
-      functionality_storage: 'granted',
-      personalization_storage: 'granted',
-      security_storage: 'granted',
-      wait_for_update: 2500,
+    setConsent({
+      necessary: true,
+      marketing: true,
+      analytics: true,
+      preferences: true,
     });
+    setShowBanner(false);
   };
 
   const rejectAll = () => {
-    setShowBanner(false);
-    const cookies: CookiesObject = cookieObjectKeys.reduce((acc, name) => {
-      acc[name as keyof CookiesObject] = 'denied';
-      return acc;
-    }, {} as CookiesObject);
-    setCookie('CookieConsent', JSON.stringify(cookies), 90);
-    gtag('consent', 'update', {
-      ad_personalization: 'denied',
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      analytics_storage: 'denied',
-      functionality_storage: 'denied',
-      personalization_storage: 'denied',
-      security_storage: 'granted',
-      wait_for_update: 2500,
+    setConsent({
+      necessary: false,
+      marketing: false,
+      analytics: false,
+      preferences: false,
     });
-  };
-
-  const changeConsent = (name: keyof CookiesObject, event: React.MouseEvent<HTMLLabelElement>) => {
-    const target = event.target as Element;
-    if (!target.matches('input'))
-      setActiveCookies((prevState) => {
-        const newState: CookiesObject = { ...prevState };
-        newState[name] = prevState[name] === 'granted' ? 'denied' : 'granted';
-        return newState;
-      });
+    setShowBanner(false);
   };
 
   const acceptPart = () => {
     setShowBanner(false);
-    setCookie('CookieConsent', JSON.stringify(activeCookies), 90);
-    gtag('consent', 'update', {
-      ad_personalization: activeCookies.marketing,
-      ad_storage: activeCookies.marketing,
-      ad_user_data: activeCookies.marketing,
-      analytics_storage: activeCookies.statistics,
-      functionality_storage: activeCookies.preferences,
-      personalization_storage: activeCookies.preferences,
-      security_storage: 'granted',
-      wait_for_update: 2500,
+    setConsent({
+      necessary: true,
+      preferences: wrapper.current?.querySelector<HTMLInputElement>('input[id="preferences"]')?.checked || false,
+      analytics: wrapper.current?.querySelector<HTMLInputElement>('input[id="analytics"]')?.checked || false,
+      marketing: wrapper.current?.querySelector<HTMLInputElement>('input[id="marketing"]')?.checked || false,
     });
   };
 
@@ -125,6 +84,7 @@ export default function Content({ CloseIcon, heading, paragraph, details }: Cont
     <div
       className={styles['Content']}
       aria-hidden={!showBanner}
+      ref={wrapper}
     >
       <button
         className={styles.RejectAll}
@@ -134,8 +94,8 @@ export default function Content({ CloseIcon, heading, paragraph, details }: Cont
         {CloseIcon}
       </button>
       <header>
-        {heading}
-        {paragraph}
+        <h2><strong>Ciasteczko</strong> do kawki?</h2>
+        <div className={styles.paragraph}>Dzięki nim nasza strona jest dla Ciebie bardziej przyjazna i działa niezawodnie. Ciasteczka pozwalają również dopasować treści i reklamy do Twoich zainteresowań.</div>
       </header>
       <div
         className={styles.settings}
@@ -143,8 +103,8 @@ export default function Content({ CloseIcon, heading, paragraph, details }: Cont
         data-visible={showSettings}
       >
         <div className={styles.header}>
-          {details.heading}
-          {details.paragraph}
+          <h3>Ustawienia ciasteczek</h3>
+          <div className={styles.paragraph}>Poniżej możesz sprawdzić, jakie dane zbieramy w ciasteczkach i po co je zbieramy. Nie na wszystkie musisz się zgodzić. Zawsze możesz zmienić swój wybór na stronie ciasteczek.</div>
         </div>
         <div className={styles.group}>
           <Switch
@@ -155,163 +115,44 @@ export default function Content({ CloseIcon, heading, paragraph, details }: Cont
           >
             Niezbędne
           </Switch>
-          <p className={styles.description}>{details.necessary_Description}</p>
-          {details.necessary?.map(({ service, cookies }, i) => (
-            <div
-              className={styles.groupItem}
-              key={i}
-            >
-              <p>{service}</p>
-              <div className={styles.cookies}>
-                {cookies?.map(({ name, description, expiry, type }, i) => (
-                  <div
-                    className={styles.cookiesItem}
-                    key={i}
-                  >
-                    <p className={styles.name}>{name}</p>
-                    <p className={styles.description}>{description}</p>
-                    <div className={styles.info}>
-                      <p>Data ważności: {expiry}</p>
-                      <p>Typ: {type}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+          <p className={styles.description}>Niezbędne pliki cookie przyczyniają się do użyteczności strony poprzez umożliwianie podstawowych funkcji, takich jak nawigacja na stronie i dostęp do bezpiecznych obszarów strony internetowej. Strona www nie może funkcjonować poprawnie bez tych ciasteczek.</p>
         </div>
         <div className={styles.group}>
           <Switch
-            labelProps={{
-              onClick: (e) => changeConsent('preferences', e),
+            inputProps={{
+              id: 'preferences'
             }}
           >
             Preferencje
           </Switch>
-          <p className={styles.description}>{details.preferences_Description}</p>
-          {details.preferences?.map(({ service, cookies }, i) => (
-            <div
-              className={styles.groupItem}
-              key={i}
-            >
-              <p>{service}</p>
-              <div className={styles.cookies}>
-                {cookies?.map(({ name, description, expiry, type }, i) => (
-                  <div
-                    className={styles.cookiesItem}
-                    key={i}
-                  >
-                    <p className={styles.name}>{name}</p>
-                    <p className={styles.description}>{description}</p>
-                    <div className={styles.info}>
-                      <p>Data ważności: {expiry}</p>
-                      <p>Typ: {type}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+          <p className={styles.description}>Pliki cookie dotyczące preferencji umożliwiają stronie zapamiętanie informacji, które zmieniają wygląd lub funkcjonowanie strony, np. preferowany język lub region, w którym znajduje się użytkownik.</p>
         </div>
         <div className={styles.group}>
           <Switch
-            labelProps={{
-              onClick: (e) => changeConsent('statistics', e),
+            inputProps={{
+              id: 'analytics'
             }}
           >
-            Statystyka
+            Analityczne
           </Switch>
-          <p className={styles.description}>{details.statistical_Description}</p>
-          {details.statistical?.map(({ service, cookies }, i) => (
-            <div
-              className={styles.groupItem}
-              key={i}
-            >
-              <p>{service}</p>
-              <div className={styles.cookies}>
-                {cookies?.map(({ name, description, expiry, type }, i) => (
-                  <div
-                    className={styles.cookiesItem}
-                    key={i}
-                  >
-                    <p className={styles.name}>{name}</p>
-                    <p className={styles.description}>{description}</p>
-                    <div className={styles.info}>
-                      <p>Data ważności: {expiry}</p>
-                      <p>Typ: {type}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+          <p className={styles.description}>Analityczne pliki cookie pomagają właścicielom stron internetowych zrozumieć, w jaki sposób różni użytkownicy zachowują się na stronie, gromadząc i zgłaszając anonimowe informacje.</p>
         </div>
         <div className={styles.group}>
           <Switch
-            labelProps={{
-              onClick: (e) => changeConsent('marketing', e),
+            inputProps={{
+              id: 'marketing'
             }}
           >
             Marketing
           </Switch>
-          <p className={styles.description}>{details.marketing_Description}</p>
-          {details.marketing?.map(({ service, cookies }, i) => (
-            <div
-              className={styles.groupItem}
-              key={i}
-            >
-              <p>{service}</p>
-              <div className={styles.cookies}>
-                {cookies?.map(({ name, description, expiry, type }, i) => (
-                  <div
-                    className={styles.cookiesItem}
-                    key={i}
-                  >
-                    <p className={styles.name}>{name}</p>
-                    <p className={styles.description}>{description}</p>
-                    <div className={styles.info}>
-                      <p>Data ważności: {expiry}</p>
-                      <p>Typ: {type}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className={styles.group}>
-          <p>Nieklasyfikowane</p>
-          <p className={styles.description}>{details.unclassified_Description}</p>
-          {details.unclassified?.map(({ service, cookies }, i) => (
-            <div
-              className={styles.groupItem}
-              key={i}
-            >
-              <p>{service}</p>
-              <div className={styles.cookies}>
-                {cookies?.map(({ name, description, expiry, type }, i) => (
-                  <div
-                    className={styles.cookiesItem}
-                    key={i}
-                  >
-                    <p className={styles.name}>{name}</p>
-                    <p className={styles.description}>{description}</p>
-                    <div className={styles.info}>
-                      <p>Data ważności: {expiry}</p>
-                      <p>Typ: {type}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+          <p className={styles.description}>Marketingowe pliki cookie stosowane są w celu śledzenia użytkowników na stronach internetowych. Ich celem jest wyświetlanie reklam, które są istotne i interesujące dla poszczególnych użytkowników i tym samym bardziej cenne dla wydawców oraz reklamodawców strony trzeciej.</p>
         </div>
       </div>
       <div className={styles.controls}>
         {showSettings ? (
           <button
             className={styles.button}
-            onClick={() => acceptPart()}
+            onClick={acceptPart}
           >
             Zapisz
           </button>
@@ -323,7 +164,7 @@ export default function Content({ CloseIcon, heading, paragraph, details }: Cont
             Ustawienia
           </button>
         )}
-        <Button onClick={() => acceptAll()}>Zaakceptuj wszystkie</Button>
+        <Button onClick={acceptAll}>Zaakceptuj wszystkie</Button>
       </div>
     </div>
   );
