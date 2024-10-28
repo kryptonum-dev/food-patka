@@ -6,7 +6,7 @@ export default function CookieButton() {
     <button
       className="link"
       onClick={() => {
-        setCookie('CookieConsent', '', -1);
+        setCookie('cookie-consent', '', -1);
         window.location.reload();
       }}
     >
