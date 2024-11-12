@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useForm, type FieldValues } from 'react-hook-form';
 import Input from '@/components/ui/Input';
-import Checkbox from '@/components/ui/Checkbox';
 import Button from '@/components/ui/Button';
 import Loader from '@/components/ui/Loader';
 import FormState from '@/components/ui/FormState';
@@ -71,25 +70,7 @@ export default function Form({ privacyPolicyLink }: FormTypes) {
         })}
         errors={errors}
       />
-      <Checkbox
-        label={
-          <>
-            Akceptuję warunki{' '}
-            <a
-              className='link'
-              href={privacyPolicyLink}
-              target='_blank'
-              rel='noreferrer'
-            >
-              polityki prywatności
-            </a>
-          </>
-        }
-        register={register('legal', {
-          required: { value: true, message: 'Zgoda jest wymagana' },
-        })}
-        errors={errors}
-      />
+      <p className={styles.legal}>Administratorem danych osobowych jest JMFM sp. z o.o. z siedzibą w Bielinach. Więcej informacji na temat przetwarzania danych osobowych, w tym o przysługujących prawach, znajdziesz w <a href={privacyPolicyLink} target='_blank' rel='noreferrer' className='link'>polityce prywatności</a>.</p>
       <Button
         type='submit'
         className={styles.cta}

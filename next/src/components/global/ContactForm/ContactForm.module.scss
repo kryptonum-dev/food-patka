@@ -41,6 +41,10 @@ $waveBottomHeight: clamp(41px, calc(87vw / 7.68), 156px);
       display: none;
     }
   }
+  .legal {
+    font-size: 0.8125rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 .WaveTop,
