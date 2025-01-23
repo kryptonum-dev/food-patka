@@ -6,6 +6,7 @@ import { schemaTypes } from './schema'
 import { markdownSchema } from 'sanity-plugin-markdown'
 import { CustomMarkdown } from './components/CustomMarkdown'
 import { singletonActions, singletonTypes, structure } from './structure'
+import { muxInput } from 'sanity-plugin-mux-input'
 
 export default defineConfig({
   name: 'default',
@@ -17,7 +18,8 @@ export default defineConfig({
     structureTool({ structure }),
     media(),
     visionTool(),
-    markdownSchema({ input: CustomMarkdown })
+    markdownSchema({ input: CustomMarkdown }),
+    muxInput()
   ],
 
   schema: {
