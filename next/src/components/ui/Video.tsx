@@ -1,4 +1,5 @@
 import MuxPlayer from '@mux/mux-player-react/lazy';
+import { createBlurUp } from '@mux/blurup';
 
 type Props = {
   playbackId: string
@@ -15,8 +16,14 @@ export const VideoDataQuery = (name: string) => `
   },
 `;
 
-export default function Video({ playbackId, aspectRatio, hideControls, ...props }: Props) {
+const getPlaceholder = async (playbackId: string) => {
+  const { blurDataURL } = await createBlurUp(playbackId);
+  return blurDataURL;
+};
+
+export default async function Video({ playbackId, aspectRatio, hideControls, ...props }: Props) {
   const aspect_ratio = aspectRatio.replace(':', ' / ');
+  const placeholder = await getPlaceholder(playbackId);
 
   return (
     <MuxPlayer
@@ -26,6 +33,7 @@ export default function Video({ playbackId, aspectRatio, hideControls, ...props 
       disableTracking
       primaryColor="#fffdfd"
       accentColor="#f489a9"
+      placeholder={placeholder}
       style={{
         aspectRatio: aspect_ratio,
         display: 'block',
@@ -40,7 +48,10 @@ export default function Video({ playbackId, aspectRatio, hideControls, ...props 
         ['--captions-button' as string]: 'none',
         ['--playback-rate-button' as string]: 'none',
         ['--pip-button' as string]: 'none',
-        ['--controls' as string]: hideControls ? 'none' : undefined,
+        ...(hideControls ? {
+          '--controls': 'none',
+          '--controls-backdrop-color': 'transparent'
+        } : {}),
       }}
       {...hideControls && { muted: true, autoPlay: true, loop: true }}
       {...props}
