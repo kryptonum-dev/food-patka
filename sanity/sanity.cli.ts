@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: 's8s6nsem',
     dataset: 'production',
   },
+  studioHost: 'foodpatka',
 })
