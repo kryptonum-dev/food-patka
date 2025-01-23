@@ -2,9 +2,7 @@ import type { ImgDataTypes } from '@/components/ui/image';
 import type { PostContentTypes } from '@/components/_Blog/PostContent';
 
 export type BlogPostPageTypes = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string; }>
 };
 
 export type BlogPostPageQueryTypes = {

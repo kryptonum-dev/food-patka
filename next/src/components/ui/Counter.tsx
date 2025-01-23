@@ -16,10 +16,10 @@ export default function Counter({ value }: CounterTypes) {
     if (isInView) motionValue.set(value);
   }, [motionValue, isInView, value]);
 
-  useEffect(() => springValue.on('change', (latest: { toFixed: (arg0: number) => number | bigint; }) => {
+  useEffect(() => springValue.on('change', (latest: number) => {
     if (ref.current) {
       ref.current.textContent = Intl.NumberFormat('pl-PL').format(
-        latest.toFixed(0)
+        Math.round(latest)
       );
     }
   }), [springValue]);

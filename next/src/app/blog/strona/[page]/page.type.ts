@@ -1,9 +1,7 @@
 import type { ComponentTypes } from '@/components/Components';
 
 export type BlogPaginationPageTypes = {
-  params: {
-    page: number;
-  };
+  params: Promise<{ page: number }>;
 };
 
 export type BlogPaginationPageQueryTypes = {

@@ -14,7 +14,7 @@
     font-size: clamp(calc(14rem / 16), calc(16vw / 7.68), calc(16rem / 16));
   }
   img,
-  video {
+  .video {
     border-radius: 12px;
     width: 100%;
     aspect-ratio: 1/1;
@@ -29,7 +29,7 @@
     gap: clamp(16px, calc(16vw / 7.68), 20px);
     &[data-is-reversed='true'] {
       img,
-      video {
+      .video {
         order: -1;
       }
     }
@@ -38,7 +38,7 @@
     &[data-has-media='true'] {
       grid-template-columns: 1fr !important;
       img,
-      video {
+      .video {
         order: -1;
       }
     }

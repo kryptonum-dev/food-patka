@@ -1,9 +1,7 @@
 import type { ComponentTypes } from '@/components/Components';
 
 export type BlogCategoryPageTypes = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 };
 
 export type BlogCategoryPageQueryTypes = {

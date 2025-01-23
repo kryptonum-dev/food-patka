@@ -36,8 +36,8 @@ export default function List({ list }: ListTypes) {
             animate={{ height: opened === i ? 'auto' : 0 }}
             exit={{ height: 0 }}
             transition={{
-              duration: 0.5,
-              ease: EASING,
+              duration: 0.8,
+              ease: 'easeOut'
             }}
           >
             {answer}

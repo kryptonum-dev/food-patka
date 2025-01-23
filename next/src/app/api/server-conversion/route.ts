@@ -11,9 +11,9 @@ export async function POST(request: Request) {
   const client_ip_address = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip');
   const client_user_agent = request.headers.get('user-agent');
 
-  const fbc = cookies().get('_fbc')?.value;
-  const fbp = cookies().get('_fbp')?.value;
-  const ttp = cookies().get('ttp')?.value;
+  const fbc = (await cookies()).get('_fbc')?.value;
+  const fbp = (await cookies()).get('_fbp')?.value;
+  const ttp = (await cookies()).get('ttp')?.value;
 
   const {
     meta_event_name,
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     epik,
   } = await request.json();
 
-  const _epik = cookies().get('_epik')?.value || epik;
+  const _epik = (await cookies()).get('_epik')?.value || epik;
 
   const referer = event_source_url || request.headers.get('referer');
 

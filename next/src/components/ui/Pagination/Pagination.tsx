@@ -16,7 +16,7 @@ export default function Pagination({
   const slugPrefix = (number?: number) => (number && number > 1) ? `${slugBase}/strona/${number}#strona` : `${slugBase}#strona`;
 
   const LinkRender = (number: number) => (
-    <Link aria-current={currentPage === number ? 'page' : undefined} href={slugPrefix(number)}>{number}</Link>
+    <Link key={number} aria-current={currentPage === number ? 'page' : undefined} href={slugPrefix(number)}>{number}</Link>
   );
 
   const renderPagination = () => {
@@ -30,17 +30,17 @@ export default function Pagination({
         for (let i = 1; i <= 3; i++) {
           pagination.push(LinkRender(i));
         }
-        pagination.push(<div>...</div>);
+        pagination.push(<div key="pageSpread1">...</div>);
         pagination.push(LinkRender(totalPages));
       } else if (currentPage >= 3 && totalPages - currentPage >= 3) {
         pagination.push(LinkRender(1));
-        pagination.push(<div>...</div>);
+        pagination.push(<div key="pageSpread1">...</div>);
         pagination.push(LinkRender(currentPage));
-        pagination.push(<div>...</div>);
+        pagination.push(<div key="pageSpread2">...</div>);
         pagination.push(LinkRender(totalPages));
       } else {
         pagination.push(LinkRender(1));
-        pagination.push(<div>...</div>);
+        pagination.push(<div key="pageSpread1">...</div>);
         for (let i = totalPages - 2; i <= totalPages; i++) {
           pagination.push(LinkRender(i));
         }

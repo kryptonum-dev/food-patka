@@ -1,6 +1,10 @@
 .FlexTiles {
   background: var(--primary-300, #fff6f9);
   padding: clamp(16px, calc(32vw / 7.68), 32px) 0;
+  margin: calc(clamp(92px, calc(114vw / 7.68), 114px) * -1) 0 clamp(39px, calc(83vw / 7.68), 148px);
+  @media (min-width: 1050px) {
+    margin-top: -82px;
+  }
   header {
     max-width: calc(587rem / 16);
     margin: 0 auto clamp(24px, calc(36vw / 7.68), 48px);
@@ -34,10 +38,6 @@
         width: 100%;
       }
     }
-  }
-  margin: calc(clamp(92px, calc(114vw / 7.68), 114px) * -1) 0 clamp(39px, calc(83vw / 7.68), 148px);
-  @media (min-width: 1050px) {
-    margin-top: -82px;
   }
 }
 

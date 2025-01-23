@@ -3,11 +3,11 @@ import type { ProductCardTypes } from '@/components/global/ProductCard';
 import type { ImgDataTypes } from '@/components/ui/image';
 
 export type ShopPageTypes = {
-  params: {
+  params: Promise<{
     page: number;
     mainCategorySlug: string;
     subCategorySlug: string;
-  };
+  }>;
 };
 
 export type ShopPageQueryTypes = {

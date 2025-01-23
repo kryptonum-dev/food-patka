@@ -24,10 +24,10 @@ $waveBottomHeight: clamp(41px, calc(87vw / 7.68), 156px);
   img {
     width: clamp(154px, calc(307vw / 7.68), 307px);
     margin-left: 20%;
+    margin-top: -10%;
     @media (max-width: 599px) {
       margin-left: 40%;
     }
-    margin-top: -10%;
   }
 }
 
