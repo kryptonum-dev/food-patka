@@ -10,8 +10,6 @@ import { hash } from '@/utils/hash';
 import ProductSchema from '@/global/Schema/ProductSchema';
 import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
 
-export const dynamic = 'force-static';
-
 export default async function ShopProductPage(props: ShopProductPageTypes) {
   const { slug } = await props.params;
   const { v: currentVariantParam } = await props.searchParams;
