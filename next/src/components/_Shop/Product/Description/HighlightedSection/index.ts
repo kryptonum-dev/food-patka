@@ -2,6 +2,7 @@ import { ImgDataQuery } from '@/components/ui/image';
 import HighlightedSection from './HighlightedSection';
 export default HighlightedSection;
 export type { HighlightedSectionTypes } from './HighlightedSection.types';
+import { VideoDataQuery } from '@/components/ui/Video';
 
 export const HighlightedSection_Query = `
   _type == "HighlightedSection" => {
@@ -11,6 +12,6 @@ export const HighlightedSection_Query = `
     img {
       ${ImgDataQuery}
     },
-    "video": video.asset -> url,
+    ${VideoDataQuery('video')}
   },
 `;

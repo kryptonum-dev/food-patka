@@ -244,11 +244,6 @@ export const global = defineType({
       options: { collapsible: true, collapsed: true },
     }),
     defineField({
-      name: 'CookieConsent',
-      type: 'CookieConsent',
-      title: 'Baner z informacją o ciasteczkach',
-    }),
-    defineField({
       name: 'isPromoCodeAfterPurchase',
       type: 'boolean',
       title: 'Czy wysyłać kod 10% promocyjny po udanym zakupie z koszyka EasyCart?',

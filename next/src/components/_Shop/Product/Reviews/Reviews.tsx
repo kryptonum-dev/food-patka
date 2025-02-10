@@ -10,7 +10,7 @@ export default async function Reviews({ data, productId }: ReviewsTypes) {
     <>
       <Form
         productId={productId}
-        privacyPolicyLink={(await getLegalLink()).termsAndConditions}
+        privacyPolicyLink={(await getLegalLink()).privacyPolicy}
         RatingIcon={RatingIcon}
       />
       <div className={styles.list}>

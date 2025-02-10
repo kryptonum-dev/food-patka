@@ -128,7 +128,7 @@ body {
   background: var(--primary-200, #fffdfd);
   color: var(--secondary-500, #726378);
   font-size: clamp(1rem, calc(18vw / 7.68), calc(18rem / 16));
-  line-height: 152%;
+  line-height: 1.52;
   font-variant-numeric: lining-nums proportional-nums;
 }
 

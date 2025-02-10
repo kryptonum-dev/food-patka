@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
     await resend.emails.send({
       from: 'FoodPatka <sklep@foodpatka.pl>',
-      reply_to: 'wspolpraca@foodpatka.pl',
+      replyTo: 'wspolpraca@foodpatka.pl',
       to: customer_email,
       subject: 'Twój kod rabatowy od FoodPatka!',
       react: SendPromoCode({

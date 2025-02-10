@@ -8,9 +8,9 @@ const resend = new Resend(process.env.RESEND_API_TOKEN);
 
 export async function POST(request: Request) {
   const req = await request.json() as RequestTypes;
-  const { name, email, message, legal } = req;
+  const { name, email, message } = req;
 
-  const isValid = name && (email && REGEX.email.test(email)) && message && legal;
+  const isValid = name && (email && REGEX.email.test(email)) && message;
 
   if (!isValid) return NextResponse.json({ success: false }, { status: 422 });
 
@@ -18,16 +18,13 @@ export async function POST(request: Request) {
     `<p>Imię: <b>${name}</b></p>`,
     `<p>Adres e-mail: <b>${email}</b></p>`,
     `<p>${message.trim()}</p>`,
-    '<br />',
-    '<br />',
-    '<p><em>Wyrażono zgodnę na politykę prywatności</em></p>'
   ].join('');
 
   try {
     await resend.emails.send({
       from: `${name} przez Formularz <formularz@foodpatka.pl>`,
       to: 'patrycja@foodpatka.pl',
-      reply_to: `${name} <${email}>`,
+      replyTo: `${name} <${email}>`,
       subject: `${name} przesyła wiadomość przez formularz kontaktowy`,
       html: body,
       text: removeHtmlTags(body),

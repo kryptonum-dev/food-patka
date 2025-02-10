@@ -1,13 +1,16 @@
 import Script from 'next/script';
 import styles from './CookieConsent.module.scss';
 import Content from './_Content';
+import getLegalLink from '@/components/ui/get-legal-link';
 
 export default async function CookieConsent() {
   return (
     <>
       <Script id='gtag'>{'window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments);}'}</Script>
       <aside className={styles['CookieConsent']}>
-        <Content CloseIcon={CloseIcon} />
+        <Content
+          CloseIcon={CloseIcon}
+          privacyPolicyLink={(await getLegalLink()).privacyPolicy} />
       </aside>
     </>
   );

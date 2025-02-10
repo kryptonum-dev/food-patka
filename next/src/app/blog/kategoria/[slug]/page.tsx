@@ -6,7 +6,8 @@ import Components, { Components_Query } from '@/components/Components';
 import Listing from '@/components/_Blog/Listing';
 import type { BlogCategoryPageQueryTypes, BlogCategoryPageTypes } from './page.types';
 
-export default async function BlogCategoryPage({ params: { slug } }: BlogCategoryPageTypes) {
+export default async function BlogCategoryPage(props: BlogCategoryPageTypes) {
+  const { slug } = await props.params;
   const {
     category: {
       name: categoryName,
@@ -54,7 +55,8 @@ const query = async (slug: string): Promise<BlogCategoryPageQueryTypes> => {
   return data;
 };
 
-export async function generateMetadata({ params: { slug } }: BlogCategoryPageTypes) {
+export async function generateMetadata(props: BlogCategoryPageTypes) {
+  const { slug } = await props.params;
   return await QueryMetadata({
     name: 'BlogCategory_Collection',
     path: `/blog/kategoria/${slug}`,

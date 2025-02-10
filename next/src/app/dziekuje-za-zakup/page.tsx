@@ -10,9 +10,8 @@ const breadcrumbs = [
   { name: 'Dziękuję za zakup', path: currentPath },
 ];
 
-export default async function ThankYouPage({
-  searchParams: { ec_product, ec_product_uuid, ec_amount, ttclid, epik }
-}: ThankYouPageTypes) {
+export default async function ThankYouPage(props: ThankYouPageTypes) {
+  const { ec_product, ec_product_uuid, ec_amount, ttclid, epik } = await props.searchParams;
   const { content } = await query();
 
   return (

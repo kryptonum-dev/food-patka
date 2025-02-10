@@ -7,7 +7,8 @@ import Listing from '@/components/_Blog/Listing';
 import type { BlogCategoryPaginationPageQueryTypes, BlogCategoryPaginationPageTypes } from './page.types';
 import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
 
-export default async function BlogCategoryPaginationPage({ params: { slug, page } }: BlogCategoryPaginationPageTypes) {
+export default async function BlogCategoryPaginationPage(props: BlogCategoryPaginationPageTypes) {
+  const { slug, page } = await props.params;
   const {
     category: {
       name: categoryName,
@@ -60,7 +61,8 @@ const query = async (slug: string): Promise<BlogCategoryPaginationPageQueryTypes
   return data;
 };
 
-export async function generateMetadata({ params: { slug, page } }: BlogCategoryPaginationPageTypes) {
+export async function generateMetadata(props: BlogCategoryPaginationPageTypes) {
+  const { slug, page } = await props.params;
   return await QueryMetadata({
     name: 'BlogCategory_Collection',
     path: `/blog/kategoria/${slug}/strona/${page}`,

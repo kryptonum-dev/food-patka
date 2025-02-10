@@ -28,7 +28,7 @@ function setConsent(consent: Consent) {
   setCookie('cookie-consent', JSON.stringify(consentMode), 365);
 }
 
-export default function Content({ CloseIcon }: ContentProps) {
+export default function Content({ CloseIcon, privacyPolicyLink }: ContentProps) {
   const wrapper = useRef<HTMLDivElement>(null);
   const [showSettings, setShowSettings] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
@@ -95,7 +95,7 @@ export default function Content({ CloseIcon }: ContentProps) {
       </button>
       <header>
         <h2><strong>Ciasteczko</strong> do kawki?</h2>
-        <div className={styles.paragraph}>Dzięki nim nasza strona jest dla Ciebie bardziej przyjazna i działa niezawodnie. Ciasteczka pozwalają również dopasować treści i reklamy do Twoich zainteresowań.</div>
+        <p className={styles.paragraph}>Dzięki nim nasza strona jest dla Ciebie bardziej przyjazna i działa niezawodnie. Ciasteczka pozwalają również dopasować treści i reklamy do Twoich zainteresowań. Dowiedz się więcej w <a href={privacyPolicyLink} target='_blank' rel='noreferrer' className='link'>polityce prywatności</a></p>
       </header>
       <div
         className={styles.settings}
@@ -104,7 +104,7 @@ export default function Content({ CloseIcon }: ContentProps) {
       >
         <div className={styles.header}>
           <h3>Ustawienia ciasteczek</h3>
-          <div className={styles.paragraph}>Poniżej możesz sprawdzić, jakie dane zbieramy w ciasteczkach i po co je zbieramy. Nie na wszystkie musisz się zgodzić. Zawsze możesz zmienić swój wybór na stronie ciasteczek.</div>
+          <p className={styles.paragraph}>Poniżej możesz sprawdzić, jakie dane zbieramy w ciasteczkach i po co je zbieramy. Nie na wszystkie musisz się zgodzić. Zawsze możesz zmienić swój wybór na stronie ciasteczek. Dowiedz się więcej w <a href={privacyPolicyLink} target='_blank' rel='noreferrer' className='link'>polityce prywatności</a></p>
         </div>
         <div className={styles.group}>
           <Switch

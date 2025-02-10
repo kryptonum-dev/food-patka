@@ -5,6 +5,7 @@
   overflow: hidden;
   margin-bottom: clamp(28px, calc(32vw / 7.68), 32px);
   font-size: clamp(calc(12rem / 16), calc(14vw / 7.68), calc(14rem / 16));
+  color: var(--secondary-600);
   + * {
     margin-top: calc(var(--gap) * -1) !important;
   }
@@ -15,7 +16,6 @@
       text-overflow: ellipsis;
     }
   }
-  color: var(--secondary-600);
   a {
     transition: opacity 0.5s;
     &:not(:hover) {

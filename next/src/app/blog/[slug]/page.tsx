@@ -8,7 +8,8 @@ import PostHero, { PostHero_Query } from '@/components/_Blog/PostHero';
 import PostContent, { PostContent_Query } from '@/components/_Blog/PostContent';
 import { toPlainText } from 'next-sanity';
 
-export default async function BlogPostPage({ params: { slug } }: BlogPostPageTypes) {
+export default async function BlogPostPage(props: BlogPostPageTypes) {
+  const { slug } = await props.params;
   const { title, subtitle, img, slug: postSlug, _createdAt, category, content, headings } = await query(slug);
 
   return (
@@ -46,7 +47,8 @@ const query = async (slug: string): Promise<BlogPostPageQueryTypes> => {
   return data;
 };
 
-export async function generateMetadata({ params: { slug } }: BlogPostPageTypes) {
+export async function generateMetadata(props: BlogPostPageTypes) {
+  const { slug } = await props.params;
   return await QueryMetadata({
     name: 'BlogPost_Collection',
     path: `/blog/${slug}`,

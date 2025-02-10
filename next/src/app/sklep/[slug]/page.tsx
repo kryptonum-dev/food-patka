@@ -10,10 +10,9 @@ import { hash } from '@/utils/hash';
 import ProductSchema from '@/global/Schema/ProductSchema';
 import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.types';
 
-export default async function ShopProductPage({
-  params: { slug },
-  searchParams: { v: currentVariantParam },
-}: ShopProductPageTypes) {
+export default async function ShopProductPage(props: ShopProductPageTypes) {
+  const { slug } = await props.params;
+  const { v: currentVariantParam } = await props.searchParams;
   const {
     _id,
     name,
@@ -128,10 +127,9 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
   return data;
 };
 
-export async function generateMetadata({
-  params: { slug },
-  searchParams: { v: currentVariantParam }
-}: ShopProductPageTypes) {
+export async function generateMetadata(props: ShopProductPageTypes) {
+  const { slug } = await props.params;
+  const { v: currentVariantParam } = await props.searchParams;
   const { hasVariants, variants } = await query(slug);
   const currentVariant = (hasVariants && variants && currentVariantParam) ? variants[currentVariantParam - 1] : null;
 

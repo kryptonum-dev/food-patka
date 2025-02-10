@@ -7,7 +7,8 @@ import Listing, { Listing_Query } from '@/components/_Blog/Listing';
 import Components, { Components_Query } from '@/components/Components';
 import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
 
-export default async function BlogPaginationPage({ params: { page } }: BlogPaginationPageTypes) {
+export default async function BlogPaginationPage(props: BlogPaginationPageTypes) {
+  const { page } = await props.params;
   const { listing, content } = await query();
 
   return (
@@ -42,7 +43,8 @@ const query = async (): Promise<BlogPaginationPageQueryTypes> => {
   return data;
 };
 
-export async function generateMetadata({ params: { page } }: BlogPaginationPageTypes) {
+export async function generateMetadata(props: BlogPaginationPageTypes) {
+  const { page } = await props.params;
   return await QueryMetadata({
     name: 'Blog_Page',
     path: page == 1 ? '/blog' : `/blog/strona/${page}`,

@@ -20,7 +20,7 @@ export default async function ContactForm({ index, isHighlighted, heading, parag
         <SocialMedia />
         {img && <Img data={img} sizes='307px' priority={index === 0} />}
       </header>
-      <Form privacyPolicyLink={(await getLegalLink()).termsAndConditions} />
+      <Form privacyPolicyLink={(await getLegalLink()).privacyPolicy} />
       {isHighlighted && (
         <>
           <WaveTop className={styles.WaveTop} />

@@ -74,6 +74,7 @@
       align-items: center;
       gap: 18px;
       > li {
+        position: relative;
         > a {
           display: flex;
           align-items: center;
@@ -95,7 +96,6 @@
             }
           }
         }
-        position: relative;
       }
     }
     .dropdown {
@@ -224,7 +224,9 @@
       }
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.5s, visibility 0.5s;
+      transition:
+        opacity 0.5s,
+        visibility 0.5s;
     }
     .menuButton {
       display: grid;

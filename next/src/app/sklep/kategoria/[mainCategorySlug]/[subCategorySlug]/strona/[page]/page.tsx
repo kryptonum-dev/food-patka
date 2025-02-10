@@ -9,7 +9,8 @@ import { ITEMS_PER_PAGE } from '@/components/ui/Pagination/Pagination';
 import { ImgDataQuery } from '@/components/ui/image';
 import type { ShopPageQueryTypes, ShopPageTypes } from '@/app/sklep/page.types';
 
-export default async function ShopPaginationPage({ params: { page, mainCategorySlug, subCategorySlug } }: ShopPageTypes) {
+export default async function ShopPaginationPage(props: ShopPageTypes) {
+  const { page, mainCategorySlug, subCategorySlug } = await props.params;
   const {
     categories,
     pageContent,
@@ -108,7 +109,8 @@ const query = async ({
   return data;
 };
 
-export async function generateMetadata({ params: { page, mainCategorySlug, subCategorySlug } }: ShopPageTypes) {
+export async function generateMetadata(props: ShopPageTypes) {
+  const { page, mainCategorySlug, subCategorySlug } = await props.params;
   return await QueryMetadata({
     name: 'ProductCategory_Collection',
     path: `/sklep/kategoria/${mainCategorySlug}/${subCategorySlug}${page !== 1 ? `/strona/${page}` : ''}`,

@@ -20,11 +20,11 @@
     max-width: calc(608rem / 16);
     margin-left: auto;
     margin-right: auto;
+    display: grid;
+    gap: 16px;
     @media (max-width: 999px) {
       margin-bottom: clamp(42px, calc(64vw / 7.68), 64px);
     }
-    display: grid;
-    gap: 16px;
     h3 {
       margin-bottom: clamp(8px, calc(12vw / 7.68), 12px);
       color: var(--secondary-500, #726378);
@@ -94,9 +94,6 @@
       }
     }
     .Arrow {
-      @media (max-width: 999px) {
-        display: none;
-      }
       right: 0;
       bottom: 20%;
       transform: translate(50%, 0);
@@ -125,6 +122,9 @@
             }
           }
         }
+      }
+      @media (max-width: 999px) {
+        display: none;
       }
     }
     @keyframes Stars {

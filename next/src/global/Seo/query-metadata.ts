@@ -45,6 +45,6 @@ const query = async (customQuery: string, tag: string, dynamicSlug?: string): Pr
     tags: [tag],
     ...(dynamicSlug && { params: { slug: dynamicSlug } }),
   });
-  !seo && notFound();
+  if (!seo) notFound();
   return { ...seo };
 };

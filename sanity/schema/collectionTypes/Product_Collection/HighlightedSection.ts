@@ -8,7 +8,6 @@ export default defineField({
   name: 'HighlightedSection',
   type: 'object',
   title,
-  icon,
   fields: [
     defineField({
       name: 'heading',
@@ -39,10 +38,7 @@ export default defineField({
     }),
     defineField({
       name: 'video',
-      type: 'file',
-      options: {
-        accept: 'video/mp4',
-      },
+      type: 'mux.video',
       title: 'Wideo (opcjonalne)',
       fieldset: 'media',
       hidden: ({ parent }) => !!parent?.img,
@@ -53,18 +49,19 @@ export default defineField({
       name: 'media',
       title: 'Zdjęcie lub film',
       description: 'Możesz dodać zdjęcie lub film.',
-      options: { columns: 2 },
     }
   ],
   preview: {
     select: {
       heading: 'heading',
       media: 'img',
+      video: 'video',
     },
-    prepare: ({ heading, media }) => ({
+    prepare: ({ heading, media, video }) => ({
       title: title,
       subtitle: removeMarkdown(heading),
       media: media,
+      icon: () => video ? '🎥' : icon(),
     }),
   }
 });
