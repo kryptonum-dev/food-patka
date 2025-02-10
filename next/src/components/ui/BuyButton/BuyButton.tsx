@@ -2,7 +2,7 @@
 import Button from '@/components/ui/Button';
 import type { BuyButtonTypes } from './BuyButton.types';
 
-export default function BuyButton({ children, href, content_id, content_name }: BuyButtonTypes) {
+export default function BuyButton({ children, href, content_id, content_name, disabled }: BuyButtonTypes) {
   const handleClick = () => {
     fetch('/api/server-conversion', {
       method: 'POST',
@@ -22,6 +22,7 @@ export default function BuyButton({ children, href, content_id, content_name }: 
     <Button
       href={href}
       onClick={handleClick}
+      disabled={disabled}
     >{children}</Button>
   );
 }

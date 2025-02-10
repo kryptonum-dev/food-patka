@@ -28,6 +28,7 @@ export default function Info({
   const currentVariant = (hasVariants && variants && currentVariantParam) ? variants[currentVariantParam - 1] : null;
   const omnibusPrice = hasVariants ? (currentVariant?.omnibus || cheapestVariant.omnibus) : omnibus;
   const purchase_url = currentVariant?.url || url;
+  const isDisabled = hasVariants && !currentVariant;
 
   return (
     <section className={`${styles['Info']} ${className}`}>
@@ -84,8 +85,9 @@ export default function Info({
         href={purchase_url}
         content_id={content_id}
         content_name={content_name}
+        disabled={isDisabled}
       >
-        Kup teraz
+        {isDisabled ? 'Wybierz wariant' : 'Kup teraz'}
       </BuyButton>
       <div className={styles.paymentInfo}>
         <p>Bezpieczne płatności</p>

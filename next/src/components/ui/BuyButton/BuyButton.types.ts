@@ -3,4 +3,5 @@ export type BuyButtonTypes = {
   href: string;
   content_id: string;
   content_name: string;
+  disabled?: boolean;
 };
