@@ -21,13 +21,13 @@ export default function Info({
   content_name,
   rating,
   totalReviews,
+  searchParams
 }: Omit<ProductTypes, '_id' | 'gallery' | 'category' | 'description' | 'reviews' | 'numberOfRecentPurchases'> &
-  {
-    className: React.HTMLProps<HTMLElement>['className'];
-  }
+  { className: React.HTMLProps<HTMLElement>['className'] }
 ) {
   const currentVariant = (hasVariants && variants && currentVariantParam) ? variants[currentVariantParam - 1] : null;
   const omnibusPrice = hasVariants ? (currentVariant?.omnibus || cheapestVariant.omnibus) : omnibus;
+  const purchase_url = currentVariant?.url || url;
 
   return (
     <section className={`${styles['Info']} ${className}`}>
@@ -38,7 +38,13 @@ export default function Info({
           {variants?.map(({ name }, i) => (
             <li key={i}>
               <Link
-                href={i + 1 == currentVariantParam ? '?' : `?v=${i + 1}`}
+                href={{
+                  pathname: url,
+                  query: {
+                    ...searchParams,
+                    v: i + 1
+                  }
+                }}
                 scroll={false}
                 aria-current={i + 1 == currentVariantParam ? 'page' : undefined}
               >
@@ -75,7 +81,7 @@ export default function Info({
       )}
       <p className={styles.omnibus}>Najniższa cena z 30 dni przed obniżką: {omnibusPrice} zł</p>
       <BuyButton
-        href={url}
+        href={purchase_url}
         content_id={content_id}
         content_name={content_name}
       >

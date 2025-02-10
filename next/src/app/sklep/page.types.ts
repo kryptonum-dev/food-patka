@@ -8,6 +8,9 @@ export type ShopPageTypes = {
     mainCategorySlug: string;
     subCategorySlug: string;
   }>;
+  searchParams: Promise<{
+    woo: boolean;
+  }>;
 };
 
 export type ShopPageQueryTypes = {

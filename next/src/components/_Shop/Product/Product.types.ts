@@ -17,6 +17,7 @@ export type ProductTypes = {
   };
   hasVariants: boolean;
   variants?: {
+    url: string;
     name: string;
     price: number;
     oldPrice?: number;
@@ -38,4 +39,5 @@ export type ProductTypes = {
   totalReviews: number;
   reviews: ReviewsTypes['data'];
   numberOfRecentPurchases: number;
+  searchParams: { [key: string]: string | number | boolean };
 } & Omit<DescriptionTypes, 'className'>;

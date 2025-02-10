@@ -25,6 +25,7 @@ export default function Product({
   totalReviews,
   reviews,
   numberOfRecentPurchases,
+  searchParams,
 }: Omit<ProductTypes, 'category'>) {
   return (
     <section className={styles['Product']}>
@@ -50,7 +51,8 @@ export default function Product({
           price,
           oldPrice,
           omnibus,
-          currentVariantParam
+          currentVariantParam,
+          searchParams,
         }}
       />
       <Content reviewsCount={reviews.length}>

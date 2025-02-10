@@ -11,6 +11,7 @@ import type { ShopPageQueryTypes, ShopPageTypes } from '@/app/sklep/page.types';
 
 export default async function ShopSubCategoryPage(props: ShopPageTypes) {
   const { mainCategorySlug, subCategorySlug } = await props.params;
+  const { woo: isWoo = false } = await props.searchParams;
   const {
     categories,
     pageContent,
@@ -22,6 +23,7 @@ export default async function ShopSubCategoryPage(props: ShopPageTypes) {
     currentPage: 1,
     mainCategory: mainCategorySlug,
     subCategory: subCategorySlug,
+    isWoo,
   });
 
   return (
@@ -50,10 +52,12 @@ const query = async ({
   currentPage,
   mainCategory,
   subCategory,
+  isWoo,
 }: {
   currentPage: number;
   mainCategory: string;
   subCategory: string;
+  isWoo: boolean;
 }): Promise<ShopPageQueryTypes> => {
   const OFFSET = ITEMS_PER_PAGE * (currentPage - 1);
   const PAGINATION_BEFORE = OFFSET;
@@ -101,6 +105,7 @@ const query = async ({
       PAGINATION_AFTER: PAGINATION_AFTER,
       mainCategory: mainCategory,
       subCategory: subCategory,
+      isWoo: isWoo,
     },
     tags: ['Shop_Page', 'Product_Collection', 'ProductCategory_Collection', 'Review_Collection'],
   });

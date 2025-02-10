@@ -30,6 +30,7 @@ const query = async (): Promise<{ content: ComponentTypes[] }> => {
         ${Components_Query}
       }
     `,
+    params: { isWoo: false },
     tags: ['ThankYou_Page'],
   });
 };

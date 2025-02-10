@@ -26,6 +26,7 @@ const query = async (): Promise<{ content: ComponentTypes[] }> => {
         ${Components_Query}
       }
     `,
+    params: { isWoo: false },
     tags: ['About_Page'],
   });
 };
