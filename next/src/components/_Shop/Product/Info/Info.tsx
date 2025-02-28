@@ -42,7 +42,7 @@ export default function Info({
               <li key={i}>
                 <Link
                   href={{
-                    pathname: url,
+                    pathname: null,
                     query: {
                       ...searchParams,
                       v: i + 1
@@ -109,7 +109,7 @@ export default function Info({
                 <li key={i}>
                   <Link
                     href={{
-                      pathname: url,
+                      pathname: null,
                       query: {
                         ...searchParams,
                         v: i + 1
