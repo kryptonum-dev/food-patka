@@ -17,6 +17,7 @@ export type ProductTypes = {
   };
   hasVariants: boolean;
   variants?: {
+    url: string;
     name: string;
     price: number;
     oldPrice?: number;

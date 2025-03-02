@@ -19,6 +19,7 @@ export const Product_Query = `
   },
   hasVariants,
   variants[] {
+    url,
     name,
     price,
     oldPrice,
