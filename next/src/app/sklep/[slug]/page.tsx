@@ -62,6 +62,13 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
     });
   }
 
+  const content_id = isWoo
+    ? currentVariant?.url
+      ? currentVariant.url.match(/add-to-cart=(\d+)/)?.[1] || analytics.item_id
+      : analytics.item_id
+    : analytics.item_id;
+  const content_name = isWoo ? removeMarkdown(name) : analytics.item_name;
+
   return (
     <>
       <ProductSchema
@@ -71,8 +78,8 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
         rating_count={totalReviews}
       />
       <Analytics
-        item_id={analytics.item_id}
-        item_name={analytics.item_name}
+        item_id={content_id}
+        item_name={content_name}
       />
       <Breadcrumbs data={breadcrumbsSchema} />
       <Product
