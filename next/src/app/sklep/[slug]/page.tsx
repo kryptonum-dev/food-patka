@@ -14,7 +14,7 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
   const { slug } = await props.params;
   const searchParams = await props.searchParams;
   const { v: currentVariantParam } = searchParams;
-  const isWoo = searchParams.woo === "true";
+  const isWoo = searchParams.woo === 'true';
   const {
     _id,
     name,
