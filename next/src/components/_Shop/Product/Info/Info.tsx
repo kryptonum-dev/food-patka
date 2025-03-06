@@ -22,14 +22,23 @@ export default function Info({
   content_name,
   rating,
   totalReviews,
-  searchParams
+  searchParams,
+  isWoo
 }: Omit<ProductTypes, '_id' | 'gallery' | 'category' | 'description' | 'reviews' | 'numberOfRecentPurchases'> &
   { className: React.HTMLProps<HTMLElement>['className'] }
 ) {
   const currentVariant = (hasVariants && variants && currentVariantParam) ? variants[currentVariantParam - 1] : null;
   const omnibusPrice = hasVariants ? (currentVariant?.omnibus || cheapestVariant.omnibus) : omnibus;
   const purchase_url = currentVariant?.url || url;
-  const isDisabled = hasVariants && !currentVariant;
+  const isDisabled = isWoo ? hasVariants && !currentVariant : false;
+
+  // Determine button text based on variant selection and isWoo
+  // - If disabled: "Wybierz wariant"
+  // - If variant selected (or no variants): "Kup teraz · price zł"
+  // - If no variant selected and not disabled: "Kup teraz"
+  const buttonText = isDisabled
+    ? 'Wybierz wariant'
+    : `Kup teraz${currentVariant || !hasVariants ? `\u00A0\u00A0·\u00A0\u00A0${currentVariant?.price || price} zł` : ''}`;
 
   return (
     <>
@@ -89,7 +98,7 @@ export default function Info({
           content_name={content_name}
           disabled={isDisabled}
         >
-          {isDisabled ? 'Wybierz wariant' : 'Kup teraz'}
+          {buttonText}
         </BuyButton>
         <div className={styles.paymentInfo}>
           <p>Bezpieczne płatności</p>
@@ -131,7 +140,7 @@ export default function Info({
           content_name={content_name}
           disabled={isDisabled}
         >
-          {isDisabled ? 'Wybierz wariant' : `Kup teraz\u00A0\u00A0·\u00A0\u00A0${currentVariant?.price || price} zł`}
+          {buttonText}
         </BuyButton>
       </FloatingBuyButton >
     </>

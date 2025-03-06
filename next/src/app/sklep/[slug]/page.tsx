@@ -13,7 +13,8 @@ import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.typ
 export default async function ShopProductPage(props: ShopProductPageTypes) {
   const { slug } = await props.params;
   const searchParams = await props.searchParams;
-  const { v: currentVariantParam, woo: isWoo = false } = searchParams;
+  const { v: currentVariantParam } = searchParams;
+  const isWoo = searchParams.woo === "true";
   const {
     _id,
     name,
@@ -98,9 +99,10 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
           description,
           numberOfRecentPurchases,
           searchParams,
+          isWoo
         }}
-        content_id={analytics.item_id}
-        content_name={analytics.item_name}
+        content_id={content_id}
+        content_name={content_name}
         rating={rating}
         totalReviews={totalReviews}
         reviews={reviews}

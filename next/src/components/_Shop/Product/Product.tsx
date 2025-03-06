@@ -26,6 +26,7 @@ export default function Product({
   reviews,
   numberOfRecentPurchases,
   searchParams,
+  isWoo,
 }: Omit<ProductTypes, 'category'>) {
   return (
     <section className={styles['Product']}>
@@ -53,6 +54,7 @@ export default function Product({
           omnibus,
           currentVariantParam,
           searchParams,
+          isWoo
         }}
       />
       <Content reviewsCount={reviews.length}>
