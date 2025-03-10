@@ -29,8 +29,10 @@ export default function Info({
 ) {
   const currentVariant = (hasVariants && variants && currentVariantParam) ? variants[currentVariantParam - 1] : null;
   const omnibusPrice = hasVariants ? (currentVariant?.omnibus || cheapestVariant.omnibus) : omnibus;
-  const purchase_url = currentVariant?.url || url;
-  const isDisabled = isWoo ? hasVariants && !currentVariant : false;
+  const purchase_url = isWoo
+    ? currentVariant?.url || url
+    : currentVariant?.url || url || variants?.[0]?.url!;
+  const isDisabled = purchase_url ? false : true;
 
   // Determine button text based on variant selection and isWoo
   // - If disabled: "Wybierz wariant"

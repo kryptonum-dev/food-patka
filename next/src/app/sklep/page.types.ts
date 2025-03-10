@@ -9,7 +9,7 @@ export type ShopPageTypes = {
     subCategorySlug: string;
   }>;
   searchParams: Promise<{
-    woo: boolean;
+    woo: string;
   }>;
 };
 

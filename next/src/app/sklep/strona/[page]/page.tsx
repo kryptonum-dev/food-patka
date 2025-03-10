@@ -11,7 +11,8 @@ import type { ShopPageQueryTypes, ShopPageTypes } from '@/app/sklep/page.types';
 
 export default async function ShopPaginationPage(props: ShopPageTypes) {
   const { page = 1 } = await props.params;
-  const { woo: isWoo = false } = await props.searchParams;
+  const { woo } = await props.searchParams;
+  const isWoo = woo !== 'false';
   const {
     categories,
     totalProducts,
@@ -73,7 +74,7 @@ const query = async (currentPage: number, isWoo: boolean): Promise<ShopPageQuery
     params: {
       PAGINATION_BEFORE: PAGINATION_BEFORE,
       PAGINATION_AFTER: PAGINATION_AFTER,
-      isWoo: isWoo,
+      isWoo: isWoo.toString(),
     },
     tags: ['Shop_Page', 'Product_Collection', 'ProductCategory_Collection', 'Review_Collection'],
   });

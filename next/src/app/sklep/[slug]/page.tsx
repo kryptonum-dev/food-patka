@@ -14,7 +14,7 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
   const { slug } = await props.params;
   const searchParams = await props.searchParams;
   const { v: currentVariantParam } = searchParams;
-  const isWoo = searchParams.woo === 'true';
+  const isWoo = searchParams.woo !== 'false';
   const {
     _id,
     name,
@@ -131,7 +131,10 @@ const query = async (slug: string, isWoo: boolean): Promise<ShopProductPageQuery
         "openGraphImageUrl": seo.img.asset -> url + "?w=1200",
       }
     `,
-    params: { slug, isWoo: isWoo },
+    params: {
+      slug,
+      isWoo: isWoo.toString(),
+    },
     tags: ['Product_Collection', 'global', 'Review_Collection'],
   });
   if (!data) notFound();

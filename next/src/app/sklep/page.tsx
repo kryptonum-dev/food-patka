@@ -13,8 +13,9 @@ const breadcrumbs = [
   { name: 'Sklep', path: currentPath },
 ];
 
-export default async function ShopPage(props: { searchParams: Promise<{ woo: boolean }> }) {
-  const { woo: isWoo = false } = await props.searchParams;
+export default async function ShopPage(props: { searchParams: Promise<{ woo: string }> }) {
+  const { woo } = await props.searchParams;
+  const isWoo = woo !== 'false';
   const {
     categories,
     totalProducts,
@@ -73,7 +74,7 @@ const query = async (currentPage: number = 1, isWoo: boolean): Promise<ShopPageQ
     params: {
       PAGINATION_BEFORE: PAGINATION_BEFORE,
       PAGINATION_AFTER: PAGINATION_AFTER,
-      isWoo: isWoo,
+      isWoo: isWoo.toString(),
     },
     tags: ['Shop_Page', 'ProductCategory_Collection', 'Product_Collection', 'Review_Collection'],
   });
