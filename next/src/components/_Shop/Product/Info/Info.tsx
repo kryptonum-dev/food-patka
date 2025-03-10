@@ -31,7 +31,7 @@ export default function Info({
   const omnibusPrice = hasVariants ? (currentVariant?.omnibus || cheapestVariant.omnibus) : omnibus;
   const purchase_url = isWoo
     ? currentVariant?.url || url
-    : currentVariant?.url || url || variants?.[0]?.url!;
+    : currentVariant?.url || url || variants?.[0]?.url || '';
   const isDisabled = purchase_url ? false : true;
 
   // Determine button text based on variant selection and isWoo
