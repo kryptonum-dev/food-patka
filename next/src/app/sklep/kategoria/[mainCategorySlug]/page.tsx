@@ -12,7 +12,7 @@ import type { ShopPageQueryTypes, ShopPageTypes } from '@/app/sklep/page.types';
 export default async function ShopMainCategoryPage(props: ShopPageTypes) {
   const { mainCategorySlug } = await props.params;
   const { woo } = await props.searchParams;
-  const isWoo = woo !== 'false'; // Reversed logic: WooCommerce is default unless woo=false
+  const isWoo = woo !== 'false';
   const {
     categories,
     pageContent,
@@ -52,7 +52,7 @@ const query = async ({
 }: {
   currentPage: number;
   mainCategory: string;
-  isWoo: boolean;
+  isWoo: string;
 }): Promise<ShopPageQueryTypes> => {
   const OFFSET = ITEMS_PER_PAGE * (currentPage - 1);
   const PAGINATION_BEFORE = OFFSET;
