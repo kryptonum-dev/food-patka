@@ -8,12 +8,10 @@ export default function Analytics({
   item_id,
   item_name,
 }: {
-  item_id: string;
+  item_id: string | undefined;
   item_name: string;
 }) {
   useEffect(() => {
-    if (!item_name || !item_id) return;
-
     fetch('/api/server-conversion', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

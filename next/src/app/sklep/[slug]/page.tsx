@@ -65,10 +65,12 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
 
   const content_id = isWoo
     ? currentVariant?.url
-      ? currentVariant.url.match(/add-to-cart=(\d+)/)?.[1] || analytics.item_id
-      : analytics.item_id
+      ? currentVariant.url.match(/add-to-cart=(\d+)/)?.[1]
+      : undefined
     : analytics.item_id;
   const content_name = isWoo ? removeMarkdown(name) : analytics.item_name;
+
+  console.log(content_id, content_name);
 
   return (
     <>
