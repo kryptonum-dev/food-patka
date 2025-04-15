@@ -70,8 +70,6 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
     : analytics.item_id;
   const content_name = isWoo ? removeMarkdown(name) : analytics.item_name;
 
-  console.log(content_id, content_name);
-
   return (
     <>
       <ProductSchema
