@@ -16,7 +16,7 @@ export default function Analytics({
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        meta_event_name: 'PageView',
+        meta_event_name: 'ViewContent',
         tiktok_event_name: 'ViewContent',
         pinterest_event_name: 'page_visit',
         content_id: item_id,
