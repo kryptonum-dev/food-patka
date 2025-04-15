@@ -39,4 +39,6 @@ export type ProductTypes = {
   totalReviews: number;
   reviews: ReviewsTypes['data'];
   numberOfRecentPurchases: number;
+  searchParams: { [key: string]: string | number | boolean };
+  isWoo: boolean;
 } & Omit<DescriptionTypes, 'className'>;

@@ -8,17 +8,15 @@ export default function Analytics({
   item_id,
   item_name,
 }: {
-  item_id: string;
+  item_id: string | undefined;
   item_name: string;
 }) {
   useEffect(() => {
-    if (!item_name || !item_id) return;
-
     fetch('/api/server-conversion', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        meta_event_name: 'PageView',
+        meta_event_name: 'ViewContent',
         tiktok_event_name: 'ViewContent',
         pinterest_event_name: 'page_visit',
         content_id: item_id,

@@ -8,7 +8,7 @@ export type { ProductTypes } from './Product.types';
 export const Product_Query = `
   _id,
   name,
-  url,
+  "url": select($isWoo == 'true' => url_woocommerce, url),
   category -> {
     name,
     "slug": slug.current,
@@ -19,7 +19,7 @@ export const Product_Query = `
   },
   hasVariants,
   variants[] {
-    url,
+    "url": select($isWoo == 'true' => url_woocommerce, url),
     name,
     price,
     oldPrice,

@@ -54,7 +54,7 @@ const query = async (slug: string): Promise<BlogCategoryPaginationPageQueryTypes
         },
       }
     `,
-    params: { slug },
+    params: { slug, isWoo: false },
     tags: ['Blog_Page', 'BlogCategory_Collection'],
   });
   if (!data.category) notFound();

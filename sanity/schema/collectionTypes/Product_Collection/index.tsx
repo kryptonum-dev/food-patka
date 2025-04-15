@@ -42,18 +42,6 @@ export default defineType({
         }).required(),
     }),
     defineField({
-      name: 'url',
-      type: 'url',
-      title: 'Link do produktu',
-      description: (
-        <>
-          Pełny link do produktu w{' '}
-          <a href='https://app.easycart.pl/admin/products' target='_blank' rel='noreferrer'>EasyCart</a>. Powinien wyglądać następująco: <b>https://app.easycart.pl/checkout/food-patka/***</b>.
-        </>
-      ),
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
       name: 'category',
       type: 'reference',
       to: [
@@ -70,12 +58,64 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'url',
+      type: 'url',
+      title: 'Link do produktu w EasyCart',
+      description: (
+        <>
+          Pełny link do produktu w{' '}
+          <a href='https://app.easycart.pl/admin/products' target='_blank' rel='noreferrer'>EasyCart</a>. Powinien wyglądać następująco: <b>https://app.easycart.pl/checkout/food-patka/***</b>.
+        </>
+      ),
+      hidden: ({ document }) => document?.hasVariants as boolean,
+      validation: Rule => Rule.custom((value, context) => {
+        if (!context.document?.hasVariants && !value) {
+          return 'Link do produktu jest wymagany'
+        };
+        return true
+      }),
+    }),
+    defineField({
+      name: 'url_woocommerce',
+      type: 'url',
+      title: 'Link do produktu w WooCommerce (opcjonalnie)',
+      description: (
+        <>
+          Link do dodania produktu do koszyka w WooCommerce (sklep.foodpatka.pl). Przykładowy link: <b>https://sklep.foodpatka.pl/?add-to-cart=XXX</b>, gdzie XXX to ID produktu. <a href="https://www.wpbeginner.com/beginners-guide/how-to-find-product-id-in-woocommerce-beginners-guide/" target="_blank" rel="noreferrer">Poradnik jak znaleźć ID produktu w WooCommerce.</a>
+        </>
+      ),
+      hidden: ({ document }) => document?.hasVariants as boolean,
+    }),
+    defineField({
       name: 'variants',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
+            defineField({
+              name: 'url',
+              type: 'url',
+              title: 'Link do produktu w EasyCart',
+              description: (
+                <>
+                  Pełny link do produktu w{' '}
+                  <a href='https://app.easycart.pl/admin/products' target='_blank' rel='noreferrer'>EasyCart</a>. Powinien wyglądać następująco: <b>https://app.easycart.pl/checkout/food-patka/***</b>.
+                </>
+              ),
+              validation: Rule => Rule.required(),
+            }),
+            defineField({
+              name: 'url_woocommerce',
+              type: 'url',
+              title: 'Link do produktu w WooCommerce',
+              description: (
+                <>
+                  Link do dodania produktu do koszyka w WooCommerce (sklep.foodpatka.pl). Przykładowy link: <b>https://sklep.foodpatka.pl/?add-to-cart=XXX</b>, gdzie XXX to ID produktu. <a href="https://www.wpbeginner.com/beginners-guide/how-to-find-product-id-in-woocommerce-beginners-guide/" target="_blank" rel="noreferrer">Poradnik jak znaleźć ID produktu w WooCommerce.</a>
+                </>
+              ),
+              validation: Rule => Rule.required(),
+            }),
             defineField({
               name: 'name',
               type: 'string',

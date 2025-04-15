@@ -4,7 +4,7 @@ export type ProductCardTypes = {
   thumbnail: ImgDataTypes;
   name: string;
   slug: string;
-  url: string;
+  url: string | null;
   hasVariants: boolean;
   cheapestVariant?: {
     price: number;

@@ -42,11 +42,11 @@ export default function ProductCard({
           <p className={styles.price}>{oldPrice && <del>{oldPrice}&nbsp;zł</del>} {price}&nbsp;zł</p>
         )}
         <BuyButton
-          href={url}
+          href={url || `/sklep/${slug}`}
           content_id={analytics?.item_id}
           content_name={analytics?.item_name}
         >
-          Kup teraz
+          {url ? 'Kup teraz' : 'Wybierz wariant'}
         </BuyButton>
       </header>
     </article>

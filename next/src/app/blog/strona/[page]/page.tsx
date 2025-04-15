@@ -37,6 +37,7 @@ const query = async (): Promise<BlogPaginationPageQueryTypes> => {
         ${Components_Query}
       }
     `,
+    params: { isWoo: false },
     tags: ['BlogPost_Collection'],
   });
   if (!data) notFound();

@@ -30,6 +30,7 @@ const query = async (): Promise<BlogPageQueryTypes> => {
         ${Components_Query}
       }
     `,
+    params: { isWoo: false },
     tags: ['Blog_Page'],
   });
 };

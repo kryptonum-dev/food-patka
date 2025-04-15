@@ -12,7 +12,9 @@ import type { ShopProductPageQueryTypes, ShopProductPageTypes } from './page.typ
 
 export default async function ShopProductPage(props: ShopProductPageTypes) {
   const { slug } = await props.params;
-  const { v: currentVariantParam } = await props.searchParams;
+  const searchParams = await props.searchParams;
+  const { v: currentVariantParam } = searchParams;
+  const isWoo = searchParams.woo !== 'false';
   const {
     _id,
     name,
@@ -33,7 +35,7 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
     reviews,
     RecentPurchases: { min, max },
     openGraphImageUrl,
-  } = await query(slug);
+  } = await query(slug, isWoo);
 
   const timestamp = Math.floor(new Date().getTime() / (1000 * 60 * 60 * 1));
   const stableSeed = await hash(`${slug}-${timestamp}-${min}-${max}`);
@@ -61,6 +63,13 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
     });
   }
 
+  const content_id = isWoo
+    ? currentVariant?.url
+      ? currentVariant.url.match(/add-to-cart=(\d+)/)?.[1]
+      : undefined
+    : analytics.item_id;
+  const content_name = isWoo ? removeMarkdown(name) : analytics.item_name;
+
   return (
     <>
       <ProductSchema
@@ -70,8 +79,8 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
         rating_count={totalReviews}
       />
       <Analytics
-        item_id={analytics.item_id}
-        item_name={analytics.item_name}
+        item_id={content_id}
+        item_name={content_name}
       />
       <Breadcrumbs data={breadcrumbsSchema} />
       <Product
@@ -89,9 +98,11 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
           currentVariantParam,
           description,
           numberOfRecentPurchases,
+          searchParams,
+          isWoo
         }}
-        content_id={analytics.item_id}
-        content_name={analytics.item_name}
+        content_id={content_id}
+        content_name={content_name}
         rating={rating}
         totalReviews={totalReviews}
         reviews={reviews}
@@ -101,7 +112,7 @@ export default async function ShopProductPage(props: ShopProductPageTypes) {
   );
 }
 
-const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
+const query = async (slug: string, isWoo: boolean): Promise<ShopProductPageQueryTypes> => {
   const data = await sanityFetch<ShopProductPageQueryTypes>({
     query: /* groq */ `
       *[_type == "Product_Collection" && $slug == slug.current][0] {
@@ -120,7 +131,10 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
         "openGraphImageUrl": seo.img.asset -> url + "?w=1200",
       }
     `,
-    params: { slug },
+    params: {
+      slug,
+      isWoo: isWoo.toString(),
+    },
     tags: ['Product_Collection', 'global', 'Review_Collection'],
   });
   if (!data) notFound();
@@ -130,7 +144,7 @@ const query = async (slug: string): Promise<ShopProductPageQueryTypes> => {
 export async function generateMetadata(props: ShopProductPageTypes) {
   const { slug } = await props.params;
   const { v: currentVariantParam } = await props.searchParams;
-  const { hasVariants, variants } = await query(slug);
+  const { hasVariants, variants } = await query(slug, false);
   const currentVariant = (hasVariants && variants && currentVariantParam) ? variants[currentVariantParam - 1] : null;
 
   return await QueryMetadata({

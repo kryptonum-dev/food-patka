@@ -19,6 +19,7 @@ const query = async (): Promise<{ content: ComponentTypes[] }> => {
         ${Components_Query}
       }
     `,
+    params: { isWoo: false },
     tags: ['NotFound_Page'],
   });
 };

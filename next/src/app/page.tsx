@@ -8,6 +8,7 @@ const currentPath = '';
 export default async function IndexPage() {
   const { content } = await query();
 
+
   return (
     <>
       <Breadcrumbs visible={false} />
@@ -23,6 +24,7 @@ const query = async (): Promise<{ content: ComponentTypes[] }> => {
         ${Components_Query}
       }
     `,
+    params: { isWoo: false },
     tags: ['Index_Page'],
   });
 };

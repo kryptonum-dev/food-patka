@@ -3,7 +3,7 @@ import type { ProductTypes } from '@/components/_Shop/Product';
 
 export type ShopProductPageTypes = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ v: number }>;
+  searchParams: Promise<{ v: number, woo: string, [key: string]: string | number | boolean }>;
 };
 
 export type ShopProductPageQueryTypes = Omit<ProductTypes, 'currentVariantParam'> & {

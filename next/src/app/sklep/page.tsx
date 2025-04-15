@@ -13,13 +13,15 @@ const breadcrumbs = [
   { name: 'Sklep', path: currentPath },
 ];
 
-export default async function ShopPage() {
+export default async function ShopPage(props: { searchParams: Promise<{ woo: string }> }) {
+  const { woo } = await props.searchParams;
+  const isWoo = woo !== 'false';
   const {
     categories,
     totalProducts,
     products,
     pageContent,
-  } = await query();
+  } = await query(1, isWoo);
 
   return (
     <>
@@ -37,7 +39,7 @@ export default async function ShopPage() {
   );
 }
 
-const query = async (currentPage: number = 1): Promise<ShopPageQueryTypes> => {
+const query = async (currentPage: number = 1, isWoo: boolean): Promise<ShopPageQueryTypes> => {
   const OFFSET = ITEMS_PER_PAGE * (currentPage - 1);
   const PAGINATION_BEFORE = OFFSET;
   const PAGINATION_AFTER = OFFSET + ITEMS_PER_PAGE;
@@ -72,6 +74,7 @@ const query = async (currentPage: number = 1): Promise<ShopPageQueryTypes> => {
     params: {
       PAGINATION_BEFORE: PAGINATION_BEFORE,
       PAGINATION_AFTER: PAGINATION_AFTER,
+      isWoo: isWoo.toString(),
     },
     tags: ['Shop_Page', 'ProductCategory_Collection', 'Product_Collection', 'Review_Collection'],
   });
