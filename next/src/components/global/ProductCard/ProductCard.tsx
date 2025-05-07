@@ -20,6 +20,7 @@ export default function ProductCard({
   rating,
   totalReviews
 }: ProductCardTypes) {
+  console.log(url);
   return (
     <article className={styles['ProductCard']}>
       <Link

@@ -40,7 +40,7 @@ const query = async (slug: string): Promise<BlogPostPageQueryTypes> => {
         ${PostContent_Query}
       }
     `,
-    params: { slug, isWoo: false },
+    params: { slug, isWoo: 'true' },
     tags: ['BlogPost_Collection'],
   });
   if (!data) notFound();

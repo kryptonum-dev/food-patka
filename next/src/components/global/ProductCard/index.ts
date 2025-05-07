@@ -9,7 +9,13 @@ export const ProductCard_Query = /* groq */ `
   },
   name,
   'slug': slug.current,
-  "url": select(hasVariants == false => select($isWoo == 'true' => url_woocommerce, url), null),
+  "url":
+    select(hasVariants == false =>
+      select($isWoo == 'true' =>
+        url_woocommerce,
+        url
+      ),
+    null),
   hasVariants,
   'cheapestVariant': variants[] | order(price asc)[0],
   price,
